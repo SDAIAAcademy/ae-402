@@ -1,0 +1,1615 @@
+{
+  "v": 1,
+  "engine": "1.0.0",
+  "build": {
+    "at": "2026-11-15T16:14:16Z",
+    "version": "2027.1.0",
+    "commit": "b2bfbf8"
+  },
+  "lang": "en",
+  "dir": "ltr",
+  "slides": [
+    {
+      "deck": "day1",
+      "id": "title",
+      "n": 1,
+      "session": 0,
+      "title": "From requirements to architecture",
+      "text": "SDAIA Academy · AI Solution Architecture and Platform Design From requirements to architecture Day 1: Drivers, scenarios with numbers, classified flows and views as code for Muyassir AI Engineering Track4 teaching days + capstone day4 sessions · 4 labsAE-402",
+      "href": "../slides/day1.html#title"
+    },
+    {
+      "deck": "day1",
+      "id": "agenda",
+      "n": 2,
+      "session": 0,
+      "title": "From requirements to architecture",
+      "text": "Today From requirements to architecture Session 1 · The architect's loop for AI systems The loop an architect runs on an AI system, starting from drivers, constraints and the people who hold them Session 2 · Quality attributes with numbers Quality-attribute scenarios with a measure a reviewer can compute, answer quality and oversight included Session 3 · Regulation as a design constraint Classification levels and transfer rules as inputs that decide where each data flow may be processed Session 4 · Views as code Context and container views generated from one model, and one request budgeted for latency and cost",
+      "href": "../slides/day1.html#agenda"
+    },
+    {
+      "deck": "day1",
+      "id": "setup-check",
+      "n": 3,
+      "session": 0,
+      "title": "Every lab runs on a laptop processor or in Colab, with no key",
+      "text": "Before Session 1 Every lab runs on a laptop processor or in Colab, with no key uv sync uv run prepare_data.py uv run jupyter lab In Colab, the first cell of each notebook clones the course and installs what is missing. The data is synthetic and already in labs/data/; the generator rebuilds the same files. No model is downloaded. Where a lab needs a model, a scripted stand-in answers, labelled as such. Each lab starts from supplied reference files: missing a lab never blocks the next one.",
+      "href": "../slides/day1.html#setup-check"
+    },
+    {
+      "deck": "day1",
+      "id": "s1",
+      "n": 4,
+      "session": 1,
+      "title": "The architect's loop for AI systems",
+      "text": "Session 1 The architect's loop for AI systems Describe the architect's loop and where an AI system adds steps to it Separate drivers, constraints, concerns and assumptions in a brief Name the stakeholder who owns each concern 01",
+      "href": "../slides/day1.html#s1"
+    },
+    {
+      "deck": "day1",
+      "id": "architects-loop",
+      "n": 5,
+      "session": 1,
+      "title": "Architecture is a loop from drivers to decisions, then back",
+      "text": "The architect's loop Architecture is a loop from drivers to decisions, then back 1 · Drivers goals, constraints, concerns → 2 · Scenarios targets with numbers → 3 · Options three, costed → 4 · Decisions recorded, with triggers → 5 · Review tested against scenarios Views are drawn all along the loop. A review that finds a failed scenario sends you back to step 3, not to a slide tool.",
+      "href": "../slides/day1.html#architects-loop"
+    },
+    {
+      "deck": "day1",
+      "id": "what-ai-adds",
+      "n": 6,
+      "session": 1,
+      "title": "An AI system adds four attributes a classic design rarely names",
+      "text": "What changes for AI systems An AI system adds four attributes a classic design rarely names Answer quality Correctness varies by question type, language and model version. Cost per request Tokens make cost a function of each prompt, not of a server count. Data in prompts Every prompt is a data flow to wherever the model runs. Human oversight Some answers must go to a person, by design. What goes wrong. These four are discovered after launch, by a complaint, a bill or a data protection officer.",
+      "href": "../slides/day1.html#what-ai-adds"
+    },
+    {
+      "deck": "day1",
+      "id": "the-ministry",
+      "n": 7,
+      "session": 1,
+      "title": "One ministry, nine product teams, one shared platform",
+      "text": "The case study One ministry, nine product teams, one shared platform 9 product teams on Asas, the shared AI platform 3 classification levels in use: Public, Restricted, Secret 38,000 building-permit applications a year The Ministry of Municipal Services is fictional and its data synthetic. Days 1 and 2 architect Muyassir, the building-permits assistant; Days 3 and 4 design Asas itself.",
+      "href": "../slides/day1.html#the-ministry"
+    },
+    {
+      "deck": "day1",
+      "id": "four-kinds",
+      "n": 8,
+      "session": 1,
+      "title": "Drivers, constraints, concerns and assumptions need different handling",
+      "text": "Sorting what people say Drivers, constraints, concerns and assumptions need different handling Kind What it is From the Muyassir interviews What you do with it Driver A goal the system exists for Median permit cycle from 21 to 10 days Turn it into a measure Constraint A decision already taken The permits system offers reads only Obey it; record its owner Concern A stakeholder's worry \"Only an inspector can approve\" Answer it with a scenario Assumption Believed, not checked Most questions cover 40 topics Test it before relying on it",
+      "href": "../slides/day1.html#four-kinds"
+    },
+    {
+      "deck": "day1",
+      "id": "stakeholders",
+      "n": 9,
+      "session": 1,
+      "title": "A concern without an owner is never closed",
+      "text": "Stakeholders A concern without an owner is never closed Owner Concern Sponsor No wrong requirement told to a citizen Inspectors The assistant must never sound as if it approves Applicants Know it is an assistant; reach a person Permit staff Logs must not rank their performance Permits team Traffic doubles after a fee change The owner signs the scenario When the inspectors' concern becomes a scenario with a target, the inspectors agree the target. That is how a concern gets closed.",
+      "href": "../slides/day1.html#stakeholders"
+    },
+    {
+      "deck": "day1",
+      "id": "said-once",
+      "n": 10,
+      "session": 1,
+      "title": "The constraint that matters most was said once, in passing",
+      "text": "The hidden constraint The constraint that matters most was said once, in passing Data protection officerApplicant files hold national identity numbers, deeds and site plans. They are Restricted, and they do not leave the Kingdom: not for storage, not for processing, not for a quick look by a model. Ruled out An external OCR service for deeds; an external model with applicant context; logs to an external dashboard. Still open A model hosted in the Kingdom; an external embedding of the published code.",
+      "href": "../slides/day1.html#said-once"
+    },
+    {
+      "deck": "day1",
+      "id": "deliverables",
+      "n": 11,
+      "session": 1,
+      "title": "Every lab produces a piece of an architecture a panel can test",
+      "text": "The course in one ladder Every lab produces a piece of an architecture a panel can test Scenarios with numbers Day 1 Views as code Day 1 Options and decisions Day 2 Platform slice Day 3 Checks and review Day 4",
+      "href": "../slides/day1.html#deliverables"
+    },
+    {
+      "deck": "day1",
+      "id": "check-constraint",
+      "n": 12,
+      "session": 1,
+      "title": "Which statement is a constraint?",
+      "text": "Checkpoint Which statement is a constraint? Four sentences from the Muyassir notes. Which one is a constraint the design must obey? Cut the median permit cycle from 21 to 10 days The permits system offers a read interface only this year Inspectors fear the assistant will sound as if it approves Most questions are about the same 40 topics",
+      "href": "../slides/day1.html#check-constraint"
+    },
+    {
+      "deck": "day1",
+      "id": "lab-1-1",
+      "n": 13,
+      "session": 1,
+      "title": "Drivers, constraints and stakeholders",
+      "text": "Lab 1.1 · 25 min Drivers, constraints and stakeholders Sort twenty statements from the Muyassir brief and three interview notes into drivers, constraints, concerns and assumptions, name each concern's owner, and find the constraint said once that rules out three designs. D1_1_drivers.ipynb Read the brief and the three notes 5 min Sort twenty statements 8 min Name the owner of each concern 5 min The hidden constraint and what it rules out 7 min ✱ Stretch: Write two statements the notes are missing",
+      "href": "../slides/day1.html#lab-1-1"
+    },
+    {
+      "deck": "day1",
+      "id": "s2",
+      "n": 14,
+      "session": 2,
+      "title": "Quality attributes with numbers",
+      "text": "Session 2 Quality attributes with numbers Write a scenario with its six parts and a measurable response Express answer quality, privacy and human oversight as targets Test a scenario against measurements 02",
+      "href": "../slides/day1.html#s2"
+    },
+    {
+      "deck": "day1",
+      "id": "ai-attributes",
+      "n": 15,
+      "session": 2,
+      "title": "Five attributes carry most of Muyassir's risk",
+      "text": "Quality attributes for AI Five attributes carry most of Muyassir's risk Answer quality Share of correct answers, per question type and language Latency A percentile of the end-to-end time Cost Per answer, from tokens and the price card Privacy Answers that expose another person's data Human oversight Cases that must reach a person, and do And the classics Availability, security, modifiability stay",
+      "href": "../slides/day1.html#ai-attributes"
+    },
+    {
+      "deck": "day1",
+      "id": "six-parts",
+      "n": 16,
+      "session": 2,
+      "title": "A scenario has six parts, and the last one carries a number",
+      "text": "The scenario A scenario has six parts, and the last one carries a number Source an engineering office → Stimulus asks any question → Environment a normal working day → Artefact Muyassir via the gateway → Response a complete answer → Measure p95 ≤ 4,000 ms Testable. The measure names a metric that is recorded, a statistic and a target.",
+      "href": "../slides/day1.html#six-parts"
+    },
+    {
+      "deck": "day1",
+      "id": "vague-to-measure",
+      "n": 17,
+      "session": 2,
+      "title": "\"Fast, accurate and available\" becomes three measures",
+      "text": "From the brief \"Fast, accurate and available\" becomes three measures The brief says The scenario measures Who measures it fast p95 of end-to-end latency ≤ 4,000 ms on a normal day gateway logs accurate share of correct answers to requirements questions ≥ 0.90 reviewers on a sample available at all times share of working-hours requests accepted ≥ 0.995 over a month the platform team What goes wrong. A target nobody measures. The lab's lint flags availability: the pilot never recorded it, so the platform team owes a measurement.",
+      "href": "../slides/day1.html#vague-to-measure"
+    },
+    {
+      "deck": "day1",
+      "id": "quality-by-type",
+      "n": 18,
+      "session": 2,
+      "title": "Measure answer quality per question type, on a reviewed sample",
+      "text": "Answer quality is a number Measure answer quality per question type, on a reviewed sample A reviewer marks each pilot answer correct or not, against the building code. The scenario names the slice: requirements questions, 197 of the 400. Fee questions are 26 of 400: too few to claim anything about them yet. 0.92 correct on requirements questions in the pilot; target 0.90",
+      "href": "../slides/day1.html#quality-by-type"
+    },
+    {
+      "deck": "day1",
+      "id": "oversight-number",
+      "n": 19,
+      "session": 2,
+      "title": "Human oversight becomes the share of cases that reach a person",
+      "text": "Oversight is a number too Human oversight becomes the share of cases that reach a person applicant Will my extension be approved if I move the stairs? rule approval question: only an inspector decides answer I cannot approve designs. An inspector can review it; shall I book a hand-over? 46 of 53 approval questions offered a person in the pilot Target 0.99. The pilot reaches 0.87: it fails.",
+      "href": "../slides/day1.html#oversight-number"
+    },
+    {
+      "deck": "day1",
+      "id": "privacy-sum",
+      "n": 20,
+      "session": 2,
+      "title": "For privacy, count the leaks: a mean hides the one that matters",
+      "text": "Choose the statistic For privacy, count the leaks: a mean hides the one that matters 1 of 400 pilot answers showed another applicant's file (request P0288) Mean leak rate: 0.0025. It looks like success. Sum of leaks with a target of zero: it fails, as it should. One leak of a deed is a reportable incident, not a rate.",
+      "href": "../slides/day1.html#privacy-sum"
+    },
+    {
+      "deck": "day1",
+      "id": "pilot-results",
+      "n": 21,
+      "session": 2,
+      "title": "Tested against 400 pilot requests, three of five scenarios fail",
+      "text": "Measured in Lab 1.2 Tested against 400 pilot requests, three of five scenarios fail Scenario Measure Pilot Result Q1 answer quality mean correct, requirements ≥ 0.90 0.919 passes Q2 latency p95 ≤ 4,000 ms 4,866 fails Q3 cost mean ≤ SAR 0.05 per answer 0.022 passes Q4 privacy leaks = 0 1 fails Q5 oversight approval questions offered a person ≥ 0.99 0.868 fails",
+      "href": "../slides/day1.html#pilot-results"
+    },
+    {
+      "deck": "day1",
+      "id": "check-scenario",
+      "n": 22,
+      "session": 2,
+      "title": "Which scenario can a reviewer test?",
+      "text": "Checkpoint Which scenario can a reviewer test? Four drafts for the inspectors' concern. Which one can be tested against pilot data? Muyassir never sounds as if it approves a design At least 99% of all answers offer a person At least 99% of approval questions get an offer of a person The prompt tells the model that only inspectors approve",
+      "href": "../slides/day1.html#check-scenario"
+    },
+    {
+      "deck": "day1",
+      "id": "lab-1-2",
+      "n": 23,
+      "session": 2,
+      "title": "Five measurable scenarios",
+      "text": "Lab 1.2 · 25 min Five measurable scenarios Rewrite the brief's vague targets, write five scenarios for answer quality, latency, cost, privacy and human oversight, and test each against 400 pilot requests. D1_2_scenarios.ipynb The six parts of a scenario 4 min Fix the brief's three vague targets 6 min Write five scenarios, answer quality and oversight included 8 min Test them on the pilot measurements 7 min ✱ Stretch: A scenario for the fee-change peak",
+      "href": "../slides/day1.html#lab-1-2"
+    },
+    {
+      "deck": "day1",
+      "id": "s3",
+      "n": 24,
+      "session": 3,
+      "title": "Regulation as a design constraint",
+      "text": "Session 3 Regulation as a design constraint Classify a data flow by the highest level it carries Derive placement constraints from classification and transfer rules Find the flows a design must change 03",
+      "href": "../slides/day1.html#s3"
+    },
+    {
+      "deck": "day1",
+      "id": "four-levels",
+      "n": 25,
+      "session": 3,
+      "title": "Four levels, set by the impact of unauthorised disclosure",
+      "text": "National data classification Four levels, set by the impact of unauthorised disclosure Level Impact of disclosure In the Ministry Top Secret high none in this case Secret medium tender documents, land disputes, state land surveys Restricted low applicant files, status records, conversation logs Public none the published building code, fee schedule, zoning maps",
+      "href": "../slides/day1.html#four-levels"
+    },
+    {
+      "deck": "day1",
+      "id": "three-principles",
+      "n": 26,
+      "session": 3,
+      "title": "Open by default, highest level wins, classify at creation",
+      "text": "Three principles that shape designs Open by default, highest level wins, classify at creation Open by default Data is accessible unless its nature or sensitivity requires more protection. Highest level A dataset that combines levels takes the highest of them. A prompt is such a dataset. Timely Data is classified when created or received, so a new log needs a level on day one.",
+      "href": "../slides/day1.html#three-principles"
+    },
+    {
+      "deck": "day1",
+      "id": "transfer-rules",
+      "n": 27,
+      "session": 3,
+      "title": "Transfer abroad is a regulated path, not a hosting preference",
+      "text": "Personal data outside the Kingdom Transfer abroad is a regulated path, not a hosting preference Adequacy The competent authority publishes the countries and organisations that give an appropriate level of protection. Safeguards Otherwise, in set cases: standard contractual clauses, binding common rules or an accreditation certificate. Onward transfer The Law still applies when data moves on from the first recipient. For the architecture. Each flow that could leave the Kingdom names its path, or does not leave.",
+      "href": "../slides/day1.html#transfer-rules"
+    },
+    {
+      "deck": "day1",
+      "id": "placement-rule",
+      "n": 28,
+      "session": 3,
+      "title": "Each level maps to where its data may be processed",
+      "text": "The Ministry's own rule Each level maps to where its data may be processed Level Ministry data centre Cloud region in the Kingdom External service Public yes yes yes Restricted yes yes no Secret yes no no Asas policy P-01. It is the case's rule, stricter by choice than the minimum the national texts set.",
+      "href": "../slides/day1.html#placement-rule"
+    },
+    {
+      "deck": "day1",
+      "id": "prompt-is-a-flow",
+      "n": 29,
+      "session": 3,
+      "title": "A prompt is a data flow, and it takes the level of what it holds",
+      "text": "Prompts carry data A prompt is a data flow, and it takes the level of what it holds question Which documents are still missing from my application? retrieved clause 4.2 of the published code (Public) status read application record with identity number (Restricted) prompt level Restricted: the highest of its parts placement Ministry or a cloud region in the Kingdom only",
+      "href": "../slides/day1.html#prompt-is-a-flow"
+    },
+    {
+      "deck": "day1",
+      "id": "three-violations",
+      "n": 30,
+      "session": 3,
+      "title": "Three of Muyassir's fourteen flows break the rule",
+      "text": "Measured in Lab 1.3 Three of Muyassir's fourteen flows break the rule Flow Carries Goes to Breaks F07 scanned deeds and site plans external OCR S12, applicant files stay in the Kingdom F09 conversation logs external analytics S13, logs are personal data F14 unpublished draft circulars external summary model S15, an unchecked assumption Allowed, and worth saying so. F04 sends the published code to an external embedding model.",
+      "href": "../slides/day1.html#three-violations"
+    },
+    {
+      "deck": "day1",
+      "id": "ethics-inputs",
+      "n": 31,
+      "session": 3,
+      "title": "Ethics principles enter the design as scenarios, not as a final check",
+      "text": "Responsible AI from the start Ethics principles enter the design as scenarios, not as a final check Privacy and security Q4: no answer shows another applicant's file. Transparency and explainability S14: citizens know it is an assistant; answers cite the clause. Accountability and responsibility Q5: approvals stay with an inspector, by measure.",
+      "href": "../slides/day1.html#ethics-inputs"
+    },
+    {
+      "deck": "day1",
+      "id": "check-flow-level",
+      "n": 32,
+      "session": 3,
+      "title": "Where may this flow go?",
+      "text": "Checkpoint Where may this flow go? A missing-documents check sends the published building code, an applicant's form with identity number and a site plan to a model. Under the Ministry's rule, where may the model run? In the Ministry or in a cloud region in the Kingdom Anywhere, since most of the prompt is the published code Only in the Ministry's own data centre Anywhere, once the identity number is masked",
+      "href": "../slides/day1.html#check-flow-level"
+    },
+    {
+      "deck": "day1",
+      "id": "lab-1-3",
+      "n": 33,
+      "session": 3,
+      "title": "Classified flows and placement",
+      "text": "Lab 1.3 · 25 min Classified flows and placement Complete the data inventory, give each of Muyassir's fourteen flows its level, derive where it may be processed, and find the three flows that break the Ministry's placement rule. D1_3_data_flows.ipynb Fill the three blank levels 5 min The level of each flow 6 min Where each flow may go 6 min The violations and what each breaks 8 min ✱ Stretch: Redesign the violating flows",
+      "href": "../slides/day1.html#lab-1-3"
+    },
+    {
+      "deck": "day1",
+      "id": "s4",
+      "n": 34,
+      "session": 4,
+      "title": "Views as code",
+      "text": "Session 4 Views as code Generate context and container views from a model as code Show hosting and classification on the views Budget one request's latency and cost against the scenarios 04",
+      "href": "../slides/day1.html#s4"
+    },
+    {
+      "deck": "day1",
+      "id": "c4-levels",
+      "n": 35,
+      "session": 4,
+      "title": "Each view answers one question for one audience",
+      "text": "Views Each view answers one question for one audience Context Who and what does the system talk to? Sponsors read this. Container What runs where, and how do the parts talk? Architects and security. Data flow Which data, at which level, goes where? The data protection officer. Request trace One request through every hop, with time and cost.",
+      "href": "../slides/day1.html#c4-levels"
+    },
+    {
+      "deck": "day1",
+      "id": "muyassir-context",
+      "n": 36,
+      "session": 4,
+      "title": "In the context view, Muyassir is one box",
+      "text": "Muyassir's context In the context view, Muyassir is one box Applicant citizen or office → Muyassir permits assistant on Asas → Permits system status, read only National single sign-on signs the applicant in Contact centre takes hand-overs Inspector reviews and approves",
+      "href": "../slides/day1.html#muyassir-context"
+    },
+    {
+      "deck": "day1",
+      "id": "views-as-code",
+      "n": 37,
+      "session": 4,
+      "title": "Generate views from one model, so a pull request changes them",
+      "text": "Views as code Generate views from one model, so a pull request changes them flowchart LR subgraph muyassir[\"Muyassir\"] gateway[\"Asas gateway<br/>hosting: ministry\"] answer_model[\"Answer model<br/>hosting: ksa_cloud\"] end gateway -->|routes by classification| answer_model One model file holds elements and relations; every view is generated. A change of hosting is a diff a reviewer sees. A check can read the same model: Day 4 does.",
+      "href": "../slides/day1.html#views-as-code"
+    },
+    {
+      "deck": "day1",
+      "id": "hosting-on-boxes",
+      "n": 38,
+      "session": 4,
+      "title": "Write hosting on every box, so placement can be read off the view",
+      "text": "The container view Write hosting on every box, so placement can be read off the view Container Technology Hosting Muyassir service Python ministry Asas gateway AI gateway ministry Regulations index vector and keyword index ministry Reranker cross-encoder ministry Answer model ksa-general-m ksa_cloud Log store object store, 90-day expiry ministry",
+      "href": "../slides/day1.html#hosting-on-boxes"
+    },
+    {
+      "deck": "day1",
+      "id": "request-hops",
+      "n": 39,
+      "session": 4,
+      "title": "Two hops hold most of the time of a request",
+      "text": "One request traced Two hops hold most of the time of a request Answer model 2,900 ms Reranker 650 ms Status read 400 ms Retrieval 180 ms Portal, sign-on, gateway 160 ms p95 per hop, from the supplied hop measurements (synthetic). The log write is off the user's path.",
+      "href": "../slides/day1.html#request-hops"
+    },
+    {
+      "deck": "day1",
+      "id": "budget-result",
+      "n": 40,
+      "session": 4,
+      "title": "The request costs half its budget and runs 290 ms over its time",
+      "text": "The budget The request costs half its budget and runs 290 ms over its time 4,290 ms sum of p95s on the user's path; target 4,000 SAR 0.025 per request, from tokens and the price card; target 0.05 3,640 ms without the reranker for status questions",
+      "href": "../slides/day1.html#budget-result"
+    },
+    {
+      "deck": "day1",
+      "id": "sum-is-bound",
+      "n": 41,
+      "session": 4,
+      "title": "A sum of p95s is an upper bound; check it against one measurement",
+      "text": "Reading a budget A sum of p95s is an upper bound; check it against one measurement Slow tails of different hops rarely meet in one request, so the sum overstates. Retries and queues add time no single hop shows, so the sum can also understate. The pilot measured 4,866 ms end to end: here the bound was not pessimistic. What goes wrong. A budget built from p50s. It fits on paper, and half the users wait longer.",
+      "href": "../slides/day1.html#sum-is-bound"
+    },
+    {
+      "deck": "day1",
+      "id": "check-budget",
+      "n": 42,
+      "session": 4,
+      "title": "Which change can bring Muyassir under 4,000 ms?",
+      "text": "Checkpoint Which change can bring Muyassir under 4,000 ms? The sum of p95s is 4,290 ms: model 2,900, reranker 650, status read 400, the rest 340. Which single change most likely brings the p95 under 4,000 ms without a new model? Write the conversation log faster Tune the index for a faster median query Add a second gateway check before the model Skip reranking for status questions and send fewer clauses",
+      "href": "../slides/day1.html#check-budget"
+    },
+    {
+      "deck": "day1",
+      "id": "lab-1-4",
+      "n": 43,
+      "session": 4,
+      "title": "Views as code and a request budget",
+      "text": "Lab 1.4 · 25 min Views as code and a request budget Generate Muyassir's context and container views as Mermaid from one model file, then trace a request through eight hops and add up its latency and cost against the scenarios. D1_4_views_budget.ipynb Read the model of Muyassir 3 min The context view as Mermaid 7 min The container view, with hosting on every box 7 min One request end to end: latency and cost 8 min ✱ Stretch: Cut the request to fit 4,000 ms",
+      "href": "../slides/day1.html#lab-1-4"
+    },
+    {
+      "deck": "day1",
+      "id": "wrap-up",
+      "n": 44,
+      "session": 4,
+      "title": "Three things to keep",
+      "text": "Day 1 Three things to keep Sort before you design Constraints said once rule out designs; find them first. Numbers make scenarios testable A metric, a statistic and a target, owned by the stakeholder. Classification decides placement Every flow has a level, and every box shows where it runs.",
+      "href": "../slides/day1.html#wrap-up"
+    },
+    {
+      "deck": "day1",
+      "id": "next",
+      "n": 45,
+      "session": 4,
+      "title": "Tomorrow: three options, their cost over three years, and the decisions",
+      "text": "Day 2 Tomorrow: three options, their cost over three years, and the decisions Keep artifacts/D1_2/scenarios.json and artifacts/D1_4/architecture.md: the capstone reuses their shape. Read the three-year forecast in labs/data/options/ once before the first session. Bring one decision from your own work that nobody wrote down.",
+      "href": "../slides/day1.html#next"
+    },
+    {
+      "deck": "day2",
+      "id": "title",
+      "n": 1,
+      "session": 0,
+      "title": "Options and decisions",
+      "text": "SDAIA Academy · AI Solution Architecture and Platform Design Options and decisions Day 2: Patterns, three options costed over three years, lock-in and a decision log AI Engineering Track4 teaching days + capstone day4 sessions · 4 labsAE-402",
+      "href": "../slides/day2.html#title"
+    },
+    {
+      "deck": "day2",
+      "id": "agenda",
+      "n": 2,
+      "session": 0,
+      "title": "Options and decisions",
+      "text": "Today Options and decisions Session 1 · Patterns and when each fits Six architecture patterns for AI needs, and the fit questions that choose between them Session 2 · Total cost over three years Three-year total cost with every line the Ministry pays, and the assumptions the ranking depends on Session 3 · Lock-in and exit Where lock-in sits, what leaving costs, how weights mislead, and contract terms that keep the exit open Session 4 · Decision records Decision records with both kinds of consequence and a trigger that says when to reopen them",
+      "href": "../slides/day2.html#agenda"
+    },
+    {
+      "deck": "day2",
+      "id": "review-day1",
+      "n": 3,
+      "session": 0,
+      "title": "Which finding of Day 1 changes the options you may draw today?",
+      "text": "Review of Day 1 Which finding of Day 1 changes the options you may draw today? Day 1 produced a scenario sheet, fourteen classified flows and a request budget. Which finding most limits today's options for Muyassir's answer model? The request costs SAR 0.025, half of its cost target The reranker takes 650 ms of the p95 Prompts with applicant context are Restricted and stay in the Kingdom One pilot answer showed another applicant's file",
+      "href": "../slides/day2.html#review-day1"
+    },
+    {
+      "deck": "day2",
+      "id": "s1",
+      "n": 4,
+      "session": 1,
+      "title": "Patterns and when each fits",
+      "text": "Session 1 Patterns and when each fits Match a need to a pattern with fit questions Test a non-generative baseline on the same data as a generative one Explain when a classical model serves a need better 01",
+      "href": "../slides/day2.html#s1"
+    },
+    {
+      "deck": "day2",
+      "id": "six-patterns",
+      "n": 5,
+      "session": 1,
+      "title": "Six patterns cover most of what the Ministry's teams ask for",
+      "text": "Patterns Six patterns cover most of what the Ministry's teams ask for Pattern Fits when A need at the Ministry Retrieval answers come from changing documents, with a citation permit questions from the code Agentic several steps whose order depends on results pre-check of a submission Fine-tuned a stable output form, high volume, thousands of examples standard inspection letters Classical a label from a fixed list, labelled data, speed and cost matter routing citizen reports Batch the answer is needed in hours, over many records nightly backlog summaries Event-driven something must happen when a record changes status-change notices",
+      "href": "../slides/day2.html#six-patterns"
+    },
+    {
+      "deck": "day2",
+      "id": "fit-questions",
+      "n": 6,
+      "session": 1,
+      "title": "Five questions choose the pattern before anyone names a model",
+      "text": "Choosing by questions, not habit Five questions choose the pattern before anyone names a model What is the output? A label, a cited answer, a document, an action. Are there labelled examples? Thousands change the options. Who is waiting? A person in seconds, a process in minutes, nobody until morning. How many steps, and does each depend on the last? How does the data change? Stable, weekly, live.",
+      "href": "../slides/day2.html#fit-questions"
+    },
+    {
+      "deck": "day2",
+      "id": "knowledge-or-form",
+      "n": 7,
+      "session": 1,
+      "title": "Retrieval brings knowledge; fine-tuning shapes form",
+      "text": "A common confusion Retrieval brings knowledge; fine-tuning shapes form Retrieval The building code changes with each circular. Retrieval reads today's version and cites it. Updating means re-indexing, not retraining. Fine-tuning Inspection letters follow one house style. 9,000 approved letters can teach the form; facts still come from the inspector's notes. What goes wrong. Tuning a model on the code to \"know\" it: the next circular makes the model wrong and nobody can see where.",
+      "href": "../slides/day2.html#knowledge-or-form"
+    },
+    {
+      "deck": "day2",
+      "id": "agent-when",
+      "n": 8,
+      "session": 1,
+      "title": "Choose an agent only when the next step depends on the last result",
+      "text": "Agentic Choose an agent only when the next step depends on the last result task pre-check submission 2027-114 for missing documents step 1 read the forms: building type is a commercial extension step 2 so query the permits system for the fire-safety approval result approval missing output two documents missing, with the clauses that require them",
+      "href": "../slides/day2.html#agent-when"
+    },
+    {
+      "deck": "day2",
+      "id": "nobody-waiting",
+      "n": 9,
+      "session": 1,
+      "title": "Batch and event-driven designs move work off the user's path",
+      "text": "When nobody is waiting Batch and event-driven designs move work off the user's path Batch Thirty district summaries a night: run them together at off-peak capacity, retry failures, and nobody sees a latency. Event-driven A status change publishes an event; a notifier reacts. 40,000 notices a month, and no applicant has to ask. Every status notice that is sent is a status call that is not made: the driver S02 is served by an event, not by a chat.",
+      "href": "../slides/day2.html#nobody-waiting"
+    },
+    {
+      "deck": "day2",
+      "id": "integration",
+      "n": 10,
+      "session": 1,
+      "title": "APIs for questions, events for changes",
+      "text": "Integration APIs for questions, events for changes Interface Muyassir uses it for Design rule Read API of the permits system status of one application read only (S09); timeouts and a hand-over Status-change events notices to applicants at-least-once, so notices are idempotent Gateway API (OpenAI-compatible) every model call one door for credentials, quotas and audit",
+      "href": "../slides/day2.html#integration"
+    },
+    {
+      "deck": "day2",
+      "id": "classifier-wins",
+      "n": 11,
+      "session": 1,
+      "title": "For routing reports, a classifier beats the generative model",
+      "text": "Measured in Lab 2.1 For routing reports, a classifier beats the generative model On the same 600 test reports Accuracy Mean latency SAR a month, 95,000 reports Classifier, character n-grams 0.938 0.1 ms 0 Generative model (recorded) 0.908 1,340 ms 156 The classifier trains in seconds on a laptop processor; it is also right more often in Arabic: 0.951 against 0.903.",
+      "href": "../slides/day2.html#classifier-wins"
+    },
+    {
+      "deck": "day2",
+      "id": "always-a-baseline",
+      "n": 12,
+      "session": 1,
+      "title": "Cost one option without a generative model, every time",
+      "text": "The non-generative baseline Cost one option without a generative model, every time It shows what the generative model must beat, in quality and in cost. It is the fallback when the model is down or over budget. Sometimes it wins outright, as for report routing. When it loses, say on what: for Muyassir, it answers 70% of questions against 92%.",
+      "href": "../slides/day2.html#always-a-baseline"
+    },
+    {
+      "deck": "day2",
+      "id": "check-pattern",
+      "n": 13,
+      "session": 1,
+      "title": "Which pattern for the street-light reports?",
+      "text": "Checkpoint Which pattern for the street-light reports? The reports team wants each report routed to one of six departments, within seconds, at 95,000 reports a month, with 24,000 labelled reports from last year. Which design do you cost first? A classifier trained on the labelled reports Retrieval over past reports, then a generated answer An agent that reads the report and calls department tools A frontier model with a routing prompt",
+      "href": "../slides/day2.html#check-pattern"
+    },
+    {
+      "deck": "day2",
+      "id": "lab-2-1",
+      "n": 14,
+      "session": 1,
+      "title": "Patterns and a non-generative baseline",
+      "text": "Lab 2.1 · 25 min Patterns and a non-generative baseline Match six case needs to patterns, train a classifier on 2,400 citizen reports on a laptop processor and compare it with a recorded generative run on the same 600 test reports. D2_1_patterns.ipynb Six patterns, six fit questions 4 min Match six needs to patterns 6 min Train a classifier on 2,400 reports 8 min Compare it with the recorded generative run 7 min ✱ Stretch: Errors by language",
+      "href": "../slides/day2.html#lab-2-1"
+    },
+    {
+      "deck": "day2",
+      "id": "s2",
+      "n": 15,
+      "session": 2,
+      "title": "Total cost over three years",
+      "text": "Session 2 Total cost over three years Build a three-year cost model with build, run, people, capacity and unanswered work Compare options per answered question Test the ranking's sensitivity to volume and token price 02",
+      "href": "../slides/day2.html#s2"
+    },
+    {
+      "deck": "day2",
+      "id": "three-options",
+      "n": 16,
+      "session": 2,
+      "title": "Three options, one of them without a generative model",
+      "text": "Muyassir's options Three options, one of them without a generative model O1 · Hosted in the Kingdom A model in a cloud region of the Kingdom, paid per token. Answers 92% of questions. O2 · Ministry-hosted An open-weight model on the Ministry's accelerators, paid per server. Answers 92%. O3 · Non-generative Guided search and a document checklist. Answers 70%. Prices are the case's synthetic ranges, not vendor prices.",
+      "href": "../slides/day2.html#three-options"
+    },
+    {
+      "deck": "day2",
+      "id": "cost-lines",
+      "n": 17,
+      "session": 2,
+      "title": "Five lines make a three-year cost, and the last one is often forgotten",
+      "text": "Total cost of ownership Five lines make a three-year cost, and the last one is often forgotten Line What it holds Moves with Build first year only scope Run and people platform fees, the team that operates it time Tokens requests × tokens × price volume and price Capacity units servers sized for the peak month peak volume, in steps Unanswered work questions not answered become calls volume and coverage",
+      "href": "../slides/day2.html#cost-lines"
+    },
+    {
+      "deck": "day2",
+      "id": "base-result",
+      "n": 18,
+      "session": 2,
+      "title": "At the base forecast, O1 costs least over three years",
+      "text": "Measured in Lab 2.2 At the base forecast, O1 costs least over three years Option Three years, SAR Per answered question Year-1 run, SAR O1 hosted in the Kingdom 6.25 million 1.08 1.40 million O2 Ministry-hosted 7.59 million 1.31 1.71 million O3 non-generative 11.92 million 2.71 2.27 million Year-1 run includes the calls from unanswered questions. Without them, O1 runs at about SAR 1.0 million, under the SAR 1.2 million cap.",
+      "href": "../slides/day2.html#base-result"
+    },
+    {
+      "deck": "day2",
+      "id": "tornado",
+      "n": 19,
+      "session": 2,
+      "title": "Volume moves O1's total by half; token price by 3%",
+      "text": "Sensitivity, one assumption at a time Volume moves O1's total by half; token price by 3% Volume high +58% Volume low -20% Token price ×2 +3% Token price ×0.5 -2% O1's three-year total against its base of SAR 6.25 million (Lab 2.2, step 4).",
+      "href": "../slides/day2.html#tornado"
+    },
+    {
+      "deck": "day2",
+      "id": "crossover",
+      "n": 20,
+      "session": 2,
+      "title": "The Ministry-hosted model wins only at high volume and double prices",
+      "text": "When would O2 win? The Ministry-hosted model wins only at high volume and double prices 900,000 requests a month, steady, at double the token price: O2 matches O1 At the base price there is no crossover below three million a month. The high forecast reaches 900,000 only in its last month. So the decision has a trigger: volume, then price.",
+      "href": "../slides/day2.html#crossover"
+    },
+    {
+      "deck": "day2",
+      "id": "ranges-not-points",
+      "n": 21,
+      "session": 2,
+      "title": "Show ranges and their sources, never one confident number",
+      "text": "Reading cost models Show ranges and their sources, never one confident number Every price has a source and the date it was read. Every volume has an owner who will defend it. Every option is costed with the same lines. What goes wrong. An options paper that costs the favourite option in detail and the others on a napkin. Reviewers spot it from the number of lines.",
+      "href": "../slides/day2.html#ranges-not-points"
+    },
+    {
+      "deck": "day2",
+      "id": "check-tco",
+      "n": 22,
+      "session": 2,
+      "title": "What should the options paper argue about?",
+      "text": "Checkpoint What should the options paper argue about? In Lab 2.2, doubling the token price moves O1's three-year total by 3%, the high forecast by 58%, and O3 loses on unanswered calls. Where should the sponsor's meeting spend its time? Negotiating the token price Cutting the build cost of O1 Choosing O3 because it is cheapest to run The volume forecast and how many questions each option answers",
+      "href": "../slides/day2.html#check-tco"
+    },
+    {
+      "deck": "day2",
+      "id": "lab-2-2",
+      "n": 23,
+      "session": 2,
+      "title": "Three options over three years",
+      "text": "Lab 2.2 · 25 min Three options over three years Cost a hosted, a Ministry-hosted and a non-generative option on a 36-month forecast, then move volume and token price one at a time. D2_2_three_year_cost.ipynb Read the forecast and the price ranges 3 min The cost model, year by year 9 min Three options at the base forecast 5 min Sensitivity to volume and token price 8 min ✱ Stretch: The crossover volume",
+      "href": "../slides/day2.html#lab-2-2"
+    },
+    {
+      "deck": "day2",
+      "id": "s3",
+      "n": 24,
+      "session": 3,
+      "title": "Lock-in and exit",
+      "text": "Session 3 Lock-in and exit Price the exit of an option from its lock-in factors Find the weight at which a weighted ranking flips Write procurement requirements a reviewer can verify 03",
+      "href": "../slides/day2.html#s3"
+    },
+    {
+      "deck": "day2",
+      "id": "where-lockin",
+      "n": 25,
+      "session": 3,
+      "title": "Lock-in sits in the data and the contract, rarely in the model",
+      "text": "Lock-in Lock-in sits in the data and the contract, rarely in the model Data Indexes and logs in a store with no bulk export Contract Minimum terms and early-exit fees Formats Prompts and tools in one provider's shape Evidence Evaluation sets kept only in a vendor console",
+      "href": "../slides/day2.html#where-lockin"
+    },
+    {
+      "deck": "day2",
+      "id": "exit-costs",
+      "n": 26,
+      "session": 3,
+      "title": "The cheapest option to run is the dearest to leave",
+      "text": "Measured in Lab 2.3 The cheapest option to run is the dearest to leave Option Exit cost, SAR O1 hosted in the Kingdom 540,000 O3 non-generative 357,500 O2 Ministry-hosted 322,500 Vector store, no export 250,000 Early-exit fee 167,500 Prompt formats 70,000 Evaluation in console 52,500 Person-months at SAR 35,000 plus fees, from the case's exit factors.",
+      "href": "../slides/day2.html#exit-costs"
+    },
+    {
+      "deck": "day2",
+      "id": "weights-pitfalls",
+      "n": 27,
+      "session": 3,
+      "title": "Weights are opinions; report how far they can move",
+      "text": "Weighted criteria Weights are opinions; report how far they can move Double counting. Three-year cost and exit cost are both money; say so, or merge them. Ordinal scores. A 4 is not twice a 2; small score gaps are noise. Hidden weights. A criterion left out has weight zero, by decision. Rank reversal. Find the weight at which the leader changes, and print it.",
+      "href": "../slides/day2.html#weights-pitfalls"
+    },
+    {
+      "deck": "day2",
+      "id": "flip-weight",
+      "n": 28,
+      "session": 3,
+      "title": "Weigh exit cost at 0.13 instead of 0.10, and O2 overtakes O1",
+      "text": "Measured in Lab 2.3 Weigh exit cost at 0.13 instead of 0.10, and O2 overtakes O1 4.20 O1's weighted score at an exit weight of 0.10 4.10 O2's weighted score at the same weights 0.13 exit-cost weight at which O2 leads A fragile ranking. A three-point change of one weight reverses it. The decision record says so.",
+      "href": "../slides/day2.html#flip-weight"
+    },
+    {
+      "deck": "day2",
+      "id": "requirements",
+      "n": 29,
+      "session": 3,
+      "title": "A procurement requirement keeps the exit open only if it can be verified",
+      "text": "Buying the exit down A procurement requirement keeps the exit open only if it can be verified WeakThe provider will make data available where possible. VerifiableThe provider shall export all indexed documents, their embeddings and metadata in JSON Lines or Parquet within 10 working days of a request, at no extra charge.",
+      "href": "../slides/day2.html#requirements"
+    },
+    {
+      "deck": "day2",
+      "id": "test-the-exit",
+      "n": 30,
+      "session": 3,
+      "title": "Test the export once a year, or the requirement is only paper",
+      "text": "An exit is a design artefact Test the export once a year, or the requirement is only paper Request a full export → Load it into the Ministry's index → Re-run the evaluation set → Record time taken and gaps",
+      "href": "../slides/day2.html#test-the-exit"
+    },
+    {
+      "deck": "day2",
+      "id": "check-lockin",
+      "n": 31,
+      "session": 3,
+      "title": "Which requirement removes O1's largest exit cost?",
+      "text": "Checkpoint Which requirement removes O1's largest exit cost? O1's largest exit factor is its managed vector store with no bulk export (SAR 250,000). Which requirement removes it? The service shall expose an OpenAI-compatible interface The provider shall export the index, embeddings and metadata in JSON Lines within 10 working days The contract shall allow exit with 90 days' notice The provider shall give reasonable help on exit",
+      "href": "../slides/day2.html#check-lockin"
+    },
+    {
+      "deck": "day2",
+      "id": "lab-2-3",
+      "n": 32,
+      "session": 3,
+      "title": "Exit cost, weights and two requirements",
+      "text": "Lab 2.3 · 25 min Exit cost, weights and two requirements Price each option's exit, fold it into the weighted score, find the weight that flips the ranking and write two requirements that keep the exit open. D2_3_exit_cost.ipynb Exit cost per option 6 min The weighted score, exit cost included 6 min The weight that flips the ranking 6 min Two procurement requirements that keep the exit open 7 min ✱ Stretch: A third requirement for the evaluation data",
+      "href": "../slides/day2.html#lab-2-3"
+    },
+    {
+      "deck": "day2",
+      "id": "s4",
+      "n": 33,
+      "session": 4,
+      "title": "Decision records",
+      "text": "Session 4 Decision records Write a decision record with drivers, options and consequences both ways Set a review trigger someone can test Challenge a peer's record for what a lint cannot see 04",
+      "href": "../slides/day2.html#s4"
+    },
+    {
+      "deck": "day2",
+      "id": "why-records",
+      "n": 34,
+      "session": 4,
+      "title": "A decision record is written for the architect who reopens it",
+      "text": "Decision records A decision record is written for the architect who reopens it The next architect Why O1, what it cost, what would change it. The auditor Who decided, on which drivers, on which date. The panel The capstone asks for six, dated, in the repository.",
+      "href": "../slides/day2.html#why-records"
+    },
+    {
+      "deck": "day2",
+      "id": "record-shape",
+      "n": 35,
+      "session": 4,
+      "title": "MADR's sections, plus a trigger that says when to reopen",
+      "text": "The template MADR's sections, plus a trigger that says when to reopen Context the question → Drivers with ids → Options two or more → Outcome and why → Consequences good and bad → Trigger a number or a date",
+      "href": "../slides/day2.html#record-shape"
+    },
+    {
+      "deck": "day2",
+      "id": "record-one",
+      "n": 36,
+      "session": 4,
+      "title": "Record one names the fragile ranking as a bad consequence",
+      "text": "From Lab 2.4 Record one names the fragile ranking as a bad consequence ## Decision outcome Chosen option: \"O1\", because it is the cheapest over three years (SAR 6.25 million against 7.59 and 11.92), meets S12 and goes live first. ### Consequences - Good, because no accelerator servers to buy or operate - Bad, because it is the dearest option to leave (SAR 540,000) - Bad, because an exit-cost weight of 0.13 puts O2 first ## Review trigger Reopen if monthly requests exceed 600,000 or the input price rises above SAR 12 per million.",
+      "href": "../slides/day2.html#record-one"
+    },
+    {
+      "deck": "day2",
+      "id": "triggers",
+      "n": 37,
+      "session": 4,
+      "title": "A trigger fires on a measurement or a date",
+      "text": "Review triggers A trigger fires on a measurement or a date Cannot fire Can fire If things change If monthly requests exceed 600,000 When quality drops If Q1 falls below 0.90 on the monthly sample of 200 Revisit periodically On 2027-12-31 If the vendor raises prices If input tokens cost more than SAR 12 per million",
+      "href": "../slides/day2.html#triggers"
+    },
+    {
+      "deck": "day2",
+      "id": "the-log",
+      "n": 38,
+      "session": 4,
+      "title": "Six records make a log when they share an index and a status",
+      "text": "The decision log Six records make a log when they share an index and a status One file per decision, numbered, never renumbered. Status: proposed, accepted, or superseded by a later number. An index with each record's trigger, so triggers are watched in one place. Records are reviewed in pull requests like code.",
+      "href": "../slides/day2.html#the-log"
+    },
+    {
+      "deck": "day2",
+      "id": "peer-challenge",
+      "n": 39,
+      "session": 4,
+      "title": "The lint finds missing parts; the reviewer finds missing consequences",
+      "text": "The peer challenge The lint finds missing parts; the reviewer finds missing consequences lint no bad consequence; the review trigger has no number or date reviewer A cached answer can outlive a new circular for 30 days. Who carries that? reviewer Q1 answer quality is not a driver, and a stale answer is a wrong answer.",
+      "href": "../slides/day2.html#peer-challenge"
+    },
+    {
+      "deck": "day2",
+      "id": "check-record",
+      "n": 40,
+      "session": 4,
+      "title": "Which line makes this record reviewable?",
+      "text": "Checkpoint Which line makes this record reviewable? A record chooses to skip the reranker for status questions. Its trigger reads \"revisit if quality drops\". Which replacement makes it a trigger someone can act on? Revisit when the product owner feels quality has dropped Revisit every three years Reopen if Q1 on mixed questions falls below 0.90 on the monthly sample of 200 Reopen if p95 latency rises above 4,000 ms",
+      "href": "../slides/day2.html#check-record"
+    },
+    {
+      "deck": "day2",
+      "id": "lab-2-4",
+      "n": 41,
+      "session": 4,
+      "title": "Two decision records and a challenge",
+      "text": "Lab 2.4 · 25 min Two decision records and a challenge Record where Muyassir's model runs and why status questions skip the reranker, lint both, then challenge a peer's record on its consequences and trigger. D2_4_decision_records.ipynb Read the template and run the lint 4 min Record one: where Muyassir's model runs 8 min Record two: no reranking for status questions 6 min Challenge a peer's record 7 min ✱ Stretch: The decision log index",
+      "href": "../slides/day2.html#lab-2-4"
+    },
+    {
+      "deck": "day2",
+      "id": "wrap-up",
+      "n": 42,
+      "session": 4,
+      "title": "Three things to keep",
+      "text": "Day 2 Three things to keep Cost a baseline A non-generative option shows what the model must beat, and sometimes wins. Find what the ranking depends on Volume and coverage, not token price, at Muyassir's scale. Record the cost of a choice Bad consequences and a trigger that can fire.",
+      "href": "../slides/day2.html#wrap-up"
+    },
+    {
+      "deck": "day2",
+      "id": "next",
+      "n": 43,
+      "session": 4,
+      "title": "Tomorrow: nine teams, one platform, and who pays for which tokens",
+      "text": "Day 3 Tomorrow: nine teams, one platform, and who pays for which tokens Keep artifacts/D2_4/: the two records start your decision log. Look at labs/data/platform/usage.csv: six months of nine teams. Think of one shared service in your own organisation that teams avoid. Why?",
+      "href": "../slides/day2.html#next"
+    },
+    {
+      "deck": "day3",
+      "id": "title",
+      "n": 1,
+      "session": 0,
+      "title": "The shared platform",
+      "text": "SDAIA Academy · AI Solution Architecture and Platform Design The shared platform Day 3: Asas as a product: demand, admission, a gateway that refuses, tenancy and showback AI Engineering Track4 teaching days + capstone day4 sessions · 4 labsAE-402",
+      "href": "../slides/day3.html#title"
+    },
+    {
+      "deck": "day3",
+      "id": "agenda",
+      "n": 2,
+      "session": 0,
+      "title": "The shared platform",
+      "text": "Today The shared platform Session 1 · The platform is a product The shared platform treated as a product with nine teams as users, phased by their measured demand Session 2 · Catalogue, admission and the gateway Admission to the model catalogue on evidence, and a gateway that enforces placement by classification Session 3 · Tenancy and shared capacity Tenancy as a set of controls that keep one team's incident inside that team Session 4 · Who pays for which tokens Cost attribution that reconciles with the invoices, shown to teams before anyone is charged",
+      "href": "../slides/day3.html#agenda"
+    },
+    {
+      "deck": "day3",
+      "id": "review-day2",
+      "n": 3,
+      "session": 0,
+      "title": "What does record one's review trigger watch?",
+      "text": "Review of Day 2 What does record one's review trigger watch? Decision record 1 hosts Muyassir's model in a cloud region of the Kingdom. Lab 2.2 found that volume moves the three-year cost by half and token price by 3%. What should its trigger watch first? The provider's token price Monthly requests, against a threshold below the crossover The build cost of O1 A single wrong answer reported in the press",
+      "href": "../slides/day3.html#review-day2"
+    },
+    {
+      "deck": "day3",
+      "id": "s1",
+      "n": 4,
+      "session": 1,
+      "title": "The platform is a product",
+      "text": "Session 1 The platform is a product Build a demand matrix from usage logs and a team survey Phase platform capabilities by shared demand Spot in the logs what the platform should already prevent 01",
+      "href": "../slides/day3.html#s1"
+    },
+    {
+      "deck": "day3",
+      "id": "platform-product",
+      "n": 5,
+      "session": 1,
+      "title": "A platform's users are teams, and they can choose not to use it",
+      "text": "The platform as a product A platform's users are teams, and they can choose not to use it Users Nine product teams with different data levels and needs. A roadmap from demand What most teams use and ask for, phased. Measured by use Adoption and the teams' satisfaction, not features shipped. What goes wrong. A platform built as a project: a list of features, delivered, and avoided by the teams it was for.",
+      "href": "../slides/day3.html#platform-product"
+    },
+    {
+      "deck": "day3",
+      "id": "asas-today",
+      "n": 6,
+      "session": 1,
+      "title": "Asas served nine teams on six models in six months",
+      "text": "Six months of logs Asas served nine teams on six models in six months 3,312 daily usage rows, May to October 2026 8 of 9 teams use or ask for chat 1 key with no owner, still calling a model",
+      "href": "../slides/day3.html#asas-today"
+    },
+    {
+      "deck": "day3",
+      "id": "demand-matrix",
+      "n": 7,
+      "session": 1,
+      "title": "Two capabilities serve most teams; four serve one team each",
+      "text": "Measured in Lab 3.1 Two capabilities serve most teams; four serve one team each Chat 8 teams Embeddings 5 Batch 3 Classification, vision, speech, agent tools 1 each Teams that use a capability or ask for it in the survey, out of nine.",
+      "href": "../slides/day3.html#demand-matrix"
+    },
+    {
+      "deck": "day3",
+      "id": "phasing",
+      "n": 8,
+      "session": 1,
+      "title": "Build shared what most teams need; pave a road for the rest",
+      "text": "Phasing Build shared what most teams need; pave a road for the rest Phase Capabilities Rule Phase 1 chat, embeddings five or more teams Phase 2 batch two to four teams Team-owned classification, vision, speech, agent tools one team: a template, not a service",
+      "href": "../slides/day3.html#phasing"
+    },
+    {
+      "deck": "day3",
+      "id": "logs-breach",
+      "n": 9,
+      "session": 1,
+      "title": "For two months, a Restricted team called the external model",
+      "text": "What the logs show For two months, a Restricted team called the external model 47,556 requests from the reports team (Restricted) to the external model, May and June Citizen reports carry phone numbers and locations. The gateway kept no prompt text, by design: what was sent cannot be read back. The prompt template of those months can be, and the team can say what it held.",
+      "href": "../slides/day3.html#logs-breach"
+    },
+    {
+      "deck": "day3",
+      "id": "check-phase",
+      "n": 10,
+      "session": 1,
+      "title": "Should Asas build a shared vision service now?",
+      "text": "Checkpoint Should Asas build a shared vision service now? Only the inspections team uses vision, and its candidate model has no Arabic evaluation. The team asks the platform to offer vision to everyone. What does the platform do first? Build a shared vision service for all nine teams Refuse, since vision is not in phase 1 Add the vision model to the catalogue now Give the team a paved road to its own vision service, and ask for Arabic evidence",
+      "href": "../slides/day3.html#check-phase"
+    },
+    {
+      "deck": "day3",
+      "id": "lab-3-1",
+      "n": 11,
+      "session": 1,
+      "title": "A demand matrix from six months of usage",
+      "text": "Lab 3.1 · 25 min A demand matrix from six months of usage Build a teams-by-capabilities matrix from six months of synthetic gateway logs and a survey, phase the platform's capabilities and find the placement breach in the logs. D3_1_demand_matrix.ipynb Read six months of usage 4 min The demand matrix: used and asked for 8 min Phase the platform's capabilities 6 min What the logs show that the platform should have stopped 7 min ✱ Stretch: Growth by capability",
+      "href": "../slides/day3.html#lab-3-1"
+    },
+    {
+      "deck": "day3",
+      "id": "s2",
+      "n": 12,
+      "session": 2,
+      "title": "Catalogue, admission and the gateway",
+      "text": "Session 2 Catalogue, admission and the gateway Admit models on licence, evaluation and data-term evidence Write catalogue entries with the highest level each model may receive Make a gateway refuse Restricted data to an external model 02",
+      "href": "../slides/day3.html#s2"
+    },
+    {
+      "deck": "day3",
+      "id": "admission",
+      "n": 13,
+      "session": 2,
+      "title": "A model enters the catalogue on evidence, not on a leaderboard",
+      "text": "Model admission A model enters the catalogue on evidence, not on a leaderboard Licence government production use allowed → Evaluation the Ministry's Arabic and English sets → Data terms retention, no training on prompts → Owner and a review date",
+      "href": "../slides/day3.html#admission"
+    },
+    {
+      "deck": "day3",
+      "id": "admitted",
+      "n": 14,
+      "session": 2,
+      "title": "Four of six candidates are admitted; the best scorer is not",
+      "text": "Measured in Lab 3.2 Four of six candidates are admitted; the best scorer is not Candidate Arabic / English Hosting Verdict ext-frontier-l 0.91 / 0.93 external admitted, Public data only ksa-general-m 0.86 / 0.88 cloud in the Kingdom admitted, up to Restricted own-open-s, own-embed-m 0.79 / 0.82, 0.88 / 0.90 Ministry admitted, up to Secret ext-mini-r 0.84 / 0.89 external rejected: research-only licence ksa-vision-x none / 0.81 cloud in the Kingdom rejected: no Arabic evidence",
+      "href": "../slides/day3.html#admitted"
+    },
+    {
+      "deck": "day3",
+      "id": "gateway-duties",
+      "n": 15,
+      "session": 2,
+      "title": "One door for every model call, with five duties",
+      "text": "The gateway One door for every model call, with five duties Credentials A key per team; provider keys never leave the gateway. Quotas and budgets Per key: requests a minute, spend. Fallback Another admitted model when one fails, under the same policies. Tool mediation Only the tools a team is allowed reach the model. Audit Who, which model, which level, which decision. And now: policy Classification decides where a request may go.",
+      "href": "../slides/day3.html#gateway-duties"
+    },
+    {
+      "deck": "day3",
+      "id": "policy-code",
+      "n": 16,
+      "session": 2,
+      "title": "The level of a request is the highest it shows, declares or defaults to",
+      "text": "Lab 3.2, step 4 The level of a request is the highest it shows, declares or defaults to def classification_policy(ctx): levels = [G.detect_level(ctx[\"text\"])] levels.append(ctx[\"request\"].get(\"classification\") or ctx[\"key_info\"][\"max_level\"]) # fail closed level = A.highest(levels) ctx[\"level\"] = level hosting = ctx[\"entry\"][\"hosting\"] if not A.allowed(level, hosting): return 403, f\"{level} data may not go to a model hosted at '{hosting}'\"",
+      "href": "../slides/day3.html#policy-code"
+    },
+    {
+      "deck": "day3",
+      "id": "nine-tests",
+      "n": 17,
+      "session": 2,
+      "title": "The supplied gateway passed four forbidden requests; the policy stops all four",
+      "text": "Measured in Lab 3.2 The supplied gateway passed four forbidden requests; the policy stops all four Test Request Supplied With the policy G2 Restricted, declared, to the external model 200 403 G3 Restricted team, nothing declared, external model 200 403 G4 declared Public, holds an identity number 200 403 G6 Secret tender text to the cloud model 200 403 G1, G5, G7, G8 allowed placements 200 200",
+      "href": "../slides/day3.html#nine-tests"
+    },
+    {
+      "deck": "day3",
+      "id": "audit-hash",
+      "n": 18,
+      "session": 2,
+      "title": "Log the decision and a hash of the prompt, never the prompt",
+      "text": "The audit log Log the decision and a hash of the prompt, never the prompt seq 4 team T05 · alias ext-frontier-l · level Restricted · 403 reason Restricted data may not go to a model hosted at 'external' prompt sha256 cf48bdcd010a953f A log full of prompts is a second copy of Restricted data, with its own retention rule. A hash proves whether a given text was sent.",
+      "href": "../slides/day3.html#audit-hash"
+    },
+    {
+      "deck": "day3",
+      "id": "fallback-placement",
+      "n": 19,
+      "session": 2,
+      "title": "A fallback must pass the same policy as the first choice",
+      "text": "Fallback A fallback must pass the same policy as the first choice request contracts team, Secret, alias own-open-s own-open-s busy (stand-in failure) fallback ksa-general-m refused: Secret may not go to ksa_cloud answer 503, no model available",
+      "href": "../slides/day3.html#fallback-placement"
+    },
+    {
+      "deck": "day3",
+      "id": "check-gateway",
+      "n": 20,
+      "session": 2,
+      "title": "What should the gateway do with this request?",
+      "text": "Checkpoint What should the gateway do with this request? The planning team (Public) labels a request Public and sends it to the external model. The text reads: \"Owner 1048837265 asks whether plot 17 can be rezoned.\" Pass it: the team and the label are both Public Pass it, and mask the number in the audit log Refuse it: the content shows an identity number, so the request is Restricted Pass it with a warning to the team",
+      "href": "../slides/day3.html#check-gateway"
+    },
+    {
+      "deck": "day3",
+      "id": "lab-3-2",
+      "n": 21,
+      "session": 2,
+      "title": "Model admission and a gateway that refuses",
+      "text": "Lab 3.2 · 25 min Model admission and a gateway that refuses Admit four of six candidate models on evidence, write their catalogue entries and add the classification policy that makes the supplied gateway refuse Restricted data to an external model. D3_2_admission_gateway.ipynb Admission criteria as code 5 min Admit four of the six candidates 6 min Catalogue entries with the level each may receive 4 min The classification policy, and nine test requests 10 min ✱ Stretch: A fallback that respects placement",
+      "href": "../slides/day3.html#lab-3-2"
+    },
+    {
+      "deck": "day3",
+      "id": "s3",
+      "n": 22,
+      "session": 3,
+      "title": "Tenancy and shared capacity",
+      "text": "Session 3 Tenancy and shared capacity Compare a shared and a per-team tenancy model under incidents Cap a team's share of shared capacity Contain leaked keys and runaway spend with keys and budgets per team 03",
+      "href": "../slides/day3.html#s3"
+    },
+    {
+      "deck": "day3",
+      "id": "isolation-levels",
+      "n": 23,
+      "session": 3,
+      "title": "Tenancy is a choice of what teams share and what each gets alone",
+      "text": "Tenancy Tenancy is a choice of what teams share and what each gets alone Model Teams share Each team gets Fits Pooled key, budget, capacity nothing a pilot Per-team controls capacity, under caps a key, a budget, a capped share Public and Restricted teams Dedicated the gateway only its own model deployment Secret teams with steady load",
+      "href": "../slides/day3.html#isolation-levels"
+    },
+    {
+      "deck": "day3",
+      "id": "three-incidents",
+      "n": 24,
+      "session": 3,
+      "title": "Three incidents test three different controls",
+      "text": "One hour, three incidents Three incidents test three different controls Leaked key The planning team's key calls the external model 400 times a minute for 15 minutes. Noisy neighbour The contact team's batch floods the Ministry-hosted model with 300 extra requests a minute. Runaway agent An inspections agent loops for 40 minutes at six times the tokens per call.",
+      "href": "../slides/day3.html#three-incidents"
+    },
+    {
+      "deck": "day3",
+      "id": "incident-results",
+      "n": 25,
+      "session": 3,
+      "title": "Under per-team controls, no bystander loses a request",
+      "text": "Measured in Lab 3.3 Under per-team controls, no bystander loses a request Incident Tenancy Worst bystander, own model Worst bystander, paid models Noisy neighbour pooled 83.1% 100% Leaked key pooled 100% 61.7% Runaway agent pooled 100% 43.3% All three per team 100% 100% Share of requests served, for the worst-off team that caused nothing.",
+      "href": "../slides/day3.html#incident-results"
+    },
+    {
+      "deck": "day3",
+      "id": "control-map",
+      "n": 26,
+      "session": 3,
+      "title": "Each incident needs its own control; the tenancy model is the set",
+      "text": "Which control for which incident Each incident needs its own control; the tenancy model is the set Control Contains Does nothing for A cap on each team's share of capacity noisy neighbour spend A budget per key runaway agent capacity A key per team, revoked on a spike leaked key a slow, legitimate overload",
+      "href": "../slides/day3.html#control-map"
+    },
+    {
+      "deck": "day3",
+      "id": "blast-radius",
+      "n": 27,
+      "session": 3,
+      "title": "One team's incident should stay that team's incident",
+      "text": "The principle One team's incident should stay that team's incident 5 minutes without paid models for the planning team, until its new key Revocation costs the team whose key leaked; nobody else. Keys are scoped to the models of the team's level: a leaked Public key reaches no Restricted model. Rotation is routine, so revoking is not a crisis.",
+      "href": "../slides/day3.html#blast-radius"
+    },
+    {
+      "deck": "day3",
+      "id": "check-tenancy",
+      "n": 28,
+      "session": 3,
+      "title": "Which control stops this from harming other teams?",
+      "text": "Checkpoint Which control stops this from harming other teams? The contact team's nightly batch moves to working hours and asks the Ministry-hosted model for more than twice its capacity. Budgets are untouched; the other teams' answers slow down. Which control fixes it? A lower budget on the contact team's key Revoke the contact team's key A cap on any team's share of the Ministry-hosted model Fall back to a cloud model when the queue is long",
+      "href": "../slides/day3.html#check-tenancy"
+    },
+    {
+      "deck": "day3",
+      "id": "lab-3-3",
+      "n": 29,
+      "session": 3,
+      "title": "Three incidents, two tenancy models",
+      "text": "Lab 3.3 · 25 min Three incidents, two tenancy models Replay an hour with a leaked key, a noisy neighbour and a runaway agent under the pilot's shared model and under a per-team model you design, and measure the harm to bystanders. D3_3_tenancy.ipynb Replay the three incidents on the shared model 5 min A capped share of the Ministry-hosted model 7 min Your tenancy model: keys, budgets, revocation 6 min The incident table: who was harmed 7 min ✱ Stretch: The cap that costs the culprit least",
+      "href": "../slides/day3.html#lab-3-3"
+    },
+    {
+      "deck": "day3",
+      "id": "s4",
+      "n": 30,
+      "session": 4,
+      "title": "Who pays for which tokens",
+      "text": "Session 4 Who pays for which tokens Allocate invoices to teams by usage, credits and fixed costs included Reconcile a showback with each invoice within 2% Name spend that no tag or owner explains 04",
+      "href": "../slides/day3.html#s4"
+    },
+    {
+      "deck": "day3",
+      "id": "showback-first",
+      "n": 31,
+      "session": 4,
+      "title": "Show teams their costs before anyone is charged",
+      "text": "Cost attribution Show teams their costs before anyone is charged Showback Each team sees what its use cost, at any granularity. Nothing moves between budgets. Chargeback The costs are sent to the teams' budgets. Allocation keys now move money. Order. Run showback until the teams stop disputing the allocation keys; then decide about chargeback.",
+      "href": "../slides/day3.html#showback-first"
+    },
+    {
+      "deck": "day3",
+      "id": "card-drift",
+      "n": 32,
+      "session": 4,
+      "title": "A showback priced with a price card drifts from the bill",
+      "text": "Measured in Lab 3.4 A showback priced with a price card drifts from the bill Invoice Showback by card Invoice Off by Why In-Kingdom Cloud, August 5,136 4,636 10.8% an onboarding credit External Provider, September 3,772 3,401 10.9% output price cut External Provider, October 3,935 3,550 10.9% output price cut",
+      "href": "../slides/day3.html#card-drift"
+    },
+    {
+      "deck": "day3",
+      "id": "allocate-invoice",
+      "n": 33,
+      "session": 4,
+      "title": "Share each invoice line by the usage it covers",
+      "text": "Allocate, do not reprice Share each invoice line by the usage it covers Token lines by the rows' tokens of that model → Credits by the rows' value on that provider → Fixed cost by an allocation key you defend → Team by the key's owner 0.00% difference from each of the 18 invoices after allocation; the outcome asks for 2% or less",
+      "href": "../slides/day3.html#allocate-invoice"
+    },
+    {
+      "deck": "day3",
+      "id": "untagged",
+      "n": 34,
+      "session": 4,
+      "title": "Untagged spend comes in two kinds, and only one has an owner",
+      "text": "Untagged spend Untagged spend comes in two kinds, and only one has an owner Blank tag, known key 116 rows, SAR 13,950: the key's owner is known, so the gateway attributes them. Orphan key k-legacy-01: SAR 558 over six months, chat on a cloud model, owned by nobody. The fix is a rule, not a report. No key without an owner, and a key without one is revoked.",
+      "href": "../slides/day3.html#untagged"
+    },
+    {
+      "deck": "day3",
+      "id": "allocation-key",
+      "n": 35,
+      "session": 4,
+      "title": "The allocation key is a decision: tokens and requests disagree",
+      "text": "The data centre's fixed cost The allocation key is a decision: tokens and requests disagree 70.7% of the data centre's cost to the contact team, by tokens 24.1% of it to the same team, by requests Speech counts many tokens per call. Which key reflects what the servers actually spend their time on? Measure it, then record the choice.",
+      "href": "../slides/day3.html#allocation-key"
+    },
+    {
+      "deck": "day3",
+      "id": "check-showback",
+      "n": 36,
+      "session": 4,
+      "title": "Why does the August showback miss the invoice?",
+      "text": "Checkpoint Why does the August showback miss the invoice? Priced with the platform's card, August's In-Kingdom Cloud showback is SAR 500 above the invoice. Every token is accounted for. What is the right fix? Add a correction line of SAR -500 to the unallocated bucket Update the price card for August Ask teams to tag their calls better Allocate the invoice lines, the credit included, to the usage they cover",
+      "href": "../slides/day3.html#check-showback"
+    },
+    {
+      "deck": "day3",
+      "id": "lab-3-4",
+      "n": 37,
+      "session": 4,
+      "title": "A showback that reconciles",
+      "text": "Lab 3.4 · 25 min A showback that reconciles Build a showback from synthetic invoices, usage and tags, see a price-card version fail to reconcile, allocate the invoices instead within 2% and name the untagged spend. D3_4_showback.ipynb A showback priced with the price card 6 min Reconcile it with each invoice 5 min Allocate the invoices instead 8 min Name the untagged spend 6 min ✱ Stretch: Is token count the right key for the data centre?",
+      "href": "../slides/day3.html#lab-3-4"
+    },
+    {
+      "deck": "day3",
+      "id": "wrap-up",
+      "n": 38,
+      "session": 4,
+      "title": "Three things to keep",
+      "text": "Day 3 Three things to keep Build from demand Shared services for most teams, paved roads for the rest. Policy at the door The gateway refuses by classification, content included, and logs no text. Contain and attribute Per-team controls keep incidents local; showback allocates the real bill.",
+      "href": "../slides/day3.html#wrap-up"
+    },
+    {
+      "deck": "day3",
+      "id": "next",
+      "n": 39,
+      "session": 4,
+      "title": "Tomorrow: a golden path, fitness checks, a review and a deviation",
+      "text": "Day 4 Tomorrow: a golden path, fitness checks, a review and a deviation Keep artifacts/D3_2/ and artifacts/D3_4/: the capstone's platform slice starts there. Read the inspections team's design in labs/data/designs/: you review it in Session 3. Choose which of the three capstone services you would take.",
+      "href": "../slides/day3.html#next"
+    },
+    {
+      "deck": "day4",
+      "id": "title",
+      "n": 1,
+      "session": 0,
+      "title": "Reference designs and reviews",
+      "text": "SDAIA Academy · AI Solution Architecture and Platform Design Reference designs and reviews Day 4: A golden path, fitness checks, a structured review and a deviation decided on one page AI Engineering Track4 teaching days + capstone day4 sessions · 4 labsAE-402",
+      "href": "../slides/day4.html#title"
+    },
+    {
+      "deck": "day4",
+      "id": "agenda",
+      "n": 2,
+      "session": 0,
+      "title": "Reference designs and reviews",
+      "text": "Today Reference designs and reviews Session 1 · Golden paths A golden path makes the compliant way the easy way: a template with its gates on by default Session 2 · Fitness functions Fitness functions turn the reference design's rules into checks that fail a build Session 3 · Structured architecture review A structured review weighs a design against its prioritised scenarios, not a checklist Session 4 · Deviations and sponsors A deviation is a time-boxed decision with conditions, explained to a sponsor in numbers",
+      "href": "../slides/day4.html#agenda"
+    },
+    {
+      "deck": "day4",
+      "id": "review-day3",
+      "n": 3,
+      "session": 0,
+      "title": "Which control contains a leaked key to one team?",
+      "text": "Review of Day 3 Which control contains a leaked key to one team? Asas moves from one shared key to per-team keys. The planning team's key leaks and calls the external model 400 times a minute. What keeps the other eight teams served? Revoking that team's key when its rate spikes, under per-team budgets A cap on each team's share of the Ministry-hosted model A larger shared budget for the hour A showback that names the planning team",
+      "href": "../slides/day4.html#review-day3"
+    },
+    {
+      "deck": "day4",
+      "id": "s1",
+      "n": 4,
+      "session": 1,
+      "title": "Golden paths",
+      "text": "Session 1 Golden paths Turn a team's service into a template other teams generate from Put evaluation, classification checks and tracing on by default Make switching a gate off visible to the platform 01",
+      "href": "../slides/day4.html#s1"
+    },
+    {
+      "deck": "day4",
+      "id": "golden-path",
+      "n": 5,
+      "session": 1,
+      "title": "Make the compliant way the easiest way to start",
+      "text": "Golden paths Make the compliant way the easiest way to start A working start A service a team generates in minutes, not a document it reads. Gates on by default Evaluation, classification checks and tracing come with it. Optional, and visible A team may leave the path; the platform sees who did and why. What goes wrong. A golden path that is harder than doing it yourself. Teams route around it, and the gates go with it.",
+      "href": "../slides/day4.html#golden-path"
+    },
+    {
+      "deck": "day4",
+      "id": "hard-coded",
+      "n": 6,
+      "session": 1,
+      "title": "What one team hard-coded becomes the template's questions",
+      "text": "Lab 4.1, step 1 What one team hard-coded becomes the template's questions In the permits service In the template Guard rail SERVICE = \"permits-rag\" service_name required TEAM = \"T01\" team required LEVEL = \"Restricted\" classification three choices MODEL = \"ksa-general-m\" model_alias must be allowed for the level python eval.py, by hand eval_gate, eval_min_score on, and 0.80 or more",
+      "href": "../slides/day4.html#hard-coded"
+    },
+    {
+      "deck": "day4",
+      "id": "validator",
+      "n": 7,
+      "session": 1,
+      "title": "The template refuses a placement before any code exists",
+      "text": "A guard rail in the template The template refuses a placement before any code exists model_alias: type: str choices: [ext-frontier-l, ksa-general-m, own-open-s] default: ksa-general-m validator: >- {% set hosting = {'ext-frontier-l': 'external', ...} %} {% if hosting[model_alias] not in ok[classification] %} {{ classification }} data may not go to {{ model_alias }}{% endif %} refused Validation error for question 'model_alias': Restricted data may not go to ext-frontier-l (external)",
+      "href": "../slides/day4.html#validator"
+    },
+    {
+      "deck": "day4",
+      "id": "three-gates",
+      "n": 8,
+      "session": 1,
+      "title": "Kashif's generated service passes three gates nobody on its team wrote",
+      "text": "Measured in Lab 4.1 Kashif's generated service passes three gates nobody on its team wrote evaluation pass · retrieval hit rate 1.00 against 0.85 on 10 questions classification pass · Restricted data to ksa-general-m (ksa_cloud) tracing pass · 2 spans, no question text pipeline exit code 0 The trace line carries the service, the team, the level and a hash of the question.",
+      "href": "../slides/day4.html#three-gates"
+    },
+    {
+      "deck": "day4",
+      "id": "gate-off",
+      "n": 9,
+      "session": 1,
+      "title": "A gate may be switched off, with a reason, in a register",
+      "text": "A visible exit A gate may be switched off, with a reason, in a register evaluation off · switched off by the team: no evaluation set yet; due 2026-12-15 classification pass tracing pass Without a reason, the template refuses. The pipeline passes and says so. The platform's register lists every service with a gate off, its team and its date.",
+      "href": "../slides/day4.html#gate-off"
+    },
+    {
+      "deck": "day4",
+      "id": "template-update",
+      "n": 10,
+      "session": 1,
+      "title": "A template copied once stops at the day it was copied",
+      "text": "Template plus update A template copied once stops at the day it was copied Copied Each service drifts; a fix to the gates reaches nobody who started before it. Generated and updated The service records its answers; copier update brings later template changes, and conflicts show as a diff.",
+      "href": "../slides/day4.html#template-update"
+    },
+    {
+      "deck": "day4",
+      "id": "check-golden",
+      "n": 11,
+      "session": 1,
+      "title": "Why did the reports team's service miss the new gate?",
+      "text": "Checkpoint Why did the reports team's service miss the new gate? In March the platform adds an Arabic evaluation gate to the template. Services generated after March have it; the reports team's service, generated in January, does not. What went wrong? The reports team should have read the release notes The template should have had more questions The service was treated as a one-time copy, with no update path from the template The gateway should run the evaluation",
+      "href": "../slides/day4.html#check-golden"
+    },
+    {
+      "deck": "day4",
+      "id": "lab-4-1",
+      "n": 12,
+      "session": 1,
+      "title": "A golden path from the permits team's service",
+      "text": "Lab 4.1 · 25 min A golden path from the permits team's service Turn the permits team's retrieval service into a Copier template whose questions refuse a disallowed placement, generate Kashif's service from it and run its three gates as the pipeline would. D4_1_golden_path.ipynb What the permits team hard-coded 4 min The template: questions with guard rails 9 min Generate Kashif's service and run its gates 7 min A register of the gates switched off 5 min ✱ Stretch: Refuse an evaluation set without Arabic",
+      "href": "../slides/day4.html#lab-4-1"
+    },
+    {
+      "deck": "day4",
+      "id": "s2",
+      "n": 13,
+      "session": 2,
+      "title": "Fitness functions",
+      "text": "Session 2 Fitness functions Describe a design as data a program can read Write a check for a blocking evaluation gate before deployment Write a placement check that follows fallbacks 02",
+      "href": "../slides/day4.html#s2"
+    },
+    {
+      "deck": "day4",
+      "id": "fitness-function",
+      "n": 14,
+      "session": 2,
+      "title": "A fitness function turns a sentence in a standard into a failing build",
+      "text": "Fitness functions A fitness function turns a sentence in a standard into a failing build Standard \"Restricted data never leaves the Kingdom\" → Design as data components, hosting, flows, levels → Check a function over the file → Pipeline exit code 1 stops the merge",
+      "href": "../slides/day4.html#fitness-function"
+    },
+    {
+      "deck": "day4",
+      "id": "design-data",
+      "n": 15,
+      "session": 2,
+      "title": "The design names hosting, levels and pipeline stages",
+      "text": "A design file The design names hosting, levels and pipeline stages {\"service\": \"kashif\", \"team\": \"T03\", \"classification\": \"Restricted\", \"components\": [ {\"id\": \"vision\", \"kind\": \"model\", \"model\": \"ksa-vision-x\", \"hosting\": \"ksa_cloud\", \"fallback\": \"vision_ext\"}, {\"id\": \"vision_ext\", \"kind\": \"model\", \"model\": \"ext-vision-q\", \"hosting\": \"external\"}], \"flows\": [{\"id\": \"F2\", \"from\": \"kashif\", \"to\": \"vision\", \"level\": \"Restricted\"}], \"pipeline\": [{\"stage\": \"test\"}, {\"stage\": \"evaluate\", \"blocking\": true, \"min_score\": 0.8, \"sets\": [\"en\"]}, {\"stage\": \"deploy\"}]}",
+      "href": "../slides/day4.html#design-data"
+    },
+    {
+      "deck": "day4",
+      "id": "fitness-results",
+      "n": 16,
+      "session": 2,
+      "title": "Two checks fail three of five designs, each for a different reason",
+      "text": "Measured in Lab 4.2 Two checks fail three of five designs, each for a different reason Design Evaluation gate Placement Why permits_reference pass pass the reference zoning_public pass pass Public data may go to an external model reports_triage fail pass evaluate runs after deploy and does not block staff_assistant pass fail an employee's leave record to an external model inspections pass fail Restricted photos reach an external model through the fallback",
+      "href": "../slides/day4.html#fitness-results"
+    },
+    {
+      "deck": "day4",
+      "id": "follow-fallback",
+      "n": 17,
+      "session": 2,
+      "title": "Follow every fallback: it is where the data goes when things fail",
+      "text": "The placement check Follow every fallback: it is where the data goes when things fail F2 kashif → vision · Restricted vision ksa-vision-x · ksa_cloud · allowed fallback vision_ext · ext-vision-q · external · not allowed FAIL kashif: flow F2 sends Restricted data to vision_ext (fallback of vision), hosted external",
+      "href": "../slides/day4.html#follow-fallback"
+    },
+    {
+      "deck": "day4",
+      "id": "policy-as-code",
+      "n": 18,
+      "session": 2,
+      "title": "The language of the check matters less than where it runs",
+      "text": "Same idea, other tools The language of the check matters less than where it runs Tool Checks Runs A Python function (the lab) design files a test in the pipeline Open Policy Agent with conftest JSON, YAML, infrastructure files, in Rego the pipeline, as a command Tests over infrastructure definitions the deployed resources' code the pipeline",
+      "href": "../slides/day4.html#policy-as-code"
+    },
+    {
+      "deck": "day4",
+      "id": "check-limits",
+      "n": 19,
+      "session": 2,
+      "title": "A check is only as true as the design file",
+      "text": "What a check cannot see A check is only as true as the design file A file that says \"ksa_cloud\" for a service deployed abroad passes. An evaluation set in the wrong language passes check 1. A design that meets every rule may still miss its scenarios. So Checks catch what can be read from the file on every commit; a review asks whether the file and the design are right, once per design.",
+      "href": "../slides/day4.html#check-limits"
+    },
+    {
+      "deck": "day4",
+      "id": "check-fitness",
+      "n": 20,
+      "session": 2,
+      "title": "Should the placement check fail this design?",
+      "text": "Checkpoint Should the placement check fail this design? The planning team's zoning assistant sends questions about published zoning plans, classified Public, to the external model. A colleague proposes failing every design with an external model, to be safe. Yes: external models are a risk whatever the data Pass it with a warning that cannot be silenced Send every external design to the board for review No: the check enforces the rule by level, and Public data may go to an external host",
+      "href": "../slides/day4.html#check-fitness"
+    },
+    {
+      "deck": "day4",
+      "id": "lab-4-2",
+      "n": 21,
+      "session": 2,
+      "title": "Two fitness checks over designs as data",
+      "text": "Lab 4.2 · 25 min Two fitness checks over designs as data Write two checks over five teams' design files, one for a blocking evaluation gate and one for the placement of every classified flow, and run them as a pipeline step that fails three designs. D4_2_fitness_checks.ipynb Read a design as data 4 min Check 1: a blocking evaluation gate before deployment 7 min Check 2: every flow is placed where its level may go 8 min Run both as a pipeline step 6 min ✱ Stretch: A third check: the evaluation includes Arabic",
+      "href": "../slides/day4.html#lab-4-2"
+    },
+    {
+      "deck": "day4",
+      "id": "s3",
+      "n": 22,
+      "session": 3,
+      "title": "Structured architecture review",
+      "text": "Session 3 Structured architecture review Prioritise scenarios in a utility tree Tell risks, sensitivity points, trade-off points and non-compliance apart Write a review report with a verdict a team can act on 03",
+      "href": "../slides/day4.html#s3"
+    },
+    {
+      "deck": "day4",
+      "id": "atam",
+      "n": 23,
+      "session": 3,
+      "title": "Review against prioritised scenarios, not against a checklist",
+      "text": "A structured review Review against prioritised scenarios, not against a checklist Drivers the business goals and constraints → Utility tree scenarios by importance and difficulty → Analysis the approaches against the leading scenarios → Findings risks, non-risks, sensitivity and trade-off points → Risk themes tied to the drivers",
+      "href": "../slides/day4.html#atam"
+    },
+    {
+      "deck": "day4",
+      "id": "utility-tree",
+      "n": 24,
+      "session": 3,
+      "title": "Three scenarios lead: Arabic quality, privacy and security",
+      "text": "Kashif's utility tree Three scenarios lead: Arabic quality, privacy and security Scenario Attribute Importance Difficulty Q1 · Arabic shop signs read correctly in 90% of the Ministry's set answer quality H H P1 · no photo with faces or plates processed outside the Kingdom privacy H M S1 · a leaked key contained to one client within 30 minutes security H M O1 · every filed report approved by its inspector oversight H L L1 · a draft on the tablet within 5 s at p95 on 4G latency M H Five of eight scenarios; cost, availability and operability follow.",
+      "href": "../slides/day4.html#utility-tree"
+    },
+    {
+      "deck": "day4",
+      "id": "five-tags",
+      "n": 25,
+      "session": 3,
+      "title": "Five tags, each telling the team something different to do",
+      "text": "What a finding is Five tags, each telling the team something different to do Tag Means Kashif example Non-compliance breaks a written standard R02 · photos fall back to an external model Risk may keep a scenario from being met R03 · evaluation in English only Sensitivity point one parameter a scenario depends on R04 · the vision call takes 3,800 of 5,000 ms Trade-off point one decision, two attributes in opposite directions R05 · compressing photos: faster, cheaper, worse at small Arabic text Non-risk a decision that meets a scenario R06 · the inspector approves every report",
+      "href": "../slides/day4.html#five-tags"
+    },
+    {
+      "deck": "day4",
+      "id": "r01-r03",
+      "n": 26,
+      "session": 3,
+      "title": "A checklist finds the broken rule; a reviewer finds the empty gate",
+      "text": "Two findings about Arabic A checklist finds the broken rule; a reviewer finds the empty gate R01 · non-compliance The vision model was not admitted: no Arabic evaluation evidence. Any checklist catches it. R03 · risk An evaluation gate exists and blocks. It runs on English, and the signs are Arabic. Only someone who read Q1 sees it.",
+      "href": "../slides/day4.html#r01-r03"
+    },
+    {
+      "deck": "day4",
+      "id": "verdict",
+      "n": 27,
+      "session": 3,
+      "title": "Not approved, with the four themes that would change the verdict",
+      "text": "Measured in Lab 4.3 Not approved, with the four themes that would change the verdict 2 · 3 · 2 · 2 · 3 non-compliance, risks, sensitivity points, trade-off points, non-risks Q1 Arabic quality unproven: R01, R03 P1 photos can leave the Kingdom: R02 S1 one key for two clients: R10 M1 no owner for prompt templates: R08",
+      "href": "../slides/day4.html#verdict"
+    },
+    {
+      "deck": "day4",
+      "id": "check-review",
+      "n": 28,
+      "session": 3,
+      "title": "How should the board tag this observation?",
+      "text": "Checkpoint How should the board tag this observation? \"A 10% sample review of approved reports is the only check that inspectors' approvals are real.\" The oversight scenario requires every filed report to carry an approval. Non-compliance A sensitivity point: whether approvals mean anything rests on that one rate A non-risk, since every report is approved A trade-off point",
+      "href": "../slides/day4.html#check-review"
+    },
+    {
+      "deck": "day4",
+      "id": "lab-4-3",
+      "n": 29,
+      "session": 3,
+      "title": "A structured review of Kashif's design",
+      "text": "Lab 4.3 · 25 min A structured review of Kashif's design Review the inspections team's design: order its scenarios in a utility tree, tag twelve observations, group the risks into themes and write the report with its verdict. D4_3_review.ipynb The utility tree: which scenarios lead 6 min Tag the twelve observations 8 min Risk themes, tied to scenarios 5 min The review report and its verdict 6 min ✱ Stretch: Which finding becomes a fitness check?",
+      "href": "../slides/day4.html#lab-4-3"
+    },
+    {
+      "deck": "day4",
+      "id": "s4",
+      "n": 30,
+      "session": 4,
+      "title": "Deviations and sponsors",
+      "text": "Session 4 Deviations and sponsors Put numbers on what a deviation breaks and what refusing it costs Decide a deviation with verifiable conditions, an expiry and reopen triggers Explain a trade-off on one page for a sponsor 04",
+      "href": "../slides/day4.html#s4"
+    },
+    {
+      "deck": "day4",
+      "id": "deviation",
+      "n": 31,
+      "session": 4,
+      "title": "A deviation is a decision record with an expiry",
+      "text": "Deviations A deviation is a decision record with an expiry Conditions Each with a number a reviewer can check. Residual risk In numbers, and who accepts it. Expiry A date, and the events that reopen it sooner. What goes wrong. A deviation without an expiry becomes the new standard by default, with nobody having decided that.",
+      "href": "../slides/day4.html#deviation"
+    },
+    {
+      "deck": "day4",
+      "id": "request-numbers",
+      "n": 32,
+      "session": 4,
+      "title": "The request has a cost either way, and the request names neither",
+      "text": "Measured in Lab 4.4 The request has a cost either way, and the request names neither SAR 96,000 a month of inspector time if refused: 800 hours 5,445 Restricted photos a month abroad if approved as asked about 90 a month still abroad if only photos the detector passes are sent",
+      "href": "../slides/day4.html#request-numbers"
+    },
+    {
+      "deck": "day4",
+      "id": "three-options",
+      "n": 33,
+      "session": 4,
+      "title": "Approve with conditions, until the evidence in the Kingdom arrives",
+      "text": "Three answers Approve with conditions, until the evidence in the Kingdom arrives Answer Gives Costs Refuse the rule kept whole SAR 96,000 a month of inspector time, until February 2027 at least Approve as asked drafts for every photo 5,445 Restricted photos a month abroad, for twelve months Approve with conditions, until 31 March 2027 drafts for about 65% of photos about 90 a month through detector misses, accepted by the data owner",
+      "href": "../slides/day4.html#three-options"
+    },
+    {
+      "deck": "day4",
+      "id": "sponsor-page",
+      "n": 34,
+      "session": 4,
+      "title": "The decision first, the trade-off in numbers, and a date it ends",
+      "text": "One page for a sponsor The decision first, the trade-off in numbers, and a date it ends The recommendation in the first sentence. What it gives and what it risks, in hours, riyals and photos. What she is asked to accept, by name. When and how it ends. Left out on purpose Gateway, fallback, p95, fitness check. The lab's self-check fails the page if any of them appear, or if it runs past 250 words.",
+      "href": "../slides/day4.html#sponsor-page"
+    },
+    {
+      "deck": "day4",
+      "id": "deviation-policy",
+      "n": 35,
+      "session": 4,
+      "title": "A deviation the gateway enforces ends on its date",
+      "text": "The stretch of Lab 4.4 A deviation the gateway enforces ends on its date 200 inspections key, photo the detector passed, December 2026 403 inspections key, flagged photo 403 another team's key, photo the detector passed 403 inspections key, photo the detector passed, 1 April 2027: expired",
+      "href": "../slides/day4.html#deviation-policy"
+    },
+    {
+      "deck": "day4",
+      "id": "capstone-choice",
+      "n": 36,
+      "session": 4,
+      "title": "Choose one of three services; all run on Asas",
+      "text": "Your capstone Choose one of three services; all run on Asas Citizen reports 95,000 reports a month, routing and replies. Restricted: phones, locations, photos. Call summaries 40,000 calls a month. Restricted: voices, names, identity numbers read aloud. Staff policies 6,000 questions a month. Public policies, Restricted employee records.",
+      "href": "../slides/day4.html#capstone-choice"
+    },
+    {
+      "deck": "day4",
+      "id": "check-deviation",
+      "n": 37,
+      "session": 4,
+      "title": "What is missing from this approval?",
+      "text": "Checkpoint What is missing from this approval? \"DR-2026-07: approved. The inspections team may send clean photos to ext-vision-q. Owner: Rabah Al-Mujil. Conditions: the detector runs on every photo; flagged photos stay on the manual path.\" An expiry, and the events that would bring it back to the board An owner for the conditions Any conditions at all The scope of what is allowed",
+      "href": "../slides/day4.html#check-deviation"
+    },
+    {
+      "deck": "day4",
+      "id": "lab-4-4",
+      "n": 38,
+      "session": 4,
+      "title": "A deviation request, decided and explained on one page",
+      "text": "Lab 4.4 · 25 min A deviation request, decided and explained on one page Measure the inspections team's request to send photos to an external vision model, decide it with conditions and an expiry, write the sponsor's one page and choose your capstone service. D4_4_deviation.ipynb What the request breaks, and what refusing costs 6 min Decide, with conditions, an expiry and what reopens it 7 min One page for the sponsor 7 min Choose your capstone service 5 min ✱ Stretch: The deviation as a gateway policy that expires",
+      "href": "../slides/day4.html#lab-4-4"
+    },
+    {
+      "deck": "day4",
+      "id": "wrap-up",
+      "n": 39,
+      "session": 4,
+      "title": "Three things to keep",
+      "text": "Day 4 Three things to keep Paths, not documents A template with its gates on is a standard teams actually follow. Checks and reviews Checks catch what the file shows, every commit; a review asks whether the design is right. Bounded exceptions A deviation has conditions, a residual someone accepts and a date it ends.",
+      "href": "../slides/day4.html#wrap-up"
+    },
+    {
+      "deck": "day4",
+      "id": "next",
+      "n": 40,
+      "session": 4,
+      "title": "Next: build your service's architecture and defend it before the panel",
+      "text": "Capstone day Next: build your service's architecture and defend it before the panel Start a public repository from labs/capstone/README.md; commit early, the history counts. Bring a peer's design to review: the review is 15% of the rubric. Prepare for the panel to change one classification level or the volume forecast.",
+      "href": "../slides/day4.html#next"
+    },
+    {
+      "deck": "capstone",
+      "id": "title",
+      "n": 1,
+      "session": 0,
+      "title": "Capstone project presentations",
+      "text": "SDAIA Academy · AI Solution Architecture and Platform Design Capstone project presentations Capstone: Ten minutes of architecture and eight of questions, with one classification or forecast changed by the panel AI Engineering Track4 teaching days + capstone day10 min talk and demo · 8 min Q&AAE-402",
+      "href": "../slides/capstone.html#title"
+    },
+    {
+      "deck": "capstone",
+      "id": "agenda",
+      "n": 2,
+      "session": 0,
+      "title": "How the defences run",
+      "text": "Capstone How the defences run Expectations and final prep the rubric, the panel's change, a last check of the repository Defences ten minutes of talk, eight of questions, each timed Review and closing what the room learned, the follow-up task",
+      "href": "../slides/capstone.html#agenda"
+    },
+    {
+      "deck": "capstone",
+      "id": "rubric",
+      "n": 3,
+      "session": 0,
+      "title": "Five criteria, 100 points",
+      "text": "How the repository is scored Five criteria, 100 points Scenarios and views 20% Options and decisions 25% Platform slice 25% Fitness checks 15% Review 15% Pass: 70% overall, and at least 60% on this rubric and on the supervised checks. The repository is 60% of the result, the defence 20%, the supervised checks 20%.",
+      "href": "../slides/capstone.html#rubric"
+    },
+    {
+      "deck": "capstone",
+      "id": "format",
+      "n": 4,
+      "session": 0,
+      "title": "Ten minutes of architecture, then eight minutes of questions",
+      "text": "The defence Ten minutes of architecture, then eight minutes of questions 3 min · the service Drivers, the leading scenarios with their targets, the data-flow view with every level. 4 min · the decisions The options paper's numbers, two decision records, and the platform slice running: one refused request. 3 min · the checks and the review The pipeline failing a bad design; the peer review's verdict. AI-full. Any assistant was allowed in the repository; the questions are where you show the decisions are yours.",
+      "href": "../slides/capstone.html#format"
+    },
+    {
+      "deck": "capstone",
+      "id": "panel-change",
+      "n": 5,
+      "session": 0,
+      "title": "The panel changes one input; you name the decisions it reopens",
+      "text": "During the questions The panel changes one input; you name the decisions it reopens A classification \"The call recordings are now Secret.\" Which placements, models, keys and costs change? The volume forecast \"Year three is three times the base.\" Which option wins now, and which review trigger fired? What the panel listens for. Record numbers, not a fresh opinion: the decision records whose triggers fire, and what each would become.",
+      "href": "../slides/capstone.html#panel-change"
+    },
+    {
+      "deck": "capstone",
+      "id": "running-order",
+      "n": 6,
+      "session": 0,
+      "title": "Who defends when",
+      "text": "Running order Who defends when # Participant Service and repository 1 2 3 4 5 6 7 8",
+      "href": "../slides/capstone.html#running-order"
+    },
+    {
+      "deck": "capstone",
+      "id": "final-prep",
+      "n": 7,
+      "session": 0,
+      "title": "Final prep · 20 minutes",
+      "text": "Before the first defence Final prep · 20 minutes Clone your repository into a new folder and run its pipeline. If the checks or the refusal test fail there, they fail for the panel.",
+      "href": "../slides/capstone.html#final-prep"
+    },
+    {
+      "deck": "capstone",
+      "id": "now-presenting",
+      "n": 8,
+      "session": 0,
+      "title": "Talk",
+      "text": "Now defending Talk Questions",
+      "href": "../slides/capstone.html#now-presenting"
+    },
+    {
+      "deck": "capstone",
+      "id": "review",
+      "n": 9,
+      "session": 0,
+      "title": "What the room learned",
+      "text": "After the defences What the room learned The decision most reopened Which record did the panel's changes reopen most often? The best refusal Whose gateway or check refused the most with the least code? The cheapest option that won Where did the non-generative option hold its own?",
+      "href": "../slides/capstone.html#review"
+    },
+    {
+      "deck": "capstone",
+      "id": "what-next",
+      "n": 10,
+      "session": 0,
+      "title": "The follow-up task, and the AE Expert badge",
+      "text": "After the course The follow-up task, and the AE Expert badge Follow-up task. Within a month, write three decision records for a system from your own work, each with good and bad consequences and a review trigger. Keep the repository. It is the evidence the AE Expert badge looks at. Next in the track: AE-401 Inference Performance and Cost Engineering, and AE-403 Reliability Engineering for AI Services.",
+      "href": "../slides/capstone.html#what-next"
+    },
+    {
+      "deck": "capstone",
+      "id": "thanks",
+      "n": 11,
+      "session": 0,
+      "title": "Thank you",
+      "text": "SDAIA Academy Thank you AI Solution Architecture and Platform Design",
+      "href": "../slides/capstone.html#thanks"
+    }
+  ]
+}

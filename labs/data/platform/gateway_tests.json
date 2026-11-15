@@ -1,0 +1,74 @@
+[
+ {
+  "id": "G1",
+  "key": "k-t05-a",
+  "model": "ext-frontier-l",
+  "declared": "Public",
+  "text": "Which zoning class allows a two-storey shop on a main road?",
+  "expect": 200
+ },
+ {
+  "id": "G2",
+  "key": "k-t01-a",
+  "model": "ext-frontier-l",
+  "declared": "Restricted",
+  "text": "Summarise application 2026-4471 with the attached deed.",
+  "expect": 403
+ },
+ {
+  "id": "G3",
+  "key": "k-t01-a",
+  "model": "ext-frontier-l",
+  "declared": null,
+  "text": "List the missing documents for this applicant.",
+  "expect": 403
+ },
+ {
+  "id": "G4",
+  "key": "k-t05-a",
+  "model": "ext-frontier-l",
+  "declared": "Public",
+  "text": "Owner 1048837265 asks whether plot 17 can be rezoned.",
+  "expect": 403
+ },
+ {
+  "id": "G5",
+  "key": "k-t01-a",
+  "model": "ksa-general-m",
+  "declared": "Restricted",
+  "text": "Summarise application 2026-4471 with the attached deed.",
+  "expect": 200
+ },
+ {
+  "id": "G6",
+  "key": "k-t06-a",
+  "model": "ksa-general-m",
+  "declared": null,
+  "text": "Compare clause 9 of the two bids for tender 31.",
+  "expect": 403
+ },
+ {
+  "id": "G7",
+  "key": "k-t06-a",
+  "model": "own-open-s",
+  "declared": null,
+  "text": "Compare clause 9 of the two bids for tender 31.",
+  "expect": 200
+ },
+ {
+  "id": "G8",
+  "key": "k-t09-a",
+  "model": "ext-frontier-l",
+  "declared": "Public",
+  "text": "Rewrite the published leave policy in plain Arabic.",
+  "expect": 200
+ },
+ {
+  "id": "G9",
+  "key": "k-unknown",
+  "model": "ksa-general-m",
+  "declared": "Public",
+  "text": "Hello",
+  "expect": 401
+ }
+]

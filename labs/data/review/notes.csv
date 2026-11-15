@@ -1,0 +1,13 @@
+id,observation
+R01,The vision model ksa-vision-x is not in the Asas catalogue: it was rejected for lack of Arabic evaluation evidence.
+R02,"When ksa-vision-x fails, photos fall back to ext-vision-q, an external model."
+R03,The evaluation gate runs on the English set only; signs and forms are in Arabic.
+R04,"The vision call takes 3,800 ms of the 5,000 ms p95 budget."
+R05,"Compressing photos on the tablet cuts upload time and cost, and lowers the recognition of small Arabic text."
+R06,The inspector approves every report before it is filed.
+R07,Drafts and approved reports are stored in the Ministry data centre.
+R08,No owner is named for the prompt templates.
+R09,A 10% sample review of approved reports is the only check that approvals are real.
+R10,The tablet app and the nightly batch share one gateway key.
+R11,"Hosting a vision model in the Ministry data centre would remove the placement question, and add a hardware purchase with a nine-month lead time."
+R12,"The cloud provider keeps photos 30 days and does not train on them, within the admission limit."

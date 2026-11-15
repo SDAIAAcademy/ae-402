@@ -1,0 +1,57 @@
+{
+ "service": "reports-triage",
+ "team": "T02",
+ "owner": "Reports team lead",
+ "classification": "Restricted",
+ "components": [
+  {
+   "id": "app",
+   "kind": "app",
+   "hosting": "ministry"
+  },
+  {
+   "id": "triage",
+   "kind": "service",
+   "hosting": "ministry"
+  },
+  {
+   "id": "clf",
+   "kind": "model",
+   "model": "own-open-s",
+   "hosting": "ministry"
+  }
+ ],
+ "flows": [
+  {
+   "id": "F1",
+   "from": "app",
+   "to": "triage",
+   "data": "citizen report with phone and location",
+   "level": "Restricted"
+  },
+  {
+   "id": "F2",
+   "from": "triage",
+   "to": "clf",
+   "data": "report text",
+   "level": "Restricted"
+  }
+ ],
+ "pipeline": [
+  {
+   "stage": "test"
+  },
+  {
+   "stage": "deploy"
+  },
+  {
+   "stage": "evaluate",
+   "blocking": false,
+   "min_score": 0.85,
+   "sets": [
+    "ar",
+    "en"
+   ]
+  }
+ ]
+}

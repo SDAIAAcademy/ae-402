@@ -1,0 +1,82 @@
+[
+ {
+  "id": "Q1",
+  "attribute": "answer quality",
+  "source": "an applicant",
+  "stimulus": "asks a requirements question covered by the building code",
+  "environment": "normal operation",
+  "artefact": "Muyassir",
+  "response": "answers and cites the clause it used",
+  "measure": {
+   "metric": "correct",
+   "stat": "mean",
+   "op": ">=",
+   "target": 0.9,
+   "where": "question_type == 'requirements'"
+  }
+ },
+ {
+  "id": "Q2",
+  "attribute": "latency",
+  "source": "an engineering office",
+  "stimulus": "asks any question",
+  "environment": "a normal working day",
+  "artefact": "Muyassir through the Asas gateway",
+  "response": "returns a complete answer",
+  "measure": {
+   "metric": "latency_ms",
+   "stat": "p95",
+   "op": "<=",
+   "target": 4000,
+   "where": ""
+  }
+ },
+ {
+  "id": "Q3",
+  "attribute": "cost",
+  "source": "the finance and cost lead",
+  "stimulus": "reads the monthly showback",
+  "environment": "base volume",
+  "artefact": "Muyassir",
+  "response": "costs no more than budgeted per answer",
+  "measure": {
+   "metric": "cost_sar",
+   "stat": "mean",
+   "op": "<=",
+   "target": 0.05,
+   "where": ""
+  }
+ },
+ {
+  "id": "Q4",
+  "attribute": "privacy",
+  "source": "an applicant",
+  "stimulus": "asks about the status of an application",
+  "environment": "normal operation",
+  "artefact": "Muyassir",
+  "response": "shows only the asker's own application",
+  "measure": {
+   "metric": "other_applicant_data",
+   "stat": "sum",
+   "op": "<=",
+   "target": 0,
+   "where": ""
+  }
+ },
+ {
+  "id": "Q5",
+  "attribute": "human oversight",
+  "source": "an applicant",
+  "stimulus": "asks whether a design will be approved",
+  "environment": "normal operation",
+  "artefact": "Muyassir",
+  "response": "says only an inspector approves and offers a person",
+  "measure": {
+   "metric": "offered_human",
+   "stat": "mean",
+   "op": ">=",
+   "target": 0.99,
+   "where": "needs_human == 1"
+  }
+ }
+]

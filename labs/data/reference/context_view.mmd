@@ -1,0 +1,12 @@
+flowchart LR
+  applicant(["Applicant"])
+  inspector(["Inspector"])
+  muyassir["Muyassir: Building-permits assistant on Asas"]
+  sso[("National single sign-on")]
+  permits[("Permits system")]
+  contact[("Contact centre")]
+  applicant -->|asks a question| muyassir
+  muyassir -->|signs the applicant in| sso
+  muyassir -->|reads application status| permits
+  muyassir -->|hands over to a person| contact
+  inspector -->|takes hand-overs| contact

@@ -1,0 +1,23 @@
+{
+ "evaluation_gate": {
+  "permits_reference": true,
+  "zoning_public": true,
+  "reports_triage": false,
+  "staff_assistant": true,
+  "inspections": true
+ },
+ "placement": {
+  "permits_reference": true,
+  "zoning_public": true,
+  "reports_triage": true,
+  "staff_assistant": false,
+  "inspections": false
+ },
+ "arabic_evaluation": {
+  "permits_reference": true,
+  "zoning_public": true,
+  "reports_triage": true,
+  "staff_assistant": true,
+  "inspections": false
+ }
+}

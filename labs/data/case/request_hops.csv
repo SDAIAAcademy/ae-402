@@ -1,0 +1,9 @@
+component,step,p50_ms,p95_ms,in_tokens,out_tokens,sar_per_m_in,sar_per_m_out
+portal,Portal to service,40,90,0,0,0.0,0.0
+sso,Token check,15,40,0,0,0.0,0.0
+permits,Status read,120,400,0,0,0.0,0.0
+index,Retrieve 20 clauses,60,180,0,0,0.0,0.0
+reranker,Rerank 20 to 5,310,650,0,0,0.0,0.0
+gateway,Gateway checks,12,30,0,0,0.0,0.0
+answer_model,"Answer, 5 clauses in context",1650,2900,3200,330,6.0,18.0
+logs,Write log (asynchronous),8,25,0,0,0.0,0.0

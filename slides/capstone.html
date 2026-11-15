@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en" dir="ltr" data-ax="deck" data-track="ai-engineering">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Capstone · Capstone project presentations · AI Solution Architecture and Platform Design</title>
+<meta name="generator" content="SDAIA Academy engine 1.0.0">
+<link rel="icon" href="../_engine/icon.svg">
+<link rel="alternate" type="text/markdown" href="capstone.md">
+<link rel="describedby" href="../llms.txt">
+<link rel="stylesheet" href="../_engine/academy.css">
+</head>
+<body>
+<div class="deck" data-course="AI Solution Architecture and Platform Design" data-track="ai-engineering" data-day="Capstone">
+<section class="slide title" id="title" data-auto="title" data-label="Welcome" data-n="1">
+  <div class="kicker">SDAIA Academy · AI Solution Architecture and Platform Design</div>
+  <h1>Capstone project presentations</h1>
+  <p class="lead mt">Capstone: Ten minutes of architecture and eight of questions, with one classification or forecast changed by the panel</p>
+  <div class="meta"><span class="track">AI Engineering Track</span><span>4 teaching days + capstone day</span><span>10 min talk and demo · 8 min Q&amp;A</span><span>AE-402</span></div>
+  <aside class="notes"><p>Today is theirs: keep your own talking to the opening and the closing. Confirm the running order, screen sharing and that every repository link opens before the first defence. The panel includes a data architect.</p></aside>
+</section>
+
+<section class="slide" id="agenda" data-label="Agenda" data-n="2">
+  <div class="kicker">Capstone</div>
+  <h2>How the defences run</h2>
+  <div class="agenda">
+    <div class="item now"><div><b>Expectations and final prep</b><small>the rubric, the panel's change, a last check of the repository</small></div></div>
+    <div class="item"><div><b>Defences</b><small>ten minutes of talk, eight of questions, each timed</small></div></div>
+    <div class="item"><div><b>Review and closing</b><small>what the room learned, the follow-up task</small></div></div>
+  </div>
+</section>
+
+<section class="slide" id="rubric" data-label="The rubric" data-lo="LO1 LO2 LO3 LO4 LO5 LO6" data-n="3">
+  <div class="kicker">How the repository is scored</div>
+  <h2>Five criteria, 100 points</h2>
+  <div class="bars">
+    <div class="row"><span>Scenarios and views</span><div class="bar c-teal" style="--w:80%"></div><span class="val">20%</span></div>
+    <div class="row"><span>Options and decisions</span><div class="bar c-cyan" style="--w:100%"></div><span class="val">25%</span></div>
+    <div class="row"><span>Platform slice</span><div class="bar c-coral" style="--w:100%"></div><span class="val">25%</span></div>
+    <div class="row"><span>Fitness checks</span><div class="bar c-purple" style="--w:60%"></div><span class="val">15%</span></div>
+    <div class="row"><span>Review</span><div class="bar c-amber" style="--w:60%"></div><span class="val">15%</span></div>
+  </div>
+  <div class="callout tip small mt"><b>Pass:</b> 70% overall, and at least 60% on this rubric and on the supervised checks. The repository is 60% of the result, the defence 20%, the supervised checks 20%.</div>
+  <aside class="notes"><p>Full marks on the platform slice means it runs: the gateway refuses Restricted data to an external model in a test, its log keeps no prompt text, and the showback reconciles within 2%. Fitness checks score only if they run in the repository's pipeline and fail on a planted bad design. One review criterion checks that responsible-AI controls (oversight and evaluation targets) are designed in from the start.</p></aside>
+</section>
+
+<section class="slide" id="format" data-label="Format" data-n="4">
+  <div class="kicker">The defence</div>
+  <h2>Ten minutes of architecture, then eight minutes of questions</h2>
+  <div class="cols cols-3">
+    <div class="card c-teal"><h4>3 min · the service</h4><p class="small mb0">Drivers, the leading scenarios with their targets, the data-flow view with every level.</p></div>
+    <div class="card c-cyan"><h4>4 min · the decisions</h4><p class="small mb0">The options paper's numbers, two decision records, and the platform slice running: one refused request.</p></div>
+    <div class="card c-coral"><h4>3 min · the checks and the review</h4><p class="small mb0">The pipeline failing a bad design; the peer review's verdict.</p></div>
+  </div>
+  <div class="callout note small mt"><b>AI-full.</b> Any assistant was allowed in the repository; the questions are where you show the decisions are yours.</div>
+  <aside class="notes"><p>The catalog sets no length; 10 and 8 minutes were chosen so the panel's change (next slide) fits in the questions with time to answer it properly.</p></aside>
+</section>
+
+<section class="slide" id="panel-change" data-label="The panel's change" data-lo="LO3" data-n="5">
+  <div class="kicker">During the questions</div>
+  <h2>The panel changes one input; you name the decisions it reopens</h2>
+  <div class="cols cols-2">
+    <div class="card c-purple"><h4>A classification</h4><p class="small mb0">"The call recordings are now Secret." Which placements, models, keys and costs change?</p></div>
+    <div class="card c-amber"><h4>The volume forecast</h4><p class="small mb0">"Year three is three times the base." Which option wins now, and which review trigger fired?</p></div>
+  </div>
+  <div class="callout tip mt"><b>What the panel listens for.</b> Record numbers, not a fresh opinion: the decision records whose triggers fire, and what each would become.</div>
+  <aside class="notes"><p>Panel: pick the change from the repository, aiming at the decision with the thinnest margin (a close weighted score, a placement that depends on a level). A strong answer names three or four records by number within a minute; the commit history and dated records are the authenticity evidence the catalog asks for.</p></aside>
+</section>
+
+<section class="slide order" id="running-order" data-label="Running order" data-n="6">
+  <div class="kicker">Running order</div>
+  <h2>Who defends when</h2>
+  <table class="t small">
+    <tr><th>#</th><th>Participant</th><th>Service and repository</th></tr>
+    <tr><td>1</td><td><input placeholder="Name"></td><td><input placeholder="Service · repository"></td></tr>
+    <tr><td>2</td><td><input placeholder="Name"></td><td><input placeholder="Service · repository"></td></tr>
+    <tr><td>3</td><td><input placeholder="Name"></td><td><input placeholder="Service · repository"></td></tr>
+    <tr><td>4</td><td><input placeholder="Name"></td><td><input placeholder="Service · repository"></td></tr>
+    <tr><td>5</td><td><input placeholder="Name"></td><td><input placeholder="Service · repository"></td></tr>
+    <tr><td>6</td><td><input placeholder="Name"></td><td><input placeholder="Service · repository"></td></tr>
+    <tr><td>7</td><td><input placeholder="Name"></td><td><input placeholder="Service · repository"></td></tr>
+    <tr><td>8</td><td><input placeholder="Name"></td><td><input placeholder="Service · repository"></td></tr>
+  </table>
+  <aside class="notes"><p>Type the names in at the start; the fields are not saved, so keep the list in your notes too. Eighteen minutes a defence plus two for changeover: three defences an hour.</p></aside>
+</section>
+
+<section class="slide dark" id="final-prep" data-label="Before the first defence" data-n="7">
+  <div class="kicker">Before the first defence</div>
+  <h1>Final prep · 20 minutes</h1>
+  <div class="timer" data-minutes="20"></div>
+  <p class="lead">Clone your repository into a new folder and run its pipeline. If the checks or the refusal test fail there, they fail for the panel.</p>
+  <aside class="notes"><p>Press T to start the timer. The clean-clone run catches a missing data file, a path that exists only on one laptop and a showback that reads an uncommitted file.</p></aside>
+</section>
+
+<section class="slide dark presenting" id="now-presenting" data-label="Now defending" data-n="8">
+  <div class="kicker center">Now defending</div>
+  <div class="center"><input placeholder="Name · service"></div>
+  <div class="timers mt">
+    <div><h3>Talk</h3><div class="timer" data-minutes="10"></div></div>
+    <div><h3>Questions</h3><div class="timer" data-minutes="8"></div></div>
+  </div>
+  <aside class="notes"><p>Type the participant's name, then start the talk timer. When it ends, start the questions timer; the panel's change comes in the first two minutes of questions. Reuse this slide for every participant.</p></aside>
+</section>
+
+<section class="slide" id="review" data-label="Review" data-n="9">
+  <div class="kicker">After the defences</div>
+  <h2>What the room learned</h2>
+  <div class="cols cols-3">
+    <div class="card c-teal"><h4>The decision most reopened</h4><p class="small mb0">Which record did the panel's changes reopen most often?</p></div>
+    <div class="card c-coral"><h4>The best refusal</h4><p class="small mb0">Whose gateway or check refused the most with the least code?</p></div>
+    <div class="card c-purple"><h4>The cheapest option that won</h4><p class="small mb0">Where did the non-generative option hold its own?</p></div>
+  </div>
+  <aside class="notes"><p>Ten minutes. Ask each participant to name one decision in another's repository they would copy.</p></aside>
+</section>
+
+<section class="slide" id="what-next" data-label="After the course" data-n="10">
+  <div class="kicker">After the course</div>
+  <h2>The follow-up task, and the AE Expert badge</h2>
+  <ul class="bullets">
+    <li><b>Follow-up task.</b> Within a month, write three decision records for a system from your own work, each with good and bad consequences and a review trigger.</li>
+    <li><b>Keep the repository.</b> It is the evidence the AE Expert badge looks at.</li>
+    <li><b>Next in the track:</b> AE-401 Inference Performance and Cost Engineering, and AE-403 Reliability Engineering for AI Services.</li>
+  </ul>
+  <aside class="notes"><p>The catalog names a tracked follow-up task; confirm its deadline with the programme office before the cohort.</p></aside>
+</section>
+
+<section class="slide dark" id="thanks" data-label="Thank you" data-n="11">
+  <div class="kicker">SDAIA Academy</div>
+  <h1>Thank you</h1>
+  <p class="lead">AI Solution Architecture and Platform Design</p>
+</section>
+</div>
+<script type="application/json" id="academy-data">{"v":1,"engine":"1.0.0","build":{"at":"2026-11-15T16:14:16Z","version":"2027.1.0","commit":"b2bfbf8"},"course":{"id":"ae-402","code":"AE-402","title":"AI Solution Architecture and Platform Design","track":"ai-engineering","lang":"en","dir":"ltr","url":"https://sdaiaacademy.github.io/ae-402/","repo":"SDAIAAcademy/ae-402","home":"../index.html"},"deck":{"id":"capstone","kind":"capstone","day":5,"label":"Capstone","title":"Capstone project presentations","prev":"day4.html","next":null,"md":"capstone.md","alt":{}},"sessions":[],"slides":[{"id":"title","n":1,"title":"Capstone project presentations","kind":"title","session":0,"hash":"db80f8a9","md":"#### [capstone#title] Capstone project presentations\n\n*SDAIA Academy · AI Solution Architecture and Platform Design*\n\nCapstone: Ten minutes of architecture and eight of questions, with one classification or forecast changed by the panel\n\nAI Engineering Track · 4 teaching days + capstone day · 10 min talk and demo · 8 min Q&A · AE-402","notes":"Today is theirs: keep your own talking to the opening and the closing. Confirm the running order, screen sharing and that every repository link opens before the first defence. The panel includes a data architect.","minutes":null,"lo":[]},{"id":"agenda","n":2,"title":"How the defences run","kind":"content","session":0,"hash":"6459ed75","md":"#### [capstone#agenda] How the defences run\n\n*Capstone*\n\n- **Expectations and final prep**: the rubric, the panel's change, a last check of the repository\n- **Defences**: ten minutes of talk, eight of questions, each timed\n- **Review and closing**: what the room learned, the follow-up task","notes":"","minutes":null,"lo":[]},{"id":"rubric","n":3,"title":"Five criteria, 100 points","kind":"content","session":0,"hash":"f8071fc2","md":"#### [capstone#rubric] Five criteria, 100 points\n\n*How the repository is scored*\n\n| Item | Value |\n| --- | --- |\n| Scenarios and views | 20% |\n| Options and decisions | 25% |\n| Platform slice | 25% |\n| Fitness checks | 15% |\n| Review | 15% |\n\n> **Pass:** 70% overall, and at least 60% on this rubric and on the supervised checks. The repository is 60% of the result, the defence 20%, the supervised checks 20%.","notes":"Full marks on the platform slice means it runs: the gateway refuses Restricted data to an external model in a test, its log keeps no prompt text, and the showback reconciles within 2%. Fitness checks score only if they run in the repository's pipeline and fail on a planted bad design. One review criterion checks that responsible-AI controls (oversight and evaluation targets) are designed in from the start.","minutes":null,"lo":["LO1","LO2","LO3","LO4","LO5","LO6"]},{"id":"format","n":4,"title":"Ten minutes of architecture, then eight minutes of questions","kind":"content","session":0,"hash":"9decb288","md":"#### [capstone#format] Ten minutes of architecture, then eight minutes of questions\n\n*The defence*\n\n- **3 min · the service.** Drivers, the leading scenarios with their targets, the data-flow view with every level.\n- **4 min · the decisions.** The options paper's numbers, two decision records, and the platform slice running: one refused request.\n- **3 min · the checks and the review.** The pipeline failing a bad design; the peer review's verdict.\n\n> **AI-full.** Any assistant was allowed in the repository; the questions are where you show the decisions are yours.","notes":"The catalog sets no length; 10 and 8 minutes were chosen so the panel's change (next slide) fits in the questions with time to answer it properly.","minutes":null,"lo":[]},{"id":"panel-change","n":5,"title":"The panel changes one input; you name the decisions it reopens","kind":"content","session":0,"hash":"f668da45","md":"#### [capstone#panel-change] The panel changes one input; you name the decisions it reopens\n\n*During the questions*\n\n- **A classification.** \"The call recordings are now Secret.\" Which placements, models, keys and costs change?\n- **The volume forecast.** \"Year three is three times the base.\" Which option wins now, and which review trigger fired?\n\n> **What the panel listens for.** Record numbers, not a fresh opinion: the decision records whose triggers fire, and what each would become.","notes":"Panel: pick the change from the repository, aiming at the decision with the thinnest margin (a close weighted score, a placement that depends on a level). A strong answer names three or four records by number within a minute; the commit history and dated records are the authenticity evidence the catalog asks for.","minutes":null,"lo":["LO3"]},{"id":"running-order","n":6,"title":"Who defends when","kind":"order","session":0,"hash":"067212b7","md":"#### [capstone#running-order] Who defends when\n\n*Running order*\n\n| # | Participant | Service and repository |\n| --- | --- | --- |\n| 1 |  |  |\n| 2 |  |  |\n| 3 |  |  |\n| 4 |  |  |\n| 5 |  |  |\n| 6 |  |  |\n| 7 |  |  |\n| 8 |  |  |","notes":"Type the names in at the start; the fields are not saved, so keep the list in your notes too. Eighteen minutes a defence plus two for changeover: three defences an hour.","minutes":null,"lo":[]},{"id":"final-prep","n":7,"title":"Final prep · 20 minutes","kind":"content","session":0,"hash":"b04463b6","md":"#### [capstone#final-prep] Final prep · 20 minutes\n\n*Before the first defence*\n\nClone your repository into a new folder and run its pipeline. If the checks or the refusal test fail there, they fail for the panel.","notes":"Press T to start the timer. The clean-clone run catches a missing data file, a path that exists only on one laptop and a showback that reads an uncommitted file.","minutes":null,"lo":[]},{"id":"now-presenting","n":8,"title":"Talk","kind":"presenting","session":0,"hash":"45fc40e2","md":"#### [capstone#now-presenting] Talk\n\n*Now defending*\n\n##### Questions","notes":"Type the participant's name, then start the talk timer. When it ends, start the questions timer; the panel's change comes in the first two minutes of questions. Reuse this slide for every participant.","minutes":null,"lo":[]},{"id":"review","n":9,"title":"What the room learned","kind":"content","session":0,"hash":"ce29e522","md":"#### [capstone#review] What the room learned\n\n*After the defences*\n\n- **The decision most reopened.** Which record did the panel's changes reopen most often?\n- **The best refusal.** Whose gateway or check refused the most with the least code?\n- **The cheapest option that won.** Where did the non-generative option hold its own?","notes":"Ten minutes. Ask each participant to name one decision in another's repository they would copy.","minutes":null,"lo":[]},{"id":"what-next","n":10,"title":"The follow-up task, and the AE Expert badge","kind":"content","session":0,"hash":"5aa4d854","md":"#### [capstone#what-next] The follow-up task, and the AE Expert badge\n\n*After the course*\n\n- **Follow-up task.** Within a month, write three decision records for a system from your own work, each with good and bad consequences and a review trigger.\n- **Keep the repository.** It is the evidence the AE Expert badge looks at.\n- **Next in the track:** AE-401 Inference Performance and Cost Engineering, and AE-403 Reliability Engineering for AI Services.","notes":"The catalog names a tracked follow-up task; confirm its deadline with the programme office before the cohort.","minutes":null,"lo":[]},{"id":"thanks","n":11,"title":"Thank you","kind":"content","session":0,"hash":"de88c100","md":"#### [capstone#thanks] Thank you\n\n*SDAIA Academy*\n\nAI Solution Architecture and Platform Design","notes":"","minutes":null,"lo":[]}],"activities":[],"ai":{"context":{"course":"../context/course.md","courseJs":"../context/course.js","day":"capstone.md","llms":"../llms.txt"},"tasks":[],"tools":[]},"bridge":{"allowedOrigins":[]},"features":{},"strings":{}}</script>
+<script src="../_engine/academy.js"></script>
+</body>
+</html>

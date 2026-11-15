@@ -1,0 +1,10 @@
+{"question": "How many photos does an inspection report need?", "expected": "K01-photos"}
+{"question": "What is violation code V44?", "expected": "K02-violation-codes"}
+{"question": "The Arabic name on a shop sign differs from its licence: what is it?", "expected": "K03-signage"}
+{"question": "Exposed wiring on a site: what does the inspector order?", "expected": "K04-hazards"}
+{"question": "Which fields does the report form record?", "expected": "K05-report-fields"}
+{"question": "When is a violation re-inspected after its deadline?", "expected": "K06-reinspection"}
+{"question": "Is an unsafe scaffold an immediate hazard?", "expected": "K04-hazards"}
+{"question": "What happens after a second failed inspection?", "expected": "K06-reinspection"}
+{"question": "Must photos show the building number plate?", "expected": "K01-photos"}
+{"question": "What is code V12 for construction without a permit?", "expected": "K02-violation-codes"}

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en" dir="ltr" data-ax="page" data-track="ai-engineering">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Solution Architecture and Platform Design · SDAIA Academy</title>
+<meta name="generator" content="SDAIA Academy engine 1.0.0">
+<meta name="description" content="Turn requirements into tested scenarios, costed options and recorded decisions, then design the shared AI platform many teams build on">
+<link rel="icon" href="_engine/icon.svg">
+<link rel="alternate" type="text/markdown" href="index.md">
+<link rel="describedby" href="llms.txt">
+<link rel="stylesheet" href="_engine/academy.css">
+</head>
+<body>
+<header>
+<div class="wrap">
+<div class="top"><div class="logo" id="logo"></div><nav><a href="slides/day1.html">Slides</a><a href="practice.html">Practice</a><a href="index.md" type="text/markdown">Markdown</a></nav></div>
+<div class="kicker">AI Engineering Track · SDAIA Academy · AE-402</div>
+<h1>AI Solution Architecture and Platform Design<span class="sub ar" lang="ar" dir="rtl">معمارية حلول الذكاء الاصطناعي وتصميم المنصات</span></h1>
+<p>Turn requirements into tested scenarios, costed options and recorded decisions, then design the shared AI platform many teams build on</p>
+<div class="meta"><span class="track">AI Engineering Track</span><span>4 teaching days + capstone day</span><span>26 hours</span><span>Level 400</span><span>AI Engineering · Expert badge</span></div>
+</div>
+</header>
+<main class="wrap">
+<h2>About the course</h2>
+<p>Participants practise the architect's loop on AI systems and apply it to the shared platform many teams build on. For a fictional ministry of municipal services with nine product teams and data at three classification levels, they turn requirements into measurable scenarios, draw views as code, cost three options including a non-generative one, keep a decision log, design a model catalogue, gateway, tenancy model, golden paths and showback, enforce a reference design with fitness checks, and review a peer's architecture. Serving optimisation and reliability engineering are left to AE-401 and AE-403.</p>
+<p><b>Who it is for:</b> Specialists. Engineers who have completed the level 300 core or can show equivalent work: a production AI system they built, operated and can defend.</p>
+<p><b>Format:</b> Intensive: 4 teaching days of four sessions and a capstone day, with guided pre-work and a tracked follow-up task</p>
+<h2>The case study</h2>
+<div class="note info"><b>Ministry of Municipal Services.</b> The Ministry of Municipal Services is a fictional ministry whose nine product teams build on Asas, its shared AI platform, with data at three classification levels. Participants architect Muyassir, its building-permits assistant (scenarios, classified flows, views as code, three costed options and a decision log), then design Asas itself: a demand matrix, model admission, a gateway that refuses Restricted data to an external model, tenancy, showback, a golden path, fitness checks and a structured review of the inspections team's design. All data is synthetic and generated with a fixed seed.</div>
+<h2>The course</h2>
+<div class="day">
+<div class="day-head c-teal"><div><div class="t">Day 1 · 4 sessions · 4 labs</div><h3>From requirements to architecture</h3></div><a class="btn" href="slides/day1.html">Open the slides</a></div>
+<div class="scroll"><table>
+<tr><th>Session</th><th>Topic</th><th>Lab</th></tr>
+<tr><td>1</td><td><b>The architect's loop for AI systems</b><br>The loop an architect runs on an AI system, starting from drivers, constraints and the people who hold them<ul><li>Describe the architect's loop and where an AI system adds steps to it</li><li>Separate drivers, constraints, concerns and assumptions in a brief</li><li>Name the stakeholder who owns each concern</li></ul></td><td><a href="labs/D1_1_drivers.ipynb">Lab 1.1 · Drivers, constraints and stakeholders</a> <span class="muted">(25 min)</span><br><a href="https://colab.research.google.com/github/SDAIAAcademy/ae-402/blob/main/labs/D1_1_drivers.ipynb">Open in Colab</a></td></tr>
+<tr><td>2</td><td><b>Quality attributes with numbers</b><br>Quality-attribute scenarios with a measure a reviewer can compute, answer quality and oversight included<ul><li>Write a scenario with its six parts and a measurable response</li><li>Express answer quality, privacy and human oversight as targets</li><li>Test a scenario against measurements</li></ul></td><td><a href="labs/D1_2_scenarios.ipynb">Lab 1.2 · Five measurable scenarios</a> <span class="muted">(25 min)</span><br><a href="https://colab.research.google.com/github/SDAIAAcademy/ae-402/blob/main/labs/D1_2_scenarios.ipynb">Open in Colab</a></td></tr>
+<tr><td>3</td><td><b>Regulation as a design constraint</b><br>Classification levels and transfer rules as inputs that decide where each data flow may be processed<ul><li>Classify a data flow by the highest level it carries</li><li>Derive placement constraints from classification and transfer rules</li><li>Find the flows a design must change</li></ul></td><td><a href="labs/D1_3_data_flows.ipynb">Lab 1.3 · Classified flows and placement</a> <span class="muted">(25 min)</span><br><a href="https://colab.research.google.com/github/SDAIAAcademy/ae-402/blob/main/labs/D1_3_data_flows.ipynb">Open in Colab</a></td></tr>
+<tr><td>4</td><td><b>Views as code</b><br>Context and container views generated from one model, and one request budgeted for latency and cost<ul><li>Generate context and container views from a model as code</li><li>Show hosting and classification on the views</li><li>Budget one request's latency and cost against the scenarios</li></ul></td><td><a href="labs/D1_4_views_budget.ipynb">Lab 1.4 · Views as code and a request budget</a> <span class="muted">(25 min)</span><br><a href="https://colab.research.google.com/github/SDAIAAcademy/ae-402/blob/main/labs/D1_4_views_budget.ipynb">Open in Colab</a></td></tr>
+</table></div>
+</div>
+<div class="day">
+<div class="day-head c-cyan"><div><div class="t">Day 2 · 4 sessions · 4 labs</div><h3>Options and decisions</h3></div><a class="btn" href="slides/day2.html">Open the slides</a></div>
+<div class="scroll"><table>
+<tr><th>Session</th><th>Topic</th><th>Lab</th></tr>
+<tr><td>1</td><td><b>Patterns and when each fits</b><br>Six architecture patterns for AI needs, and the fit questions that choose between them<ul><li>Match a need to a pattern with fit questions</li><li>Test a non-generative baseline on the same data as a generative one</li><li>Explain when a classical model serves a need better</li></ul></td><td><a href="labs/D2_1_patterns.ipynb">Lab 2.1 · Patterns and a non-generative baseline</a> <span class="muted">(25 min)</span><br><a href="https://colab.research.google.com/github/SDAIAAcademy/ae-402/blob/main/labs/D2_1_patterns.ipynb">Open in Colab</a></td></tr>
+<tr><td>2</td><td><b>Total cost over three years</b><br>Three-year total cost with every line the Ministry pays, and the assumptions the ranking depends on<ul><li>Build a three-year cost model with build, run, people, capacity and unanswered work</li><li>Compare options per answered question</li><li>Test the ranking's sensitivity to volume and token price</li></ul></td><td><a href="labs/D2_2_three_year_cost.ipynb">Lab 2.2 · Three options over three years</a> <span class="muted">(25 min)</span><br><a href="https://colab.research.google.com/github/SDAIAAcademy/ae-402/blob/main/labs/D2_2_three_year_cost.ipynb">Open in Colab</a></td></tr>
+<tr><td>3</td><td><b>Lock-in and exit</b><br>Where lock-in sits, what leaving costs, how weights mislead, and contract terms that keep the exit open<ul><li>Price the exit of an option from its lock-in factors</li><li>Find the weight at which a weighted ranking flips</li><li>Write procurement requirements a reviewer can verify</li></ul></td><td><a href="labs/D2_3_exit_cost.ipynb">Lab 2.3 · Exit cost, weights and two requirements</a> <span class="muted">(25 min)</span><br><a href="https://colab.research.google.com/github/SDAIAAcademy/ae-402/blob/main/labs/D2_3_exit_cost.ipynb">Open in Colab</a></td></tr>
+<tr><td>4</td><td><b>Decision records</b><br>Decision records with both kinds of consequence and a trigger that says when to reopen them<ul><li>Write a decision record with drivers, options and consequences both ways</li><li>Set a review trigger someone can test</li><li>Challenge a peer's record for what a lint cannot see</li></ul></td><td><a href="labs/D2_4_decision_records.ipynb">Lab 2.4 · Two decision records and a challenge</a> <span class="muted">(25 min)</span><br><a href="https://colab.research.google.com/github/SDAIAAcademy/ae-402/blob/main/labs/D2_4_decision_records.ipynb">Open in Colab</a></td></tr>
+</table></div>
+</div>
+<div class="day">
+<div class="day-head c-coral"><div><div class="t">Day 3 · 4 sessions · 4 labs</div><h3>The shared platform</h3></div><a class="btn" href="slides/day3.html">Open the slides</a></div>
+<div class="scroll"><table>
+<tr><th>Session</th><th>Topic</th><th>Lab</th></tr>
+<tr><td>1</td><td><b>The platform is a product</b><br>The shared platform treated as a product with nine teams as users, phased by their measured demand<ul><li>Build a demand matrix from usage logs and a team survey</li><li>Phase platform capabilities by shared demand</li><li>Spot in the logs what the platform should already prevent</li></ul></td><td><a href="labs/D3_1_demand_matrix.ipynb">Lab 3.1 · A demand matrix from six months of usage</a> <span class="muted">(25 min)</span><br><a href="https://colab.research.google.com/github/SDAIAAcademy/ae-402/blob/main/labs/D3_1_demand_matrix.ipynb">Open in Colab</a></td></tr>
+<tr><td>2</td><td><b>Catalogue, admission and the gateway</b><br>Admission to the model catalogue on evidence, and a gateway that enforces placement by classification<ul><li>Admit models on licence, evaluation and data-term evidence</li><li>Write catalogue entries with the highest level each model may receive</li><li>Make a gateway refuse Restricted data to an external model</li></ul></td><td><a href="labs/D3_2_admission_gateway.ipynb">Lab 3.2 · Model admission and a gateway that refuses</a> <span class="muted">(25 min)</span><br><a href="https://colab.research.google.com/github/SDAIAAcademy/ae-402/blob/main/labs/D3_2_admission_gateway.ipynb">Open in Colab</a></td></tr>
+<tr><td>3</td><td><b>Tenancy and shared capacity</b><br>Tenancy as a set of controls that keep one team's incident inside that team<ul><li>Compare a shared and a per-team tenancy model under incidents</li><li>Cap a team's share of shared capacity</li><li>Contain leaked keys and runaway spend with keys and budgets per team</li></ul></td><td><a href="labs/D3_3_tenancy.ipynb">Lab 3.3 · Three incidents, two tenancy models</a> <span class="muted">(25 min)</span><br><a href="https://colab.research.google.com/github/SDAIAAcademy/ae-402/blob/main/labs/D3_3_tenancy.ipynb">Open in Colab</a></td></tr>
+<tr><td>4</td><td><b>Who pays for which tokens</b><br>Cost attribution that reconciles with the invoices, shown to teams before anyone is charged<ul><li>Allocate invoices to teams by usage, credits and fixed costs included</li><li>Reconcile a showback with each invoice within 2%</li><li>Name spend that no tag or owner explains</li></ul></td><td><a href="labs/D3_4_showback.ipynb">Lab 3.4 · A showback that reconciles</a> <span class="muted">(25 min)</span><br><a href="https://colab.research.google.com/github/SDAIAAcademy/ae-402/blob/main/labs/D3_4_showback.ipynb">Open in Colab</a></td></tr>
+</table></div>
+</div>
+<div class="day">
+<div class="day-head c-purple"><div><div class="t">Day 4 · 4 sessions · 4 labs</div><h3>Reference designs and reviews</h3></div><a class="btn" href="slides/day4.html">Open the slides</a></div>
+<div class="scroll"><table>
+<tr><th>Session</th><th>Topic</th><th>Lab</th></tr>
+<tr><td>1</td><td><b>Golden paths</b><br>A golden path makes the compliant way the easy way: a template with its gates on by default<ul><li>Turn a team's service into a template other teams generate from</li><li>Put evaluation, classification checks and tracing on by default</li><li>Make switching a gate off visible to the platform</li></ul></td><td><a href="labs/D4_1_golden_path.ipynb">Lab 4.1 · A golden path from the permits team's service</a> <span class="muted">(25 min)</span><br><a href="https://colab.research.google.com/github/SDAIAAcademy/ae-402/blob/main/labs/D4_1_golden_path.ipynb">Open in Colab</a></td></tr>
+<tr><td>2</td><td><b>Fitness functions</b><br>Fitness functions turn the reference design's rules into checks that fail a build<ul><li>Describe a design as data a program can read</li><li>Write a check for a blocking evaluation gate before deployment</li><li>Write a placement check that follows fallbacks</li></ul></td><td><a href="labs/D4_2_fitness_checks.ipynb">Lab 4.2 · Two fitness checks over designs as data</a> <span class="muted">(25 min)</span><br><a href="https://colab.research.google.com/github/SDAIAAcademy/ae-402/blob/main/labs/D4_2_fitness_checks.ipynb">Open in Colab</a></td></tr>
+<tr><td>3</td><td><b>Structured architecture review</b><br>A structured review weighs a design against its prioritised scenarios, not a checklist<ul><li>Prioritise scenarios in a utility tree</li><li>Tell risks, sensitivity points, trade-off points and non-compliance apart</li><li>Write a review report with a verdict a team can act on</li></ul></td><td><a href="labs/D4_3_review.ipynb">Lab 4.3 · A structured review of Kashif's design</a> <span class="muted">(25 min)</span><br><a href="https://colab.research.google.com/github/SDAIAAcademy/ae-402/blob/main/labs/D4_3_review.ipynb">Open in Colab</a></td></tr>
+<tr><td>4</td><td><b>Deviations and sponsors</b><br>A deviation is a time-boxed decision with conditions, explained to a sponsor in numbers<ul><li>Put numbers on what a deviation breaks and what refusing it costs</li><li>Decide a deviation with verifiable conditions, an expiry and reopen triggers</li><li>Explain a trade-off on one page for a sponsor</li></ul></td><td><a href="labs/D4_4_deviation.ipynb">Lab 4.4 · A deviation request, decided and explained on one page</a> <span class="muted">(25 min)</span><br><a href="https://colab.research.google.com/github/SDAIAAcademy/ae-402/blob/main/labs/D4_4_deviation.ipynb">Open in Colab</a></td></tr>
+</table></div>
+</div>
+<div class="day">
+<div class="day-head c-amber"><div><div class="t">Capstone</div><h3>Capstone project presentations</h3></div><a class="btn" href="slides/capstone.html">Open the slides</a></div>
+<div class="scroll"><table><tr><td>Ten minutes of architecture and eight of questions, with one classification or forecast changed by the panel</td></tr></table></div>
+</div>
+<h2>Capstone</h2>
+<div class="two">
+<div><p>An architecture for one ministry service and the platform slice it runs on (scenarios, views, options paper, at least six decision records, and a working gateway, catalogue entry, golden path and showback) in a public repository, defended before a panel that includes a data architect. The follow-up task writes three decision records for a system from the participant's own work</p><p><b>What you submit:</b> A public GitHub repository link, sent before the defence. The repository holds the scenario sheet, the architecture document with views as code and one request traced end to end, the options paper with total cost, lock-in and sensitivity, at least six dated decision records, and the platform slice (gateway with its refusal test and logs, catalogue entry, golden-path template, showback that reconciles within 2%), with the fitness checks running in its pipeline.</p><p><b>Format:</b> 10 min talk and demo · 8 min Q&amp;A</p></div>
+<div><h3>Rubric</h3><div class="bar c-teal"><span>Scenarios and views<i style="--w:80%"></i></span><b>20%</b></div><div class="bar c-cyan"><span>Options and decisions<i style="--w:100%"></i></span><b>25%</b></div><div class="bar c-coral"><span>Platform slice<i style="--w:100%"></i></span><b>25%</b></div><div class="bar c-purple"><span>Fitness checks<i style="--w:60%"></i></span><b>15%</b></div><div class="bar c-amber"><span>Review<i style="--w:60%"></i></span><b>15%</b></div></div>
+</div>
+<h2>Outcomes</h2>
+<p>By the end of the course, participants can:</p>
+<div class="day"><div class="scroll"><table>
+<tr><th></th><th>Outcomes</th><th>Level</th><th>Evidence</th></tr>
+<tr><td><b>LO1</b></td><td>Prepare quality-attribute scenarios with measurable targets for answer quality, latency, cost, privacy and human oversight, given the case brief, three interview notes and the data inventory</td><td>Applied</td><td>a scenario sheet a reviewer can test a design against</td></tr>
+<tr><td><b>LO2</b></td><td>Design an end-to-end architecture with context, container and data-flow views and a per-request latency and cost budget, given the scenario sheet and the classification of each data flow</td><td>Performance</td><td>an architecture document with views as code and one request traced end to end</td></tr>
+<tr><td><b>LO3</b></td><td>Evaluate at least three solution options, including a non-generative baseline, and record the resulting decisions, given weighted criteria, a three-year volume forecast and price ranges</td><td>Performance</td><td>an options paper with total cost, lock-in and sensitivity analysis, and at least six decision records</td></tr>
+<tr><td><b>LO4</b></td><td>Design a shared AI platform covering model admission, gateway, tenancy, golden paths and cost attribution, given nine teams, three classification levels, synthetic usage logs and invoices</td><td>Performance</td><td>a design and a working slice whose gateway refuses restricted data to an external model and whose showback reconciles within 2%</td></tr>
+<tr><td><b>LO5</b></td><td>Design a reference architecture with fitness functions that check conformance automatically, given a recurring pattern: retrieval over classified documents</td><td>Performance</td><td>a template and two automated checks that fail on a non-conforming design</td></tr>
+<tr><td><b>LO6</b></td><td>Review a peer's architecture with a structured trade-off method and decide on a requested deviation, given a peer design, the reference designs and a deviation request</td><td>Performance</td><td>a review report naming risks, sensitivity points and non-compliance, with a recorded decision</td></tr>
+</table></div></div>
+<h2>Tools</h2>
+<div class="grid">
+<div class="card c-teal"><h3>Architecture views as code</h3><p>Structurizr DSL · Mermaid · PlantUML</p></div>
+<div class="card c-cyan"><h3>Decision record templates</h3><p>MADR · a plain Markdown template</p></div>
+<div class="card c-coral"><h3>AI gateway</h3><p>LiteLLM · agentgateway</p></div>
+<div class="card c-purple"><h3>Fitness checks and policy</h3><p>Open Policy Agent with conftest · tests over infrastructure definitions</p></div>
+<div class="card c-green"><h3>Project templates</h3><p>Copier · Backstage software templates</p></div>
+<div class="card c-teal"><h3>Cost modelling and allocation</h3><p>a Python notebook · OpenCost</p></div>
+</div>
+<h2>Before you start</h2>
+<h3>Prerequisites</h3>
+<ul><li>AE-305 Operating Machine Learning and Language Model Systems</li><li>AE-308 Securing Language Model and Agent Applications</li><li>AE-311 Shaping the Build: Product Sense and Delivery Practice</li><li>Has built and deployed at least one AI service that other people used</li><li>Reads a cloud usage export or bill</li><li>Can name the four national data classification levels</li></ul>
+<div class="note tip">The labs are notebooks. Open each one in Google Colab from the table above, or clone the repository and run them locally.</div>
+<h2>Sources</h2>
+<h3>National references</h3>
+<ul><li><a href="https://sdaia.gov.sa/en/SDAIA/about/Documents/PersonalDataProtectionLaw.pdf">Personal Data Protection Law (SDAIA)</a></li><li><a href="https://sdaia.gov.sa/en/SDAIA/about/Documents/ImplementingRegulationPersonalDataProtectionLaw.pdf">Implementing Regulation of the Personal Data Protection Law (SDAIA)</a></li><li><a href="https://sdaia.gov.sa/Documents/RegulationonPersonalDataEN.pdf">Regulation on Personal Data Transfer outside the Kingdom (SDAIA)</a></li><li><a href="https://sdaia.gov.sa/en/SDAIA/about/Documents/DataClassificationPolicy.pdf">Data Classification Policy (National Data Management Office, SDAIA)</a></li><li><a href="https://nca.gov.sa/en/regulatory-documents/controls-list/ccc/">Cloud Cybersecurity Controls (National Cybersecurity Authority)</a></li><li><a href="https://sdaia.gov.sa/en/SDAIA/about/Documents/ai-principles.pdf">AI Ethics Principles (SDAIA)</a></li><li><a href="https://sdaia.gov.sa/en/MediaCenter/KnowledgeCenter/ResearchLibrary/ExecutiveSummaryEn.pdf">National AI Risk Management Framework, executive summary (SDAIA, April 2026)</a></li></ul>
+<h3>Architecture methods</h3>
+<ul><li><a href="https://www.sei.cmu.edu/library/the-architecture-tradeoff-analysis-method/">The Architecture Tradeoff Analysis Method (Software Engineering Institute)</a></li><li><a href="https://c4model.com/">The C4 model for visualising software architecture</a></li><li><a href="https://docs.structurizr.com/dsl">Structurizr DSL documentation</a></li><li><a href="https://adr.github.io/madr/">MADR: Markdown Architectural Decision Records</a></li><li><a href="https://www.thoughtworks.com/radar/techniques/architectural-fitness-function">Architectural fitness function (Thoughtworks Technology Radar)</a></li><li><a href="https://tag-app-delivery.cncf.io/whitepapers/platforms/">CNCF Platforms White Paper (TAG App Delivery)</a></li></ul>
+<h3>Platform tools (examples, interchangeable)</h3>
+<ul><li><a href="https://docs.litellm.ai/docs/proxy/virtual_keys">LiteLLM: virtual keys, budgets and rate limits</a></li><li><a href="https://docs.litellm.ai/docs/proxy/guardrails/quick_start">LiteLLM: guardrails quick start</a></li><li><a href="https://docs.litellm.ai/docs/proxy/reliability">LiteLLM: fallbacks</a></li><li><a href="https://agentgateway.dev/docs/">agentgateway documentation</a></li><li><a href="https://www.conftest.dev/">Conftest</a></li><li><a href="https://www.openpolicyagent.org/docs">Open Policy Agent documentation</a></li><li><a href="https://copier.readthedocs.io/en/stable/">Copier documentation</a></li><li><a href="https://backstage.io/docs/features/software-templates/">Backstage software templates</a></li><li><a href="https://opencost.io/docs/">OpenCost documentation</a></li><li><a href="https://www.finops.org/framework/capabilities/invoicing-chargeback/">FinOps Framework: invoicing and chargeback</a></li></ul>
+<h2>Files and links</h2>
+<div class="files">
+<a href="practice.html"><b>practice.html</b><span>Practice questions with feedback</span></a>
+<a href="index.md"><b>index.md</b><span>This page as Markdown, for an AI assistant</span></a>
+<a href="llms.txt"><b>llms.txt</b><span>The course for AI assistants (llms.txt)</span></a>
+<a href="https://github.com/SDAIAAcademy/ae-402"><b>SDAIAAcademy/ae-402</b><span>The course repository</span></a>
+</div>
+</main>
+<footer><div class="wrap">SDAIA Academy · AI Engineering Track · AI Solution Architecture and Platform Design<br><span class="muted">Course version 2027.1.0 · engine 1.0.0 · built 2026-11-15 · commit b2bfbf8</span></div></footer>
+<script type="application/json" id="academy-data">{"v":1,"engine":"1.0.0","build":{"at":"2026-11-15T16:14:16Z","version":"2027.1.0","commit":"b2bfbf8"},"course":{"id":"ae-402","code":"AE-402","title":"AI Solution Architecture and Platform Design","track":"ai-engineering","lang":"en","dir":"ltr","url":"https://sdaiaacademy.github.io/ae-402/","repo":"SDAIAAcademy/ae-402","home":"index.html"},"ai":{"context":{"course":"context/course.md","courseJs":"context/course.js","day":null,"llms":"llms.txt"},"tasks":[],"tools":[]},"features":{},"strings":{}}</script>
+<script src="_engine/academy.js"></script>
+</body>
+</html>

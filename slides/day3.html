@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en" dir="ltr" data-ax="deck" data-track="ai-engineering">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Day 3 · The shared platform · AI Solution Architecture and Platform Design</title>
+<meta name="generator" content="SDAIA Academy engine 1.0.0">
+<link rel="icon" href="../_engine/icon.svg">
+<link rel="alternate" type="text/markdown" href="day3.md">
+<link rel="describedby" href="../llms.txt">
+<link rel="stylesheet" href="../_engine/academy.css">
+</head>
+<body>
+<div class="deck" data-course="AI Solution Architecture and Platform Design" data-track="ai-engineering" data-day="Day 3">
+<section class="slide title" id="title" data-auto="title" data-label="Welcome" data-n="1">
+  <div class="kicker">SDAIA Academy · AI Solution Architecture and Platform Design</div>
+  <h1>The shared platform</h1>
+  <p class="lead mt">Day 3: Asas as a product: demand, admission, a gateway that refuses, tenancy and showback</p>
+  <div class="meta"><span class="track">AI Engineering Track</span><span>4 teaching days + capstone day</span><span>4 sessions · 4 labs</span><span>AE-402</span></div>
+  <aside class="notes"><p>Open with the question from yesterday's last slide: a shared service in your organisation that teams avoid, and why. Write two reasons on the board. Most will be about the service being built for its builders, not for its users; that is today's first session.</p></aside>
+</section>
+
+<section class="slide" id="agenda" data-auto="agenda" data-label="Agenda" data-n="2">
+  <div class="kicker">Today</div>
+  <h2>The shared platform</h2>
+  <div class="agenda"><div class="item"><div><b>Session 1 · The platform is a product</b><small>The shared platform treated as a product with nine teams as users, phased by their measured demand</small></div></div><div class="item"><div><b>Session 2 · Catalogue, admission and the gateway</b><small>Admission to the model catalogue on evidence, and a gateway that enforces placement by classification</small></div></div><div class="item"><div><b>Session 3 · Tenancy and shared capacity</b><small>Tenancy as a set of controls that keep one team's incident inside that team</small></div></div><div class="item"><div><b>Session 4 · Who pays for which tokens</b><small>Cost attribution that reconciles with the invoices, shown to teams before anyone is charged</small></div></div></div>
+</section>
+
+<section class="slide" id="review-day2" data-lo="LO3" data-label="Review of Day 2" data-n="3">
+  <div class="kicker">Review of Day 2</div>
+  <h2>What does record one's review trigger watch?</h2>
+  <div class="quiz" data-type="single" data-lo="LO3" data-id="review-day2-q1">
+    <p class="lead">Decision record 1 hosts Muyassir's model in a cloud region of the Kingdom. Lab 2.2 found that volume moves the three-year cost by half and token price by 3%. What should its trigger watch first?</p>
+    <div class="opts">
+      <div class="opt" data-why="Watches the input that barely moves the ranking at this volume" data-k="A">The provider's token price</div>
+      <div class="opt" data-ok data-k="B">Monthly requests, against a threshold below the crossover</div>
+      <div class="opt" data-why="Watches a cost already spent: build cannot reopen a hosting decision" data-k="C">The build cost of O1</div>
+      <div class="opt" data-why="Confuses an incident with a decision trigger: one bad answer is a defect to fix" data-k="D">A single wrong answer reported in the press</div>
+    </div>
+    <div class="callout tip why"><b>Why.</b> The ranking depends on volume; the trigger fires before the volume at which the Ministry-hosted option catches up.</div>
+  </div>
+  <aside class="notes"><p>Answer: B. Who measures monthly requests? The platform team, from the gateway logs: today's material.</p></aside>
+</section>
+
+<!-- Session 1 -->
+
+<section class="slide section" id="s1" data-auto="section" data-session="1" data-n="4">
+  <div class="kicker">Session 1</div>
+  <h1>The platform is a product</h1>
+  <ul class="bullets outcomes"><li>Build a demand matrix from usage logs and a team survey</li><li>Phase platform capabilities by shared demand</li><li>Spot in the logs what the platform should already prevent</li></ul>
+  <div class="sess-no">01</div>
+</section>
+
+<section class="slide" id="platform-product" data-lo="LO4" data-label="A product" data-n="5" data-session="1">
+  <div class="kicker">The platform as a product</div>
+  <h2>A platform's users are teams, and they can choose not to use it</h2>
+  <div class="cols cols-3">
+    <div class="card c-teal"><h4>Users</h4><p class="small mb0">Nine product teams with different data levels and needs.</p></div>
+    <div class="card c-cyan"><h4>A roadmap from demand</h4><p class="small mb0">What most teams use and ask for, phased.</p></div>
+    <div class="card c-purple"><h4>Measured by use</h4><p class="small mb0">Adoption and the teams' satisfaction, not features shipped.</p></div>
+  </div>
+  <div class="callout warn mt"><b>What goes wrong.</b> A platform built as a project: a list of features, delivered, and avoided by the teams it was for.</div>
+  <aside class="notes"><p>The CNCF platforms white paper argues for treating platforms as products and measuring them by their users' satisfaction and productivity. Faris Al-Hothali runs Asas this way; his first question is what the teams actually use.</p><p>Sources: CNCF Platforms White Paper.</p></aside>
+</section>
+
+<section class="slide" id="asas-today" data-lo="LO4" data-label="Asas today" data-n="6" data-session="1">
+  <div class="kicker">Six months of logs</div>
+  <h2>Asas served nine teams on six models in six months</h2>
+  <div class="cols cols-3">
+    <div class="stat"><div class="big">3,312</div><div class="lbl">daily usage rows, May to October 2026</div></div>
+    <div class="stat"><div class="big">8 of 9</div><div class="lbl">teams use or ask for chat</div></div>
+    <div class="stat"><div class="big">1</div><div class="lbl">key with no owner, still calling a model</div></div>
+  </div>
+  <aside class="notes"><p>From Lab 3.1 on the synthetic logs. The pilot's gateway knew keys and budgets, nothing else: no classification, no per-team capacity. Today rebuilds it as a product.</p></aside>
+</section>
+
+<section class="slide" id="demand-matrix" data-lo="LO4" data-label="Demand matrix" data-n="7" data-session="1">
+  <div class="kicker">Measured in Lab 3.1</div>
+  <h2>Two capabilities serve most teams; four serve one team each</h2>
+  <div class="bars">
+    <div class="row"><span>Chat</span><div class="bar c-teal" style="--w:89%"></div><span class="val">8 teams</span></div>
+    <div class="row"><span>Embeddings</span><div class="bar c-cyan" style="--w:56%"></div><span class="val">5</span></div>
+    <div class="row"><span>Batch</span><div class="bar c-purple" style="--w:33%"></div><span class="val">3</span></div>
+    <div class="row"><span>Classification, vision, speech, agent tools</span><div class="bar c-amber" style="--w:11%"></div><span class="val">1 each</span></div>
+  </div>
+  <p class="caption">Teams that use a capability or ask for it in the survey, out of nine.</p>
+  <aside class="notes"><p>The matrix combines what teams do (logs) with what they ask for (survey). Disagreements are worth a conversation: the waste team asks for chat and uses only batch. Ask why before building chat for them.</p></aside>
+</section>
+
+<section class="slide" id="phasing" data-lo="LO4" data-label="Phasing" data-n="8" data-session="1">
+  <div class="kicker">Phasing</div>
+  <h2>Build shared what most teams need; pave a road for the rest</h2>
+  <table class="t">
+    <tr><th>Phase</th><th>Capabilities</th><th>Rule</th></tr>
+    <tr><td>Phase 1</td><td>chat, embeddings</td><td>five or more teams</td></tr>
+    <tr><td>Phase 2</td><td>batch</td><td>two to four teams</td></tr>
+    <tr><td>Team-owned</td><td>classification, vision, speech, agent tools</td><td>one team: a template, not a service</td></tr>
+  </table>
+  <aside class="notes"><p>The thresholds are the lab's; a real platform team tunes them with its sponsor. "Team-owned" does not mean unsupported: the team gets a golden path (Day 4) and the gateway, and owns the service. Classification is the example from Lab 2.1: a classifier the reports team owns.</p></aside>
+</section>
+
+<section class="slide" id="logs-breach" data-lo="LO4" data-label="A breach" data-n="9" data-session="1">
+  <div class="kicker">What the logs show</div>
+  <h2>For two months, a Restricted team called the external model</h2>
+  <div class="cols cols-2">
+    <div class="stat"><div class="big">47,556</div><div class="lbl">requests from the reports team (Restricted) to the external model, May and June</div></div>
+    <ul class="bullets small">
+      <li>Citizen reports carry phone numbers and locations.</li>
+      <li>The gateway kept no prompt text, by design: what was sent cannot be read back.</li>
+      <li>The prompt template of those months can be, and the team can say what it held.</li>
+    </ul>
+  </div>
+  <aside class="notes"><p>A breach in the logs is a lead, not a verdict: a Restricted team may send Public prompts. The data protection officer decides what follows. The architectural point: the gateway should have refused, and from Session 2 on, it does.</p></aside>
+</section>
+
+<section class="slide" id="check-phase" data-lo="LO4" data-n="10" data-session="1">
+  <div class="kicker">Checkpoint</div>
+  <h2>Should Asas build a shared vision service now?</h2>
+  <div class="quiz" data-type="single" data-lo="LO4" data-id="check-phase-q1">
+    <p class="lead">Only the inspections team uses vision, and its candidate model has no Arabic evaluation. The team asks the platform to offer vision to everyone. What does the platform do first?</p>
+    <div class="opts">
+      <div class="opt" data-why="Builds from one team's request: shared services carry shared cost and an owner for nine teams" data-k="A">Build a shared vision service for all nine teams</div>
+      <div class="opt" data-why="Treats team-owned as unsupported: the team still needs the gateway and a template" data-k="B">Refuse, since vision is not in phase 1</div>
+      <div class="opt" data-why="Admits a model without the evidence the catalogue requires" data-k="C">Add the vision model to the catalogue now</div>
+      <div class="opt" data-ok data-k="D">Give the team a paved road to its own vision service, and ask for Arabic evidence</div>
+    </div>
+    <div class="callout tip why"><b>Why.</b> One team's need is served by a golden path the team owns; the catalogue waits for the evidence.</div>
+  </div>
+  <aside class="notes"><p>Answer: D. This sets up Day 4's deviation request: the inspections team will ask to use an external vision model instead.</p></aside>
+</section>
+
+<section class="slide lab top" id="lab-3-1" data-auto="lab" data-lab="3.1" data-label="Lab 3.1" data-n="11" data-session="1">
+  <div class="cols cols-2 mid"><div><div class="lab-tag">Lab 3.1 · 25 min</div><h2>A demand matrix from six months of usage</h2><p class="lead small">Build a teams-by-capabilities matrix from six months of synthetic gateway logs and a survey, phase the platform's capabilities and find the placement breach in the logs.</p><a class="nb" href="../labs/D3_1_demand_matrix.ipynb">D3_1_demand_matrix.ipynb</a></div><ul class="checklist"><li>Read six months of usage <span class="min">4 min</span></li><li>The demand matrix: used and asked for <span class="min">8 min</span></li><li>Phase the platform's capabilities <span class="min">6 min</span></li><li>What the logs show that the platform should have stopped <span class="min">7 min</span></li><li class="stretch">✱ Stretch: Growth by capability</li></ul></div>
+  <aside class="notes"><p>The key-to-team join matters: rows with a blank tag still belong to the key's owner. Participants who group by the tag lose 116 rows. The breach step uses each team's highest level; say aloud that this flags leads, not proven violations.</p></aside>
+</section>
+
+<!-- Session 2 -->
+
+<section class="slide section" id="s2" data-auto="section" data-session="2" data-n="12">
+  <div class="kicker">Session 2</div>
+  <h1>Catalogue, admission and the gateway</h1>
+  <ul class="bullets outcomes"><li>Admit models on licence, evaluation and data-term evidence</li><li>Write catalogue entries with the highest level each model may receive</li><li>Make a gateway refuse Restricted data to an external model</li></ul>
+  <div class="sess-no">02</div>
+</section>
+
+<section class="slide" id="admission" data-lo="LO4" data-label="Admission" data-n="13" data-session="2">
+  <div class="kicker">Model admission</div>
+  <h2>A model enters the catalogue on evidence, not on a leaderboard</h2>
+  <div class="flow">
+    <div class="step c-navy"><b>Licence</b>government production use allowed</div>
+    <div class="arrow">→</div>
+    <div class="step c-teal"><b>Evaluation</b>the Ministry's Arabic and English sets</div>
+    <div class="arrow">→</div>
+    <div class="step c-cyan"><b>Data terms</b>retention, no training on prompts</div>
+    <div class="arrow">→</div>
+    <div class="step c-purple"><b>Owner</b>and a review date</div>
+  </div>
+  <aside class="notes"><p>The four criteria are the case's. Signing, provenance and bills of materials of model files are AE-403's admission topics; here admission is the architect's question: may this model be offered to these teams, for which data?</p></aside>
+</section>
+
+<section class="slide" id="admitted" data-lo="LO4" data-label="Four admitted" data-n="14" data-session="2">
+  <div class="kicker">Measured in Lab 3.2</div>
+  <h2>Four of six candidates are admitted; the best scorer is not</h2>
+  <table class="t small">
+    <tr><th>Candidate</th><th>Arabic / English</th><th>Hosting</th><th>Verdict</th></tr>
+    <tr><td>ext-frontier-l</td><td>0.91 / 0.93</td><td>external</td><td>admitted, Public data only</td></tr>
+    <tr><td>ksa-general-m</td><td>0.86 / 0.88</td><td>cloud in the Kingdom</td><td>admitted, up to Restricted</td></tr>
+    <tr><td>own-open-s, own-embed-m</td><td>0.79 / 0.82, 0.88 / 0.90</td><td>Ministry</td><td>admitted, up to Secret</td></tr>
+    <tr class="hl"><td>ext-mini-r</td><td>0.84 / 0.89</td><td>external</td><td>rejected: research-only licence</td></tr>
+    <tr class="hl"><td>ksa-vision-x</td><td>none / 0.81</td><td>cloud in the Kingdom</td><td>rejected: no Arabic evidence</td></tr>
+  </table>
+  <aside class="notes"><p>Model ids, scores and licences are fictional. The catalogue entry carries the highest level each model may receive, derived from hosting by the placement rule of Day 1: the catalogue and the gateway use the same table.</p></aside>
+</section>
+
+<section class="slide" id="gateway-duties" data-lo="LO4" data-label="Gateway duties" data-n="15" data-session="2">
+  <div class="kicker">The gateway</div>
+  <h2>One door for every model call, with five duties</h2>
+  <div class="cols cols-3">
+    <div class="card c-teal"><h4>Credentials</h4><p class="small mb0">A key per team; provider keys never leave the gateway.</p></div>
+    <div class="card c-cyan"><h4>Quotas and budgets</h4><p class="small mb0">Per key: requests a minute, spend.</p></div>
+    <div class="card c-purple"><h4>Fallback</h4><p class="small mb0">Another admitted model when one fails, under the same policies.</p></div>
+    <div class="card c-amber"><h4>Tool mediation</h4><p class="small mb0">Only the tools a team is allowed reach the model.</p></div>
+    <div class="card c-coral"><h4>Audit</h4><p class="small mb0">Who, which model, which level, which decision.</p></div>
+    <div class="card c-navy"><h4>And now: policy</h4><p class="small mb0">Classification decides where a request may go.</p></div>
+  </div>
+  <aside class="notes"><p>Products in this slot: LiteLLM's proxy offers virtual keys with budgets and rate limits per key, fallbacks, and guardrails that run before or after a call; agentgateway proxies model, agent and MCP traffic. The lab's gateway is 150 lines of Python with the same ideas, so participants can read all of it. Budgets and kill switches for agents were AE-305 Day 4; one slide here, no more.</p><p>Sources: LiteLLM documentation (virtual keys, guardrails, fallbacks); agentgateway documentation.</p></aside>
+</section>
+
+<section class="slide" id="policy-code" data-lo="LO4" data-label="The policy" data-n="16" data-session="2">
+  <div class="kicker">Lab 3.2, step 4</div>
+  <h2>The level of a request is the highest it shows, declares or defaults to</h2>
+  <pre class="code s" data-file="Lab 3.2"><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">classification_policy</span>(<span class="hljs-params">ctx</span>):
+    levels = [G.detect_level(ctx[<span class="hljs-string">&quot;text&quot;</span>])]
+    levels.append(ctx[<span class="hljs-string">&quot;request&quot;</span>].get(<span class="hljs-string">&quot;classification&quot;</span>)
+                  <span class="hljs-keyword">or</span> ctx[<span class="hljs-string">&quot;key_info&quot;</span>][<span class="hljs-string">&quot;max_level&quot;</span>])   <span class="hljs-comment"># fail closed</span>
+    level = A.highest(levels)
+    ctx[<span class="hljs-string">&quot;level&quot;</span>] = level
+    hosting = ctx[<span class="hljs-string">&quot;entry&quot;</span>][<span class="hljs-string">&quot;hosting&quot;</span>]
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> A.allowed(level, hosting):
+        <span class="hljs-keyword">return</span> <span class="hljs-number">403</span>, <span class="hljs-string">f&quot;<span class="hljs-subst">{level}</span> data may not go to a model hosted at &#x27;<span class="hljs-subst">{hosting}</span>&#x27;&quot;</span></code></pre>
+  <aside class="notes"><p>Three sources of the level: what the request declares, what the content shows, and, when it declares nothing, the team's highest level. Undeclared from a Restricted team means Restricted. That default is a decision; it makes teams declare Public explicitly when they mean it.</p></aside>
+</section>
+
+<section class="slide" id="nine-tests" data-lo="LO4" data-label="Nine tests" data-n="17" data-session="2">
+  <div class="kicker">Measured in Lab 3.2</div>
+  <h2>The supplied gateway passed four forbidden requests; the policy stops all four</h2>
+  <table class="t small">
+    <tr><th>Test</th><th>Request</th><th class="num">Supplied</th><th class="num">With the policy</th></tr>
+    <tr><td>G2</td><td>Restricted, declared, to the external model</td><td class="num">200</td><td class="num">403</td></tr>
+    <tr><td>G3</td><td>Restricted team, nothing declared, external model</td><td class="num">200</td><td class="num">403</td></tr>
+    <tr class="hl"><td>G4</td><td>declared Public, holds an identity number</td><td class="num">200</td><td class="num">403</td></tr>
+    <tr><td>G6</td><td>Secret tender text to the cloud model</td><td class="num">200</td><td class="num">403</td></tr>
+    <tr><td>G1, G5, G7, G8</td><td>allowed placements</td><td class="num">200</td><td class="num">200</td></tr>
+  </table>
+  <aside class="notes"><p>G9, an unknown key, gets 401 on both. G4 is the one to dwell on: a Public team, a Public label, Restricted content. The content check is a regular expression for the identity-number format; it is a floor. Production gateways add classifiers and data-loss-prevention services in the same place.</p></aside>
+</section>
+
+<section class="slide" id="audit-hash" data-lo="LO4" data-label="Audit" data-n="18" data-session="2">
+  <div class="kicker">The audit log</div>
+  <h2>Log the decision and a hash of the prompt, never the prompt</h2>
+  <div class="trace s">
+    <div class="ev guard"><b>seq 4</b>team T05 · alias ext-frontier-l · level Restricted · 403</div>
+    <div class="ev result"><b>reason</b>Restricted data may not go to a model hosted at 'external'</div>
+    <div class="ev result"><b>prompt</b>sha256 cf48bdcd010a953f</div>
+  </div>
+  <p class="small mt">A log full of prompts is a second copy of Restricted data, with its own retention rule. A hash proves whether a given text was sent.</p>
+  <aside class="notes"><p>From the solution's audit of the refusals. The assessment's authenticity rule asks for gateway logs in the capstone repository; this is why they can be public: no prompt text.</p></aside>
+</section>
+
+<section class="slide" id="fallback-placement" data-lo="LO4" data-label="Fallback" data-n="19" data-session="2">
+  <div class="kicker">Fallback</div>
+  <h2>A fallback must pass the same policy as the first choice</h2>
+  <div class="trace s">
+    <div class="ev user"><b>request</b>contracts team, Secret, alias own-open-s</div>
+    <div class="ev error"><b>own-open-s</b>busy (stand-in failure)</div>
+    <div class="ev guard"><b>fallback</b>ksa-general-m refused: Secret may not go to ksa_cloud</div>
+    <div class="ev final"><b>answer</b>503, no model available</div>
+  </div>
+  <aside class="notes"><p>From the stretch of Lab 3.2: two calls, statuses 200 then 503. A 503 is the right answer: an outage is better than a Secret document in the wrong place. Availability of Secret workloads therefore needs a second Ministry-hosted model, which is a decision with a cost.</p></aside>
+</section>
+
+<section class="slide" id="check-gateway" data-lo="LO4" data-n="20" data-session="2">
+  <div class="kicker">Checkpoint</div>
+  <h2>What should the gateway do with this request?</h2>
+  <div class="quiz" data-type="single" data-lo="LO4" data-id="check-gateway-q1">
+    <p class="lead">The planning team (Public) labels a request Public and sends it to the external model. The text reads: "Owner 1048837265 asks whether plot 17 can be rezoned."</p>
+    <div class="opts">
+      <div class="opt" data-why="Trusts the label over the content: labels are what the caller remembered to send" data-k="A">Pass it: the team and the label are both Public</div>
+      <div class="opt" data-why="Fixes the data after the fact: masking in the log does not stop the text reaching the model" data-k="B">Pass it, and mask the number in the audit log</div>
+      <div class="opt" data-ok data-k="C">Refuse it: the content shows an identity number, so the request is Restricted</div>
+      <div class="opt" data-why="Moves the risk to the team without stopping it: a warning lets the data out" data-k="D">Pass it with a warning to the team</div>
+    </div>
+    <div class="callout tip why"><b>Why.</b> The level is the highest the gateway can see; the identity number makes it Restricted, which may not go to an external model.</div>
+  </div>
+  <aside class="notes"><p>Answer: C. This is test G4.</p></aside>
+</section>
+
+<section class="slide lab top" id="lab-3-2" data-auto="lab" data-lab="3.2" data-label="Lab 3.2" data-n="21" data-session="2">
+  <div class="cols cols-2 mid"><div><div class="lab-tag">Lab 3.2 · 25 min</div><h2>Model admission and a gateway that refuses</h2><p class="lead small">Admit four of six candidate models on evidence, write their catalogue entries and add the classification policy that makes the supplied gateway refuse Restricted data to an external model.</p><a class="nb" href="../labs/D3_2_admission_gateway.ipynb">D3_2_admission_gateway.ipynb</a></div><ul class="checklist"><li>Admission criteria as code <span class="min">5 min</span></li><li>Admit four of the six candidates <span class="min">6 min</span></li><li>Catalogue entries with the level each may receive <span class="min">4 min</span></li><li>The classification policy, and nine test requests <span class="min">10 min</span></li><li class="stretch">✱ Stretch: A fallback that respects placement</li></ul></div>
+  <aside class="notes"><p>No key or model is needed: the refusal happens before any call, and the models are labelled stand-ins. An optional cell puts a free hosted model behind the external alias when the three ASAS_UPSTREAM variables are set; G1 then gets a real answer and G4 is still refused before the call. Nothing in the lab needs it. Common slip: treating a missing label as Public.</p></aside>
+</section>
+
+<!-- Session 3 -->
+
+<section class="slide section" id="s3" data-auto="section" data-session="3" data-n="22">
+  <div class="kicker">Session 3</div>
+  <h1>Tenancy and shared capacity</h1>
+  <ul class="bullets outcomes"><li>Compare a shared and a per-team tenancy model under incidents</li><li>Cap a team's share of shared capacity</li><li>Contain leaked keys and runaway spend with keys and budgets per team</li></ul>
+  <div class="sess-no">03</div>
+</section>
+
+<section class="slide" id="isolation-levels" data-lo="LO4" data-label="Isolation" data-n="23" data-session="3">
+  <div class="kicker">Tenancy</div>
+  <h2>Tenancy is a choice of what teams share and what each gets alone</h2>
+  <table class="t small">
+    <tr><th>Model</th><th>Teams share</th><th>Each team gets</th><th>Fits</th></tr>
+    <tr><td>Pooled</td><td>key, budget, capacity</td><td>nothing</td><td>a pilot</td></tr>
+    <tr class="hl"><td>Per-team controls</td><td>capacity, under caps</td><td>a key, a budget, a capped share</td><td>Public and Restricted teams</td></tr>
+    <tr><td>Dedicated</td><td>the gateway only</td><td>its own model deployment</td><td>Secret teams with steady load</td></tr>
+  </table>
+  <aside class="notes"><p>Most platforms mix them: per-team controls for most teams, dedicated deployments where data or load demands it. The lab compares the first two; the third is a cost question the options paper of a Secret team answers.</p></aside>
+</section>
+
+<section class="slide" id="three-incidents" data-lo="LO4" data-label="Three incidents" data-n="24" data-session="3">
+  <div class="kicker">One hour, three incidents</div>
+  <h2>Three incidents test three different controls</h2>
+  <div class="cols cols-3">
+    <div class="card c-coral"><h4>Leaked key</h4><p class="small mb0">The planning team's key calls the external model 400 times a minute for 15 minutes.</p></div>
+    <div class="card c-amber"><h4>Noisy neighbour</h4><p class="small mb0">The contact team's batch floods the Ministry-hosted model with 300 extra requests a minute.</p></div>
+    <div class="card c-purple"><h4>Runaway agent</h4><p class="small mb0">An inspections agent loops for 40 minutes at six times the tokens per call.</p></div>
+  </div>
+  <aside class="notes"><p>The replay is deterministic (asas_tenancy.py). The Ministry-hosted model serves 120 requests a minute; a quiet hour of paid models costs SAR 99.</p></aside>
+</section>
+
+<section class="slide" id="incident-results" data-lo="LO4" data-label="Results" data-n="25" data-session="3">
+  <div class="kicker">Measured in Lab 3.3</div>
+  <h2>Under per-team controls, no bystander loses a request</h2>
+  <table class="t small">
+    <tr><th>Incident</th><th>Tenancy</th><th class="num">Worst bystander, own model</th><th class="num">Worst bystander, paid models</th></tr>
+    <tr><td>Noisy neighbour</td><td>pooled</td><td class="num">83.1%</td><td class="num">100%</td></tr>
+    <tr><td>Leaked key</td><td>pooled</td><td class="num">100%</td><td class="num">61.7%</td></tr>
+    <tr><td>Runaway agent</td><td>pooled</td><td class="num">100%</td><td class="num">43.3%</td></tr>
+    <tr class="hl"><td>All three</td><td>per team</td><td class="num">100%</td><td class="num">100%</td></tr>
+  </table>
+  <p class="caption">Share of requests served, for the worst-off team that caused nothing.</p>
+  <aside class="notes"><p>Under the pooled model, the leak and the runaway agent exhaust the one shared budget and cut every team off. Per team: the leaked key is revoked at minute 30 when its rate exceeds five times normal; the runaway agent hits its own budget and spike rule.</p></aside>
+</section>
+
+<section class="slide" id="control-map" data-lo="LO4" data-label="Controls" data-n="26" data-session="3">
+  <div class="kicker">Which control for which incident</div>
+  <h2>Each incident needs its own control; the tenancy model is the set</h2>
+  <table class="t">
+    <tr><th>Control</th><th>Contains</th><th>Does nothing for</th></tr>
+    <tr><td>A cap on each team's share of capacity</td><td>noisy neighbour</td><td>spend</td></tr>
+    <tr><td>A budget per key</td><td>runaway agent</td><td>capacity</td></tr>
+    <tr><td>A key per team, revoked on a spike</td><td>leaked key</td><td>a slow, legitimate overload</td></tr>
+  </table>
+  <aside class="notes"><p>The stretch finds the largest safe cap: 0.5 of capacity holds for this hour's noisy neighbour. A smaller cap is safer and slows the culprit's legitimate batch more; that trade-off belongs in a decision record.</p></aside>
+</section>
+
+<section class="slide" id="blast-radius" data-lo="LO4" data-label="Blast radius" data-n="27" data-session="3">
+  <div class="kicker">The principle</div>
+  <h2>One team's incident should stay that team's incident</h2>
+  <div class="cols cols-2">
+    <div class="stat"><div class="big">5 minutes</div><div class="lbl">without paid models for the planning team, until its new key</div></div>
+    <ul class="bullets small">
+      <li>Revocation costs the team whose key leaked; nobody else.</li>
+      <li>Keys are scoped to the models of the team's level: a leaked Public key reaches no Restricted model.</li>
+      <li>Rotation is routine, so revoking is not a crisis.</li>
+    </ul>
+  </div>
+  <aside class="notes"><p>Under the pooled model the only way to stop the leak is to revoke the key all nine teams use: an outage for everyone. Most teams then do not revoke, and the budget burns instead.</p></aside>
+</section>
+
+<section class="slide" id="check-tenancy" data-lo="LO4" data-n="28" data-session="3">
+  <div class="kicker">Checkpoint</div>
+  <h2>Which control stops this from harming other teams?</h2>
+  <div class="quiz" data-type="single" data-lo="LO4" data-id="check-tenancy-q1">
+    <p class="lead">The contact team's nightly batch moves to working hours and asks the Ministry-hosted model for more than twice its capacity. Budgets are untouched; the other teams' answers slow down. Which control fixes it?</p>
+    <div class="opts">
+      <div class="opt" data-why="Fixes spend, not capacity: the batch runs on a fixed-cost model and spends nothing per call" data-k="A">A lower budget on the contact team's key</div>
+      <div class="opt" data-why="Treats a legitimate overload as a leak: the key is the team's own and correctly used" data-k="B">Revoke the contact team's key</div>
+      <div class="opt" data-ok data-k="C">A cap on any team's share of the Ministry-hosted model</div>
+      <div class="opt" data-why="Moves the load instead of capping it: the batch spills onto a paid model the other teams share, and only a cloud region in the Kingdom may take its Restricted transcripts" data-k="D">Fall back to a cloud model when the queue is long</div>
+    </div>
+    <div class="callout tip why"><b>Why.</b> The harm is shared capacity; only a cap on each team's share keeps the others served.</div>
+  </div>
+  <aside class="notes"><p>Answer: C. D is worth a minute: call transcripts are Restricted, so a cloud region in the Kingdom would be allowed by the rule; the external model would not. Placement still limits the fallback.</p></aside>
+</section>
+
+<section class="slide lab top" id="lab-3-3" data-auto="lab" data-lab="3.3" data-label="Lab 3.3" data-n="29" data-session="3">
+  <div class="cols cols-2 mid"><div><div class="lab-tag">Lab 3.3 · 25 min</div><h2>Three incidents, two tenancy models</h2><p class="lead small">Replay an hour with a leaked key, a noisy neighbour and a runaway agent under the pilot's shared model and under a per-team model you design, and measure the harm to bystanders.</p><a class="nb" href="../labs/D3_3_tenancy.ipynb">D3_3_tenancy.ipynb</a></div><ul class="checklist"><li>Replay the three incidents on the shared model <span class="min">5 min</span></li><li>A capped share of the Ministry-hosted model <span class="min">7 min</span></li><li>Your tenancy model: keys, budgets, revocation <span class="min">6 min</span></li><li>The incident table: who was harmed <span class="min">7 min</span></li><li class="stretch">✱ Stretch: The cap that costs the culprit least</li></ul></div>
+  <aside class="notes"><p>The allocation function is the only hard part: unused share must go to the others, still under the cap. A one-pass version that caps and stops leaves capacity idle; the check on the noisy neighbour still passes but the own-model numbers of bystanders show the waste.</p></aside>
+</section>
+
+<!-- Session 4 -->
+
+<section class="slide section" id="s4" data-auto="section" data-session="4" data-n="30">
+  <div class="kicker">Session 4</div>
+  <h1>Who pays for which tokens</h1>
+  <ul class="bullets outcomes"><li>Allocate invoices to teams by usage, credits and fixed costs included</li><li>Reconcile a showback with each invoice within 2%</li><li>Name spend that no tag or owner explains</li></ul>
+  <div class="sess-no">04</div>
+</section>
+
+<section class="slide" id="showback-first" data-lo="LO4" data-label="Showback" data-n="31" data-session="4">
+  <div class="kicker">Cost attribution</div>
+  <h2>Show teams their costs before anyone is charged</h2>
+  <div class="cols cols-2">
+    <div class="card c-teal"><h4>Showback</h4><p class="small mb0">Each team sees what its use cost, at any granularity. Nothing moves between budgets.</p></div>
+    <div class="card c-coral"><h4>Chargeback</h4><p class="small mb0">The costs are sent to the teams' budgets. Allocation keys now move money.</p></div>
+  </div>
+  <div class="callout tip mt"><b>Order.</b> Run showback until the teams stop disputing the allocation keys; then decide about chargeback.</div>
+  <aside class="notes"><p>The FinOps Framework distinguishes the two: chargeback is the formal sending of costs to accounting budgets, showback is reporting without it. Nisreen Al-Mehaimeed asked for showback first; the lab shows why the keys need arguing before money moves.</p><p>Sources: FinOps Framework, invoicing and chargeback.</p></aside>
+</section>
+
+<section class="slide" id="card-drift" data-lo="LO4" data-label="Price card" data-n="32" data-session="4">
+  <div class="kicker">Measured in Lab 3.4</div>
+  <h2>A showback priced with a price card drifts from the bill</h2>
+  <table class="t small">
+    <tr><th>Invoice</th><th class="num">Showback by card</th><th class="num">Invoice</th><th class="num">Off by</th><th>Why</th></tr>
+    <tr><td>In-Kingdom Cloud, August</td><td class="num">5,136</td><td class="num">4,636</td><td class="num">10.8%</td><td>an onboarding credit</td></tr>
+    <tr><td>External Provider, September</td><td class="num">3,772</td><td class="num">3,401</td><td class="num">10.9%</td><td>output price cut</td></tr>
+    <tr><td>External Provider, October</td><td class="num">3,935</td><td class="num">3,550</td><td class="num">10.9%</td><td>output price cut</td></tr>
+  </table>
+  <aside class="notes"><p>SAR, from the solution run on the synthetic invoices. The card was last updated in May. Finance stops trusting a showback the first month it disagrees with the bill.</p></aside>
+</section>
+
+<section class="slide" id="allocate-invoice" data-lo="LO4" data-label="Allocate" data-n="33" data-session="4">
+  <div class="kicker">Allocate, do not reprice</div>
+  <h2>Share each invoice line by the usage it covers</h2>
+  <div class="flow">
+    <div class="step c-teal"><b>Token lines</b>by the rows' tokens of that model</div>
+    <div class="arrow">→</div>
+    <div class="step c-amber"><b>Credits</b>by the rows' value on that provider</div>
+    <div class="arrow">→</div>
+    <div class="step c-navy"><b>Fixed cost</b>by an allocation key you defend</div>
+    <div class="arrow">→</div>
+    <div class="step c-purple"><b>Team</b>by the key's owner</div>
+  </div>
+  <div class="stat center mt"><div class="big">0.00%</div><div class="lbl">difference from each of the 18 invoices after allocation; the outcome asks for 2% or less</div></div>
+  <aside class="notes"><p>From Lab 3.4 step 3. The allocation sums to the invoice by construction, so reconciliation is a test that the code covers every line, not a coincidence.</p></aside>
+</section>
+
+<section class="slide" id="untagged" data-lo="LO4" data-label="Untagged" data-n="34" data-session="4">
+  <div class="kicker">Untagged spend</div>
+  <h2>Untagged spend comes in two kinds, and only one has an owner</h2>
+  <div class="cols cols-2">
+    <div class="card c-cyan"><h4>Blank tag, known key</h4><p class="small mb0">116 rows, SAR 13,950: the key's owner is known, so the gateway attributes them.</p></div>
+    <div class="card c-coral"><h4>Orphan key</h4><p class="small mb0"><code>k-legacy-01</code>: SAR 558 over six months, chat on a cloud model, owned by nobody.</p></div>
+  </div>
+  <div class="callout warn mt"><b>The fix is a rule, not a report.</b> No key without an owner, and a key without one is revoked.</div>
+  <aside class="notes"><p>The orphan's spend is 0.14% of the six months, small enough to be ignored, which is why it matters: nobody would notice it grow, and it can reach a model that receives Restricted data.</p></aside>
+</section>
+
+<section class="slide" id="allocation-key" data-lo="LO4" data-label="Allocation key" data-n="35" data-session="4">
+  <div class="kicker">The data centre's fixed cost</div>
+  <h2>The allocation key is a decision: tokens and requests disagree</h2>
+  <div class="cols cols-2">
+    <div class="stat"><div class="big">70.7%</div><div class="lbl">of the data centre's cost to the contact team, by tokens</div></div>
+    <div class="stat"><div class="big">24.1%</div><div class="lbl">of it to the same team, by requests</div></div>
+  </div>
+  <p class="small mt">Speech counts many tokens per call. Which key reflects what the servers actually spend their time on? Measure it, then record the choice.</p>
+  <aside class="notes"><p>From the stretch of Lab 3.4. A third key, accelerator time per team, would be the most defensible and needs metering the platform does not have yet. Tools such as OpenCost allocate cluster costs from measured resource use; the decision of which key to use stays the architect's.</p><p>Sources: OpenCost documentation.</p></aside>
+</section>
+
+<section class="slide" id="check-showback" data-lo="LO4" data-n="36" data-session="4">
+  <div class="kicker">Checkpoint</div>
+  <h2>Why does the August showback miss the invoice?</h2>
+  <div class="quiz" data-type="single" data-lo="LO4" data-id="check-showback-q1">
+    <p class="lead">Priced with the platform's card, August's In-Kingdom Cloud showback is SAR 500 above the invoice. Every token is accounted for. What is the right fix?</p>
+    <div class="opts">
+      <div class="opt" data-why="Hides a gap instead of explaining it: a fudge line makes the next month's gap invisible too" data-k="A">Add a correction line of SAR -500 to the unallocated bucket</div>
+      <div class="opt" data-why="Updates a card that was right: the provider's prices did not change in August" data-k="B">Update the price card for August</div>
+      <div class="opt" data-why="Blames tags for a pricing gap: tags decide who pays, not how much" data-k="C">Ask teams to tag their calls better</div>
+      <div class="opt" data-ok data-k="D">Allocate the invoice lines, the credit included, to the usage they cover</div>
+    </div>
+    <div class="callout tip why"><b>Why.</b> The invoice holds a credit the card cannot know; allocating the invoice passes it to the teams in proportion to their use.</div>
+  </div>
+  <aside class="notes"><p>Answer: D.</p></aside>
+</section>
+
+<section class="slide lab top" id="lab-3-4" data-auto="lab" data-lab="3.4" data-label="Lab 3.4" data-n="37" data-session="4">
+  <div class="cols cols-2 mid"><div><div class="lab-tag">Lab 3.4 · 25 min</div><h2>A showback that reconciles</h2><p class="lead small">Build a showback from synthetic invoices, usage and tags, see a price-card version fail to reconcile, allocate the invoices instead within 2% and name the untagged spend.</p><a class="nb" href="../labs/D3_4_showback.ipynb">D3_4_showback.ipynb</a></div><ul class="checklist"><li>A showback priced with the price card <span class="min">6 min</span></li><li>Reconcile it with each invoice <span class="min">5 min</span></li><li>Allocate the invoices instead <span class="min">8 min</span></li><li>Name the untagged spend <span class="min">6 min</span></li><li class="stretch">✱ Stretch: Is token count the right key for the data centre?</li></ul></div>
+  <aside class="notes"><p>The credit line has no model; a blank cell reads as missing in pandas, which is the usual trip. Attribute by key owner, not by tag: grouping by tag loses SAR 13,950 to "untagged".</p></aside>
+</section>
+
+<section class="slide" id="wrap-up" data-label="Wrap-up" data-n="38" data-session="4">
+  <div class="kicker">Day 3</div>
+  <h2>Three things to keep</h2>
+  <div class="cols cols-3">
+    <div class="card c-teal"><h4>Build from demand</h4><p class="small mb0">Shared services for most teams, paved roads for the rest.</p></div>
+    <div class="card c-coral"><h4>Policy at the door</h4><p class="small mb0">The gateway refuses by classification, content included, and logs no text.</p></div>
+    <div class="card c-purple"><h4>Contain and attribute</h4><p class="small mb0">Per-team controls keep incidents local; showback allocates the real bill.</p></div>
+  </div>
+  <aside class="notes"><p>The platform slice of the capstone is today's four labs: a catalogue entry, the gateway with its refusal test, and a showback that reconciles. Tomorrow adds the golden path.</p></aside>
+</section>
+
+<section class="slide dark" id="next" data-label="Next" data-n="39" data-session="4">
+  <div class="kicker">Day 4</div>
+  <h2>Tomorrow: a golden path, fitness checks, a review and a deviation</h2>
+  <ul class="bullets">
+    <li>Keep <code>artifacts/D3_2/</code> and <code>artifacts/D3_4/</code>: the capstone's platform slice starts there.</li>
+    <li>Read the inspections team's design in <code>labs/data/designs/</code>: you review it in Session 3.</li>
+    <li>Choose which of the three capstone services you would take.</li>
+  </ul>
+  <aside class="notes"><p>The three capstone services are in labs/capstone/README.md. Participants choose in Lab 4.4.</p></aside>
+</section>
+</div>
+<script type="application/json" id="academy-data">{"v":1,"engine":"1.0.0","build":{"at":"2026-11-15T16:14:16Z","version":"2027.1.0","commit":"b2bfbf8"},"course":{"id":"ae-402","code":"AE-402","title":"AI Solution Architecture and Platform Design","track":"ai-engineering","lang":"en","dir":"ltr","url":"https://sdaiaacademy.github.io/ae-402/","repo":"SDAIAAcademy/ae-402","home":"../index.html"},"deck":{"id":"day3","kind":"day","day":3,"label":"Day 3","title":"The shared platform","prev":"day2.html","next":"day4.html","md":"day3.md","alt":{}},"sessions":[{"n":1,"label":"Session 1","title":"The platform is a product","slide":"s1","outcomes":["Build a demand matrix from usage logs and a team survey","Phase platform capabilities by shared demand","Spot in the logs what the platform should already prevent"],"minutes":50,"lab":{"id":"3.1","title":"A demand matrix from six months of usage","minutes":25,"href":"../labs/D3_1_demand_matrix.ipynb"}},{"n":2,"label":"Session 2","title":"Catalogue, admission and the gateway","slide":"s2","outcomes":["Admit models on licence, evaluation and data-term evidence","Write catalogue entries with the highest level each model may receive","Make a gateway refuse Restricted data to an external model"],"minutes":50,"lab":{"id":"3.2","title":"Model admission and a gateway that refuses","minutes":25,"href":"../labs/D3_2_admission_gateway.ipynb"}},{"n":3,"label":"Session 3","title":"Tenancy and shared capacity","slide":"s3","outcomes":["Compare a shared and a per-team tenancy model under incidents","Cap a team's share of shared capacity","Contain leaked keys and runaway spend with keys and budgets per team"],"minutes":50,"lab":{"id":"3.3","title":"Three incidents, two tenancy models","minutes":25,"href":"../labs/D3_3_tenancy.ipynb"}},{"n":4,"label":"Session 4","title":"Who pays for which tokens","slide":"s4","outcomes":["Allocate invoices to teams by usage, credits and fixed costs included","Reconcile a showback with each invoice within 2%","Name spend that no tag or owner explains"],"minutes":50,"lab":{"id":"3.4","title":"A showback that reconciles","minutes":25,"href":"../labs/D3_4_showback.ipynb"}}],"slides":[{"id":"title","n":1,"title":"The shared platform","kind":"title","session":0,"hash":"62ea5409","md":"#### [day3#title] The shared platform\n\n*SDAIA Academy · AI Solution Architecture and Platform Design*\n\nDay 3: Asas as a product: demand, admission, a gateway that refuses, tenancy and showback\n\nAI Engineering Track · 4 teaching days + capstone day · 4 sessions · 4 labs · AE-402","notes":"Open with the question from yesterday's last slide: a shared service in your organisation that teams avoid, and why. Write two reasons on the board. Most will be about the service being built for its builders, not for its users; that is today's first session.","minutes":null,"lo":[]},{"id":"agenda","n":2,"title":"The shared platform","kind":"content","session":0,"hash":"e37cb979","md":"#### [day3#agenda] The shared platform\n\n*Today*\n\n- **Session 1 · The platform is a product**: The shared platform treated as a product with nine teams as users, phased by their measured demand\n- **Session 2 · Catalogue, admission and the gateway**: Admission to the model catalogue on evidence, and a gateway that enforces placement by classification\n- **Session 3 · Tenancy and shared capacity**: Tenancy as a set of controls that keep one team's incident inside that team\n- **Session 4 · Who pays for which tokens**: Cost attribution that reconciles with the invoices, shown to teams before anyone is charged","notes":"","minutes":null,"lo":[]},{"id":"review-day2","n":3,"title":"What does record one's review trigger watch?","kind":"quiz","session":0,"hash":"c6b88696","md":"#### [day3#review-day2] What does record one's review trigger watch?\n\n*Review of Day 2*\n\n**Question:** Decision record 1 hosts Muyassir's model in a cloud region of the Kingdom. Lab 2.2 found that volume moves the three-year cost by half and token price by 3%. What should its trigger watch first?\n\n- A. The provider's token price\n- B. Monthly requests, against a threshold below the crossover\n- C. The build cost of O1\n- D. A single wrong answer reported in the press","notes":"Answer: B. Who measures monthly requests? The platform team, from the gateway logs: today's material.","minutes":null,"lo":["LO3"]},{"id":"s1","n":4,"title":"The platform is a product","kind":"section","session":1,"hash":"0688d94c","md":"#### [day3#s1] The platform is a product\n\n*Session 1*\n\n- Build a demand matrix from usage logs and a team survey\n- Phase platform capabilities by shared demand\n- Spot in the logs what the platform should already prevent","notes":"","minutes":null,"lo":["LO4"]},{"id":"platform-product","n":5,"title":"A platform's users are teams, and they can choose not to use it","kind":"content","session":1,"hash":"84823872","md":"#### [day3#platform-product] A platform's users are teams, and they can choose not to use it\n\n*The platform as a product*\n\n- **Users.** Nine product teams with different data levels and needs.\n- **A roadmap from demand.** What most teams use and ask for, phased.\n- **Measured by use.** Adoption and the teams' satisfaction, not features shipped.\n\n> **What goes wrong.** A platform built as a project: a list of features, delivered, and avoided by the teams it was for.","notes":"The CNCF platforms white paper argues for treating platforms as products and measuring them by their users' satisfaction and productivity. Faris Al-Hothali runs Asas this way; his first question is what the teams actually use.\n\nSources: CNCF Platforms White Paper.","minutes":null,"lo":["LO4"]},{"id":"asas-today","n":6,"title":"Asas served nine teams on six models in six months","kind":"content","session":1,"hash":"992254b6","md":"#### [day3#asas-today] Asas served nine teams on six models in six months\n\n*Six months of logs*\n\n- **3,312** daily usage rows, May to October 2026\n- **8 of 9** teams use or ask for chat\n- **1** key with no owner, still calling a model","notes":"From Lab 3.1 on the synthetic logs. The pilot's gateway knew keys and budgets, nothing else: no classification, no per-team capacity. Today rebuilds it as a product.","minutes":null,"lo":["LO4"]},{"id":"demand-matrix","n":7,"title":"Two capabilities serve most teams; four serve one team each","kind":"content","session":1,"hash":"b4e7ff15","md":"#### [day3#demand-matrix] Two capabilities serve most teams; four serve one team each\n\n*Measured in Lab 3.1*\n\n| Item | Value |\n| --- | --- |\n| Chat | 8 teams |\n| Embeddings | 5 |\n| Batch | 3 |\n| Classification, vision, speech, agent tools | 1 each |\n\nTeams that use a capability or ask for it in the survey, out of nine.","notes":"The matrix combines what teams do (logs) with what they ask for (survey). Disagreements are worth a conversation: the waste team asks for chat and uses only batch. Ask why before building chat for them.","minutes":null,"lo":["LO4"]},{"id":"phasing","n":8,"title":"Build shared what most teams need; pave a road for the rest","kind":"content","session":1,"hash":"fbc31162","md":"#### [day3#phasing] Build shared what most teams need; pave a road for the rest\n\n*Phasing*\n\n| Phase | Capabilities | Rule |\n| --- | --- | --- |\n| Phase 1 | chat, embeddings | five or more teams |\n| Phase 2 | batch | two to four teams |\n| Team-owned | classification, vision, speech, agent tools | one team: a template, not a service |","notes":"The thresholds are the lab's; a real platform team tunes them with its sponsor. \"Team-owned\" does not mean unsupported: the team gets a golden path (Day 4) and the gateway, and owns the service. Classification is the example from Lab 2.1: a classifier the reports team owns.","minutes":null,"lo":["LO4"]},{"id":"logs-breach","n":9,"title":"For two months, a Restricted team called the external model","kind":"content","session":1,"hash":"f11db963","md":"#### [day3#logs-breach] For two months, a Restricted team called the external model\n\n*What the logs show*\n\n**47,556** requests from the reports team (Restricted) to the external model, May and June\n\n- Citizen reports carry phone numbers and locations.\n- The gateway kept no prompt text, by design: what was sent cannot be read back.\n- The prompt template of those months can be, and the team can say what it held.","notes":"A breach in the logs is a lead, not a verdict: a Restricted team may send Public prompts. The data protection officer decides what follows. The architectural point: the gateway should have refused, and from Session 2 on, it does.","minutes":null,"lo":["LO4"]},{"id":"check-phase","n":10,"title":"Should Asas build a shared vision service now?","kind":"quiz","session":1,"hash":"f27f9f27","md":"#### [day3#check-phase] Should Asas build a shared vision service now?\n\n*Checkpoint*\n\n**Question:** Only the inspections team uses vision, and its candidate model has no Arabic evaluation. The team asks the platform to offer vision to everyone. What does the platform do first?\n\n- A. Build a shared vision service for all nine teams\n- B. Refuse, since vision is not in phase 1\n- C. Add the vision model to the catalogue now\n- D. Give the team a paved road to its own vision service, and ask for Arabic evidence","notes":"Answer: D. This sets up Day 4's deviation request: the inspections team will ask to use an external vision model instead.","minutes":null,"lo":["LO4"]},{"id":"lab-3-1","n":11,"title":"A demand matrix from six months of usage","kind":"lab","session":1,"hash":"1895d040","md":"#### [day3#lab-3-1] A demand matrix from six months of usage\n\nLab 3.1 · 25 min\n\nBuild a teams-by-capabilities matrix from six months of synthetic gateway logs and a survey, phase the platform's capabilities and find the placement breach in the logs.\n\n[D3_1_demand_matrix.ipynb](https://sdaiaacademy.github.io/ae-402/labs/D3_1_demand_matrix.ipynb)\n\n- [ ] Read six months of usage (4 min)\n- [ ] The demand matrix: used and asked for (8 min)\n- [ ] Phase the platform's capabilities (6 min)\n- [ ] What the logs show that the platform should have stopped (7 min)\n- [ ] ✱ Stretch: Growth by capability","notes":"The key-to-team join matters: rows with a blank tag still belong to the key's owner. Participants who group by the tag lose 116 rows. The breach step uses each team's highest level; say aloud that this flags leads, not proven violations.","minutes":null,"lo":[]},{"id":"s2","n":12,"title":"Catalogue, admission and the gateway","kind":"section","session":2,"hash":"ccb4b470","md":"#### [day3#s2] Catalogue, admission and the gateway\n\n*Session 2*\n\n- Admit models on licence, evaluation and data-term evidence\n- Write catalogue entries with the highest level each model may receive\n- Make a gateway refuse Restricted data to an external model","notes":"","minutes":null,"lo":["LO4"]},{"id":"admission","n":13,"title":"A model enters the catalogue on evidence, not on a leaderboard","kind":"content","session":2,"hash":"3ef743df","md":"#### [day3#admission] A model enters the catalogue on evidence, not on a leaderboard\n\n*Model admission*\n\n1. **Licence** government production use allowed\n2. **Evaluation** the Ministry's Arabic and English sets\n3. **Data terms** retention, no training on prompts\n4. **Owner** and a review date","notes":"The four criteria are the case's. Signing, provenance and bills of materials of model files are AE-403's admission topics; here admission is the architect's question: may this model be offered to these teams, for which data?","minutes":null,"lo":["LO4"]},{"id":"admitted","n":14,"title":"Four of six candidates are admitted; the best scorer is not","kind":"content","session":2,"hash":"0364bba4","md":"#### [day3#admitted] Four of six candidates are admitted; the best scorer is not\n\n*Measured in Lab 3.2*\n\n| Candidate | Arabic / English | Hosting | Verdict |\n| --- | --- | --- | --- |\n| ext-frontier-l | 0.91 / 0.93 | external | admitted, Public data only |\n| ksa-general-m | 0.86 / 0.88 | cloud in the Kingdom | admitted, up to Restricted |\n| own-open-s, own-embed-m | 0.79 / 0.82, 0.88 / 0.90 | Ministry | admitted, up to Secret |\n| ext-mini-r | 0.84 / 0.89 | external | rejected: research-only licence |\n| ksa-vision-x | none / 0.81 | cloud in the Kingdom | rejected: no Arabic evidence |","notes":"Model ids, scores and licences are fictional. The catalogue entry carries the highest level each model may receive, derived from hosting by the placement rule of Day 1: the catalogue and the gateway use the same table.","minutes":null,"lo":["LO4"]},{"id":"gateway-duties","n":15,"title":"One door for every model call, with five duties","kind":"content","session":2,"hash":"ae15dc62","md":"#### [day3#gateway-duties] One door for every model call, with five duties\n\n*The gateway*\n\n- **Credentials.** A key per team; provider keys never leave the gateway.\n- **Quotas and budgets.** Per key: requests a minute, spend.\n- **Fallback.** Another admitted model when one fails, under the same policies.\n- **Tool mediation.** Only the tools a team is allowed reach the model.\n- **Audit.** Who, which model, which level, which decision.\n- **And now: policy.** Classification decides where a request may go.","notes":"Products in this slot: LiteLLM's proxy offers virtual keys with budgets and rate limits per key, fallbacks, and guardrails that run before or after a call; agentgateway proxies model, agent and MCP traffic. The lab's gateway is 150 lines of Python with the same ideas, so participants can read all of it. Budgets and kill switches for agents were AE-305 Day 4; one slide here, no more.\n\nSources: LiteLLM documentation (virtual keys, guardrails, fallbacks); agentgateway documentation.","minutes":null,"lo":["LO4"]},{"id":"policy-code","n":16,"title":"The level of a request is the highest it shows, declares or defaults to","kind":"content","session":2,"hash":"e8f0ef09","md":"#### [day3#policy-code] The level of a request is the highest it shows, declares or defaults to\n\n*Lab 3.2, step 4*\n\n```python\n# file: Lab 3.2\ndef classification_policy(ctx):\n    levels = [G.detect_level(ctx[\"text\"])]\n    levels.append(ctx[\"request\"].get(\"classification\")\n                  or ctx[\"key_info\"][\"max_level\"])   # fail closed\n    level = A.highest(levels)\n    ctx[\"level\"] = level\n    hosting = ctx[\"entry\"][\"hosting\"]\n    if not A.allowed(level, hosting):\n        return 403, f\"{level} data may not go to a model hosted at '{hosting}'\"\n```","notes":"Three sources of the level: what the request declares, what the content shows, and, when it declares nothing, the team's highest level. Undeclared from a Restricted team means Restricted. That default is a decision; it makes teams declare Public explicitly when they mean it.","minutes":null,"lo":["LO4"]},{"id":"nine-tests","n":17,"title":"The supplied gateway passed four forbidden requests; the policy stops all four","kind":"content","session":2,"hash":"0f57a80a","md":"#### [day3#nine-tests] The supplied gateway passed four forbidden requests; the policy stops all four\n\n*Measured in Lab 3.2*\n\n| Test | Request | Supplied | With the policy |\n| --- | --- | --- | --- |\n| G2 | Restricted, declared, to the external model | 200 | 403 |\n| G3 | Restricted team, nothing declared, external model | 200 | 403 |\n| G4 | declared Public, holds an identity number | 200 | 403 |\n| G6 | Secret tender text to the cloud model | 200 | 403 |\n| G1, G5, G7, G8 | allowed placements | 200 | 200 |","notes":"G9, an unknown key, gets 401 on both. G4 is the one to dwell on: a Public team, a Public label, Restricted content. The content check is a regular expression for the identity-number format; it is a floor. Production gateways add classifiers and data-loss-prevention services in the same place.","minutes":null,"lo":["LO4"]},{"id":"audit-hash","n":18,"title":"Log the decision and a hash of the prompt, never the prompt","kind":"content","session":2,"hash":"9d777931","md":"#### [day3#audit-hash] Log the decision and a hash of the prompt, never the prompt\n\n*The audit log*\n\n- seq 4: team T05 · alias ext-frontier-l · level Restricted · 403\n- reason: Restricted data may not go to a model hosted at 'external'\n- prompt: sha256 cf48bdcd010a953f\n\nA log full of prompts is a second copy of Restricted data, with its own retention rule. A hash proves whether a given text was sent.","notes":"From the solution's audit of the refusals. The assessment's authenticity rule asks for gateway logs in the capstone repository; this is why they can be public: no prompt text.","minutes":null,"lo":["LO4"]},{"id":"fallback-placement","n":19,"title":"A fallback must pass the same policy as the first choice","kind":"content","session":2,"hash":"a0f840a9","md":"#### [day3#fallback-placement] A fallback must pass the same policy as the first choice\n\n*Fallback*\n\n- request: contracts team, Secret, alias own-open-s\n- own-open-s: busy (stand-in failure)\n- fallback: ksa-general-m refused: Secret may not go to ksa_cloud\n- answer: 503, no model available","notes":"From the stretch of Lab 3.2: two calls, statuses 200 then 503. A 503 is the right answer: an outage is better than a Secret document in the wrong place. Availability of Secret workloads therefore needs a second Ministry-hosted model, which is a decision with a cost.","minutes":null,"lo":["LO4"]},{"id":"check-gateway","n":20,"title":"What should the gateway do with this request?","kind":"quiz","session":2,"hash":"b818328f","md":"#### [day3#check-gateway] What should the gateway do with this request?\n\n*Checkpoint*\n\n**Question:** The planning team (Public) labels a request Public and sends it to the external model. The text reads: \"Owner 1048837265 asks whether plot 17 can be rezoned.\"\n\n- A. Pass it: the team and the label are both Public\n- B. Pass it, and mask the number in the audit log\n- C. Refuse it: the content shows an identity number, so the request is Restricted\n- D. Pass it with a warning to the team","notes":"Answer: C. This is test G4.","minutes":null,"lo":["LO4"]},{"id":"lab-3-2","n":21,"title":"Model admission and a gateway that refuses","kind":"lab","session":2,"hash":"a78bae43","md":"#### [day3#lab-3-2] Model admission and a gateway that refuses\n\nLab 3.2 · 25 min\n\nAdmit four of six candidate models on evidence, write their catalogue entries and add the classification policy that makes the supplied gateway refuse Restricted data to an external model.\n\n[D3_2_admission_gateway.ipynb](https://sdaiaacademy.github.io/ae-402/labs/D3_2_admission_gateway.ipynb)\n\n- [ ] Admission criteria as code (5 min)\n- [ ] Admit four of the six candidates (6 min)\n- [ ] Catalogue entries with the level each may receive (4 min)\n- [ ] The classification policy, and nine test requests (10 min)\n- [ ] ✱ Stretch: A fallback that respects placement","notes":"No key or model is needed: the refusal happens before any call, and the models are labelled stand-ins. An optional cell puts a free hosted model behind the external alias when the three ASAS_UPSTREAM variables are set; G1 then gets a real answer and G4 is still refused before the call. Nothing in the lab needs it. Common slip: treating a missing label as Public.","minutes":null,"lo":[]},{"id":"s3","n":22,"title":"Tenancy and shared capacity","kind":"section","session":3,"hash":"f4dbccdd","md":"#### [day3#s3] Tenancy and shared capacity\n\n*Session 3*\n\n- Compare a shared and a per-team tenancy model under incidents\n- Cap a team's share of shared capacity\n- Contain leaked keys and runaway spend with keys and budgets per team","notes":"","minutes":null,"lo":["LO4"]},{"id":"isolation-levels","n":23,"title":"Tenancy is a choice of what teams share and what each gets alone","kind":"content","session":3,"hash":"d7764d1b","md":"#### [day3#isolation-levels] Tenancy is a choice of what teams share and what each gets alone\n\n*Tenancy*\n\n| Model | Teams share | Each team gets | Fits |\n| --- | --- | --- | --- |\n| Pooled | key, budget, capacity | nothing | a pilot |\n| Per-team controls | capacity, under caps | a key, a budget, a capped share | Public and Restricted teams |\n| Dedicated | the gateway only | its own model deployment | Secret teams with steady load |","notes":"Most platforms mix them: per-team controls for most teams, dedicated deployments where data or load demands it. The lab compares the first two; the third is a cost question the options paper of a Secret team answers.","minutes":null,"lo":["LO4"]},{"id":"three-incidents","n":24,"title":"Three incidents test three different controls","kind":"content","session":3,"hash":"9889d064","md":"#### [day3#three-incidents] Three incidents test three different controls\n\n*One hour, three incidents*\n\n- **Leaked key.** The planning team's key calls the external model 400 times a minute for 15 minutes.\n- **Noisy neighbour.** The contact team's batch floods the Ministry-hosted model with 300 extra requests a minute.\n- **Runaway agent.** An inspections agent loops for 40 minutes at six times the tokens per call.","notes":"The replay is deterministic (asas_tenancy.py). The Ministry-hosted model serves 120 requests a minute; a quiet hour of paid models costs SAR 99.","minutes":null,"lo":["LO4"]},{"id":"incident-results","n":25,"title":"Under per-team controls, no bystander loses a request","kind":"content","session":3,"hash":"21ab39e3","md":"#### [day3#incident-results] Under per-team controls, no bystander loses a request\n\n*Measured in Lab 3.3*\n\n| Incident | Tenancy | Worst bystander, own model | Worst bystander, paid models |\n| --- | --- | --- | --- |\n| Noisy neighbour | pooled | 83.1% | 100% |\n| Leaked key | pooled | 100% | 61.7% |\n| Runaway agent | pooled | 100% | 43.3% |\n| All three | per team | 100% | 100% |\n\nShare of requests served, for the worst-off team that caused nothing.","notes":"Under the pooled model, the leak and the runaway agent exhaust the one shared budget and cut every team off. Per team: the leaked key is revoked at minute 30 when its rate exceeds five times normal; the runaway agent hits its own budget and spike rule.","minutes":null,"lo":["LO4"]},{"id":"control-map","n":26,"title":"Each incident needs its own control; the tenancy model is the set","kind":"content","session":3,"hash":"ff6d195a","md":"#### [day3#control-map] Each incident needs its own control; the tenancy model is the set\n\n*Which control for which incident*\n\n| Control | Contains | Does nothing for |\n| --- | --- | --- |\n| A cap on each team's share of capacity | noisy neighbour | spend |\n| A budget per key | runaway agent | capacity |\n| A key per team, revoked on a spike | leaked key | a slow, legitimate overload |","notes":"The stretch finds the largest safe cap: 0.5 of capacity holds for this hour's noisy neighbour. A smaller cap is safer and slows the culprit's legitimate batch more; that trade-off belongs in a decision record.","minutes":null,"lo":["LO4"]},{"id":"blast-radius","n":27,"title":"One team's incident should stay that team's incident","kind":"content","session":3,"hash":"4107bc38","md":"#### [day3#blast-radius] One team's incident should stay that team's incident\n\n*The principle*\n\n**5 minutes** without paid models for the planning team, until its new key\n\n- Revocation costs the team whose key leaked; nobody else.\n- Keys are scoped to the models of the team's level: a leaked Public key reaches no Restricted model.\n- Rotation is routine, so revoking is not a crisis.","notes":"Under the pooled model the only way to stop the leak is to revoke the key all nine teams use: an outage for everyone. Most teams then do not revoke, and the budget burns instead.","minutes":null,"lo":["LO4"]},{"id":"check-tenancy","n":28,"title":"Which control stops this from harming other teams?","kind":"quiz","session":3,"hash":"ba77bd18","md":"#### [day3#check-tenancy] Which control stops this from harming other teams?\n\n*Checkpoint*\n\n**Question:** The contact team's nightly batch moves to working hours and asks the Ministry-hosted model for more than twice its capacity. Budgets are untouched; the other teams' answers slow down. Which control fixes it?\n\n- A. A lower budget on the contact team's key\n- B. Revoke the contact team's key\n- C. A cap on any team's share of the Ministry-hosted model\n- D. Fall back to a cloud model when the queue is long","notes":"Answer: C. D is worth a minute: call transcripts are Restricted, so a cloud region in the Kingdom would be allowed by the rule; the external model would not. Placement still limits the fallback.","minutes":null,"lo":["LO4"]},{"id":"lab-3-3","n":29,"title":"Three incidents, two tenancy models","kind":"lab","session":3,"hash":"44cfff66","md":"#### [day3#lab-3-3] Three incidents, two tenancy models\n\nLab 3.3 · 25 min\n\nReplay an hour with a leaked key, a noisy neighbour and a runaway agent under the pilot's shared model and under a per-team model you design, and measure the harm to bystanders.\n\n[D3_3_tenancy.ipynb](https://sdaiaacademy.github.io/ae-402/labs/D3_3_tenancy.ipynb)\n\n- [ ] Replay the three incidents on the shared model (5 min)\n- [ ] A capped share of the Ministry-hosted model (7 min)\n- [ ] Your tenancy model: keys, budgets, revocation (6 min)\n- [ ] The incident table: who was harmed (7 min)\n- [ ] ✱ Stretch: The cap that costs the culprit least","notes":"The allocation function is the only hard part: unused share must go to the others, still under the cap. A one-pass version that caps and stops leaves capacity idle; the check on the noisy neighbour still passes but the own-model numbers of bystanders show the waste.","minutes":null,"lo":[]},{"id":"s4","n":30,"title":"Who pays for which tokens","kind":"section","session":4,"hash":"1710b921","md":"#### [day3#s4] Who pays for which tokens\n\n*Session 4*\n\n- Allocate invoices to teams by usage, credits and fixed costs included\n- Reconcile a showback with each invoice within 2%\n- Name spend that no tag or owner explains","notes":"","minutes":null,"lo":["LO4"]},{"id":"showback-first","n":31,"title":"Show teams their costs before anyone is charged","kind":"content","session":4,"hash":"22de96b9","md":"#### [day3#showback-first] Show teams their costs before anyone is charged\n\n*Cost attribution*\n\n- **Showback.** Each team sees what its use cost, at any granularity. Nothing moves between budgets.\n- **Chargeback.** The costs are sent to the teams' budgets. Allocation keys now move money.\n\n> **Order.** Run showback until the teams stop disputing the allocation keys; then decide about chargeback.","notes":"The FinOps Framework distinguishes the two: chargeback is the formal sending of costs to accounting budgets, showback is reporting without it. Nisreen Al-Mehaimeed asked for showback first; the lab shows why the keys need arguing before money moves.\n\nSources: FinOps Framework, invoicing and chargeback.","minutes":null,"lo":["LO4"]},{"id":"card-drift","n":32,"title":"A showback priced with a price card drifts from the bill","kind":"content","session":4,"hash":"9086681a","md":"#### [day3#card-drift] A showback priced with a price card drifts from the bill\n\n*Measured in Lab 3.4*\n\n| Invoice | Showback by card | Invoice | Off by | Why |\n| --- | --- | --- | --- | --- |\n| In-Kingdom Cloud, August | 5,136 | 4,636 | 10.8% | an onboarding credit |\n| External Provider, September | 3,772 | 3,401 | 10.9% | output price cut |\n| External Provider, October | 3,935 | 3,550 | 10.9% | output price cut |","notes":"SAR, from the solution run on the synthetic invoices. The card was last updated in May. Finance stops trusting a showback the first month it disagrees with the bill.","minutes":null,"lo":["LO4"]},{"id":"allocate-invoice","n":33,"title":"Share each invoice line by the usage it covers","kind":"content","session":4,"hash":"e3bb2752","md":"#### [day3#allocate-invoice] Share each invoice line by the usage it covers\n\n*Allocate, do not reprice*\n\n1. **Token lines** by the rows' tokens of that model\n2. **Credits** by the rows' value on that provider\n3. **Fixed cost** by an allocation key you defend\n4. **Team** by the key's owner\n\n**0.00%** difference from each of the 18 invoices after allocation; the outcome asks for 2% or less","notes":"From Lab 3.4 step 3. The allocation sums to the invoice by construction, so reconciliation is a test that the code covers every line, not a coincidence.","minutes":null,"lo":["LO4"]},{"id":"untagged","n":34,"title":"Untagged spend comes in two kinds, and only one has an owner","kind":"content","session":4,"hash":"1161fa90","md":"#### [day3#untagged] Untagged spend comes in two kinds, and only one has an owner\n\n*Untagged spend*\n\n- **Blank tag, known key.** 116 rows, SAR 13,950: the key's owner is known, so the gateway attributes them.\n- **Orphan key.** `k-legacy-01`: SAR 558 over six months, chat on a cloud model, owned by nobody.\n\n> **The fix is a rule, not a report.** No key without an owner, and a key without one is revoked.","notes":"The orphan's spend is 0.14% of the six months, small enough to be ignored, which is why it matters: nobody would notice it grow, and it can reach a model that receives Restricted data.","minutes":null,"lo":["LO4"]},{"id":"allocation-key","n":35,"title":"The allocation key is a decision: tokens and requests disagree","kind":"content","session":4,"hash":"34bb4459","md":"#### [day3#allocation-key] The allocation key is a decision: tokens and requests disagree\n\n*The data centre's fixed cost*\n\n- **70.7%** of the data centre's cost to the contact team, by tokens\n- **24.1%** of it to the same team, by requests\n\nSpeech counts many tokens per call. Which key reflects what the servers actually spend their time on? Measure it, then record the choice.","notes":"From the stretch of Lab 3.4. A third key, accelerator time per team, would be the most defensible and needs metering the platform does not have yet. Tools such as OpenCost allocate cluster costs from measured resource use; the decision of which key to use stays the architect's.\n\nSources: OpenCost documentation.","minutes":null,"lo":["LO4"]},{"id":"check-showback","n":36,"title":"Why does the August showback miss the invoice?","kind":"quiz","session":4,"hash":"bd3e36a7","md":"#### [day3#check-showback] Why does the August showback miss the invoice?\n\n*Checkpoint*\n\n**Question:** Priced with the platform's card, August's In-Kingdom Cloud showback is SAR 500 above the invoice. Every token is accounted for. What is the right fix?\n\n- A. Add a correction line of SAR -500 to the unallocated bucket\n- B. Update the price card for August\n- C. Ask teams to tag their calls better\n- D. Allocate the invoice lines, the credit included, to the usage they cover","notes":"Answer: D.","minutes":null,"lo":["LO4"]},{"id":"lab-3-4","n":37,"title":"A showback that reconciles","kind":"lab","session":4,"hash":"c1ea4856","md":"#### [day3#lab-3-4] A showback that reconciles\n\nLab 3.4 · 25 min\n\nBuild a showback from synthetic invoices, usage and tags, see a price-card version fail to reconcile, allocate the invoices instead within 2% and name the untagged spend.\n\n[D3_4_showback.ipynb](https://sdaiaacademy.github.io/ae-402/labs/D3_4_showback.ipynb)\n\n- [ ] A showback priced with the price card (6 min)\n- [ ] Reconcile it with each invoice (5 min)\n- [ ] Allocate the invoices instead (8 min)\n- [ ] Name the untagged spend (6 min)\n- [ ] ✱ Stretch: Is token count the right key for the data centre?","notes":"The credit line has no model; a blank cell reads as missing in pandas, which is the usual trip. Attribute by key owner, not by tag: grouping by tag loses SAR 13,950 to \"untagged\".","minutes":null,"lo":[]},{"id":"wrap-up","n":38,"title":"Three things to keep","kind":"content","session":4,"hash":"4c921e58","md":"#### [day3#wrap-up] Three things to keep\n\n*Day 3*\n\n- **Build from demand.** Shared services for most teams, paved roads for the rest.\n- **Policy at the door.** The gateway refuses by classification, content included, and logs no text.\n- **Contain and attribute.** Per-team controls keep incidents local; showback allocates the real bill.","notes":"The platform slice of the capstone is today's four labs: a catalogue entry, the gateway with its refusal test, and a showback that reconciles. Tomorrow adds the golden path.","minutes":null,"lo":[]},{"id":"next","n":39,"title":"Tomorrow: a golden path, fitness checks, a review and a deviation","kind":"content","session":4,"hash":"1e65bc84","md":"#### [day3#next] Tomorrow: a golden path, fitness checks, a review and a deviation\n\n*Day 4*\n\n- Keep `artifacts/D3_2/` and `artifacts/D3_4/`: the capstone's platform slice starts there.\n- Read the inspections team's design in `labs/data/designs/`: you review it in Session 3.\n- Choose which of the three capstone services you would take.","notes":"The three capstone services are in labs/capstone/README.md. Participants choose in Lab 4.4.","minutes":null,"lo":[]}],"activities":[{"id":"review-day2-q1","slide":"review-day2","type":"single","prompt":"Decision record 1 hosts Muyassir's model in a cloud region of the Kingdom. Lab 2.2 found that volume moves the three-year cost by half and token price by 3%. What should its trigger watch first?","options":[{"key":"A","text":"The provider's token price"},{"key":"B","text":"Monthly requests, against a threshold below the crossover"},{"key":"C","text":"The build cost of O1"},{"key":"D","text":"A single wrong answer reported in the press"}],"correct":[1],"explanation":"The ranking depends on volume; the trigger fires before the volume at which the Ministry-hosted option catches up.","misconceptions":["Watches the input that barely moves the ranking at this volume","","Watches a cost already spent: build cannot reopen a hosting decision","Confuses an incident with a decision trigger: one bad answer is a defect to fix"],"lo":["LO3"]},{"id":"check-phase-q1","slide":"check-phase","type":"single","prompt":"Only the inspections team uses vision, and its candidate model has no Arabic evaluation. The team asks the platform to offer vision to everyone. What does the platform do first?","options":[{"key":"A","text":"Build a shared vision service for all nine teams"},{"key":"B","text":"Refuse, since vision is not in phase 1"},{"key":"C","text":"Add the vision model to the catalogue now"},{"key":"D","text":"Give the team a paved road to its own vision service, and ask for Arabic evidence"}],"correct":[3],"explanation":"One team's need is served by a golden path the team owns; the catalogue waits for the evidence.","misconceptions":["Builds from one team's request: shared services carry shared cost and an owner for nine teams","Treats team-owned as unsupported: the team still needs the gateway and a template","Admits a model without the evidence the catalogue requires",""],"lo":["LO4"]},{"id":"check-gateway-q1","slide":"check-gateway","type":"single","prompt":"The planning team (Public) labels a request Public and sends it to the external model. The text reads: \"Owner 1048837265 asks whether plot 17 can be rezoned.\"","options":[{"key":"A","text":"Pass it: the team and the label are both Public"},{"key":"B","text":"Pass it, and mask the number in the audit log"},{"key":"C","text":"Refuse it: the content shows an identity number, so the request is Restricted"},{"key":"D","text":"Pass it with a warning to the team"}],"correct":[2],"explanation":"The level is the highest the gateway can see; the identity number makes it Restricted, which may not go to an external model.","misconceptions":["Trusts the label over the content: labels are what the caller remembered to send","Fixes the data after the fact: masking in the log does not stop the text reaching the model","","Moves the risk to the team without stopping it: a warning lets the data out"],"lo":["LO4"]},{"id":"check-tenancy-q1","slide":"check-tenancy","type":"single","prompt":"The contact team's nightly batch moves to working hours and asks the Ministry-hosted model for more than twice its capacity. Budgets are untouched; the other teams' answers slow down. Which control fixes it?","options":[{"key":"A","text":"A lower budget on the contact team's key"},{"key":"B","text":"Revoke the contact team's key"},{"key":"C","text":"A cap on any team's share of the Ministry-hosted model"},{"key":"D","text":"Fall back to a cloud model when the queue is long"}],"correct":[2],"explanation":"The harm is shared capacity; only a cap on each team's share keeps the others served.","misconceptions":["Fixes spend, not capacity: the batch runs on a fixed-cost model and spends nothing per call","Treats a legitimate overload as a leak: the key is the team's own and correctly used","","Moves the load instead of capping it: the batch spills onto a paid model the other teams share, and only a cloud region in the Kingdom may take its Restricted transcripts"],"lo":["LO4"]},{"id":"check-showback-q1","slide":"check-showback","type":"single","prompt":"Priced with the platform's card, August's In-Kingdom Cloud showback is SAR 500 above the invoice. Every token is accounted for. What is the right fix?","options":[{"key":"A","text":"Add a correction line of SAR -500 to the unallocated bucket"},{"key":"B","text":"Update the price card for August"},{"key":"C","text":"Ask teams to tag their calls better"},{"key":"D","text":"Allocate the invoice lines, the credit included, to the usage they cover"}],"correct":[3],"explanation":"The invoice holds a credit the card cannot know; allocating the invoice passes it to the teams in proportion to their use.","misconceptions":["Hides a gap instead of explaining it: a fudge line makes the next month's gap invisible too","Updates a card that was right: the provider's prices did not change in August","Blames tags for a pricing gap: tags decide who pays, not how much",""],"lo":["LO4"]}],"ai":{"context":{"course":"../context/course.md","courseJs":"../context/course.js","day":"day3.md","llms":"../llms.txt"},"tasks":[],"tools":[]},"bridge":{"allowedOrigins":[]},"features":{},"strings":{}}</script>
+<script src="../_engine/academy.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+{
+ "tags": {
+  "R01": "non-compliance",
+  "R02": "non-compliance",
+  "R03": "risk",
+  "R04": "sensitivity point",
+  "R05": "trade-off point",
+  "R06": "non-risk",
+  "R07": "non-risk",
+  "R08": "risk",
+  "R09": "sensitivity point",
+  "R10": "risk",
+  "R11": "trade-off point",
+  "R12": "non-risk"
+ },
+ "scenario": {
+  "R01": "Q1",
+  "R02": "P1",
+  "R03": "Q1",
+  "R04": "L1",
+  "R05": "Q1",
+  "R06": "O1",
+  "R07": "P1",
+  "R08": "M1",
+  "R09": "O1",
+  "R10": "S1",
+  "R11": "P1",
+  "R12": "P1"
+ },
+ "why": {
+  "R01": "The catalogue is a standard every team must meet; a design that uses an unadmitted model does not conform.",
+  "R02": "Photos are Restricted; the placement rule forbids an external host whatever the path.",
+  "R03": "A gate exists, so it is not non-compliance; it measures the wrong thing for the top scenario.",
+  "R04": "One parameter, the provider's latency, decides whether the latency scenario is met.",
+  "R05": "One decision moves latency and cost one way and quality the other.",
+  "R06": "The oversight scenario is met by design.",
+  "R07": "Storage placement meets the rule for Restricted data.",
+  "R08": "Nobody reviews or answers for template changes.",
+  "R09": "If the sample rate falls, rubber-stamping becomes invisible: the oversight scenario rests on this number.",
+  "R10": "A leak in either client means revoking both: the leak is not contained to one client.",
+  "R11": "Privacy against cost and time to service.",
+  "R12": "The data terms meet the catalogue's criteria."
+ },
+ "priority": [
+  "Q1",
+  "P1",
+  "S1",
+  "O1",
+  "L1",
+  "A1",
+  "C1",
+  "M1"
+ ]
+}

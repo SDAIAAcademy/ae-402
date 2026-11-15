@@ -1,0 +1,10 @@
+team,name,product,max_level,survey_wants
+T01,permits,"Muyassir, the building-permits assistant",Restricted,chat;embeddings;agent_tools
+T02,reports,Citizen reports: routing and replies,Restricted,classification;chat
+T03,inspections,"Kashif, the inspection-report assistant",Restricted,chat;vision
+T04,waste,Collection route summaries,Public,batch;chat
+T05,planning,Zoning questions assistant,Public,chat;embeddings
+T06,contracts,Contract clause review,Secret,chat;embeddings
+T07,land,Land and survey records search,Secret,embeddings;chat
+T08,contact,Call-centre call summaries,Restricted,speech;batch
+T09,staff,Staff policies assistant,Restricted,chat;embeddings;batch

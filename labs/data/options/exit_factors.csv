@@ -1,0 +1,10 @@
+option,factor,person_months,fees_sar
+O1,Prompts and tool definitions in the provider's own format,2.0,0
+O1,"Answers indexed in the provider's managed vector store, no bulk export",6.0,40000
+O1,"Twelve-month minimum term, early-exit fee",0.5,150000
+O1,Evaluation set and results kept by the provider's console,1.5,0
+O2,Open-weight model swapped for another open-weight model,2.0,0
+O2,"Index in the Ministry's own store, open formats",0.5,0
+O2,Accelerator servers resold or redeployed,1.0,200000
+O3,Rules written in a vendor's rule language,8.0,0
+O3,Search licence with a six-month notice,0.5,60000

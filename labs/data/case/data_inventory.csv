@@ -1,0 +1,25 @@
+id,item,owner_team,personal_data,level
+D01,Building code (published edition),permits,0,Public
+D02,Permit regulations and circulars (published),permits,0,Public
+D03,Permit fee schedule (published),permits,0,Public
+D04,"Applicant files: forms, national identity numbers",permits,1,Restricted
+D05,Property deeds and site plans attached to applications,permits,1,Restricted
+D06,Application status records,permits,1,Restricted
+D07,Muyassir conversation logs,permits,1,
+D08,Inspector notes on applications,inspections,1,Restricted
+D09,Draft circulars not yet published,permits,0,
+D10,Anonymised monthly permit statistics,permits,0,Public
+D11,"Engineering office registry (names, licence numbers)",permits,0,Public
+D12,"Engineering office contact persons (names, mobile numbers)",permits,1,
+D13,Citizen reports with location and phone,reports,1,Restricted
+D14,Inspection photos,inspections,1,Restricted
+D15,Waste collection routes,waste,0,Public
+D16,Zoning maps (published),planning,0,Public
+D17,Tender documents and bids,contracts,0,Secret
+D18,Land ownership dispute files,land,1,Secret
+D19,Survey records of state land,land,0,Secret
+D20,Call-centre recordings,contact,1,Restricted
+D21,Staff HR policies,staff,0,Public
+D22,Staff leave and payroll questions,staff,1,Restricted
+D23,"Asas usage logs (key, team, tokens)",platform,0,Restricted
+D24,Model evaluation results,platform,0,Public

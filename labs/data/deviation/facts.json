@@ -1,0 +1,14 @@
+{
+ "note": "Synthetic figures for the deviation request DR-2026-07.",
+ "photos_per_month": 18000,
+ "photos_per_report": 3,
+ "manual_minutes_per_report": 14,
+ "assisted_minutes_per_report": 6,
+ "inspector_cost_sar_per_hour": 120,
+ "ext_vision_sar_per_photo": 0.02,
+ "ext_vision_arabic_signage_score": 0.93,
+ "ksa_vision_x_arabic_evidence_expected": "2027-02-28",
+ "own_vision_lead_time_months": 9,
+ "detector": "an on-device detector of faces, plates and documents that runs on the tablet before upload",
+ "request_date": "2026-11-02"
+}

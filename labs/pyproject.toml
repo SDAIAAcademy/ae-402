@@ -1,0 +1,17 @@
+[project]
+name = "ae-402-labs"
+version = "2027.1.0"
+description = "Lab notebooks for the SDAIA Academy course AE-402 AI Solution Architecture and Platform Design"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+    "pandas>=2.2",
+    "numpy>=2.0",
+    "scikit-learn>=1.5",
+    "copier>=9.4",
+    "jupyterlab>=4.4",
+    "nbclient>=0.10",
+    "ipykernel>=6.29",
+]
+
+[tool.uv]
+package = false

@@ -1,0 +1,1016 @@
+{
+  "v": 1,
+  "engine": "1.0.0",
+  "build": {
+    "at": "2026-11-15T16:14:16Z",
+    "version": "2027.1.0",
+    "commit": "b2bfbf8"
+  },
+  "lang": "en",
+  "dir": "ltr",
+  "langs": [
+    "en"
+  ],
+  "alt": {},
+  "course": {
+    "id": "ae-402",
+    "code": "AE-402",
+    "version": "2027.1.0",
+    "title": "AI Solution Architecture and Platform Design",
+    "tagline": "Turn requirements into tested scenarios, costed options and recorded decisions, then design the shared AI platform many teams build on",
+    "description": "Participants practise the architect's loop on AI systems and apply it to the shared platform many teams build on. For a fictional ministry of municipal services with nine product teams and data at three classification levels, they turn requirements into measurable scenarios, draw views as code, cost three options including a non-generative one, keep a decision log, design a model catalogue, gateway, tenancy model, golden paths and showback, enforce a reference design with fitness checks, and review a peer's architecture. Serving optimisation and reliability engineering are left to AE-401 and AE-403.",
+    "track": "ai-engineering",
+    "track_name": "AI Engineering Track",
+    "level": 400,
+    "badge": {
+      "name": "AI Engineering",
+      "level": "Expert"
+    },
+    "audience": "Specialists. Engineers who have completed the level 300 core or can show equivalent work: a production AI system they built, operated and can defend.",
+    "prerequisites": [
+      "AE-305 Operating Machine Learning and Language Model Systems",
+      "AE-308 Securing Language Model and Agent Applications",
+      "AE-311 Shaping the Build: Product Sense and Delivery Practice",
+      "Has built and deployed at least one AI service that other people used",
+      "Reads a cloud usage export or bill",
+      "Can name the four national data classification levels"
+    ],
+    "url": "https://sdaiaacademy.github.io/ae-402/",
+    "repo": "SDAIAAcademy/ae-402",
+    "home": "../index.html",
+    "format": "intensive",
+    "format_note": "Intensive: 4 teaching days of four sessions and a capstone day, with guided pre-work and a tracked follow-up task",
+    "shape": "4 teaching days + capstone day",
+    "hours": {
+      "instruction": 6,
+      "lab": 7,
+      "guided_self_study": 6,
+      "assessment": 1,
+      "capstone": 6,
+      "total": 26
+    },
+    "unit": "day",
+    "outcomes": [
+      {
+        "id": "LO1",
+        "text": "Prepare quality-attribute scenarios with measurable targets for answer quality, latency, cost, privacy and human oversight, given the case brief, three interview notes and the data inventory",
+        "level": "Applied",
+        "evidence": "a scenario sheet a reviewer can test a design against"
+      },
+      {
+        "id": "LO2",
+        "text": "Design an end-to-end architecture with context, container and data-flow views and a per-request latency and cost budget, given the scenario sheet and the classification of each data flow",
+        "level": "Performance",
+        "evidence": "an architecture document with views as code and one request traced end to end"
+      },
+      {
+        "id": "LO3",
+        "text": "Evaluate at least three solution options, including a non-generative baseline, and record the resulting decisions, given weighted criteria, a three-year volume forecast and price ranges",
+        "level": "Performance",
+        "evidence": "an options paper with total cost, lock-in and sensitivity analysis, and at least six decision records"
+      },
+      {
+        "id": "LO4",
+        "text": "Design a shared AI platform covering model admission, gateway, tenancy, golden paths and cost attribution, given nine teams, three classification levels, synthetic usage logs and invoices",
+        "level": "Performance",
+        "evidence": "a design and a working slice whose gateway refuses restricted data to an external model and whose showback reconciles within 2%"
+      },
+      {
+        "id": "LO5",
+        "text": "Design a reference architecture with fitness functions that check conformance automatically, given a recurring pattern: retrieval over classified documents",
+        "level": "Performance",
+        "evidence": "a template and two automated checks that fail on a non-conforming design"
+      },
+      {
+        "id": "LO6",
+        "text": "Review a peer's architecture with a structured trade-off method and decide on a requested deviation, given a peer design, the reference designs and a deviation request",
+        "level": "Performance",
+        "evidence": "a review report naming risks, sensitivity points and non-compliance, with a recorded decision"
+      }
+    ],
+    "case_study": {
+      "name": "Ministry of Municipal Services",
+      "summary": "The Ministry of Municipal Services is a fictional ministry whose nine product teams build on Asas, its shared AI platform, with data at three classification levels. Participants architect Muyassir, its building-permits assistant (scenarios, classified flows, views as code, three costed options and a decision log), then design Asas itself: a demand matrix, model admission, a gateway that refuses Restricted data to an external model, tenancy, showback, a golden path, fitness checks and a structured review of the inspections team's design. All data is synthetic and generated with a fixed seed."
+    },
+    "days": [
+      {
+        "id": "day1",
+        "kind": "day",
+        "n": 1,
+        "number": 1,
+        "label": "Day 1",
+        "title": "From requirements to architecture",
+        "subtitle": "Drivers, scenarios with numbers, classified flows and views as code for Muyassir",
+        "shape": "4 sessions · 4 labs",
+        "deck": "../slides/day1.html",
+        "md": "../slides/day1.md",
+        "url": "https://sdaiaacademy.github.io/ae-402/slides/day1.html",
+        "sessions": [
+          {
+            "n": 1,
+            "label": "Session 1",
+            "title": "The architect's loop for AI systems",
+            "summary": "The loop an architect runs on an AI system, starting from drivers, constraints and the people who hold them",
+            "outcomes": [
+              "Describe the architect's loop and where an AI system adds steps to it",
+              "Separate drivers, constraints, concerns and assumptions in a brief",
+              "Name the stakeholder who owns each concern"
+            ],
+            "lo": [
+              "LO1"
+            ],
+            "minutes": 50,
+            "lab": {
+              "id": "1.1",
+              "title": "Drivers, constraints and stakeholders",
+              "summary": "Sort twenty statements from the Muyassir brief and three interview notes into drivers, constraints, concerns and assumptions, name each concern's owner, and find the constraint said once that rules out three designs.",
+              "minutes": 25,
+              "href": "../labs/D1_1_drivers.ipynb",
+              "steps": [
+                {
+                  "text": "Read the brief and the three notes",
+                  "minutes": 5
+                },
+                {
+                  "text": "Sort twenty statements",
+                  "minutes": 8
+                },
+                {
+                  "text": "Name the owner of each concern",
+                  "minutes": 5
+                },
+                {
+                  "text": "The hidden constraint and what it rules out",
+                  "minutes": 7
+                }
+              ],
+              "stretch": "Write two statements the notes are missing"
+            }
+          },
+          {
+            "n": 2,
+            "label": "Session 2",
+            "title": "Quality attributes with numbers",
+            "summary": "Quality-attribute scenarios with a measure a reviewer can compute, answer quality and oversight included",
+            "outcomes": [
+              "Write a scenario with its six parts and a measurable response",
+              "Express answer quality, privacy and human oversight as targets",
+              "Test a scenario against measurements"
+            ],
+            "lo": [
+              "LO1"
+            ],
+            "minutes": 50,
+            "lab": {
+              "id": "1.2",
+              "title": "Five measurable scenarios",
+              "summary": "Rewrite the brief's vague targets, write five scenarios for answer quality, latency, cost, privacy and human oversight, and test each against 400 pilot requests.",
+              "minutes": 25,
+              "href": "../labs/D1_2_scenarios.ipynb",
+              "steps": [
+                {
+                  "text": "The six parts of a scenario",
+                  "minutes": 4
+                },
+                {
+                  "text": "Fix the brief's three vague targets",
+                  "minutes": 6
+                },
+                {
+                  "text": "Write five scenarios, answer quality and oversight included",
+                  "minutes": 8
+                },
+                {
+                  "text": "Test them on the pilot measurements",
+                  "minutes": 7
+                }
+              ],
+              "stretch": "A scenario for the fee-change peak"
+            }
+          },
+          {
+            "n": 3,
+            "label": "Session 3",
+            "title": "Regulation as a design constraint",
+            "summary": "Classification levels and transfer rules as inputs that decide where each data flow may be processed",
+            "outcomes": [
+              "Classify a data flow by the highest level it carries",
+              "Derive placement constraints from classification and transfer rules",
+              "Find the flows a design must change"
+            ],
+            "lo": [
+              "LO1",
+              "LO2"
+            ],
+            "minutes": 50,
+            "lab": {
+              "id": "1.3",
+              "title": "Classified flows and placement",
+              "summary": "Complete the data inventory, give each of Muyassir's fourteen flows its level, derive where it may be processed, and find the three flows that break the Ministry's placement rule.",
+              "minutes": 25,
+              "href": "../labs/D1_3_data_flows.ipynb",
+              "steps": [
+                {
+                  "text": "Fill the three blank levels",
+                  "minutes": 5
+                },
+                {
+                  "text": "The level of each flow",
+                  "minutes": 6
+                },
+                {
+                  "text": "Where each flow may go",
+                  "minutes": 6
+                },
+                {
+                  "text": "The violations and what each breaks",
+                  "minutes": 8
+                }
+              ],
+              "stretch": "Redesign the violating flows"
+            }
+          },
+          {
+            "n": 4,
+            "label": "Session 4",
+            "title": "Views as code",
+            "summary": "Context and container views generated from one model, and one request budgeted for latency and cost",
+            "outcomes": [
+              "Generate context and container views from a model as code",
+              "Show hosting and classification on the views",
+              "Budget one request's latency and cost against the scenarios"
+            ],
+            "lo": [
+              "LO2"
+            ],
+            "minutes": 50,
+            "lab": {
+              "id": "1.4",
+              "title": "Views as code and a request budget",
+              "summary": "Generate Muyassir's context and container views as Mermaid from one model file, then trace a request through eight hops and add up its latency and cost against the scenarios.",
+              "minutes": 25,
+              "href": "../labs/D1_4_views_budget.ipynb",
+              "steps": [
+                {
+                  "text": "Read the model of Muyassir",
+                  "minutes": 3
+                },
+                {
+                  "text": "The context view as Mermaid",
+                  "minutes": 7
+                },
+                {
+                  "text": "The container view, with hosting on every box",
+                  "minutes": 7
+                },
+                {
+                  "text": "One request end to end: latency and cost",
+                  "minutes": 8
+                }
+              ],
+              "stretch": "Cut the request to fit 4,000 ms"
+            }
+          }
+        ]
+      },
+      {
+        "id": "day2",
+        "kind": "day",
+        "n": 2,
+        "number": 2,
+        "label": "Day 2",
+        "title": "Options and decisions",
+        "subtitle": "Patterns, three options costed over three years, lock-in and a decision log",
+        "shape": "4 sessions · 4 labs",
+        "deck": "../slides/day2.html",
+        "md": "../slides/day2.md",
+        "url": "https://sdaiaacademy.github.io/ae-402/slides/day2.html",
+        "sessions": [
+          {
+            "n": 1,
+            "label": "Session 1",
+            "title": "Patterns and when each fits",
+            "summary": "Six architecture patterns for AI needs, and the fit questions that choose between them",
+            "outcomes": [
+              "Match a need to a pattern with fit questions",
+              "Test a non-generative baseline on the same data as a generative one",
+              "Explain when a classical model serves a need better"
+            ],
+            "lo": [
+              "LO3"
+            ],
+            "minutes": 50,
+            "lab": {
+              "id": "2.1",
+              "title": "Patterns and a non-generative baseline",
+              "summary": "Match six case needs to patterns, train a classifier on 2,400 citizen reports on a laptop processor and compare it with a recorded generative run on the same 600 test reports.",
+              "minutes": 25,
+              "href": "../labs/D2_1_patterns.ipynb",
+              "steps": [
+                {
+                  "text": "Six patterns, six fit questions",
+                  "minutes": 4
+                },
+                {
+                  "text": "Match six needs to patterns",
+                  "minutes": 6
+                },
+                {
+                  "text": "Train a classifier on 2,400 reports",
+                  "minutes": 8
+                },
+                {
+                  "text": "Compare it with the recorded generative run",
+                  "minutes": 7
+                }
+              ],
+              "stretch": "Errors by language"
+            }
+          },
+          {
+            "n": 2,
+            "label": "Session 2",
+            "title": "Total cost over three years",
+            "summary": "Three-year total cost with every line the Ministry pays, and the assumptions the ranking depends on",
+            "outcomes": [
+              "Build a three-year cost model with build, run, people, capacity and unanswered work",
+              "Compare options per answered question",
+              "Test the ranking's sensitivity to volume and token price"
+            ],
+            "lo": [
+              "LO3"
+            ],
+            "minutes": 50,
+            "lab": {
+              "id": "2.2",
+              "title": "Three options over three years",
+              "summary": "Cost a hosted, a Ministry-hosted and a non-generative option on a 36-month forecast, then move volume and token price one at a time.",
+              "minutes": 25,
+              "href": "../labs/D2_2_three_year_cost.ipynb",
+              "steps": [
+                {
+                  "text": "Read the forecast and the price ranges",
+                  "minutes": 3
+                },
+                {
+                  "text": "The cost model, year by year",
+                  "minutes": 9
+                },
+                {
+                  "text": "Three options at the base forecast",
+                  "minutes": 5
+                },
+                {
+                  "text": "Sensitivity to volume and token price",
+                  "minutes": 8
+                }
+              ],
+              "stretch": "The crossover volume"
+            }
+          },
+          {
+            "n": 3,
+            "label": "Session 3",
+            "title": "Lock-in and exit",
+            "summary": "Where lock-in sits, what leaving costs, how weights mislead, and contract terms that keep the exit open",
+            "outcomes": [
+              "Price the exit of an option from its lock-in factors",
+              "Find the weight at which a weighted ranking flips",
+              "Write procurement requirements a reviewer can verify"
+            ],
+            "lo": [
+              "LO3"
+            ],
+            "minutes": 50,
+            "lab": {
+              "id": "2.3",
+              "title": "Exit cost, weights and two requirements",
+              "summary": "Price each option's exit, fold it into the weighted score, find the weight that flips the ranking and write two requirements that keep the exit open.",
+              "minutes": 25,
+              "href": "../labs/D2_3_exit_cost.ipynb",
+              "steps": [
+                {
+                  "text": "Exit cost per option",
+                  "minutes": 6
+                },
+                {
+                  "text": "The weighted score, exit cost included",
+                  "minutes": 6
+                },
+                {
+                  "text": "The weight that flips the ranking",
+                  "minutes": 6
+                },
+                {
+                  "text": "Two procurement requirements that keep the exit open",
+                  "minutes": 7
+                }
+              ],
+              "stretch": "A third requirement for the evaluation data"
+            }
+          },
+          {
+            "n": 4,
+            "label": "Session 4",
+            "title": "Decision records",
+            "summary": "Decision records with both kinds of consequence and a trigger that says when to reopen them",
+            "outcomes": [
+              "Write a decision record with drivers, options and consequences both ways",
+              "Set a review trigger someone can test",
+              "Challenge a peer's record for what a lint cannot see"
+            ],
+            "lo": [
+              "LO3"
+            ],
+            "minutes": 50,
+            "lab": {
+              "id": "2.4",
+              "title": "Two decision records and a challenge",
+              "summary": "Record where Muyassir's model runs and why status questions skip the reranker, lint both, then challenge a peer's record on its consequences and trigger.",
+              "minutes": 25,
+              "href": "../labs/D2_4_decision_records.ipynb",
+              "steps": [
+                {
+                  "text": "Read the template and run the lint",
+                  "minutes": 4
+                },
+                {
+                  "text": "Record one: where Muyassir's model runs",
+                  "minutes": 8
+                },
+                {
+                  "text": "Record two: no reranking for status questions",
+                  "minutes": 6
+                },
+                {
+                  "text": "Challenge a peer's record",
+                  "minutes": 7
+                }
+              ],
+              "stretch": "The decision log index"
+            }
+          }
+        ]
+      },
+      {
+        "id": "day3",
+        "kind": "day",
+        "n": 3,
+        "number": 3,
+        "label": "Day 3",
+        "title": "The shared platform",
+        "subtitle": "Asas as a product: demand, admission, a gateway that refuses, tenancy and showback",
+        "shape": "4 sessions · 4 labs",
+        "deck": "../slides/day3.html",
+        "md": "../slides/day3.md",
+        "url": "https://sdaiaacademy.github.io/ae-402/slides/day3.html",
+        "sessions": [
+          {
+            "n": 1,
+            "label": "Session 1",
+            "title": "The platform is a product",
+            "summary": "The shared platform treated as a product with nine teams as users, phased by their measured demand",
+            "outcomes": [
+              "Build a demand matrix from usage logs and a team survey",
+              "Phase platform capabilities by shared demand",
+              "Spot in the logs what the platform should already prevent"
+            ],
+            "lo": [
+              "LO4"
+            ],
+            "minutes": 50,
+            "lab": {
+              "id": "3.1",
+              "title": "A demand matrix from six months of usage",
+              "summary": "Build a teams-by-capabilities matrix from six months of synthetic gateway logs and a survey, phase the platform's capabilities and find the placement breach in the logs.",
+              "minutes": 25,
+              "href": "../labs/D3_1_demand_matrix.ipynb",
+              "steps": [
+                {
+                  "text": "Read six months of usage",
+                  "minutes": 4
+                },
+                {
+                  "text": "The demand matrix: used and asked for",
+                  "minutes": 8
+                },
+                {
+                  "text": "Phase the platform's capabilities",
+                  "minutes": 6
+                },
+                {
+                  "text": "What the logs show that the platform should have stopped",
+                  "minutes": 7
+                }
+              ],
+              "stretch": "Growth by capability"
+            }
+          },
+          {
+            "n": 2,
+            "label": "Session 2",
+            "title": "Catalogue, admission and the gateway",
+            "summary": "Admission to the model catalogue on evidence, and a gateway that enforces placement by classification",
+            "outcomes": [
+              "Admit models on licence, evaluation and data-term evidence",
+              "Write catalogue entries with the highest level each model may receive",
+              "Make a gateway refuse Restricted data to an external model"
+            ],
+            "lo": [
+              "LO4"
+            ],
+            "minutes": 50,
+            "lab": {
+              "id": "3.2",
+              "title": "Model admission and a gateway that refuses",
+              "summary": "Admit four of six candidate models on evidence, write their catalogue entries and add the classification policy that makes the supplied gateway refuse Restricted data to an external model.",
+              "minutes": 25,
+              "href": "../labs/D3_2_admission_gateway.ipynb",
+              "steps": [
+                {
+                  "text": "Admission criteria as code",
+                  "minutes": 5
+                },
+                {
+                  "text": "Admit four of the six candidates",
+                  "minutes": 6
+                },
+                {
+                  "text": "Catalogue entries with the level each may receive",
+                  "minutes": 4
+                },
+                {
+                  "text": "The classification policy, and nine test requests",
+                  "minutes": 10
+                }
+              ],
+              "stretch": "A fallback that respects placement"
+            }
+          },
+          {
+            "n": 3,
+            "label": "Session 3",
+            "title": "Tenancy and shared capacity",
+            "summary": "Tenancy as a set of controls that keep one team's incident inside that team",
+            "outcomes": [
+              "Compare a shared and a per-team tenancy model under incidents",
+              "Cap a team's share of shared capacity",
+              "Contain leaked keys and runaway spend with keys and budgets per team"
+            ],
+            "lo": [
+              "LO4"
+            ],
+            "minutes": 50,
+            "lab": {
+              "id": "3.3",
+              "title": "Three incidents, two tenancy models",
+              "summary": "Replay an hour with a leaked key, a noisy neighbour and a runaway agent under the pilot's shared model and under a per-team model you design, and measure the harm to bystanders.",
+              "minutes": 25,
+              "href": "../labs/D3_3_tenancy.ipynb",
+              "steps": [
+                {
+                  "text": "Replay the three incidents on the shared model",
+                  "minutes": 5
+                },
+                {
+                  "text": "A capped share of the Ministry-hosted model",
+                  "minutes": 7
+                },
+                {
+                  "text": "Your tenancy model: keys, budgets, revocation",
+                  "minutes": 6
+                },
+                {
+                  "text": "The incident table: who was harmed",
+                  "minutes": 7
+                }
+              ],
+              "stretch": "The cap that costs the culprit least"
+            }
+          },
+          {
+            "n": 4,
+            "label": "Session 4",
+            "title": "Who pays for which tokens",
+            "summary": "Cost attribution that reconciles with the invoices, shown to teams before anyone is charged",
+            "outcomes": [
+              "Allocate invoices to teams by usage, credits and fixed costs included",
+              "Reconcile a showback with each invoice within 2%",
+              "Name spend that no tag or owner explains"
+            ],
+            "lo": [
+              "LO4"
+            ],
+            "minutes": 50,
+            "lab": {
+              "id": "3.4",
+              "title": "A showback that reconciles",
+              "summary": "Build a showback from synthetic invoices, usage and tags, see a price-card version fail to reconcile, allocate the invoices instead within 2% and name the untagged spend.",
+              "minutes": 25,
+              "href": "../labs/D3_4_showback.ipynb",
+              "steps": [
+                {
+                  "text": "A showback priced with the price card",
+                  "minutes": 6
+                },
+                {
+                  "text": "Reconcile it with each invoice",
+                  "minutes": 5
+                },
+                {
+                  "text": "Allocate the invoices instead",
+                  "minutes": 8
+                },
+                {
+                  "text": "Name the untagged spend",
+                  "minutes": 6
+                }
+              ],
+              "stretch": "Is token count the right key for the data centre?"
+            }
+          }
+        ]
+      },
+      {
+        "id": "day4",
+        "kind": "day",
+        "n": 4,
+        "number": 4,
+        "label": "Day 4",
+        "title": "Reference designs and reviews",
+        "subtitle": "A golden path, fitness checks, a structured review and a deviation decided on one page",
+        "shape": "4 sessions · 4 labs",
+        "deck": "../slides/day4.html",
+        "md": "../slides/day4.md",
+        "url": "https://sdaiaacademy.github.io/ae-402/slides/day4.html",
+        "sessions": [
+          {
+            "n": 1,
+            "label": "Session 1",
+            "title": "Golden paths",
+            "summary": "A golden path makes the compliant way the easy way: a template with its gates on by default",
+            "outcomes": [
+              "Turn a team's service into a template other teams generate from",
+              "Put evaluation, classification checks and tracing on by default",
+              "Make switching a gate off visible to the platform"
+            ],
+            "lo": [
+              "LO4",
+              "LO5"
+            ],
+            "minutes": 50,
+            "lab": {
+              "id": "4.1",
+              "title": "A golden path from the permits team's service",
+              "summary": "Turn the permits team's retrieval service into a Copier template whose questions refuse a disallowed placement, generate Kashif's service from it and run its three gates as the pipeline would.",
+              "minutes": 25,
+              "href": "../labs/D4_1_golden_path.ipynb",
+              "steps": [
+                {
+                  "text": "What the permits team hard-coded",
+                  "minutes": 4
+                },
+                {
+                  "text": "The template: questions with guard rails",
+                  "minutes": 9
+                },
+                {
+                  "text": "Generate Kashif's service and run its gates",
+                  "minutes": 7
+                },
+                {
+                  "text": "A register of the gates switched off",
+                  "minutes": 5
+                }
+              ],
+              "stretch": "Refuse an evaluation set without Arabic"
+            }
+          },
+          {
+            "n": 2,
+            "label": "Session 2",
+            "title": "Fitness functions",
+            "summary": "Fitness functions turn the reference design's rules into checks that fail a build",
+            "outcomes": [
+              "Describe a design as data a program can read",
+              "Write a check for a blocking evaluation gate before deployment",
+              "Write a placement check that follows fallbacks"
+            ],
+            "lo": [
+              "LO5"
+            ],
+            "minutes": 50,
+            "lab": {
+              "id": "4.2",
+              "title": "Two fitness checks over designs as data",
+              "summary": "Write two checks over five teams' design files, one for a blocking evaluation gate and one for the placement of every classified flow, and run them as a pipeline step that fails three designs.",
+              "minutes": 25,
+              "href": "../labs/D4_2_fitness_checks.ipynb",
+              "steps": [
+                {
+                  "text": "Read a design as data",
+                  "minutes": 4
+                },
+                {
+                  "text": "Check 1: a blocking evaluation gate before deployment",
+                  "minutes": 7
+                },
+                {
+                  "text": "Check 2: every flow is placed where its level may go",
+                  "minutes": 8
+                },
+                {
+                  "text": "Run both as a pipeline step",
+                  "minutes": 6
+                }
+              ],
+              "stretch": "A third check: the evaluation includes Arabic"
+            }
+          },
+          {
+            "n": 3,
+            "label": "Session 3",
+            "title": "Structured architecture review",
+            "summary": "A structured review weighs a design against its prioritised scenarios, not a checklist",
+            "outcomes": [
+              "Prioritise scenarios in a utility tree",
+              "Tell risks, sensitivity points, trade-off points and non-compliance apart",
+              "Write a review report with a verdict a team can act on"
+            ],
+            "lo": [
+              "LO6"
+            ],
+            "minutes": 50,
+            "lab": {
+              "id": "4.3",
+              "title": "A structured review of Kashif's design",
+              "summary": "Review the inspections team's design: order its scenarios in a utility tree, tag twelve observations, group the risks into themes and write the report with its verdict.",
+              "minutes": 25,
+              "href": "../labs/D4_3_review.ipynb",
+              "steps": [
+                {
+                  "text": "The utility tree: which scenarios lead",
+                  "minutes": 6
+                },
+                {
+                  "text": "Tag the twelve observations",
+                  "minutes": 8
+                },
+                {
+                  "text": "Risk themes, tied to scenarios",
+                  "minutes": 5
+                },
+                {
+                  "text": "The review report and its verdict",
+                  "minutes": 6
+                }
+              ],
+              "stretch": "Which finding becomes a fitness check?"
+            }
+          },
+          {
+            "n": 4,
+            "label": "Session 4",
+            "title": "Deviations and sponsors",
+            "summary": "A deviation is a time-boxed decision with conditions, explained to a sponsor in numbers",
+            "outcomes": [
+              "Put numbers on what a deviation breaks and what refusing it costs",
+              "Decide a deviation with verifiable conditions, an expiry and reopen triggers",
+              "Explain a trade-off on one page for a sponsor"
+            ],
+            "lo": [
+              "LO6"
+            ],
+            "minutes": 50,
+            "lab": {
+              "id": "4.4",
+              "title": "A deviation request, decided and explained on one page",
+              "summary": "Measure the inspections team's request to send photos to an external vision model, decide it with conditions and an expiry, write the sponsor's one page and choose your capstone service.",
+              "minutes": 25,
+              "href": "../labs/D4_4_deviation.ipynb",
+              "steps": [
+                {
+                  "text": "What the request breaks, and what refusing costs",
+                  "minutes": 6
+                },
+                {
+                  "text": "Decide, with conditions, an expiry and what reopens it",
+                  "minutes": 7
+                },
+                {
+                  "text": "One page for the sponsor",
+                  "minutes": 7
+                },
+                {
+                  "text": "Choose your capstone service",
+                  "minutes": 5
+                }
+              ],
+              "stretch": "The deviation as a gateway policy that expires"
+            }
+          }
+        ]
+      },
+      {
+        "id": "capstone",
+        "kind": "capstone",
+        "n": 5,
+        "number": null,
+        "label": "Capstone",
+        "title": "Capstone project presentations",
+        "subtitle": "Ten minutes of architecture and eight of questions, with one classification or forecast changed by the panel",
+        "shape": "",
+        "deck": "../slides/capstone.html",
+        "md": "../slides/capstone.md",
+        "url": "https://sdaiaacademy.github.io/ae-402/slides/capstone.html",
+        "sessions": []
+      }
+    ],
+    "capstone": {
+      "summary": "An architecture for one ministry service and the platform slice it runs on (scenarios, views, options paper, at least six decision records, and a working gateway, catalogue entry, golden path and showback) in a public repository, defended before a panel that includes a data architect. The follow-up task writes three decision records for a system from the participant's own work",
+      "submission": "A public GitHub repository link, sent before the defence. The repository holds the scenario sheet, the architecture document with views as code and one request traced end to end, the options paper with total cost, lock-in and sensitivity, at least six dated decision records, and the platform slice (gateway with its refusal test and logs, catalogue entry, golden-path template, showback that reconciles within 2%), with the fitness checks running in its pipeline.",
+      "talk_minutes": 10,
+      "qa_minutes": 8,
+      "rubric": [
+        {
+          "criterion": "Scenarios and views",
+          "weight": 20
+        },
+        {
+          "criterion": "Options and decisions",
+          "weight": 25
+        },
+        {
+          "criterion": "Platform slice",
+          "weight": 25
+        },
+        {
+          "criterion": "Fitness checks",
+          "weight": 15
+        },
+        {
+          "criterion": "Review",
+          "weight": 15
+        }
+      ]
+    },
+    "labs": {
+      "kind": "notebooks",
+      "base": "labs/"
+    },
+    "tools": [
+      {
+        "slot": "Architecture views as code",
+        "examples": [
+          "Structurizr DSL",
+          "Mermaid",
+          "PlantUML"
+        ]
+      },
+      {
+        "slot": "Decision record templates",
+        "examples": [
+          "MADR",
+          "a plain Markdown template"
+        ]
+      },
+      {
+        "slot": "AI gateway",
+        "examples": [
+          "LiteLLM",
+          "agentgateway"
+        ]
+      },
+      {
+        "slot": "Fitness checks and policy",
+        "examples": [
+          "Open Policy Agent with conftest",
+          "tests over infrastructure definitions"
+        ]
+      },
+      {
+        "slot": "Project templates",
+        "examples": [
+          "Copier",
+          "Backstage software templates"
+        ]
+      },
+      {
+        "slot": "Cost modelling and allocation",
+        "examples": [
+          "a Python notebook",
+          "OpenCost"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "group": "National references",
+        "items": [
+          {
+            "title": "Personal Data Protection Law (SDAIA)",
+            "url": "https://sdaia.gov.sa/en/SDAIA/about/Documents/PersonalDataProtectionLaw.pdf"
+          },
+          {
+            "title": "Implementing Regulation of the Personal Data Protection Law (SDAIA)",
+            "url": "https://sdaia.gov.sa/en/SDAIA/about/Documents/ImplementingRegulationPersonalDataProtectionLaw.pdf"
+          },
+          {
+            "title": "Regulation on Personal Data Transfer outside the Kingdom (SDAIA)",
+            "url": "https://sdaia.gov.sa/Documents/RegulationonPersonalDataEN.pdf"
+          },
+          {
+            "title": "Data Classification Policy (National Data Management Office, SDAIA)",
+            "url": "https://sdaia.gov.sa/en/SDAIA/about/Documents/DataClassificationPolicy.pdf"
+          },
+          {
+            "title": "Cloud Cybersecurity Controls (National Cybersecurity Authority)",
+            "url": "https://nca.gov.sa/en/regulatory-documents/controls-list/ccc/"
+          },
+          {
+            "title": "AI Ethics Principles (SDAIA)",
+            "url": "https://sdaia.gov.sa/en/SDAIA/about/Documents/ai-principles.pdf"
+          },
+          {
+            "title": "National AI Risk Management Framework, executive summary (SDAIA, April 2026)",
+            "url": "https://sdaia.gov.sa/en/MediaCenter/KnowledgeCenter/ResearchLibrary/ExecutiveSummaryEn.pdf"
+          }
+        ]
+      },
+      {
+        "group": "Architecture methods",
+        "items": [
+          {
+            "title": "The Architecture Tradeoff Analysis Method (Software Engineering Institute)",
+            "url": "https://www.sei.cmu.edu/library/the-architecture-tradeoff-analysis-method/"
+          },
+          {
+            "title": "The C4 model for visualising software architecture",
+            "url": "https://c4model.com/"
+          },
+          {
+            "title": "Structurizr DSL documentation",
+            "url": "https://docs.structurizr.com/dsl"
+          },
+          {
+            "title": "MADR: Markdown Architectural Decision Records",
+            "url": "https://adr.github.io/madr/"
+          },
+          {
+            "title": "Architectural fitness function (Thoughtworks Technology Radar)",
+            "url": "https://www.thoughtworks.com/radar/techniques/architectural-fitness-function"
+          },
+          {
+            "title": "CNCF Platforms White Paper (TAG App Delivery)",
+            "url": "https://tag-app-delivery.cncf.io/whitepapers/platforms/"
+          }
+        ]
+      },
+      {
+        "group": "Platform tools (examples, interchangeable)",
+        "items": [
+          {
+            "title": "LiteLLM: virtual keys, budgets and rate limits",
+            "url": "https://docs.litellm.ai/docs/proxy/virtual_keys"
+          },
+          {
+            "title": "LiteLLM: guardrails quick start",
+            "url": "https://docs.litellm.ai/docs/proxy/guardrails/quick_start"
+          },
+          {
+            "title": "LiteLLM: fallbacks",
+            "url": "https://docs.litellm.ai/docs/proxy/reliability"
+          },
+          {
+            "title": "agentgateway documentation",
+            "url": "https://agentgateway.dev/docs/"
+          },
+          {
+            "title": "Conftest",
+            "url": "https://www.conftest.dev/"
+          },
+          {
+            "title": "Open Policy Agent documentation",
+            "url": "https://www.openpolicyagent.org/docs"
+          },
+          {
+            "title": "Copier documentation",
+            "url": "https://copier.readthedocs.io/en/stable/"
+          },
+          {
+            "title": "Backstage software templates",
+            "url": "https://backstage.io/docs/features/software-templates/"
+          },
+          {
+            "title": "OpenCost documentation",
+            "url": "https://opencost.io/docs/"
+          },
+          {
+            "title": "FinOps Framework: invoicing and chargeback",
+            "url": "https://www.finops.org/framework/capabilities/invoicing-chargeback/"
+          }
+        ]
+      }
+    ]
+  }
+}

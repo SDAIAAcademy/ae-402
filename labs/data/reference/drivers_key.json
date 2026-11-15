@@ -1,0 +1,82 @@
+{
+ "S01": {
+  "kind": "driver",
+  "owner": "sponsor"
+ },
+ "S02": {
+  "kind": "driver",
+  "owner": "sponsor"
+ },
+ "S03": {
+  "kind": "constraint",
+  "owner": "sponsor"
+ },
+ "S04": {
+  "kind": "constraint",
+  "owner": "sponsor"
+ },
+ "S05": {
+  "kind": "concern",
+  "owner": "sponsor"
+ },
+ "S06": {
+  "kind": "driver",
+  "owner": "permits team"
+ },
+ "S07": {
+  "kind": "concern",
+  "owner": "inspectors"
+ },
+ "S08": {
+  "kind": "assumption",
+  "owner": "permits team"
+ },
+ "S09": {
+  "kind": "constraint",
+  "owner": "permits team"
+ },
+ "S10": {
+  "kind": "concern",
+  "owner": "permits team"
+ },
+ "S11": {
+  "kind": "noise",
+  "owner": "permits team"
+ },
+ "S12": {
+  "kind": "constraint",
+  "owner": "data protection officer"
+ },
+ "S13": {
+  "kind": "constraint",
+  "owner": "data protection officer"
+ },
+ "S14": {
+  "kind": "concern",
+  "owner": "applicants"
+ },
+ "S15": {
+  "kind": "assumption",
+  "owner": "data protection officer"
+ },
+ "S16": {
+  "kind": "driver",
+  "owner": "sponsor"
+ },
+ "S17": {
+  "kind": "constraint",
+  "owner": "sponsor"
+ },
+ "S18": {
+  "kind": "noise",
+  "owner": "sponsor"
+ },
+ "S19": {
+  "kind": "assumption",
+  "owner": "engineering offices"
+ },
+ "S20": {
+  "kind": "concern",
+  "owner": "permit staff"
+ }
+}

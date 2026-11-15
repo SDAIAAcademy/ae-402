@@ -1,0 +1,9 @@
+{
+ "agent_tools": 1,
+ "batch": 3,
+ "chat": 8,
+ "classification": 1,
+ "embeddings": 5,
+ "speech": 1,
+ "vision": 1
+}

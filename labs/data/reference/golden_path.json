@@ -1,0 +1,18 @@
+{
+ "questions": [
+  "service_name",
+  "team",
+  "classification",
+  "model_alias",
+  "eval_min_score",
+  "eval_gate",
+  "gate_off_reason"
+ ],
+ "hard_coded": [
+  "SERVICE",
+  "TEAM",
+  "LEVEL",
+  "MODEL"
+ ],
+ "min_score_floor": 0.8
+}

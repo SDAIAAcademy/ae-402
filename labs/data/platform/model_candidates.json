@@ -1,0 +1,94 @@
+{
+ "note": "Fictional model ids. 'eval' is the score on the Ministry's own Arabic and English evaluation sets (answer correctness for chat, recall at 5 for embeddings, defect detection for vision); null means no evidence was submitted.",
+ "thresholds": {
+  "chat": 0.75,
+  "embeddings": 0.8,
+  "vision": 0.8
+ },
+ "candidates": [
+  {
+   "id": "ext-frontier-l",
+   "capability": "chat",
+   "hosting": "external",
+   "licence": "commercial API terms",
+   "licence_allows_government_production": true,
+   "eval": {
+    "ar": 0.91,
+    "en": 0.93
+   },
+   "retention_days": 30,
+   "trains_on_prompts": false,
+   "owner": "Faris Al-Hothali"
+  },
+  {
+   "id": "ksa-general-m",
+   "capability": "chat",
+   "hosting": "ksa_cloud",
+   "licence": "commercial API terms",
+   "licence_allows_government_production": true,
+   "eval": {
+    "ar": 0.86,
+    "en": 0.88
+   },
+   "retention_days": 0,
+   "trains_on_prompts": false,
+   "owner": "Faris Al-Hothali"
+  },
+  {
+   "id": "own-open-s",
+   "capability": "chat",
+   "hosting": "ministry",
+   "licence": "permissive open-weight licence",
+   "licence_allows_government_production": true,
+   "eval": {
+    "ar": 0.79,
+    "en": 0.82
+   },
+   "retention_days": 0,
+   "trains_on_prompts": false,
+   "owner": "Faris Al-Hothali"
+  },
+  {
+   "id": "own-embed-m",
+   "capability": "embeddings",
+   "hosting": "ministry",
+   "licence": "permissive open-weight licence",
+   "licence_allows_government_production": true,
+   "eval": {
+    "ar": 0.88,
+    "en": 0.9
+   },
+   "retention_days": 0,
+   "trains_on_prompts": false,
+   "owner": "Faris Al-Hothali"
+  },
+  {
+   "id": "ext-mini-r",
+   "capability": "chat",
+   "hosting": "external",
+   "licence": "research use only",
+   "licence_allows_government_production": false,
+   "eval": {
+    "ar": 0.84,
+    "en": 0.89
+   },
+   "retention_days": 30,
+   "trains_on_prompts": false,
+   "owner": "Faris Al-Hothali"
+  },
+  {
+   "id": "ksa-vision-x",
+   "capability": "vision",
+   "hosting": "ksa_cloud",
+   "licence": "commercial API terms",
+   "licence_allows_government_production": true,
+   "eval": {
+    "ar": null,
+    "en": 0.81
+   },
+   "retention_days": 0,
+   "trains_on_prompts": false,
+   "owner": "Rabah Al-Mujil"
+  }
+ ]
+}

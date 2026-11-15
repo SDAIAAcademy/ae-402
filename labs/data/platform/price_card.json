@@ -1,0 +1,18 @@
+{
+ "note": "The Asas price card, SAR per million tokens, last updated 2026-05-01. Ministry-hosted models carry no token price: their fixed monthly cost is shared by token volume.",
+ "per_million": {
+  "ext-frontier-l": {
+   "in": 10.0,
+   "out": 40.0
+  },
+  "ksa-general-m": {
+   "in": 8.0,
+   "out": 24.0
+  },
+  "ksa-vision-x": {
+   "in": 12.0,
+   "out": 36.0
+  }
+ },
+ "ministry_fixed_per_month": 60000.0
+}

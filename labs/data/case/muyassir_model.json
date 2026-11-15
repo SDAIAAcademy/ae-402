@@ -1,0 +1,148 @@
+{
+ "system": {
+  "id": "muyassir",
+  "name": "Muyassir",
+  "description": "Building-permits assistant on Asas"
+ },
+ "people": [
+  {
+   "id": "applicant",
+   "name": "Applicant",
+   "description": "Citizen or engineering office"
+  },
+  {
+   "id": "inspector",
+   "name": "Inspector",
+   "description": "Reviews hand-overs and approves"
+  }
+ ],
+ "external_systems": [
+  {
+   "id": "sso",
+   "name": "National single sign-on",
+   "hosting": "ksa_cloud"
+  },
+  {
+   "id": "permits",
+   "name": "Permits system",
+   "hosting": "ministry"
+  },
+  {
+   "id": "contact",
+   "name": "Contact centre",
+   "hosting": "ministry"
+  }
+ ],
+ "containers": [
+  {
+   "id": "portal",
+   "name": "Permits portal widget",
+   "tech": "Web",
+   "hosting": "ministry"
+  },
+  {
+   "id": "orchestrator",
+   "name": "Muyassir service",
+   "tech": "Python",
+   "hosting": "ministry"
+  },
+  {
+   "id": "gateway",
+   "name": "Asas gateway",
+   "tech": "AI gateway",
+   "hosting": "ministry"
+  },
+  {
+   "id": "index",
+   "name": "Regulations index",
+   "tech": "Vector and keyword index",
+   "hosting": "ministry"
+  },
+  {
+   "id": "reranker",
+   "name": "Reranker",
+   "tech": "Cross-encoder",
+   "hosting": "ministry"
+  },
+  {
+   "id": "answer_model",
+   "name": "Answer model",
+   "tech": "ksa-general-m",
+   "hosting": "ksa_cloud"
+  },
+  {
+   "id": "logs",
+   "name": "Log store",
+   "tech": "Object store, 90-day expiry",
+   "hosting": "ministry"
+  }
+ ],
+ "relations": [
+  [
+   "applicant",
+   "portal",
+   "asks a question",
+   "HTTPS"
+  ],
+  [
+   "portal",
+   "sso",
+   "signs the applicant in",
+   "OIDC"
+  ],
+  [
+   "portal",
+   "orchestrator",
+   "sends question and applicant id",
+   "HTTPS"
+  ],
+  [
+   "orchestrator",
+   "permits",
+   "reads application status",
+   "REST, read only"
+  ],
+  [
+   "orchestrator",
+   "index",
+   "retrieves clauses",
+   "HTTPS"
+  ],
+  [
+   "orchestrator",
+   "reranker",
+   "reranks clauses",
+   "HTTPS"
+  ],
+  [
+   "orchestrator",
+   "gateway",
+   "asks for an answer",
+   "OpenAI-compatible"
+  ],
+  [
+   "gateway",
+   "answer_model",
+   "routes by classification",
+   "HTTPS"
+  ],
+  [
+   "orchestrator",
+   "logs",
+   "writes the conversation",
+   "HTTPS"
+  ],
+  [
+   "orchestrator",
+   "contact",
+   "hands over to a person",
+   "Events"
+  ],
+  [
+   "inspector",
+   "contact",
+   "takes hand-overs",
+   "Staff console"
+  ]
+ ]
+}

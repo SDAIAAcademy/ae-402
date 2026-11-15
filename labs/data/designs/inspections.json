@@ -1,0 +1,116 @@
+{
+ "service": "kashif",
+ "team": "T03",
+ "owner": "Rabah Al-Mujil",
+ "classification": "Restricted",
+ "components": [
+  {
+   "id": "tablet",
+   "kind": "app",
+   "hosting": "ministry"
+  },
+  {
+   "id": "kashif",
+   "kind": "service",
+   "hosting": "ministry"
+  },
+  {
+   "id": "vision",
+   "kind": "model",
+   "model": "ksa-vision-x",
+   "hosting": "ksa_cloud",
+   "fallback": "vision_ext"
+  },
+  {
+   "id": "vision_ext",
+   "kind": "model",
+   "model": "ext-vision-q",
+   "hosting": "external"
+  },
+  {
+   "id": "llm",
+   "kind": "model",
+   "model": "ksa-general-m",
+   "hosting": "ksa_cloud"
+  },
+  {
+   "id": "reports",
+   "kind": "store",
+   "hosting": "ministry"
+  }
+ ],
+ "flows": [
+  {
+   "id": "F1",
+   "from": "tablet",
+   "to": "kashif",
+   "data": "site photos and inspector notes",
+   "level": "Restricted"
+  },
+  {
+   "id": "F2",
+   "from": "kashif",
+   "to": "vision",
+   "data": "site photos",
+   "level": "Restricted"
+  },
+  {
+   "id": "F3",
+   "from": "kashif",
+   "to": "llm",
+   "data": "notes and photo findings",
+   "level": "Restricted"
+  },
+  {
+   "id": "F4",
+   "from": "kashif",
+   "to": "reports",
+   "data": "approved report",
+   "level": "Restricted"
+  },
+  {
+   "id": "F5",
+   "from": "kashif",
+   "to": "tablet",
+   "data": "draft report",
+   "level": "Restricted"
+  }
+ ],
+ "pipeline": [
+  {
+   "stage": "test"
+  },
+  {
+   "stage": "evaluate",
+   "blocking": true,
+   "min_score": 0.8,
+   "sets": [
+    "en"
+   ]
+  },
+  {
+   "stage": "deploy"
+  }
+ ],
+ "oversight": {
+  "inspector_approves_every_report": true,
+  "sample_review_pct": 10
+ },
+ "latency_budget_ms": {
+  "p95_total": 5000,
+  "vision_p95": 3800
+ },
+ "keys": [
+  {
+   "key": "k-t03-a",
+   "used_by": [
+    "tablet app",
+    "nightly batch"
+   ]
+  }
+ ],
+ "photos": {
+  "compressed_on_tablet": true,
+  "retention_days_at_provider": 30
+ }
+}
