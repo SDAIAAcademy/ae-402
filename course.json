@@ -253,69 +253,158 @@
       "sessions": [
         {
           "title": "Patterns and when each fits",
+          "summary": "Six architecture patterns for AI needs, and the fit questions that choose between them",
           "outcomes": [
-            "REPLACE: what a participant can do after this session"
+            "Match a need to a pattern with fit questions",
+            "Test a non-generative baseline on the same data as a generative one",
+            "Explain when a classical model serves a need better"
           ],
           "lo": [
             "LO3"
           ],
           "lab": {
             "id": "2.1",
-            "title": "Match six case needs to patterns and find the one a non-generative design serves better",
-            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "title": "Patterns and a non-generative baseline",
+            "summary": "Match six case needs to patterns, train a classifier on 2,400 citizen reports on a laptop processor and compare it with a recorded generative run on the same 600 test reports.",
             "minutes": 25,
-            "href": "D2_1_patterns.ipynb"
+            "href": "D2_1_patterns.ipynb",
+            "steps": [
+              {
+                "text": "Six patterns, six fit questions",
+                "minutes": 4
+              },
+              {
+                "text": "Match six needs to patterns",
+                "minutes": 6
+              },
+              {
+                "text": "Train a classifier on 2,400 reports",
+                "minutes": 8
+              },
+              {
+                "text": "Compare it with the recorded generative run",
+                "minutes": 7
+              }
+            ],
+            "stretch": "Errors by language"
           }
         },
         {
           "title": "Total cost over three years",
+          "summary": "Three-year total cost with every line the Ministry pays, and the assumptions the ranking depends on",
           "outcomes": [
-            "REPLACE: what a participant can do after this session"
+            "Build a three-year cost model with build, run, people, capacity and unanswered work",
+            "Compare options per answered question",
+            "Test the ranking's sensitivity to volume and token price"
           ],
           "lo": [
             "LO3"
           ],
           "lab": {
             "id": "2.2",
-            "title": "Cost three options and test their sensitivity to volume and token price",
-            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "title": "Three options over three years",
+            "summary": "Cost a hosted, a Ministry-hosted and a non-generative option on a 36-month forecast, then move volume and token price one at a time.",
             "minutes": 25,
-            "href": "D2_2_three_year_cost.ipynb"
+            "href": "D2_2_three_year_cost.ipynb",
+            "steps": [
+              {
+                "text": "Read the forecast and the price ranges",
+                "minutes": 3
+              },
+              {
+                "text": "The cost model, year by year",
+                "minutes": 9
+              },
+              {
+                "text": "Three options at the base forecast",
+                "minutes": 5
+              },
+              {
+                "text": "Sensitivity to volume and token price",
+                "minutes": 8
+              }
+            ],
+            "stretch": "The crossover volume"
           }
         },
         {
           "title": "Lock-in and exit",
+          "summary": "Where lock-in sits, what leaving costs, how weights mislead, and contract terms that keep the exit open",
           "outcomes": [
-            "REPLACE: what a participant can do after this session"
+            "Price the exit of an option from its lock-in factors",
+            "Find the weight at which a weighted ranking flips",
+            "Write procurement requirements a reviewer can verify"
           ],
           "lo": [
             "LO3"
           ],
           "lab": {
             "id": "2.3",
-            "title": "Score exit cost and write two procurement requirements that keep the exit open",
-            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "title": "Exit cost, weights and two requirements",
+            "summary": "Price each option's exit, fold it into the weighted score, find the weight that flips the ranking and write two requirements that keep the exit open.",
             "minutes": 25,
-            "href": "D2_3_exit_cost.ipynb"
+            "href": "D2_3_exit_cost.ipynb",
+            "steps": [
+              {
+                "text": "Exit cost per option",
+                "minutes": 6
+              },
+              {
+                "text": "The weighted score, exit cost included",
+                "minutes": 6
+              },
+              {
+                "text": "The weight that flips the ranking",
+                "minutes": 6
+              },
+              {
+                "text": "Two procurement requirements that keep the exit open",
+                "minutes": 7
+              }
+            ],
+            "stretch": "A third requirement for the evaluation data"
           }
         },
         {
           "title": "Decision records",
+          "summary": "Decision records with both kinds of consequence and a trigger that says when to reopen them",
           "outcomes": [
-            "REPLACE: what a participant can do after this session"
+            "Write a decision record with drivers, options and consequences both ways",
+            "Set a review trigger someone can test",
+            "Challenge a peer's record for what a lint cannot see"
           ],
           "lo": [
             "LO3"
           ],
           "lab": {
             "id": "2.4",
-            "title": "Write two records, swap with a peer and challenge consequences and review triggers",
-            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "title": "Two decision records and a challenge",
+            "summary": "Record where Muyassir's model runs and why status questions skip the reranker, lint both, then challenge a peer's record on its consequences and trigger.",
             "minutes": 25,
-            "href": "D2_4_decision_records.ipynb"
+            "href": "D2_4_decision_records.ipynb",
+            "steps": [
+              {
+                "text": "Read the template and run the lint",
+                "minutes": 4
+              },
+              {
+                "text": "Record one: where Muyassir's model runs",
+                "minutes": 8
+              },
+              {
+                "text": "Record two: no reranking for status questions",
+                "minutes": 6
+              },
+              {
+                "text": "Challenge a peer's record",
+                "minutes": 7
+              }
+            ],
+            "stretch": "The decision log index"
           }
         }
-      ]
+      ],
+      "subtitle": "Patterns, three options costed over three years, lock-in and a decision log"
     },
     {
       "id": "day3",

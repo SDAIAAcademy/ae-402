@@ -1,0 +1,7 @@
+id,need,requests_per_month,labelled_examples,answer_needed_within,steps,data_changes
+N1,"Answer permit questions from the building code and circulars, citing the clause",120000,0,seconds,one,weekly
+N2,Route each citizen report to one of six departments,95000,24000,seconds,one,stable
+N3,Summarise the inspection backlog for each district every night,30,0,hours,one,daily
+N4,Tell an applicant when the status of their application changes,40000,0,minutes,one,live
+N5,"Pre-check a new submission: read the forms, query the permits system, list what is missing",3200,0,minutes,several,live
+N6,Draft standard inspection letters in the house style from inspector notes,6000,9000,minutes,one,stable

@@ -1,158 +1,484 @@
 <section class="slide title" id="title" data-auto="title">
-  <aside class="notes">REPLACE: welcome; introduce yourself; one question to the room that calibrates the pace; the rhythm of the day</aside>
+  <aside class="notes"><p>Open with the decision participants brought from their own work: who wrote it down, and who could say today why it was taken? Two answers are enough. Today ends with a decision log for Muyassir.</p></aside>
 </section>
 
 <section class="slide" id="agenda" data-auto="agenda"></section>
+
+<section class="slide" id="review-day1" data-lo="LO1 LO2" data-label="Review of Day 1">
+  <div class="kicker">Review of Day 1</div>
+  <h2>Which finding of Day 1 changes the options you may draw today?</h2>
+  <div class="quiz" data-type="single" data-lo="LO1 LO2">
+    <p class="lead">Day 1 produced a scenario sheet, fourteen classified flows and a request budget. Which finding most limits today's options for Muyassir's answer model?</p>
+    <div class="opts">
+      <div class="opt" data-why="Treats a passed scenario as a limit: cost at SAR 0.025 a request leaves room, it rules nothing out">The request costs SAR 0.025, half of its cost target</div>
+      <div class="opt" data-why="Mistakes a fixable hop for a placement limit: the reranker is a design choice inside every option">The reranker takes 650 ms of the p95</div>
+      <div class="opt" data-ok>Prompts with applicant context are Restricted and stay in the Kingdom</div>
+      <div class="opt" data-why="Confuses an incident to fix with a constraint on options: P0288 is a defect in the status read">One pilot answer showed another applicant's file</div>
+    </div>
+    <div class="callout tip why"><b>Why.</b> The level of the prompt removes every option that would send it to an external model; the other findings are fixed inside an option.</div>
+  </div>
+  <aside class="notes"><p>Answer: C. It is why today's three options are a model in the Kingdom, a model in the Ministry, and no generative model at all.</p></aside>
+</section>
 
 <!-- Session 1 -->
 
 <section class="slide section" id="s1" data-auto="section" data-session="1"></section>
 
-<section class="slide" id="s1-idea" data-lo="LO3">
-  <div class="kicker">REPLACE: the question this slide answers</div>
-  <h2>REPLACE: one idea, stated as a sentence</h2>
-  <div class="cols cols-2">
-    <ul class="bullets">
-      <li>REPLACE: at most six bullets, each a complete thought</li>
-      <li>REPLACE: bold the key phrase; numbers come from the lab run, not from memory</li>
-    </ul>
-    <div class="card c-teal"><h4>In the case study</h4><p class="small mb0">REPLACE: tie the idea to the case study and its data</p></div>
-  </div>
-  <div class="callout warn mt"><b>What goes wrong.</b> REPLACE: the failure participants will hit, and how to recognise it</div>
-  <aside class="notes">REPLACE: what to say, the demo to run, the question to ask the room, the common failure and its fix</aside>
+<section class="slide" id="six-patterns" data-lo="LO3" data-label="Six patterns">
+  <div class="kicker">Patterns</div>
+  <h2>Six patterns cover most of what the Ministry's teams ask for</h2>
+  <table class="t small">
+    <tr><th>Pattern</th><th>Fits when</th><th>A need at the Ministry</th></tr>
+    <tr><td>Retrieval</td><td>answers come from changing documents, with a citation</td><td>permit questions from the code</td></tr>
+    <tr><td>Agentic</td><td>several steps whose order depends on results</td><td>pre-check of a submission</td></tr>
+    <tr><td>Fine-tuned</td><td>a stable output form, high volume, thousands of examples</td><td>standard inspection letters</td></tr>
+    <tr><td>Classical</td><td>a label from a fixed list, labelled data, speed and cost matter</td><td>routing citizen reports</td></tr>
+    <tr><td>Batch</td><td>the answer is needed in hours, over many records</td><td>nightly backlog summaries</td></tr>
+    <tr><td>Event-driven</td><td>something must happen when a record changes</td><td>status-change notices</td></tr>
+  </table>
+  <aside class="notes"><p>These are the six of the entry's topic list. They combine: Muyassir is retrieval behind an event-driven notice and an agentic pre-check. The lab matches each need to its main pattern.</p></aside>
 </section>
 
-<section class="slide" id="s1-steps" data-lo="LO3">
-  <div class="kicker">Step by step</div>
-  <h2>REPLACE: a process, shown one step per key press</h2>
-  <div class="flow">
-    <div class="step c-teal"><b>1 · REPLACE: name</b>REPLACE: what happens first</div>
-    <div class="arrow frag" data-frag="b">→</div><div class="step c-cyan frag" data-frag="b"><b>2 · REPLACE: name</b>REPLACE: the next piece</div>
-    <div class="arrow frag" data-frag="c">→</div><div class="step c-coral frag" data-frag="c"><b>3 · REPLACE: name</b>REPLACE: the result</div>
+<section class="slide" id="fit-questions" data-lo="LO3" data-label="Fit questions">
+  <div class="kicker">Choosing by questions, not habit</div>
+  <h2>Five questions choose the pattern before anyone names a model</h2>
+  <ol class="bullets">
+    <li><b>What is the output?</b> A label, a cited answer, a document, an action.</li>
+    <li><b>Are there labelled examples?</b> Thousands change the options.</li>
+    <li><b>Who is waiting?</b> A person in seconds, a process in minutes, nobody until morning.</li>
+    <li><b>How many steps,</b> and does each depend on the last?</li>
+    <li><b>How does the data change?</b> Stable, weekly, live.</li>
+  </ol>
+  <aside class="notes"><p>The columns of needs.csv are the answers to these five questions. Ask a table to answer them for one of their own systems before the lab.</p></aside>
+</section>
+
+<section class="slide" id="knowledge-or-form" data-lo="LO3" data-label="Retrieval or tuning">
+  <div class="kicker">A common confusion</div>
+  <h2>Retrieval brings knowledge; fine-tuning shapes form</h2>
+  <div class="cols cols-2">
+    <div class="card c-teal"><h4>Retrieval</h4><p class="small mb0">The building code changes with each circular. Retrieval reads today's version and cites it. Updating means re-indexing, not retraining.</p></div>
+    <div class="card c-purple"><h4>Fine-tuning</h4><p class="small mb0">Inspection letters follow one house style. 9,000 approved letters can teach the form; facts still come from the inspector's notes.</p></div>
   </div>
-  <div class="callout tip mt frag"><b>Takeaway.</b> REPLACE: the one sentence to remember</div>
-  <aside class="notes">Press once per step and say what each step adds before the next one appears. REPLACE: the example to walk through</aside>
+  <div class="callout warn mt"><b>What goes wrong.</b> Tuning a model on the code to "know" it: the next circular makes the model wrong and nobody can see where.</div>
+  <aside class="notes"><p>For N6 the lab's answer is fine-tuning, but a prompt with three examples is a fair rival: the match is a hypothesis to test, as step 3 tests N2. Fine-tuning itself is taught in AE-310; here it is an option with a cost and an exit.</p></aside>
+</section>
+
+<section class="slide" id="agent-when" data-lo="LO3" data-label="When an agent">
+  <div class="kicker">Agentic</div>
+  <h2>Choose an agent only when the next step depends on the last result</h2>
+  <div class="trace s">
+    <div class="ev user"><b>task</b>pre-check submission 2027-114 for missing documents</div>
+    <div class="ev call"><b>step 1</b>read the forms: building type is a commercial extension</div>
+    <div class="ev call"><b>step 2</b>so query the permits system for the fire-safety approval</div>
+    <div class="ev result"><b>result</b>approval missing</div>
+    <div class="ev final"><b>output</b>two documents missing, with the clauses that require them</div>
+  </div>
+  <aside class="notes"><p>Step 2 exists only because of step 1's result. A status question has one step and needs no agent: an agent there adds cost, latency and a larger attack surface for nothing. Agent engineering is AE-302's subject; the architect's decision is whether to use one.</p></aside>
+</section>
+
+<section class="slide" id="nobody-waiting" data-lo="LO3" data-label="Batch and events">
+  <div class="kicker">When nobody is waiting</div>
+  <h2>Batch and event-driven designs move work off the user's path</h2>
+  <div class="cols cols-2">
+    <div class="card c-cyan"><h4>Batch</h4><p class="small mb0">Thirty district summaries a night: run them together at off-peak capacity, retry failures, and nobody sees a latency.</p></div>
+    <div class="card c-amber"><h4>Event-driven</h4><p class="small mb0">A status change publishes an event; a notifier reacts. 40,000 notices a month, and no applicant has to ask.</p></div>
+  </div>
+  <p class="small mt">Every status notice that is sent is a status call that is not made: the driver S02 is served by an event, not by a chat.</p>
+  <aside class="notes"><p>This is the integration topic: Muyassir talks to the permits system through a read API, and the notices through events. Ask: which of the two would you put on the Asas platform as a shared capability? Day 3's demand matrix answers it with data.</p></aside>
+</section>
+
+<section class="slide" id="integration" data-lo="LO3" data-label="Integration">
+  <div class="kicker">Integration</div>
+  <h2>APIs for questions, events for changes</h2>
+  <table class="t small">
+    <tr><th>Interface</th><th>Muyassir uses it for</th><th>Design rule</th></tr>
+    <tr><td>Read API of the permits system</td><td>status of one application</td><td>read only (S09); timeouts and a hand-over</td></tr>
+    <tr><td>Status-change events</td><td>notices to applicants</td><td>at-least-once, so notices are idempotent</td></tr>
+    <tr><td>Gateway API (OpenAI-compatible)</td><td>every model call</td><td>one door for credentials, quotas and audit</td></tr>
+  </table>
+  <aside class="notes"><p>The third row anticipates Day 3: no team calls a model directly. At-least-once delivery means an event may arrive twice; the notifier must not send two messages.</p></aside>
+</section>
+
+<section class="slide" id="classifier-wins" data-lo="LO3" data-label="The baseline wins">
+  <div class="kicker">Measured in Lab 2.1</div>
+  <h2>For routing reports, a classifier beats the generative model</h2>
+  <table class="t">
+    <tr><th>On the same 600 test reports</th><th class="num">Accuracy</th><th class="num">Mean latency</th><th class="num">SAR a month, 95,000 reports</th></tr>
+    <tr class="hl"><td>Classifier, character n-grams</td><td class="num">0.938</td><td class="num">0.1 ms</td><td class="num">0</td></tr>
+    <tr><td>Generative model (recorded)</td><td class="num">0.908</td><td class="num">1,340 ms</td><td class="num">156</td></tr>
+  </table>
+  <p class="small mt">The classifier trains in seconds on a laptop processor; it is also right more often in Arabic: 0.951 against 0.903.</p>
+  <aside class="notes"><p>Classifier numbers are from the solution run; the generative run is a synthetic recording, labelled so in the lab. Do not let the room conclude "generative is bad": it is the wrong tool for a fixed label with 24,000 labelled examples. The money is the smallest of the three differences.</p></aside>
+</section>
+
+<section class="slide" id="always-a-baseline" data-lo="LO3" data-label="Baseline">
+  <div class="kicker">The non-generative baseline</div>
+  <h2>Cost one option without a generative model, every time</h2>
+  <ul class="bullets">
+    <li>It shows what the generative model must beat, in quality and in cost.</li>
+    <li>It is the fallback when the model is down or over budget.</li>
+    <li>Sometimes it wins outright, as for report routing.</li>
+    <li>When it loses, say on what: for Muyassir, it answers 70% of questions against 92%.</li>
+  </ul>
+  <aside class="notes"><p>LO3 asks for at least three options including a non-generative baseline. Session 2 costs O3 for Muyassir; it loses there, on coverage, which is an honest and useful finding for the options paper.</p></aside>
+</section>
+
+<section class="slide" id="check-pattern" data-lo="LO3">
+  <div class="kicker">Checkpoint</div>
+  <h2>Which pattern for the street-light reports?</h2>
+  <div class="quiz" data-type="single" data-lo="LO3">
+    <p class="lead">The reports team wants each report routed to one of six departments, within seconds, at 95,000 reports a month, with 24,000 labelled reports from last year. Which design do you cost first?</p>
+    <div class="opts">
+      <div class="opt" data-ok>A classifier trained on the labelled reports</div>
+      <div class="opt" data-why="Uses retrieval for a label: there is no document to cite, only a category to choose">Retrieval over past reports, then a generated answer</div>
+      <div class="opt" data-why="Adds steps a single label does not need: no step depends on another">An agent that reads the report and calls department tools</div>
+      <div class="opt" data-why="Reaches for the most capable model before checking the output's shape and the labels">A frontier model with a routing prompt</div>
+    </div>
+    <div class="callout tip why"><b>Why.</b> A label from a fixed list, many labelled examples and a need for speed are the fit questions of the classical pattern.</div>
+  </div>
+  <aside class="notes"><p>Answer: A. D is the generative baseline you then compare against, as the lab does.</p></aside>
 </section>
 
 <section class="slide lab" id="lab-2-1" data-auto="lab" data-lab="2.1">
-  <aside class="notes">REPLACE: what to watch for while participants work, the typical problems, and the fallback for anyone who did not finish an earlier lab</aside>
+  <aside class="notes"><p>Training takes seconds; if it takes minutes, the participant fitted on all 3,000 rows or set a huge n-gram range. Typical slip: comparing accuracy on train rows. The recorded generative run is synthetic and says so; anyone with a free model key can rerun it live for curiosity, it is not needed.</p></aside>
 </section>
 
 <!-- Session 2 -->
 
 <section class="slide section" id="s2" data-auto="section" data-session="2"></section>
 
-<section class="slide" id="s2-idea" data-lo="LO3">
-  <div class="kicker">REPLACE: the question this slide answers</div>
-  <h2>REPLACE: one idea, stated as a sentence</h2>
-  <div class="cols cols-2">
-    <ul class="bullets">
-      <li>REPLACE: at most six bullets, each a complete thought</li>
-      <li>REPLACE: bold the key phrase; numbers come from the lab run, not from memory</li>
-    </ul>
-    <div class="card c-teal"><h4>In the case study</h4><p class="small mb0">REPLACE: tie the idea to the case study and its data</p></div>
+<section class="slide" id="three-options" data-lo="LO3" data-label="Three options">
+  <div class="kicker">Muyassir's options</div>
+  <h2>Three options, one of them without a generative model</h2>
+  <div class="cols cols-3">
+    <div class="card c-teal"><h4>O1 · Hosted in the Kingdom</h4><p class="small mb0">A model in a cloud region of the Kingdom, paid per token. Answers 92% of questions.</p></div>
+    <div class="card c-navy"><h4>O2 · Ministry-hosted</h4><p class="small mb0">An open-weight model on the Ministry's accelerators, paid per server. Answers 92%.</p></div>
+    <div class="card c-amber"><h4>O3 · Non-generative</h4><p class="small mb0">Guided search and a document checklist. Answers 70%.</p></div>
   </div>
-  <div class="callout warn mt"><b>What goes wrong.</b> REPLACE: the failure participants will hit, and how to recognise it</div>
-  <aside class="notes">REPLACE: what to say, the demo to run, the question to ask the room, the common failure and its fix</aside>
+  <p class="small mt">Prices are the case's synthetic ranges, not vendor prices.</p>
+  <aside class="notes"><p>All three meet S12: none sends Restricted prompts outside the Kingdom. Real prices of hosted models change every few months; an options paper cites the provider's page with the date it was read, and keeps ranges, not single numbers.</p></aside>
 </section>
 
-<section class="slide" id="s2-steps" data-lo="LO3">
-  <div class="kicker">Step by step</div>
-  <h2>REPLACE: a process, shown one step per key press</h2>
-  <div class="flow">
-    <div class="step c-teal"><b>1 · REPLACE: name</b>REPLACE: what happens first</div>
-    <div class="arrow frag" data-frag="b">→</div><div class="step c-cyan frag" data-frag="b"><b>2 · REPLACE: name</b>REPLACE: the next piece</div>
-    <div class="arrow frag" data-frag="c">→</div><div class="step c-coral frag" data-frag="c"><b>3 · REPLACE: name</b>REPLACE: the result</div>
+<section class="slide" id="cost-lines" data-lo="LO3" data-label="Cost lines">
+  <div class="kicker">Total cost of ownership</div>
+  <h2>Five lines make a three-year cost, and the last one is often forgotten</h2>
+  <table class="t small">
+    <tr><th>Line</th><th>What it holds</th><th>Moves with</th></tr>
+    <tr><td>Build</td><td>first year only</td><td>scope</td></tr>
+    <tr><td>Run and people</td><td>platform fees, the team that operates it</td><td>time</td></tr>
+    <tr><td>Tokens</td><td>requests × tokens × price</td><td>volume and price</td></tr>
+    <tr><td>Capacity units</td><td>servers sized for the peak month</td><td>peak volume, in steps</td></tr>
+    <tr class="hl"><td>Unanswered work</td><td>questions not answered become calls</td><td>volume and coverage</td></tr>
+  </table>
+  <aside class="notes"><p>The last line is where non-generative options look cheaper than they are: the Ministry pays the contact centre too. The call cost (SAR 9, half of the unanswered calling) is the case's assumption; in a real paper, the contact-centre lead owns that number.</p></aside>
+</section>
+
+<section class="slide" id="base-result" data-lo="LO3" data-label="Base forecast">
+  <div class="kicker">Measured in Lab 2.2</div>
+  <h2>At the base forecast, O1 costs least over three years</h2>
+  <table class="t">
+    <tr><th>Option</th><th class="num">Three years, SAR</th><th class="num">Per answered question</th><th class="num">Year-1 run, SAR</th></tr>
+    <tr class="hl"><td>O1 hosted in the Kingdom</td><td class="num">6.25 million</td><td class="num">1.08</td><td class="num">1.40 million</td></tr>
+    <tr><td>O2 Ministry-hosted</td><td class="num">7.59 million</td><td class="num">1.31</td><td class="num">1.71 million</td></tr>
+    <tr><td>O3 non-generative</td><td class="num">11.92 million</td><td class="num">2.71</td><td class="num">2.27 million</td></tr>
+  </table>
+  <p class="small mt">Year-1 run includes the calls from unanswered questions. Without them, O1 runs at about SAR 1.0 million, under the SAR 1.2 million cap.</p>
+  <aside class="notes"><p>Copied from the solution run. The cap question (S04) is a good moment to ask which lines the sponsor's budget covers. The answer belongs in the options paper, not in the architect's head.</p></aside>
+</section>
+
+<section class="slide" id="tornado" data-lo="LO3" data-label="Sensitivity">
+  <div class="kicker">Sensitivity, one assumption at a time</div>
+  <h2>Volume moves O1's total by half; token price by 3%</h2>
+  <div class="bars">
+    <div class="row"><span>Volume high</span><div class="bar c-coral" style="--w:100%"></div><span class="val">+58%</span></div>
+    <div class="row"><span>Volume low</span><div class="bar c-teal" style="--w:35%"></div><span class="val">-20%</span></div>
+    <div class="row"><span>Token price ×2</span><div class="bar c-amber" style="--w:6%"></div><span class="val">+3%</span></div>
+    <div class="row"><span>Token price ×0.5</span><div class="bar c-cyan" style="--w:4%"></div><span class="val">-2%</span></div>
   </div>
-  <div class="callout tip mt frag"><b>Takeaway.</b> REPLACE: the one sentence to remember</div>
-  <aside class="notes">Press once per step and say what each step adds before the next one appears. REPLACE: the example to walk through</aside>
+  <p class="caption">O1's three-year total against its base of SAR 6.25 million (Lab 2.2, step 4).</p>
+  <aside class="notes"><p>Base 6,251,418; high volume 9,906,174; low volume 4,984,171; double price 6,461,933; half price 6,146,161. The lesson: debate the forecast and the coverage, not the token price, at this volume. With long agent loops, tokens per request would grow and the picture changes; that is why the model is code, not a slide.</p></aside>
+</section>
+
+<section class="slide" id="crossover" data-lo="LO3" data-label="Crossover">
+  <div class="kicker">When would O2 win?</div>
+  <h2>The Ministry-hosted model wins only at high volume and double prices</h2>
+  <div class="cols cols-2">
+    <div class="stat"><div class="big">900,000</div><div class="lbl">requests a month, steady, at double the token price: O2 matches O1</div></div>
+    <ul class="bullets small">
+      <li>At the base price there is no crossover below three million a month.</li>
+      <li>The high forecast reaches 900,000 only in its last month.</li>
+      <li>So the decision has a trigger: volume, then price.</li>
+    </ul>
+  </div>
+  <aside class="notes"><p>From the stretch of Lab 2.2. This is the number that goes into the review trigger of decision record 1: reopen if monthly requests exceed 600,000 or the input price rises above SAR 12 per million, before the crossover is reached.</p></aside>
+</section>
+
+<section class="slide" id="ranges-not-points" data-lo="LO3" data-label="Ranges">
+  <div class="kicker">Reading cost models</div>
+  <h2>Show ranges and their sources, never one confident number</h2>
+  <div class="cols cols-2">
+    <ul class="bullets small">
+      <li>Every price has a source and the date it was read.</li>
+      <li>Every volume has an owner who will defend it.</li>
+      <li>Every option is costed with the same lines.</li>
+    </ul>
+    <div class="callout warn small"><b>What goes wrong.</b> An options paper that costs the favourite option in detail and the others on a napkin. Reviewers spot it from the number of lines.</div>
+  </div>
+  <aside class="notes"><p>Hosting cost per request at different volumes and serving optimisation are AE-401's subject; here the architect needs the shape of the curve, not the engine settings.</p></aside>
+</section>
+
+<section class="slide" id="check-tco" data-lo="LO3">
+  <div class="kicker">Checkpoint</div>
+  <h2>What should the options paper argue about?</h2>
+  <div class="quiz" data-type="single" data-lo="LO3">
+    <p class="lead">In Lab 2.2, doubling the token price moves O1's three-year total by 3%, the high forecast by 58%, and O3 loses on unanswered calls. Where should the sponsor's meeting spend its time?</p>
+    <div class="opts">
+      <div class="opt" data-why="Debates the input with the least effect: the token price barely moves the ranking at this volume">Negotiating the token price</div>
+      <div class="opt" data-why="Ignores that build is a small share of three years and similar across options">Cutting the build cost of O1</div>
+      <div class="opt" data-why="Treats O3 as cheapest because it is cheapest to run: its unanswered calls dominate">Choosing O3 because it is cheapest to run</div>
+      <div class="opt" data-ok>The volume forecast and how many questions each option answers</div>
+    </div>
+    <div class="callout tip why"><b>Why.</b> The ranking depends on volume and coverage; the sensitivity table shows it, so the meeting argues about those.</div>
+  </div>
+  <aside class="notes"><p>Answer: D.</p></aside>
 </section>
 
 <section class="slide lab" id="lab-2-2" data-auto="lab" data-lab="2.2">
-  <aside class="notes">REPLACE: what to watch for while participants work, the typical problems, and the fallback for anyone who did not finish an earlier lab</aside>
+  <aside class="notes"><p>Common slips: capacity units sized for the average month, not the peak; tokens forgotten in year 1; coverage applied to cost instead of to requests. The solution's totals are printed as a check; a participant within a riyal of them is right.</p></aside>
 </section>
 
 <!-- Session 3 -->
 
 <section class="slide section" id="s3" data-auto="section" data-session="3"></section>
 
-<section class="slide" id="s3-idea" data-lo="LO3">
-  <div class="kicker">REPLACE: the question this slide answers</div>
-  <h2>REPLACE: one idea, stated as a sentence</h2>
-  <div class="cols cols-2">
-    <ul class="bullets">
-      <li>REPLACE: at most six bullets, each a complete thought</li>
-      <li>REPLACE: bold the key phrase; numbers come from the lab run, not from memory</li>
-    </ul>
-    <div class="card c-teal"><h4>In the case study</h4><p class="small mb0">REPLACE: tie the idea to the case study and its data</p></div>
+<section class="slide" id="where-lockin" data-lo="LO3" data-label="Where lock-in sits">
+  <div class="kicker">Lock-in</div>
+  <h2>Lock-in sits in the data and the contract, rarely in the model</h2>
+  <div class="cols cols-4">
+    <div class="card c-coral"><h4>Data</h4><p class="small mb0">Indexes and logs in a store with no bulk export</p></div>
+    <div class="card c-amber"><h4>Contract</h4><p class="small mb0">Minimum terms and early-exit fees</p></div>
+    <div class="card c-purple"><h4>Formats</h4><p class="small mb0">Prompts and tools in one provider's shape</p></div>
+    <div class="card c-cyan"><h4>Evidence</h4><p class="small mb0">Evaluation sets kept only in a vendor console</p></div>
   </div>
-  <div class="callout warn mt"><b>What goes wrong.</b> REPLACE: the failure participants will hit, and how to recognise it</div>
-  <aside class="notes">REPLACE: what to say, the demo to run, the question to ask the room, the common failure and its fix</aside>
+  <aside class="notes"><p>Swapping the model behind an OpenAI-compatible interface is often days of work. Moving 38,000 applications' worth of indexed documents and their evaluation history is months. Ask the room where their own last migration lost time.</p></aside>
 </section>
 
-<section class="slide" id="s3-steps" data-lo="LO3">
-  <div class="kicker">Step by step</div>
-  <h2>REPLACE: a process, shown one step per key press</h2>
-  <div class="flow">
-    <div class="step c-teal"><b>1 · REPLACE: name</b>REPLACE: what happens first</div>
-    <div class="arrow frag" data-frag="b">→</div><div class="step c-cyan frag" data-frag="b"><b>2 · REPLACE: name</b>REPLACE: the next piece</div>
-    <div class="arrow frag" data-frag="c">→</div><div class="step c-coral frag" data-frag="c"><b>3 · REPLACE: name</b>REPLACE: the result</div>
+<section class="slide" id="exit-costs" data-lo="LO3" data-label="Exit cost">
+  <div class="kicker">Measured in Lab 2.3</div>
+  <h2>The cheapest option to run is the dearest to leave</h2>
+  <div class="cols cols-2">
+    <table class="t">
+      <tr><th>Option</th><th class="num">Exit cost, SAR</th></tr>
+      <tr class="hl"><td>O1 hosted in the Kingdom</td><td class="num">540,000</td></tr>
+      <tr><td>O3 non-generative</td><td class="num">357,500</td></tr>
+      <tr><td>O2 Ministry-hosted</td><td class="num">322,500</td></tr>
+    </table>
+    <div class="bars">
+      <div class="row"><span>Vector store, no export</span><div class="bar c-coral" style="--w:100%"></div><span class="val">250,000</span></div>
+      <div class="row"><span>Early-exit fee</span><div class="bar c-amber" style="--w:67%"></div><span class="val">167,500</span></div>
+      <div class="row"><span>Prompt formats</span><div class="bar c-purple" style="--w:28%"></div><span class="val">70,000</span></div>
+      <div class="row"><span>Evaluation in console</span><div class="bar c-cyan" style="--w:21%"></div><span class="val">52,500</span></div>
+    </div>
   </div>
-  <div class="callout tip mt frag"><b>Takeaway.</b> REPLACE: the one sentence to remember</div>
-  <aside class="notes">Press once per step and say what each step adds before the next one appears. REPLACE: the example to walk through</aside>
+  <p class="caption">Person-months at SAR 35,000 plus fees, from the case's exit factors.</p>
+  <aside class="notes"><p>The bars are O1's four factors: 6 person-months plus a 40,000 re-embedding fee; 0.5 plus 150,000; 2; 1.5. Two of the four can be bought down in the contract, which is step 4 of the lab.</p></aside>
+</section>
+
+<section class="slide" id="weights-pitfalls" data-lo="LO3" data-label="Weights">
+  <div class="kicker">Weighted criteria</div>
+  <h2>Weights are opinions; report how far they can move</h2>
+  <ul class="bullets">
+    <li><b>Double counting.</b> Three-year cost and exit cost are both money; say so, or merge them.</li>
+    <li><b>Ordinal scores.</b> A 4 is not twice a 2; small score gaps are noise.</li>
+    <li><b>Hidden weights.</b> A criterion left out has weight zero, by decision.</li>
+    <li><b>Rank reversal.</b> Find the weight at which the leader changes, and print it.</li>
+  </ul>
+  <aside class="notes"><p>The entry names "weighted criteria and their pitfalls". The fix is not to drop weights; it is to show the sensitivity of the ranking to them, exactly as Session 2 showed the sensitivity of cost to volume.</p></aside>
+</section>
+
+<section class="slide" id="flip-weight" data-lo="LO3" data-label="Flip">
+  <div class="kicker">Measured in Lab 2.3</div>
+  <h2>Weigh exit cost at 0.13 instead of 0.10, and O2 overtakes O1</h2>
+  <div class="cols cols-3">
+    <div class="stat"><div class="big">4.20</div><div class="lbl">O1's weighted score at an exit weight of 0.10</div></div>
+    <div class="stat"><div class="big">4.10</div><div class="lbl">O2's weighted score at the same weights</div></div>
+    <div class="stat"><div class="big">0.13</div><div class="lbl">exit-cost weight at which O2 leads</div></div>
+  </div>
+  <div class="callout warn mt"><b>A fragile ranking.</b> A three-point change of one weight reverses it. The decision record says so.</div>
+  <aside class="notes"><p>Ask the room for its own weight on exit cost. If anyone argues above 0.13, the ranking is contested, and the honest record lists the flip weight as a bad consequence. Record 1 in Lab 2.4 does exactly that.</p></aside>
+</section>
+
+<section class="slide" id="requirements" data-lo="LO3" data-label="Requirements">
+  <div class="kicker">Buying the exit down</div>
+  <h2>A procurement requirement keeps the exit open only if it can be verified</h2>
+  <div class="chat">
+    <div class="msg ai bad"><span class="who">Weak</span>The provider will make data available where possible.</div>
+    <div class="msg ai good"><span class="who">Verifiable</span>The provider shall export all indexed documents, their embeddings and metadata in JSON Lines or Parquet within 10 working days of a request, at no extra charge.</div>
+  </div>
+  <aside class="notes"><p>The lab's lint checks three things: "shall", something verifiable (a number, a format, a standard interface) and no escape phrase. Content is the participant's: each requirement must remove one of O1's factors. The second solution requirement asks for an OpenAI-compatible interface and a 90-day notice after 12 months.</p></aside>
+</section>
+
+<section class="slide" id="test-the-exit" data-lo="LO3" data-label="Test the exit">
+  <div class="kicker">An exit is a design artefact</div>
+  <h2>Test the export once a year, or the requirement is only paper</h2>
+  <div class="flow">
+    <div class="step c-teal"><b>Request</b>a full export</div>
+    <div class="arrow">→</div>
+    <div class="step c-cyan"><b>Load</b>it into the Ministry's index</div>
+    <div class="arrow">→</div>
+    <div class="step c-purple"><b>Re-run</b>the evaluation set</div>
+    <div class="arrow">→</div>
+    <div class="step c-coral"><b>Record</b>time taken and gaps</div>
+  </div>
+  <aside class="notes"><p>The yearly exit test is an architect's control, not a lawyer's. It turns the exit cost into a measured number for the next decision.</p></aside>
+</section>
+
+<section class="slide" id="check-lockin" data-lo="LO3">
+  <div class="kicker">Checkpoint</div>
+  <h2>Which requirement removes O1's largest exit cost?</h2>
+  <div class="quiz" data-type="single" data-lo="LO3">
+    <p class="lead">O1's largest exit factor is its managed vector store with no bulk export (SAR 250,000). Which requirement removes it?</p>
+    <div class="opts">
+      <div class="opt" data-why="Moves the calls but not the data: an interface standard leaves the index where it is">The service shall expose an OpenAI-compatible interface</div>
+      <div class="opt" data-ok>The provider shall export the index, embeddings and metadata in JSON Lines within 10 working days</div>
+      <div class="opt" data-why="Fixes the contract term, not the data: leaving early is cheaper, the index is still stuck">The contract shall allow exit with 90 days' notice</div>
+      <div class="opt" data-why="Has no verifiable term: 'reasonable' cannot be checked">The provider shall give reasonable help on exit</div>
+    </div>
+    <div class="callout tip why"><b>Why.</b> The cost is in the data; only an export of the data, in an open format and a set time, removes it.</div>
+  </div>
+  <aside class="notes"><p>Answer: B. A and C are both good requirements for other factors; that is the trap.</p></aside>
 </section>
 
 <section class="slide lab" id="lab-2-3" data-auto="lab" data-lab="2.3">
-  <aside class="notes">REPLACE: what to watch for while participants work, the typical problems, and the fallback for anyone who did not finish an earlier lab</aside>
+  <aside class="notes"><p>The flip search must rescale the other weights; participants who only add weight to exit cost get weights that sum above 1 and a flip that means nothing. The lint is strict on "shall": "will" fails on purpose.</p></aside>
 </section>
 
 <!-- Session 4 -->
 
 <section class="slide section" id="s4" data-auto="section" data-session="4"></section>
 
-<section class="slide" id="s4-idea" data-lo="LO3">
-  <div class="kicker">REPLACE: the question this slide answers</div>
-  <h2>REPLACE: one idea, stated as a sentence</h2>
-  <div class="cols cols-2">
-    <ul class="bullets">
-      <li>REPLACE: at most six bullets, each a complete thought</li>
-      <li>REPLACE: bold the key phrase; numbers come from the lab run, not from memory</li>
-    </ul>
-    <div class="card c-teal"><h4>In the case study</h4><p class="small mb0">REPLACE: tie the idea to the case study and its data</p></div>
+<section class="slide" id="why-records" data-lo="LO3" data-label="Why records">
+  <div class="kicker">Decision records</div>
+  <h2>A decision record is written for the architect who reopens it</h2>
+  <div class="cols cols-3">
+    <div class="card c-teal"><h4>The next architect</h4><p class="small mb0">Why O1, what it cost, what would change it.</p></div>
+    <div class="card c-purple"><h4>The auditor</h4><p class="small mb0">Who decided, on which drivers, on which date.</p></div>
+    <div class="card c-coral"><h4>The panel</h4><p class="small mb0">The capstone asks for six, dated, in the repository.</p></div>
   </div>
-  <div class="callout warn mt"><b>What goes wrong.</b> REPLACE: the failure participants will hit, and how to recognise it</div>
-  <aside class="notes">REPLACE: what to say, the demo to run, the question to ask the room, the common failure and its fix</aside>
+  <aside class="notes"><p>The authenticity rule of the assessment uses dated decision records and the commit history. The follow-up task after the course is three records from the participant's own work.</p></aside>
 </section>
 
-<section class="slide" id="s4-steps" data-lo="LO3">
-  <div class="kicker">Step by step</div>
-  <h2>REPLACE: a process, shown one step per key press</h2>
+<section class="slide" id="record-shape" data-lo="LO3" data-label="The template">
+  <div class="kicker">The template</div>
+  <h2>MADR's sections, plus a trigger that says when to reopen</h2>
   <div class="flow">
-    <div class="step c-teal"><b>1 · REPLACE: name</b>REPLACE: what happens first</div>
-    <div class="arrow frag" data-frag="b">→</div><div class="step c-cyan frag" data-frag="b"><b>2 · REPLACE: name</b>REPLACE: the next piece</div>
-    <div class="arrow frag" data-frag="c">→</div><div class="step c-coral frag" data-frag="c"><b>3 · REPLACE: name</b>REPLACE: the result</div>
+    <div class="step c-navy"><b>Context</b>the question</div>
+    <div class="arrow">→</div>
+    <div class="step c-teal"><b>Drivers</b>with ids</div>
+    <div class="arrow">→</div>
+    <div class="step c-cyan"><b>Options</b>two or more</div>
+    <div class="arrow">→</div>
+    <div class="step c-purple"><b>Outcome</b>and why</div>
+    <div class="arrow">→</div>
+    <div class="step c-amber"><b>Consequences</b>good and bad</div>
+    <div class="arrow">→</div>
+    <div class="step c-coral"><b>Trigger</b>a number or a date</div>
   </div>
-  <div class="callout tip mt frag"><b>Takeaway.</b> REPLACE: the one sentence to remember</div>
-  <aside class="notes">Press once per step and say what each step adds before the next one appears. REPLACE: the example to walk through</aside>
+  <aside class="notes"><p>MADR merged its positive and negative consequences into one "Consequences" section with "Good, because" and "Bad, because" lines; the course keeps that. The review trigger is this course's addition.</p><p>Sources: MADR.</p></aside>
+</section>
+
+<section class="slide" id="record-one" data-lo="LO3" data-label="Record one">
+  <div class="kicker">From Lab 2.4</div>
+  <h2>Record one names the fragile ranking as a bad consequence</h2>
+  <pre class="code s" data-file="0001.md"><code class="language-markdown">## Decision outcome
+Chosen option: "O1", because it is the cheapest over three years
+(SAR 6.25 million against 7.59 and 11.92), meets S12 and goes live first.
+
+### Consequences
+- Good, because no accelerator servers to buy or operate
+- Bad, because it is the dearest option to leave (SAR 540,000)
+- Bad, because an exit-cost weight of 0.13 puts O2 first
+
+## Review trigger
+Reopen if monthly requests exceed 600,000 or the input price
+rises above SAR 12 per million.</code></pre>
+  <aside class="notes"><p>Abridged from the solution. Every number traces to a lab: Lab 2.2 for the totals and the crossover, Lab 2.3 for the exit cost and the flip weight.</p></aside>
+</section>
+
+<section class="slide" id="triggers" data-lo="LO3" data-label="Triggers">
+  <div class="kicker">Review triggers</div>
+  <h2>A trigger fires on a measurement or a date</h2>
+  <table class="t small">
+    <tr><th>Cannot fire</th><th>Can fire</th></tr>
+    <tr><td>If things change</td><td>If monthly requests exceed 600,000</td></tr>
+    <tr><td>When quality drops</td><td>If Q1 falls below 0.90 on the monthly sample of 200</td></tr>
+    <tr><td>Revisit periodically</td><td>On 2027-12-31</td></tr>
+    <tr><td>If the vendor raises prices</td><td>If input tokens cost more than SAR 12 per million</td></tr>
+  </table>
+  <aside class="notes"><p>Each right-hand trigger names who measures it. Ask: who watches the monthly request count? The platform team, from the gateway logs of Day 3.</p></aside>
+</section>
+
+<section class="slide" id="the-log" data-lo="LO3" data-label="The log">
+  <div class="kicker">The decision log</div>
+  <h2>Six records make a log when they share an index and a status</h2>
+  <ul class="bullets">
+    <li>One file per decision, numbered, never renumbered.</li>
+    <li>Status: proposed, accepted, or superseded by a later number.</li>
+    <li>An index with each record's trigger, so triggers are watched in one place.</li>
+    <li>Records are reviewed in pull requests like code.</li>
+  </ul>
+  <aside class="notes"><p>The stretch of Lab 2.4 writes the index. A superseded record is never deleted: the history of why is the point.</p></aside>
+</section>
+
+<section class="slide" id="peer-challenge" data-lo="LO3" data-label="Challenge">
+  <div class="kicker">The peer challenge</div>
+  <h2>The lint finds missing parts; the reviewer finds missing consequences</h2>
+  <div class="trace s">
+    <div class="ev guard"><b>lint</b>no bad consequence; the review trigger has no number or date</div>
+    <div class="ev model"><b>reviewer</b>A cached answer can outlive a new circular for 30 days. Who carries that?</div>
+    <div class="ev model"><b>reviewer</b>Q1 answer quality is not a driver, and a stale answer is a wrong answer.</div>
+  </div>
+  <aside class="notes"><p>Record 0007 is the permits team's cache decision, planted with three flaws. The lint finds two. The third, a missing driver, needs a person who knows the scenarios. In the room, pairs swap their own records first and use 0007 only if time runs short.</p></aside>
+</section>
+
+<section class="slide" id="check-record" data-lo="LO3">
+  <div class="kicker">Checkpoint</div>
+  <h2>Which line makes this record reviewable?</h2>
+  <div class="quiz" data-type="single" data-lo="LO3">
+    <p class="lead">A record chooses to skip the reranker for status questions. Its trigger reads "revisit if quality drops". Which replacement makes it a trigger someone can act on?</p>
+    <div class="opts">
+      <div class="opt" data-why="Keeps the vagueness and adds a person: nobody can tell when quality has dropped">Revisit when the product owner feels quality has dropped</div>
+      <div class="opt" data-why="Sets a date with no link to the risk the decision took">Revisit every three years</div>
+      <div class="opt" data-ok>Reopen if Q1 on mixed questions falls below 0.90 on the monthly sample of 200</div>
+      <div class="opt" data-why="Chooses a metric the decision does not affect: latency improved by the change">Reopen if p95 latency rises above 4,000 ms</div>
+    </div>
+    <div class="callout tip why"><b>Why.</b> The risk the decision took is answer quality on mixed questions; the trigger measures exactly that, with a threshold and a sample.</div>
+  </div>
+  <aside class="notes"><p>Answer: C. D is a fine trigger for a different decision.</p></aside>
 </section>
 
 <section class="slide lab" id="lab-2-4" data-auto="lab" data-lab="2.4">
-  <aside class="notes">REPLACE: what to watch for while participants work, the typical problems, and the fallback for anyone who did not finish an earlier lab</aside>
+  <aside class="notes"><p>AI policy: an assistant may question the record but does not write the decision. In the room, pairs swap records for step 4 and write challenges as pull-request comments. Watch for records whose only bad consequence is "it costs money".</p></aside>
 </section>
 
-<section class="slide" id="wrap-up">
-  <div class="kicker">Day 2 · wrap-up</div>
+<section class="slide" id="wrap-up" data-label="Wrap-up">
+  <div class="kicker">Day 2</div>
   <h2>Three things to keep</h2>
   <div class="cols cols-3">
-    <div class="card c-teal"><h4>Remember</h4><p class="small mb0">REPLACE: one idea participants keep</p></div>
-    <div class="card c-coral"><h4>Remember</h4><p class="small mb0">REPLACE: one idea participants keep</p></div>
-    <div class="card c-purple"><h4>Remember</h4><p class="small mb0">REPLACE: one idea participants keep</p></div>
+    <div class="card c-teal"><h4>Cost a baseline</h4><p class="small mb0">A non-generative option shows what the model must beat, and sometimes wins.</p></div>
+    <div class="card c-coral"><h4>Find what the ranking depends on</h4><p class="small mb0">Volume and coverage, not token price, at Muyassir's scale.</p></div>
+    <div class="card c-purple"><h4>Record the cost of a choice</h4><p class="small mb0">Bad consequences and a trigger that can fire.</p></div>
   </div>
+  <aside class="notes"><p>Two records exist; the capstone needs six. Ask each participant to name the third decision they will record tonight.</p></aside>
 </section>
 
 <section class="slide dark" id="next" data-label="Next">
-  <div class="kicker">Next</div>
-  <h2>Day 3: The shared platform</h2>
-  <p class="lead">REPLACE: what participants prepare before then; unfinished labs can be finished at home</p>
-  <aside class="notes">REPLACE: accounts, installs or reading participants need before the next unit</aside>
+  <div class="kicker">Day 3</div>
+  <h2>Tomorrow: nine teams, one platform, and who pays for which tokens</h2>
+  <ul class="bullets">
+    <li>Keep <code>artifacts/D2_4/</code>: the two records start your decision log.</li>
+    <li>Look at <code>labs/data/platform/usage.csv</code>: six months of nine teams.</li>
+    <li>Think of one shared service in your own organisation that teams avoid. Why?</li>
+  </ul>
+  <aside class="notes"><p>The last question opens Day 3: platforms that teams avoid were usually built as projects, not products.</p></aside>
 </section>

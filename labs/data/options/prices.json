@@ -1,0 +1,51 @@
+{
+ "note": "Synthetic price ranges for the case. Not vendor prices.",
+ "person_year_sar": 420000,
+ "call_cost_sar": 9.0,
+ "call_share_of_unanswered": 0.5,
+ "token_price_range": {
+  "low": 0.5,
+  "base": 1.0,
+  "high": 2.0
+ },
+ "options": [
+  {
+   "id": "O1",
+   "name": "Generative, model hosted in the Kingdom, paid per token",
+   "build_sar": 900000,
+   "fixed_run_sar_per_year": 120000,
+   "people_fte": 2.0,
+   "in_tokens": 3200,
+   "out_tokens": 330,
+   "sar_per_m_in": 8.0,
+   "sar_per_m_out": 24.0,
+   "coverage": 0.92
+  },
+  {
+   "id": "O2",
+   "name": "Generative, open-weight model hosted by the Ministry",
+   "build_sar": 1400000,
+   "fixed_run_sar_per_year": 60000,
+   "people_fte": 2.5,
+   "in_tokens": 0,
+   "out_tokens": 0,
+   "sar_per_m_in": 0.0,
+   "sar_per_m_out": 0.0,
+   "unit_capacity_per_month": 450000,
+   "unit_sar_per_year": 200000,
+   "coverage": 0.92
+  },
+  {
+   "id": "O3",
+   "name": "Non-generative: guided search and a document checklist",
+   "build_sar": 1100000,
+   "fixed_run_sar_per_year": 150000,
+   "people_fte": 1.5,
+   "in_tokens": 0,
+   "out_tokens": 0,
+   "sar_per_m_in": 0.0,
+   "sar_per_m_out": 0.0,
+   "coverage": 0.7
+  }
+ ]
+}

@@ -54,10 +54,10 @@ Every lab is a notebook in `labs/`. Open it in Google Colab from the course page
 | 1.2 | Day 1 · Session 2 | Five measurable scenarios | [`D1_2_scenarios.ipynb`](labs/D1_2_scenarios.ipynb) |
 | 1.3 | Day 1 · Session 3 | Classified flows and placement | [`D1_3_data_flows.ipynb`](labs/D1_3_data_flows.ipynb) |
 | 1.4 | Day 1 · Session 4 | Views as code and a request budget | [`D1_4_views_budget.ipynb`](labs/D1_4_views_budget.ipynb) |
-| 2.1 | Day 2 · Session 1 | Match six case needs to patterns and find the one a non-generative design serves better | [`D2_1_patterns.ipynb`](labs/D2_1_patterns.ipynb) |
-| 2.2 | Day 2 · Session 2 | Cost three options and test their sensitivity to volume and token price | [`D2_2_three_year_cost.ipynb`](labs/D2_2_three_year_cost.ipynb) |
-| 2.3 | Day 2 · Session 3 | Score exit cost and write two procurement requirements that keep the exit open | [`D2_3_exit_cost.ipynb`](labs/D2_3_exit_cost.ipynb) |
-| 2.4 | Day 2 · Session 4 | Write two records, swap with a peer and challenge consequences and review triggers | [`D2_4_decision_records.ipynb`](labs/D2_4_decision_records.ipynb) |
+| 2.1 | Day 2 · Session 1 | Patterns and a non-generative baseline | [`D2_1_patterns.ipynb`](labs/D2_1_patterns.ipynb) |
+| 2.2 | Day 2 · Session 2 | Three options over three years | [`D2_2_three_year_cost.ipynb`](labs/D2_2_three_year_cost.ipynb) |
+| 2.3 | Day 2 · Session 3 | Exit cost, weights and two requirements | [`D2_3_exit_cost.ipynb`](labs/D2_3_exit_cost.ipynb) |
+| 2.4 | Day 2 · Session 4 | Two decision records and a challenge | [`D2_4_decision_records.ipynb`](labs/D2_4_decision_records.ipynb) |
 | 3.1 | Day 3 · Session 1 | Build a demand matrix from the synthetic usage logs of nine teams | [`D3_1_demand_matrix.ipynb`](labs/D3_1_demand_matrix.ipynb) |
 | 3.2 | Day 3 · Session 2 | Admit four models and make the supplied gateway refuse restricted data to an external model | [`D3_2_admission_gateway.ipynb`](labs/D3_2_admission_gateway.ipynb) |
 | 3.3 | Day 3 · Session 3 | Walk a tenancy model through a leaked key, a noisy neighbour and a runaway agent | [`D3_3_tenancy.ipynb`](labs/D3_3_tenancy.ipynb) |

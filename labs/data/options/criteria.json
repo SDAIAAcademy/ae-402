@@ -1,0 +1,31 @@
+{
+ "note": "Scores from 1 (worst) to 5 (best). The exit-cost score is yours to fill from the exit cost.",
+ "weights": {
+  "answer_coverage": 0.3,
+  "three_year_cost": 0.25,
+  "time_to_live": 0.2,
+  "data_placement": 0.15,
+  "exit_cost": 0.1
+ },
+ "scores": {
+  "O1": {
+   "answer_coverage": 5,
+   "three_year_cost": 4,
+   "time_to_live": 5,
+   "data_placement": 4
+  },
+  "O2": {
+   "answer_coverage": 5,
+   "three_year_cost": 3,
+   "time_to_live": 3,
+   "data_placement": 5
+  },
+  "O3": {
+   "answer_coverage": 2,
+   "three_year_cost": 1,
+   "time_to_live": 3,
+   "data_placement": 5
+  }
+ },
+ "person_month_sar": 35000
+}

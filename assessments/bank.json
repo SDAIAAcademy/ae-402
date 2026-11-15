@@ -204,6 +204,180 @@
       "level": "understand",
       "pool": "practice",
       "weight": 1
+    },
+    {
+      "id": "d2-pattern-letters",
+      "type": "single",
+      "prompt": "The inspections team wants its standard letters drafted in the house style from inspector notes; 9,000 approved letters exist. The building code changes monthly. What does fine-tuning give them, and what must still come from elsewhere?",
+      "options": [
+        "Both the style and the current code requirements",
+        "The style; the facts come from the inspector's notes",
+        "Nothing a prompt cannot give",
+        "The current code requirements; the style comes from a template"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Fine-tuning shapes a stable form from many examples; facts that change come from the notes or retrieval.",
+      "misconceptions": [
+        "Thinks tuning keeps knowledge current: the next circular makes a tuned model wrong",
+        "",
+        "Ignores what 9,000 examples make possible; a prompt is a rival to test, not a certainty",
+        "Inverts the two: tuning is for form, retrieval for knowledge that changes"
+      ],
+      "lo": [
+        "LO3"
+      ],
+      "day": "day2",
+      "session": 1,
+      "level": "analyze",
+      "pool": "practice",
+      "weight": 1
+    },
+    {
+      "id": "d2-unanswered-cost",
+      "type": "single",
+      "prompt": "Option O3 has the lowest build and run cost but answers 70% of questions, against 92% for O1. Why can its three-year cost still be the highest?",
+      "options": [
+        "Its build cost is paid every year",
+        "Unanswered questions become calls the Ministry also pays for",
+        "Non-generative systems need more servers",
+        "Its token price is higher"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "The cost model counts the calls created by unanswered questions; at 30% unanswered they dominate.",
+      "misconceptions": [
+        "Build is a first-year line only",
+        "",
+        "O3 runs on fixed infrastructure with no capacity units",
+        "O3 has no tokens at all"
+      ],
+      "lo": [
+        "LO3"
+      ],
+      "day": "day2",
+      "session": 2,
+      "level": "evaluate",
+      "pool": "practice",
+      "weight": 1
+    },
+    {
+      "id": "d2-sensitivity",
+      "type": "single",
+      "prompt": "Doubling the token price moves O1's three-year total by 3%; the high volume forecast moves it by 58%. What belongs in the decision's review trigger?",
+      "options": [
+        "The token price only",
+        "A monthly request volume, then the price",
+        "The build cost",
+        "Nothing: O1 is cheapest"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "The ranking depends most on volume, so the trigger watches volume first and price second.",
+      "misconceptions": [
+        "Watches the input with the least effect",
+        "",
+        "Build is spent and cannot reopen the decision",
+        "A cheapest option today can stop being cheapest; that is what triggers are for"
+      ],
+      "lo": [
+        "LO3"
+      ],
+      "day": "day2",
+      "session": 2,
+      "level": "analyze",
+      "pool": "practice",
+      "weight": 1
+    },
+    {
+      "id": "d2-flip-weight",
+      "type": "single",
+      "prompt": "With exit cost weighted 0.10, O1 scores 4.20 and O2 4.10; at 0.13, O2 leads. What should the options paper do?",
+      "options": [
+        "Report O1 as the winner and omit the flip",
+        "Raise the exit weight until the preferred option wins",
+        "Report the ranking and the flip weight, and record the fragility as a bad consequence",
+        "Drop weighted scoring from the paper"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "Weights are opinions; a close ranking is reported with the weight that reverses it.",
+      "misconceptions": [
+        "Presents an opinion as a fact",
+        "Tunes weights to a conclusion",
+        "",
+        "Throws away a useful method instead of reporting its sensitivity"
+      ],
+      "lo": [
+        "LO3"
+      ],
+      "day": "day2",
+      "session": 3,
+      "level": "evaluate",
+      "pool": "practice",
+      "weight": 1
+    },
+    {
+      "id": "d2-requirement",
+      "type": "single",
+      "prompt": "Which procurement requirement can a reviewer verify?",
+      "options": [
+        "The provider will support a smooth exit",
+        "The provider shall make reasonable efforts to export data",
+        "The provider shall export all indexed documents in JSON Lines within 10 working days of a request",
+        "The provider should prefer open formats"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "It uses 'shall', names a format and a time a reviewer can test.",
+      "misconceptions": [
+        "Uses 'will' and no measurable term",
+        "Contains an escape phrase",
+        "",
+        "Uses 'should' and no testable term"
+      ],
+      "lo": [
+        "LO3"
+      ],
+      "day": "day2",
+      "session": 3,
+      "level": "apply",
+      "pool": "practice",
+      "weight": 1
+    },
+    {
+      "id": "d2-adr-trigger",
+      "type": "single",
+      "prompt": "Which review trigger can fire?",
+      "options": [
+        "If the situation changes materially",
+        "When the team has time to revisit",
+        "If monthly requests exceed 600,000 in the gateway logs",
+        "When quality seems lower than expected"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "It names a measurement, a threshold and where it is measured.",
+      "misconceptions": [
+        "No measurement",
+        "No measurement or date",
+        "",
+        "A feeling, not a threshold"
+      ],
+      "lo": [
+        "LO3"
+      ],
+      "day": "day2",
+      "session": 4,
+      "level": "apply",
+      "pool": "practice",
+      "weight": 1
     }
   ]
 }
