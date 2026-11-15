@@ -733,7 +733,7 @@
       "kind": "capstone",
       "title": "Capstone project presentations",
       "deck": "slides/capstone.html",
-      "subtitle": "REPLACE: the catalog gives no length for the presentations; set capstone.talk_minutes and capstone.qa_minutes in course.json, write them on the format slide, add a timer for each to the now-presenting slide, and remove this line"
+      "subtitle": "Ten minutes of architecture and eight of questions, with one classification or forecast changed by the panel"
     }
   ],
   "capstone": {

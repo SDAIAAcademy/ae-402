@@ -72,7 +72,7 @@ Every lab is a notebook in `labs/`. Open it in Google Colab from the course page
 
 An architecture for one ministry service and the platform slice it runs on (scenarios, views, options paper, at least six decision records, and a working gateway, catalogue entry, golden path and showback) in a public repository, defended before a panel that includes a data architect. The follow-up task writes three decision records for a system from the participant's own work
 
-**Submission:** a public GitHub repository link, sent before the defence (see the capstone deck for what it holds). The defence is a 10-minute talk and 8 minutes of questions before a panel that includes a data architect.
+**Submission:** a public GitHub repository link, sent before the defence; `labs/capstone/README.md` lists what it holds and `labs/capstone/briefs/` the three services to choose from. The defence is a 10-minute talk and 8 minutes of questions before a panel that includes a data architect.
 
 ## Prerequisites
 
