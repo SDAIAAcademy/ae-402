@@ -62,10 +62,10 @@ Every lab is a notebook in `labs/`. Open it in Google Colab from the course page
 | 3.2 | Day 3 · Session 2 | Model admission and a gateway that refuses | [`D3_2_admission_gateway.ipynb`](labs/D3_2_admission_gateway.ipynb) |
 | 3.3 | Day 3 · Session 3 | Three incidents, two tenancy models | [`D3_3_tenancy.ipynb`](labs/D3_3_tenancy.ipynb) |
 | 3.4 | Day 3 · Session 4 | A showback that reconciles | [`D3_4_showback.ipynb`](labs/D3_4_showback.ipynb) |
-| 4.1 | Day 4 · Session 1 | Turn a supplied retrieval service into a template with evaluation, tracing and classification checks on | [`D4_1_golden_path.ipynb`](labs/D4_1_golden_path.ipynb) |
-| 4.2 | Day 4 · Session 2 | Write two checks that fail a design lacking an evaluation gate or sending restricted data out | [`D4_2_fitness_checks.ipynb`](labs/D4_2_fitness_checks.ipynb) |
-| 4.3 | Day 4 · Session 3 | Review a supplied design for risks, sensitivity points and non-compliance | [`D4_3_review.ipynb`](labs/D4_3_review.ipynb) |
-| 4.4 | Day 4 · Session 4 | Decide a deviation request and explain the trade-off on one page for a sponsor | [`D4_4_deviation.ipynb`](labs/D4_4_deviation.ipynb) |
+| 4.1 | Day 4 · Session 1 | A golden path from the permits team's service | [`D4_1_golden_path.ipynb`](labs/D4_1_golden_path.ipynb) |
+| 4.2 | Day 4 · Session 2 | Two fitness checks over designs as data | [`D4_2_fitness_checks.ipynb`](labs/D4_2_fitness_checks.ipynb) |
+| 4.3 | Day 4 · Session 3 | A structured review of Kashif's design | [`D4_3_review.ipynb`](labs/D4_3_review.ipynb) |
+| 4.4 | Day 4 · Session 4 | A deviation request, decided and explained on one page | [`D4_4_deviation.ipynb`](labs/D4_4_deviation.ipynb) |
 <!-- /academy:labs -->
 
 ## Capstone

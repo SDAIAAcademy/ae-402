@@ -1,0 +1,9 @@
+id,attribute,importance,difficulty,scenario
+Q1,answer quality,H,H,An inspector photographs an Arabic shop sign; Kashif's draft names the trade correctly in 90% of the Ministry's Arabic signage set.
+P1,privacy,H,M,A photo shows faces and car plates; no copy of it is processed outside the Kingdom.
+S1,security,H,M,One client's key leaks; the leak is contained to that client within 30 minutes.
+O1,human oversight,H,L,No report is filed without the inspector's approval; 100% of filed reports carry it.
+L1,latency,M,H,"On a 4G connection in the field, a draft report reaches the tablet within 5 s at p95."
+C1,cost,M,M,"A report costs SAR 0.05 or less in model calls at 18,000 photos a month."
+A1,availability,M,M,During field hours (07:00 to 15:00) drafts are available 99% of the time.
+M1,operability,L,M,A change to a prompt template is reviewed and can be traced to its owner.

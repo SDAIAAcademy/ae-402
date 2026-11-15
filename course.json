@@ -575,69 +575,158 @@
       "sessions": [
         {
           "title": "Golden paths",
+          "summary": "A golden path makes the compliant way the easy way: a template with its gates on by default",
           "outcomes": [
-            "REPLACE: what a participant can do after this session"
+            "Turn a team's service into a template other teams generate from",
+            "Put evaluation, classification checks and tracing on by default",
+            "Make switching a gate off visible to the platform"
           ],
           "lo": [
             "LO5"
           ],
           "lab": {
             "id": "4.1",
-            "title": "Turn a supplied retrieval service into a template with evaluation, tracing and classification checks on",
-            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "title": "A golden path from the permits team's service",
+            "summary": "Turn the permits team's retrieval service into a Copier template whose questions refuse a disallowed placement, generate Kashif's service from it and run its three gates as the pipeline would.",
             "minutes": 25,
-            "href": "D4_1_golden_path.ipynb"
+            "href": "D4_1_golden_path.ipynb",
+            "steps": [
+              {
+                "text": "What the permits team hard-coded",
+                "minutes": 4
+              },
+              {
+                "text": "The template: questions with guard rails",
+                "minutes": 9
+              },
+              {
+                "text": "Generate Kashif's service and run its gates",
+                "minutes": 7
+              },
+              {
+                "text": "A register of the gates switched off",
+                "minutes": 5
+              }
+            ],
+            "stretch": "Refuse an evaluation set without Arabic"
           }
         },
         {
           "title": "Fitness functions",
+          "summary": "Fitness functions turn the reference design's rules into checks that fail a build",
           "outcomes": [
-            "REPLACE: what a participant can do after this session"
+            "Describe a design as data a program can read",
+            "Write a check for a blocking evaluation gate before deployment",
+            "Write a placement check that follows fallbacks"
           ],
           "lo": [
             "LO5"
           ],
           "lab": {
             "id": "4.2",
-            "title": "Write two checks that fail a design lacking an evaluation gate or sending restricted data out",
-            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "title": "Two fitness checks over designs as data",
+            "summary": "Write two checks over five teams' design files, one for a blocking evaluation gate and one for the placement of every classified flow, and run them as a pipeline step that fails three designs.",
             "minutes": 25,
-            "href": "D4_2_fitness_checks.ipynb"
+            "href": "D4_2_fitness_checks.ipynb",
+            "steps": [
+              {
+                "text": "Read a design as data",
+                "minutes": 4
+              },
+              {
+                "text": "Check 1: a blocking evaluation gate before deployment",
+                "minutes": 7
+              },
+              {
+                "text": "Check 2: every flow is placed where its level may go",
+                "minutes": 8
+              },
+              {
+                "text": "Run both as a pipeline step",
+                "minutes": 6
+              }
+            ],
+            "stretch": "A third check: the evaluation includes Arabic"
           }
         },
         {
           "title": "Structured architecture review",
+          "summary": "A structured review weighs a design against its prioritised scenarios, not a checklist",
           "outcomes": [
-            "REPLACE: what a participant can do after this session"
+            "Prioritise scenarios in a utility tree",
+            "Tell risks, sensitivity points, trade-off points and non-compliance apart",
+            "Write a review report with a verdict a team can act on"
           ],
           "lo": [
             "LO6"
           ],
           "lab": {
             "id": "4.3",
-            "title": "Review a supplied design for risks, sensitivity points and non-compliance",
-            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "title": "A structured review of Kashif's design",
+            "summary": "Review the inspections team's design: order its scenarios in a utility tree, tag twelve observations, group the risks into themes and write the report with its verdict.",
             "minutes": 25,
-            "href": "D4_3_review.ipynb"
+            "href": "D4_3_review.ipynb",
+            "steps": [
+              {
+                "text": "The utility tree: which scenarios lead",
+                "minutes": 6
+              },
+              {
+                "text": "Tag the twelve observations",
+                "minutes": 8
+              },
+              {
+                "text": "Risk themes, tied to scenarios",
+                "minutes": 5
+              },
+              {
+                "text": "The review report and its verdict",
+                "minutes": 6
+              }
+            ],
+            "stretch": "Which finding becomes a fitness check?"
           }
         },
         {
           "title": "Deviations and sponsors",
+          "summary": "A deviation is a time-boxed decision with conditions, explained to a sponsor in numbers",
           "outcomes": [
-            "REPLACE: what a participant can do after this session"
+            "Put numbers on what a deviation breaks and what refusing it costs",
+            "Decide a deviation with verifiable conditions, an expiry and reopen triggers",
+            "Explain a trade-off on one page for a sponsor"
           ],
           "lo": [
             "LO6"
           ],
           "lab": {
             "id": "4.4",
-            "title": "Decide a deviation request and explain the trade-off on one page for a sponsor",
-            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "title": "A deviation request, decided and explained on one page",
+            "summary": "Measure the inspections team's request to send photos to an external vision model, decide it with conditions and an expiry, write the sponsor's one page and choose your capstone service.",
             "minutes": 25,
-            "href": "D4_4_deviation.ipynb"
+            "href": "D4_4_deviation.ipynb",
+            "steps": [
+              {
+                "text": "What the request breaks, and what refusing costs",
+                "minutes": 6
+              },
+              {
+                "text": "Decide, with conditions, an expiry and what reopens it",
+                "minutes": 7
+              },
+              {
+                "text": "One page for the sponsor",
+                "minutes": 7
+              },
+              {
+                "text": "Choose your capstone service",
+                "minutes": 5
+              }
+            ],
+            "stretch": "The deviation as a gateway policy that expires"
           }
         }
-      ]
+      ],
+      "subtitle": "A golden path, fitness checks, a structured review and a deviation decided on one page"
     },
     {
       "id": "capstone",

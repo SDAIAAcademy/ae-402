@@ -1,0 +1,57 @@
+{
+ "service": "zoning-questions",
+ "team": "T05",
+ "owner": "Planning team lead",
+ "classification": "Public",
+ "components": [
+  {
+   "id": "site",
+   "kind": "app",
+   "hosting": "ministry"
+  },
+  {
+   "id": "qa",
+   "kind": "service",
+   "hosting": "ministry"
+  },
+  {
+   "id": "llm",
+   "kind": "model",
+   "model": "ext-frontier-l",
+   "hosting": "external"
+  }
+ ],
+ "flows": [
+  {
+   "id": "F1",
+   "from": "site",
+   "to": "qa",
+   "data": "question about published zoning",
+   "level": "Public"
+  },
+  {
+   "id": "F2",
+   "from": "qa",
+   "to": "llm",
+   "data": "prompt with published plans",
+   "level": "Public"
+  }
+ ],
+ "pipeline": [
+  {
+   "stage": "test"
+  },
+  {
+   "stage": "evaluate",
+   "blocking": true,
+   "min_score": 0.85,
+   "sets": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "stage": "deploy"
+  }
+ ]
+}

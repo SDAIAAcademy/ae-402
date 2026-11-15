@@ -581,6 +581,209 @@
       "level": "evaluate",
       "pool": "practice",
       "weight": 1
+    },
+    {
+      "id": "d4-golden-default",
+      "type": "single",
+      "prompt": "A platform's service template ships with its evaluation gate switched on. What does that default achieve that a recommendation in the template's README does not?",
+      "options": [
+        "Teams that take the easy way get the gate without deciding to",
+        "It makes the gate impossible to switch off",
+        "It removes the need for an evaluation set",
+        "It moves the evaluation to the gateway"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Most teams keep defaults; a recommendation is what gets skipped under a deadline.",
+      "misconceptions": [
+        "",
+        "A good default can still be switched off, visibly, with a reason",
+        "The gate needs the team's evaluation set to run",
+        "The gateway cannot see a service's evaluation"
+      ],
+      "lo": [
+        "LO5"
+      ],
+      "day": "day4",
+      "session": 1,
+      "level": "understand",
+      "pool": "practice",
+      "weight": 1
+    },
+    {
+      "id": "d4-template-validator",
+      "type": "single",
+      "prompt": "A team generating a service from the platform's template answers Restricted for its data and an external model for its alias. What should the template do?",
+      "options": [
+        "Generate the service and leave the refusal to the gateway",
+        "Refuse at generation, naming the placement rule the answer breaks",
+        "Generate the service with the evaluation gate off",
+        "Generate the service and email the platform team"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "A validator refuses the disallowed placement before any code or data exists.",
+      "misconceptions": [
+        "Lets a non-conforming service be built and deployed first",
+        "",
+        "Switches off an unrelated gate",
+        "Notifies without preventing anything"
+      ],
+      "lo": [
+        "LO5"
+      ],
+      "day": "day4",
+      "session": 1,
+      "level": "apply",
+      "pool": "practice",
+      "weight": 1
+    },
+    {
+      "id": "d4-fallback",
+      "type": "single",
+      "prompt": "A design sends Restricted photos to a vision model hosted in the Kingdom, with an external model as its fallback. A placement check looks only at each flow's destination. What happens?",
+      "options": [
+        "The check fails the design, since the fallback is external",
+        "The check fails every design that has a fallback",
+        "The check passes the design, though Restricted photos reach an external model when the first one fails",
+        "The check cannot run on a design with a fallback"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "A fallback is a second destination for the same data; a check must follow it to see it.",
+      "misconceptions": [
+        "Credits the check with reading fallbacks it ignores",
+        "Over-reaches: fallbacks within the rule are fine",
+        "",
+        "The check runs; it just checks too little"
+      ],
+      "lo": [
+        "LO5"
+      ],
+      "day": "day4",
+      "session": 2,
+      "level": "analyze",
+      "pool": "practice",
+      "weight": 1
+    },
+    {
+      "id": "d4-eval-order",
+      "type": "single",
+      "prompt": "A pipeline runs test, deploy, then a non-blocking evaluate stage with a 0.85 threshold on Arabic and English sets. Does it meet a standard that asks for an evaluation gate?",
+      "options": [
+        "Yes: it has an evaluate stage with a threshold",
+        "Yes, if the threshold is raised to 0.90",
+        "No: it needs a third language set",
+        "No: an evaluation after deployment that blocks nothing gates nothing"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "A gate must block, and before deployment; otherwise users already have the release it measures.",
+      "misconceptions": [
+        "Reads the stage's name, not its order or effect",
+        "The threshold is not the problem",
+        "Language coverage is not the problem here",
+        ""
+      ],
+      "lo": [
+        "LO5"
+      ],
+      "day": "day4",
+      "session": 2,
+      "level": "evaluate",
+      "pool": "practice",
+      "weight": 1
+    },
+    {
+      "id": "d4-sensitivity",
+      "type": "single",
+      "prompt": "In a review, the board notes: 'The vision call takes 3,800 ms of the 5,000 ms latency budget.' How should it be tagged?",
+      "options": [
+        "A sensitivity point: the latency scenario depends on that one parameter",
+        "Non-compliance: the budget is nearly spent",
+        "A trade-off point: latency against quality",
+        "A non-risk: the budget is met"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "One parameter decides whether a scenario is met; whether it becomes a risk depends on how much it moves.",
+      "misconceptions": [
+        "",
+        "No written standard is broken",
+        "Names no decision that moves two attributes in opposite directions",
+        "Misses how little room is left"
+      ],
+      "lo": [
+        "LO6"
+      ],
+      "day": "day4",
+      "session": 3,
+      "level": "analyze",
+      "pool": "practice",
+      "weight": 1
+    },
+    {
+      "id": "d4-utility-tree",
+      "type": "single",
+      "prompt": "A review has an hour. Which scenario should it examine first?",
+      "options": [
+        "Oversight: important, easy to meet",
+        "Arabic answer quality: important, hard to meet",
+        "Latency: of medium importance, hard to meet",
+        "Operability: of low importance, of medium difficulty"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "A utility tree leads with scenarios high in both importance and difficulty.",
+      "misconceptions": [
+        "Important but easy: little for the review to find",
+        "",
+        "Hard, but less important than an important and hard scenario",
+        "Least important"
+      ],
+      "lo": [
+        "LO6"
+      ],
+      "day": "day4",
+      "session": 3,
+      "level": "apply",
+      "pool": "practice",
+      "weight": 1
+    },
+    {
+      "id": "d4-deviation",
+      "type": "single",
+      "prompt": "A deviation lets a team send photos the on-device detector passes as clean to an external model. Which record is complete?",
+      "options": [
+        "Approved; owner named; conditions listed",
+        "Approved for as long as the team needs it, with conditions",
+        "Approved with conditions that carry numbers, the residual risk and who accepts it, an expiry date and reopen triggers",
+        "Refused, because any risk is too much"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "A deviation is bounded: verifiable conditions, a stated residual, an owner of that risk and an end.",
+      "misconceptions": [
+        "Has no expiry or residual risk",
+        "Has no end: it becomes the standard",
+        "",
+        "Refusing has a cost too, and the record must state it"
+      ],
+      "lo": [
+        "LO6"
+      ],
+      "day": "day4",
+      "session": 4,
+      "level": "evaluate",
+      "pool": "practice",
+      "weight": 1
     }
   ]
 }

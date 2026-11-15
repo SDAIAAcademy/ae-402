@@ -1,0 +1,76 @@
+{
+ "service": "permits-assistant",
+ "team": "T01",
+ "owner": "Eyad Al-Shuraihi",
+ "classification": "Restricted",
+ "components": [
+  {
+   "id": "portal",
+   "kind": "app",
+   "hosting": "ministry"
+  },
+  {
+   "id": "rag",
+   "kind": "service",
+   "hosting": "ministry"
+  },
+  {
+   "id": "index",
+   "kind": "store",
+   "hosting": "ministry"
+  },
+  {
+   "id": "llm",
+   "kind": "model",
+   "model": "ksa-general-m",
+   "hosting": "ksa_cloud"
+  }
+ ],
+ "flows": [
+  {
+   "id": "F1",
+   "from": "portal",
+   "to": "rag",
+   "data": "question and application",
+   "level": "Restricted"
+  },
+  {
+   "id": "F2",
+   "from": "rag",
+   "to": "index",
+   "data": "query",
+   "level": "Restricted"
+  },
+  {
+   "id": "F3",
+   "from": "rag",
+   "to": "llm",
+   "data": "prompt with passages",
+   "level": "Restricted"
+  },
+  {
+   "id": "F4",
+   "from": "rag",
+   "to": "portal",
+   "data": "answer",
+   "level": "Restricted"
+  }
+ ],
+ "pipeline": [
+  {
+   "stage": "test"
+  },
+  {
+   "stage": "evaluate",
+   "blocking": true,
+   "min_score": 0.85,
+   "sets": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "stage": "deploy"
+  }
+ ]
+}

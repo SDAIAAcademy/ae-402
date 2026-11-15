@@ -1,0 +1,57 @@
+{
+ "service": "staff-policies",
+ "team": "T09",
+ "owner": "Staff services lead",
+ "classification": "Restricted",
+ "components": [
+  {
+   "id": "intranet",
+   "kind": "app",
+   "hosting": "ministry"
+  },
+  {
+   "id": "assistant",
+   "kind": "service",
+   "hosting": "ministry"
+  },
+  {
+   "id": "llm",
+   "kind": "model",
+   "model": "ext-frontier-l",
+   "hosting": "external"
+  }
+ ],
+ "flows": [
+  {
+   "id": "F1",
+   "from": "intranet",
+   "to": "assistant",
+   "data": "employee question",
+   "level": "Restricted"
+  },
+  {
+   "id": "F2",
+   "from": "assistant",
+   "to": "llm",
+   "data": "question with the employee's leave record",
+   "level": "Restricted"
+  }
+ ],
+ "pipeline": [
+  {
+   "stage": "test"
+  },
+  {
+   "stage": "evaluate",
+   "blocking": true,
+   "min_score": 0.85,
+   "sets": [
+    "ar",
+    "en"
+   ]
+  },
+  {
+   "stage": "deploy"
+  }
+ ]
+}

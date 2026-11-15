@@ -1,0 +1,10 @@
+{"question": "Which documents do I need for a building permit?", "expected": "P01-documents"}
+{"question": "How is the permit fee calculated per square metre?", "expected": "P02-fees"}
+{"question": "How many working days until a residential application is decided?", "expected": "P03-timelines"}
+{"question": "What setback from the street is required?", "expected": "P04-setbacks"}
+{"question": "Do I need a permit to renovate the interior?", "expected": "P05-renovation"}
+{"question": "Can I appeal a refused permit?", "expected": "P06-appeals"}
+{"question": "Who must stamp the drawings?", "expected": "P07-engineering-office"}
+{"question": "What does a demolition permit require?", "expected": "P08-demolition"}
+{"question": "Adding a floor to my house: permit or not?", "expected": "P05-renovation"}
+{"question": "My corner plot: which setbacks apply?", "expected": "P04-setbacks"}

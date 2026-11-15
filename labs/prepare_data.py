@@ -795,12 +795,474 @@ def day3(rng: random.Random) -> None:
 
 
 # ======================================================================================
+# Day 4 · reference designs and reviews
+# ======================================================================================
+
+PERMITS_DOCS = {
+    "P01-documents": ("Documents for a building permit",
+                      "An application for a building permit needs the title deed, the site plan, the architectural "
+                      "drawings stamped by a licensed engineering office and the owner's national identity."),
+    "P02-fees": ("Permit fees",
+                 "The permit fee is charged per square metre of built area. Residential buildings pay a lower fee "
+                 "than commercial buildings. Fees are paid online before the permit is issued."),
+    "P03-timelines": ("How long a permit takes",
+                      "A complete residential application is decided within ten working days. Commercial "
+                      "applications take up to twenty working days. Missing documents stop the clock."),
+    "P04-setbacks": ("Setback rules",
+                     "Buildings keep a setback of two metres from side boundaries and four metres from the street. "
+                     "Corner plots keep the street setback on both street sides."),
+    "P05-renovation": ("Renovation without a permit",
+                       "Interior renovation that does not touch structure, facade or services needs no permit. "
+                       "Changing the facade, adding a floor or moving load-bearing walls needs one."),
+    "P06-appeals": ("Appealing a refusal",
+                    "An applicant may appeal a refused permit within thirty days. The appeal is reviewed by a "
+                    "committee that did not take the first decision."),
+    "P07-engineering-office": ("Engineering office certificate",
+                               "Drawings must be stamped by an engineering office licensed by the Saudi Council of "
+                               "Engineers. The office certifies that the design follows the building code."),
+    "P08-demolition": ("Demolition permits",
+                       "Demolition needs its own permit, a safety plan and a contractor licensed for demolition. "
+                       "Neighbours are notified seven days before work starts."),
+}
+PERMITS_EVAL = [
+    ("Which documents do I need for a building permit?", "P01-documents"),
+    ("How is the permit fee calculated per square metre?", "P02-fees"),
+    ("How many working days until a residential application is decided?", "P03-timelines"),
+    ("What setback from the street is required?", "P04-setbacks"),
+    ("Do I need a permit to renovate the interior?", "P05-renovation"),
+    ("Can I appeal a refused permit?", "P06-appeals"),
+    ("Who must stamp the drawings?", "P07-engineering-office"),
+    ("What does a demolition permit require?", "P08-demolition"),
+    ("Adding a floor to my house: permit or not?", "P05-renovation"),
+    ("My corner plot: which setbacks apply?", "P04-setbacks"),
+]
+INSPECTION_DOCS = {
+    "K01-photos": ("Photo requirements",
+                   "Each inspection report carries at least three photos: the facade, the violation and the "
+                   "building number plate. Photos are taken in daylight."),
+    "K02-violation-codes": ("Violation codes",
+                            "Violation codes start with V. V12 is construction without a permit, V31 is a blocked "
+                            "pavement, V44 is an unsafe scaffold."),
+    "K03-signage": ("Shop signage",
+                    "Shop signs show the licensed trade name in Arabic. A sign whose Arabic name differs from the "
+                    "commercial licence is a signage violation."),
+    "K04-hazards": ("Safety hazards",
+                    "Open excavations, exposed wiring and unsafe scaffolds are immediate hazards. The inspector "
+                    "orders the site closed until the hazard is removed."),
+    "K05-report-fields": ("Report form fields",
+                          "The report form records the plot number, the violation code, the inspector's finding, "
+                          "the photos and the deadline given to the owner."),
+    "K06-reinspection": ("Re-inspection",
+                         "A violation with a deadline is re-inspected within three working days after the deadline. "
+                         "A second failed inspection doubles the fine."),
+}
+INSPECTION_EVAL = [
+    ("How many photos does an inspection report need?", "K01-photos"),
+    ("What is violation code V44?", "K02-violation-codes"),
+    ("The Arabic name on a shop sign differs from its licence: what is it?", "K03-signage"),
+    ("Exposed wiring on a site: what does the inspector order?", "K04-hazards"),
+    ("Which fields does the report form record?", "K05-report-fields"),
+    ("When is a violation re-inspected after its deadline?", "K06-reinspection"),
+    ("Is an unsafe scaffold an immediate hazard?", "K04-hazards"),
+    ("What happens after a second failed inspection?", "K06-reinspection"),
+    ("Must photos show the building number plate?", "K01-photos"),
+    ("What is code V12 for construction without a permit?", "K02-violation-codes"),
+]
+
+RETRIEVAL_CORE = '''
+STOP = {"a", "an", "the", "is", "are", "do", "does", "i", "my", "to", "of", "for", "what", "which", "how",
+        "can", "it", "or", "not", "need", "needs", "on", "in", "must", "be", "by", "after", "and", "who", "when",
+        "until", "many", "from", "with", "its", "has", "per", "that", "this", "at"}
+
+
+def load_docs() -> dict[str, str]:
+    return {p.stem: p.read_text(encoding="utf-8") for p in sorted((HERE / "docs").glob("*.md"))}
+
+
+def words(text: str) -> set[str]:
+    return set(re.findall(r"[a-z0-9]+", text.lower())) - STOP
+
+
+def retrieve(question: str, docs: dict[str, str], k: int) -> list[str]:
+    q = words(question)
+    return sorted(docs, key=lambda d: (-len(q & words(docs[d])), d))[:k]
+'''
+
+PERMITS_SERVICE = '''"""Muyassir's retrieval service, as the permits team wrote it for itself (synthetic).
+
+Everything another team would change is hard-coded below. Evaluation is a script someone may run; nothing
+checks the classification of the model, and nothing is traced.
+"""
+from __future__ import annotations
+
+import re
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+SERVICE = "permits-rag"
+TEAM = "T01"
+LEVEL = "Restricted"
+MODEL = "ksa-general-m"
+TOP_K = 3
+''' + RETRIEVAL_CORE + '''
+
+def answer(question: str) -> dict:
+    docs = load_docs()
+    hits = retrieve(question, docs, TOP_K)
+    first = next(l for l in docs[hits[0]].splitlines() if l and not l.startswith("#"))
+    # the model call (MODEL, through the gateway) is a scripted stand-in: the first sentence of the top source
+    return {"answer": first.split(". ")[0].rstrip(".") + ".", "sources": hits}
+'''
+
+PERMITS_EVAL_PY = '''"""Retrieval hit rate on the permits team's evaluation set. Run by hand: python eval.py"""
+import json
+from service import HERE, TOP_K, load_docs, retrieve
+
+rows = [json.loads(l) for l in (HERE / "eval_set.jsonl").read_text(encoding="utf-8").splitlines() if l.strip()]
+docs = load_docs()
+hits = sum(r["expected"] in retrieve(r["question"], docs, TOP_K) for r in rows)
+print(f"hit rate {hits / len(rows):.2f} on {len(rows)} questions")
+'''
+
+GOLDEN_SERVICE = '''"""A retrieval service on the Asas golden path (synthetic).
+
+Its settings live in service.json, which the template writes from the team's answers. Every answer is
+traced to traces.jsonl with a hash of the question, never its text.
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+import re
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+CFG = json.loads((HERE / "service.json").read_text(encoding="utf-8"))
+''' + RETRIEVAL_CORE + '''
+
+def _trace(question: str, span: str, **fields) -> None:
+    if not CFG.get("tracing"):
+        return
+    rec = {"service": CFG["service_name"], "team": CFG["team"], "level": CFG["classification"], "span": span,
+           "question_sha256": hashlib.sha256(question.encode("utf-8")).hexdigest()[:16], **fields}
+    with open(HERE / "traces.jsonl", "a", encoding="utf-8") as f:
+        f.write(json.dumps(rec) + "\\n")
+
+
+def answer(question: str) -> dict:
+    docs = load_docs()
+    hits = retrieve(question, docs, CFG["top_k"])
+    _trace(question, "retrieve", sources=hits)
+    first = next(l for l in docs[hits[0]].splitlines() if l and not l.startswith("#"))
+    # the model call goes to CFG["model_alias"] through the gateway; here a scripted stand-in
+    _trace(question, "generate", model_alias=CFG["model_alias"])
+    return {"answer": first.split(". ")[0].rstrip(".") + ".", "sources": hits}
+'''
+
+GOLDEN_CHECKS = '''"""The golden path's gates. The pipeline runs `python checks.py`; exit code 1 stops the deployment."""
+from __future__ import annotations
+
+import json
+import sys
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+import service as S  # noqa: E402
+
+# from the Asas catalogue (Lab 3.2) and the placement rule P-01 (Day 1)
+HOSTING = {"ext-frontier-l": "external", "ksa-general-m": "ksa_cloud", "own-open-s": "ministry"}
+ALLOWED = {"Public": {"external", "ksa_cloud", "ministry"}, "Restricted": {"ksa_cloud", "ministry"},
+           "Secret": {"ministry"}}
+
+
+def gate_evaluation(cfg: dict) -> tuple[str, str]:
+    ev = cfg["evaluation"]
+    if not ev["enabled"]:
+        return "off", "switched off by the team: " + (ev.get("off_reason") or "no reason given")
+    rows = [json.loads(l) for l in (HERE / "eval_set.jsonl").read_text(encoding="utf-8").splitlines() if l.strip()]
+    docs = S.load_docs()
+    score = sum(r["expected"] in S.retrieve(r["question"], docs, cfg["top_k"]) for r in rows) / len(rows)
+    status = "pass" if score >= ev["min_score"] else "fail"
+    return status, f"retrieval hit rate {score:.2f} against {ev['min_score']:.2f} on {len(rows)} questions"
+
+
+def gate_classification(cfg: dict) -> tuple[str, str]:
+    hosting = HOSTING.get(cfg["model_alias"])
+    if hosting is None:
+        return "fail", f"{cfg['model_alias']} is not in the catalogue"
+    ok = hosting in ALLOWED[cfg["classification"]]
+    return ("pass" if ok else "fail"), f"{cfg['classification']} data to {cfg['model_alias']} ({hosting})"
+
+
+def gate_tracing(cfg: dict) -> tuple[str, str]:
+    path = HERE / "traces.jsonl"
+    before = len(path.read_text(encoding="utf-8").splitlines()) if path.exists() else 0
+    S.answer("tracing probe from the pipeline")
+    lines = path.read_text(encoding="utf-8").splitlines() if path.exists() else []
+    spans = [json.loads(l) for l in lines[before:]]
+    ok = ([s["span"] for s in spans] == ["retrieve", "generate"]
+          and all("question" not in s and s["level"] == cfg["classification"] for s in spans))
+    return ("pass" if ok else "fail"), f"{len(spans)} spans, no question text"
+
+
+GATES = {"evaluation": gate_evaluation, "classification": gate_classification, "tracing": gate_tracing}
+
+
+def main() -> int:
+    failed = False
+    for name, gate in GATES.items():
+        status, why = gate(S.CFG)
+        print(f"{name:15s} {status:5s} {why}")
+        failed |= status == "fail"
+    return 1 if failed else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
+'''
+
+
+def design(service, team, owner, level, components, flows, pipeline, extra=None):
+    d = {"service": service, "team": team, "owner": owner, "classification": level,
+         "components": components, "flows": flows, "pipeline": pipeline}
+    d.update(extra or {})
+    return d
+
+
+def day4(rng: random.Random) -> None:
+    # ---- Lab 4.1: the permits team's retrieval service, the golden path's parts, Kashif's knowledge base
+    base = "services/permits_rag"
+    for k, (title, body) in PERMITS_DOCS.items():
+        write(f"{base}/docs/{k}.md", f"# {title}\n\n{body}")
+    write(f"{base}/eval_set.jsonl", "\n".join(json.dumps({"question": q, "expected": e}) for q, e in PERMITS_EVAL))
+    write(f"{base}/service.py", PERMITS_SERVICE)
+    write(f"{base}/eval.py", PERMITS_EVAL_PY)
+    write(f"{base}/README.md", "# permits-rag (synthetic)\n\nThe permits team's retrieval service behind Muyassir. "
+          "Settings are constants in `service.py`. Evaluation: `python eval.py`, by hand.")
+    write("services/golden_path/service.py", GOLDEN_SERVICE)
+    write("services/golden_path/checks.py", GOLDEN_CHECKS)
+    write("services/golden_path/README.md.jinja",
+          "# {{ service_name }}\n\nA retrieval service of team {{ team }} on the Asas golden path, generated from "
+          "the template. Data: {{ classification }}. Model alias: {{ model_alias }} (through the gateway).\n\n"
+          "Put the team's documents in `docs/` and its evaluation set in `eval_set.jsonl`; the pipeline runs "
+          "`python checks.py`.")
+    kb = "services/inspections_kb"
+    for k, (title, body) in INSPECTION_DOCS.items():
+        write(f"{kb}/docs/{k}.md", f"# {title}\n\n{body}")
+    write(f"{kb}/eval_set.jsonl", "\n".join(json.dumps({"question": q, "expected": e}) for q, e in INSPECTION_EVAL))
+    ref("golden_path", {"questions": ["service_name", "team", "classification", "model_alias", "eval_min_score",
+                                      "eval_gate", "gate_off_reason"],
+                        "hard_coded": ["SERVICE", "TEAM", "LEVEL", "MODEL"], "min_score_floor": 0.8})
+
+    # ---- Lab 4.2 and 4.3: designs as data
+    eval_gate = {"stage": "evaluate", "blocking": True, "min_score": 0.85, "sets": ["ar", "en"]}
+    designs = {
+        "permits_reference": design(
+            "permits-assistant", "T01", "Eyad Al-Shuraihi", "Restricted",
+            [{"id": "portal", "kind": "app", "hosting": "ministry"},
+             {"id": "rag", "kind": "service", "hosting": "ministry"},
+             {"id": "index", "kind": "store", "hosting": "ministry"},
+             {"id": "llm", "kind": "model", "model": "ksa-general-m", "hosting": "ksa_cloud"}],
+            [{"id": "F1", "from": "portal", "to": "rag", "data": "question and application", "level": "Restricted"},
+             {"id": "F2", "from": "rag", "to": "index", "data": "query", "level": "Restricted"},
+             {"id": "F3", "from": "rag", "to": "llm", "data": "prompt with passages", "level": "Restricted"},
+             {"id": "F4", "from": "rag", "to": "portal", "data": "answer", "level": "Restricted"}],
+            [{"stage": "test"}, eval_gate, {"stage": "deploy"}]),
+        "zoning_public": design(
+            "zoning-questions", "T05", "Planning team lead", "Public",
+            [{"id": "site", "kind": "app", "hosting": "ministry"},
+             {"id": "qa", "kind": "service", "hosting": "ministry"},
+             {"id": "llm", "kind": "model", "model": "ext-frontier-l", "hosting": "external"}],
+            [{"id": "F1", "from": "site", "to": "qa", "data": "question about published zoning", "level": "Public"},
+             {"id": "F2", "from": "qa", "to": "llm", "data": "prompt with published plans", "level": "Public"}],
+            [{"stage": "test"}, eval_gate, {"stage": "deploy"}]),
+        "reports_triage": design(
+            "reports-triage", "T02", "Reports team lead", "Restricted",
+            [{"id": "app", "kind": "app", "hosting": "ministry"},
+             {"id": "triage", "kind": "service", "hosting": "ministry"},
+             {"id": "clf", "kind": "model", "model": "own-open-s", "hosting": "ministry"}],
+            [{"id": "F1", "from": "app", "to": "triage", "data": "citizen report with phone and location",
+              "level": "Restricted"},
+             {"id": "F2", "from": "triage", "to": "clf", "data": "report text", "level": "Restricted"}],
+            [{"stage": "test"}, {"stage": "deploy"},
+             {"stage": "evaluate", "blocking": False, "min_score": 0.85, "sets": ["ar", "en"]}]),
+        "staff_assistant": design(
+            "staff-policies", "T09", "Staff services lead", "Restricted",
+            [{"id": "intranet", "kind": "app", "hosting": "ministry"},
+             {"id": "assistant", "kind": "service", "hosting": "ministry"},
+             {"id": "llm", "kind": "model", "model": "ext-frontier-l", "hosting": "external"}],
+            [{"id": "F1", "from": "intranet", "to": "assistant", "data": "employee question", "level": "Restricted"},
+             {"id": "F2", "from": "assistant", "to": "llm", "data": "question with the employee's leave record",
+              "level": "Restricted"}],
+            [{"stage": "test"}, eval_gate, {"stage": "deploy"}]),
+        "inspections": design(
+            "kashif", "T03", "Rabah Al-Mujil", "Restricted",
+            [{"id": "tablet", "kind": "app", "hosting": "ministry"},
+             {"id": "kashif", "kind": "service", "hosting": "ministry"},
+             {"id": "vision", "kind": "model", "model": "ksa-vision-x", "hosting": "ksa_cloud",
+              "fallback": "vision_ext"},
+             {"id": "vision_ext", "kind": "model", "model": "ext-vision-q", "hosting": "external"},
+             {"id": "llm", "kind": "model", "model": "ksa-general-m", "hosting": "ksa_cloud"},
+             {"id": "reports", "kind": "store", "hosting": "ministry"}],
+            [{"id": "F1", "from": "tablet", "to": "kashif", "data": "site photos and inspector notes",
+              "level": "Restricted"},
+             {"id": "F2", "from": "kashif", "to": "vision", "data": "site photos", "level": "Restricted"},
+             {"id": "F3", "from": "kashif", "to": "llm", "data": "notes and photo findings", "level": "Restricted"},
+             {"id": "F4", "from": "kashif", "to": "reports", "data": "approved report", "level": "Restricted"},
+             {"id": "F5", "from": "kashif", "to": "tablet", "data": "draft report", "level": "Restricted"}],
+            [{"stage": "test"}, {"stage": "evaluate", "blocking": True, "min_score": 0.8, "sets": ["en"]},
+             {"stage": "deploy"}],
+            {"oversight": {"inspector_approves_every_report": True, "sample_review_pct": 10},
+             "latency_budget_ms": {"p95_total": 5000, "vision_p95": 3800},
+             "keys": [{"key": "k-t03-a", "used_by": ["tablet app", "nightly batch"]}],
+             "photos": {"compressed_on_tablet": True, "retention_days_at_provider": 30}}),
+    }
+    for k, d in designs.items():
+        write_json(f"designs/{k}.json", d)
+    ref("fitness", {"evaluation_gate": {"permits_reference": True, "zoning_public": True, "reports_triage": False,
+                                        "staff_assistant": True, "inspections": True},
+                    "placement": {"permits_reference": True, "zoning_public": True, "reports_triage": True,
+                                  "staff_assistant": False, "inspections": False},
+                    "arabic_evaluation": {"permits_reference": True, "zoning_public": True, "reports_triage": True,
+                                          "staff_assistant": True, "inspections": False}})
+
+    # ---- Lab 4.3: the review of Kashif
+    write_csv("review/scenarios.csv", [
+        {"id": "Q1", "attribute": "answer quality", "importance": "H", "difficulty": "H",
+         "scenario": "An inspector photographs an Arabic shop sign; Kashif's draft names the trade correctly in 90% "
+                     "of the Ministry's Arabic signage set."},
+        {"id": "P1", "attribute": "privacy", "importance": "H", "difficulty": "M",
+         "scenario": "A photo shows faces and car plates; no copy of it is processed outside the Kingdom."},
+        {"id": "S1", "attribute": "security", "importance": "H", "difficulty": "M",
+         "scenario": "One client's key leaks; the leak is contained to that client within 30 minutes."},
+        {"id": "O1", "attribute": "human oversight", "importance": "H", "difficulty": "L",
+         "scenario": "No report is filed without the inspector's approval; 100% of filed reports carry it."},
+        {"id": "L1", "attribute": "latency", "importance": "M", "difficulty": "H",
+         "scenario": "On a 4G connection in the field, a draft report reaches the tablet within 5 s at p95."},
+        {"id": "C1", "attribute": "cost", "importance": "M", "difficulty": "M",
+         "scenario": "A report costs SAR 0.05 or less in model calls at 18,000 photos a month."},
+        {"id": "A1", "attribute": "availability", "importance": "M", "difficulty": "M",
+         "scenario": "During field hours (07:00 to 15:00) drafts are available 99% of the time."},
+        {"id": "M1", "attribute": "operability", "importance": "L", "difficulty": "M",
+         "scenario": "A change to a prompt template is reviewed and can be traced to its owner."},
+    ])
+    notes = [
+        ("R01", "The vision model ksa-vision-x is not in the Asas catalogue: it was rejected for lack of Arabic "
+                "evaluation evidence.", "non-compliance", "Q1",
+         "The catalogue is a standard every team must meet; a design that uses an unadmitted model does not conform."),
+        ("R02", "When ksa-vision-x fails, photos fall back to ext-vision-q, an external model.", "non-compliance", "P1",
+         "Photos are Restricted; the placement rule forbids an external host whatever the path."),
+        ("R03", "The evaluation gate runs on the English set only; signs and forms are in Arabic.", "risk", "Q1",
+         "A gate exists, so it is not non-compliance; it measures the wrong thing for the top scenario."),
+        ("R04", "The vision call takes 3,800 ms of the 5,000 ms p95 budget.", "sensitivity point", "L1",
+         "One parameter, the provider's latency, decides whether the latency scenario is met."),
+        ("R05", "Compressing photos on the tablet cuts upload time and cost, and lowers the recognition of small "
+                "Arabic text.", "trade-off point", "Q1",
+         "One decision moves latency and cost one way and quality the other."),
+        ("R06", "The inspector approves every report before it is filed.", "non-risk", "O1",
+         "The oversight scenario is met by design."),
+        ("R07", "Drafts and approved reports are stored in the Ministry data centre.", "non-risk", "P1",
+         "Storage placement meets the rule for Restricted data."),
+        ("R08", "No owner is named for the prompt templates.", "risk", "M1",
+         "Nobody reviews or answers for template changes."),
+        ("R09", "A 10% sample review of approved reports is the only check that approvals are real.",
+         "sensitivity point", "O1",
+         "If the sample rate falls, rubber-stamping becomes invisible: the oversight scenario rests on this number."),
+        ("R10", "The tablet app and the nightly batch share one gateway key.", "risk", "S1",
+         "A leak in either client means revoking both: the leak is not contained to one client."),
+        ("R11", "Hosting a vision model in the Ministry data centre would remove the placement question, and add a "
+                "hardware purchase with a nine-month lead time.", "trade-off point", "P1",
+         "Privacy against cost and time to service."),
+        ("R12", "The cloud provider keeps photos 30 days and does not train on them, within the admission limit.",
+         "non-risk", "P1", "The data terms meet the catalogue's criteria."),
+    ]
+    write_csv("review/notes.csv", [{"id": i, "observation": t} for i, t, _, _, _ in notes])
+    ref("review_key", {"tags": {i: c for i, _, c, _, _ in notes}, "scenario": {i: s for i, _, _, s, _ in notes},
+                       "why": {i: w for i, _, _, _, w in notes},
+                       "priority": ["Q1", "P1", "S1", "O1", "L1", "A1", "C1", "M1"]})
+
+    # ---- Lab 4.4: the deviation request
+    write("deviation/request.md", """
+# Deviation request DR-2026-07 · external vision model for inspection photos
+
+**From** Rabah Al-Mujil, lead of the inspections team · **To** the Asas architecture board · **Date** 2026-11-02
+
+**Request.** Allow Kashif to send inspection photos to `ext-vision-q`, an external vision model, for twelve
+months, as its primary vision model.
+
+**Why.** `ksa-vision-x` was not admitted: it has no Arabic evaluation evidence, and its provider will publish one
+in February 2027 at the earliest. A Ministry-hosted vision model needs a hardware purchase with a nine-month lead
+time. Meanwhile inspectors type every report by hand: 14 minutes a report, against about 6 with Kashif's draft.
+`ext-vision-q` reads Arabic signs at 0.93 on the Ministry's signage set.
+
+**What we accept.** Photos are classified Restricted because some show faces, car plates or documents. We would
+ask inspectors to avoid people in photos.
+
+**Standard affected.** Placement rule P-01: Restricted data may not go to an external host.
+""")
+    rows = []
+    for i in range(400):
+        face = rng.random() < 0.13
+        plate = rng.random() < 0.17
+        doc = rng.random() < 0.05
+        restricted = face or plate or doc
+        flagged = (rng.random() < 0.975) if restricted else (rng.random() < 0.09)
+        rows.append({"photo_id": f"PH{i + 1:04d}", "has_face": int(face), "has_plate": int(plate),
+                     "has_document": int(doc), "detector_flags": int(flagged)})
+    write_csv("deviation/photo_sample.csv", rows)
+    write_json("deviation/facts.json", {
+        "note": "Synthetic figures for the deviation request DR-2026-07.",
+        "photos_per_month": 18000, "photos_per_report": 3, "manual_minutes_per_report": 14,
+        "assisted_minutes_per_report": 6, "inspector_cost_sar_per_hour": 120,
+        "ext_vision_sar_per_photo": 0.02, "ext_vision_arabic_signage_score": 0.93,
+        "ksa_vision_x_arabic_evidence_expected": "2027-02-28", "own_vision_lead_time_months": 9,
+        "detector": "an on-device detector of faces, plates and documents that runs on the tablet before upload",
+        "request_date": "2026-11-02"})
+    n_r = sum(1 for r in rows if r["has_face"] or r["has_plate"] or r["has_document"])
+    missed = sum(1 for r in rows if (r["has_face"] or r["has_plate"] or r["has_document"]) and not r["detector_flags"])
+    clean_sent = sum(1 for r in rows if not r["detector_flags"])
+    ref("deviation", {"restricted_share": round(n_r / len(rows), 4), "missed_by_detector": missed,
+                      "sent_share": round(clean_sent / len(rows), 4), "sample": len(rows)})
+
+    # ---- the capstone's three services
+    briefs = {
+        "reports": ("Citizen reports: routing and replies", "T02, the reports team",
+                    "Citizens report potholes, broken lights and blocked pavements through the app and the call "
+                    "centre: 90,000 reports a year, growing 15% a year. Each report carries text, a location, a "
+                    "phone number and sometimes a photo. The team wants each report routed to the right department "
+                    "and a reply drafted for the citizen.",
+                    "Restricted (phone numbers, locations, photos)",
+                    "Day 2's labelled reports (Lab 2.1) and Day 3's usage logs of T02, including its breach in May "
+                    "and June."),
+        "contact": ("Call-centre call summaries", "T08, the contact team",
+                    "The Ministry's call centre takes 40,000 calls a month. Agents write a summary of each call "
+                    "after it ends, about 90 seconds a call. The team wants a summary drafted from the recording "
+                    "for the agent to correct, and a nightly batch of themes for managers.",
+                    "Restricted (voices, names, identity numbers read aloud)",
+                    "Day 3's usage logs and invoices of T08, the largest user of the Ministry data centre."),
+        "staff": ("Staff policies assistant", "T09, the staff services team",
+                  "6,000 staff questions a month about leave, allowances and training. The policies are Public; "
+                  "a question about one's own case needs the employee's record, which is Restricted. The team's "
+                  "first design sent both to an external model (Lab 4.2).",
+                  "Public (policies) and Restricted (employee records)",
+                  "Day 3's usage logs of T09 and the staff_assistant design of Lab 4.2."),
+    }
+    for k, (title, team, what, level, start) in briefs.items():
+        write(f"../capstone/briefs/{k}.md",
+              f"# {title}\n\n**Team.** {team}. **Data.** {level}.\n\n{what}\n\n**Where to start.** {start}\n\n"
+              "**The panel will change** one classification level or the volume forecast during the defence; "
+              "name the decisions it reopens.\n\nAll figures are synthetic.")
+
+
+# ======================================================================================
 
 def main() -> None:
     rng = random.Random(SEED)
     day1(rng)
     day2(random.Random(SEED + 2))
     day3(random.Random(SEED + 3))
+    day4(random.Random(SEED + 4))
     print("wrote", sum(1 for p in DATA.rglob("*") if p.is_file()), "files under labs/data")
 
 

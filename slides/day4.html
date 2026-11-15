@@ -1,158 +1,449 @@
 <section class="slide title" id="title" data-auto="title">
-  <aside class="notes">REPLACE: welcome; introduce yourself; one question to the room that calibrates the pace; the rhythm of the day</aside>
+  <aside class="notes"><p>Ask who chose a capstone service last night; the rest choose in Lab 4.4. Today turns yesterday's platform into standards: a template, checks, a review and an exception to a standard. Every lab today ends in a file the capstone repository holds.</p></aside>
 </section>
 
 <section class="slide" id="agenda" data-auto="agenda"></section>
+
+<section class="slide" id="review-day3" data-lo="LO4" data-label="Review of Day 3">
+  <div class="kicker">Review of Day 3</div>
+  <h2>Which control contains a leaked key to one team?</h2>
+  <div class="quiz" data-type="single" data-lo="LO4">
+    <p class="lead">Asas moves from one shared key to per-team keys. The planning team's key leaks and calls the external model 400 times a minute. What keeps the other eight teams served?</p>
+    <div class="opts">
+      <div class="opt" data-ok>Revoking that team's key when its rate spikes, under per-team budgets</div>
+      <div class="opt" data-why="Contains capacity incidents; the leak spends money on a paid model and takes no shared capacity">A cap on each team's share of the Ministry-hosted model</div>
+      <div class="opt" data-why="Delays the outage: a larger shared pot still runs out for everyone">A larger shared budget for the hour</div>
+      <div class="opt" data-why="Decides who pays afterwards; it stops nothing during the hour">A showback that names the planning team</div>
+    </div>
+    <div class="callout tip why"><b>Why.</b> A per-team key can be revoked without touching anyone else, and a per-team budget bounds the spend until it is.</div>
+  </div>
+  <aside class="notes"><p>Answer: A. In Lab 3.3 every bystander kept 100% of paid service under the per-team model; under the shared one the worst lost 38%.</p></aside>
+</section>
 
 <!-- Session 1 -->
 
 <section class="slide section" id="s1" data-auto="section" data-session="1"></section>
 
-<section class="slide" id="s1-idea" data-lo="LO5">
-  <div class="kicker">REPLACE: the question this slide answers</div>
-  <h2>REPLACE: one idea, stated as a sentence</h2>
-  <div class="cols cols-2">
-    <ul class="bullets">
-      <li>REPLACE: at most six bullets, each a complete thought</li>
-      <li>REPLACE: bold the key phrase; numbers come from the lab run, not from memory</li>
-    </ul>
-    <div class="card c-teal"><h4>In the case study</h4><p class="small mb0">REPLACE: tie the idea to the case study and its data</p></div>
+<section class="slide" id="golden-path" data-lo="LO5" data-label="Golden path">
+  <div class="kicker">Golden paths</div>
+  <h2>Make the compliant way the easiest way to start</h2>
+  <div class="cols cols-3">
+    <div class="card c-teal"><h4>A working start</h4><p class="small mb0">A service a team generates in minutes, not a document it reads.</p></div>
+    <div class="card c-cyan"><h4>Gates on by default</h4><p class="small mb0">Evaluation, classification checks and tracing come with it.</p></div>
+    <div class="card c-purple"><h4>Optional, and visible</h4><p class="small mb0">A team may leave the path; the platform sees who did and why.</p></div>
   </div>
-  <div class="callout warn mt"><b>What goes wrong.</b> REPLACE: the failure participants will hit, and how to recognise it</div>
-  <aside class="notes">REPLACE: what to say, the demo to run, the question to ask the room, the common failure and its fix</aside>
+  <div class="callout warn mt"><b>What goes wrong.</b> A golden path that is harder than doing it yourself. Teams route around it, and the gates go with it.</div>
+  <aside class="notes"><p>The CNCF platforms paper calls these templates and documentation for a paved road. Backstage software templates and Copier fill the same slot: Backstage when there is a developer portal, Copier when a command line and a repository are enough. Asas has no portal, so the lab uses Copier.</p><p>Sources: CNCF Platforms White Paper; Backstage software templates; Copier documentation.</p></aside>
 </section>
 
-<section class="slide" id="s1-steps" data-lo="LO5">
-  <div class="kicker">Step by step</div>
-  <h2>REPLACE: a process, shown one step per key press</h2>
-  <div class="flow">
-    <div class="step c-teal"><b>1 · REPLACE: name</b>REPLACE: what happens first</div>
-    <div class="arrow frag" data-frag="b">→</div><div class="step c-cyan frag" data-frag="b"><b>2 · REPLACE: name</b>REPLACE: the next piece</div>
-    <div class="arrow frag" data-frag="c">→</div><div class="step c-coral frag" data-frag="c"><b>3 · REPLACE: name</b>REPLACE: the result</div>
+<section class="slide" id="hard-coded" data-lo="LO5" data-label="Hard-coded">
+  <div class="kicker">Lab 4.1, step 1</div>
+  <h2>What one team hard-coded becomes the template's questions</h2>
+  <table class="t">
+    <tr><th>In the permits service</th><th>In the template</th><th>Guard rail</th></tr>
+    <tr><td><code>SERVICE = "permits-rag"</code></td><td>service_name</td><td>required</td></tr>
+    <tr><td><code>TEAM = "T01"</code></td><td>team</td><td>required</td></tr>
+    <tr><td><code>LEVEL = "Restricted"</code></td><td>classification</td><td>three choices</td></tr>
+    <tr class="hl"><td><code>MODEL = "ksa-general-m"</code></td><td>model_alias</td><td>must be allowed for the level</td></tr>
+    <tr><td><code>python eval.py</code>, by hand</td><td>eval_gate, eval_min_score</td><td>on, and 0.80 or more</td></tr>
+  </table>
+  <aside class="notes"><p>TOP_K stays fixed: it is a tuning choice the platform owns. Ask the room what else they would not let a team change. Usual answers: the tracing format and the audit fields.</p></aside>
+</section>
+
+<section class="slide" id="validator" data-lo="LO5" data-label="Validator">
+  <div class="kicker">A guard rail in the template</div>
+  <h2>The template refuses a placement before any code exists</h2>
+  <pre class="code s" data-file="copier.yml"><code class="language-yaml">model_alias:
+  type: str
+  choices: [ext-frontier-l, ksa-general-m, own-open-s]
+  default: ksa-general-m
+  validator: >-
+    {% set hosting = {'ext-frontier-l': 'external', ...} %}
+    {% if hosting[model_alias] not in ok[classification] %}
+    {{ classification }} data may not go to {{ model_alias }}{% endif %}</code></pre>
+  <div class="trace s mt">
+    <div class="ev guard"><b>refused</b>Validation error for question 'model_alias': Restricted data may not go to ext-frontier-l (external)</div>
   </div>
-  <div class="callout tip mt frag"><b>Takeaway.</b> REPLACE: the one sentence to remember</div>
-  <aside class="notes">Press once per step and say what each step adds before the next one appears. REPLACE: the example to walk through</aside>
+  <aside class="notes"><p>From the solution run. The gateway would refuse the same request at run time (Lab 3.2); the template refuses it at generation, before a line of the service exists. Two lines of defence, the earlier one cheaper.</p></aside>
+</section>
+
+<section class="slide" id="three-gates" data-lo="LO5" data-label="Three gates">
+  <div class="kicker">Measured in Lab 4.1</div>
+  <h2>Kashif's generated service passes three gates nobody on its team wrote</h2>
+  <div class="trace s">
+    <div class="ev result"><b>evaluation</b>pass · retrieval hit rate 1.00 against 0.85 on 10 questions</div>
+    <div class="ev result"><b>classification</b>pass · Restricted data to ksa-general-m (ksa_cloud)</div>
+    <div class="ev result"><b>tracing</b>pass · 2 spans, no question text</div>
+    <div class="ev final"><b>pipeline</b>exit code 0</div>
+  </div>
+  <p class="small mt">The trace line carries the service, the team, the level and a hash of the question.</p>
+  <aside class="notes"><p>The inspections team supplied its documents and its evaluation set, nothing else. A hit rate of 1.00 on ten synthetic questions says the plumbing works, not that Kashif is good: the evaluation set is the team's to grow.</p></aside>
+</section>
+
+<section class="slide" id="gate-off" data-lo="LO5" data-label="Gate off">
+  <div class="kicker">A visible exit</div>
+  <h2>A gate may be switched off, with a reason, in a register</h2>
+  <div class="cols cols-2">
+    <div class="trace s">
+      <div class="ev guard"><b>evaluation</b>off · switched off by the team: no evaluation set yet; due 2026-12-15</div>
+      <div class="ev result"><b>classification</b>pass</div>
+      <div class="ev result"><b>tracing</b>pass</div>
+    </div>
+    <ul class="bullets small">
+      <li>Without a reason, the template refuses.</li>
+      <li>The pipeline passes and says so.</li>
+      <li>The platform's register lists every service with a gate off, its team and its date.</li>
+    </ul>
+  </div>
+  <aside class="notes"><p>The waste team in Lab 4.1. A gate that can be switched off silently is a suggestion; one that needs a reason and appears in a register is a standard with a visible exit. Session 4 is the same idea for a bigger exception.</p></aside>
+</section>
+
+<section class="slide" id="template-update" data-lo="LO5" data-label="Update">
+  <div class="kicker">Template plus update</div>
+  <h2>A template copied once stops at the day it was copied</h2>
+  <div class="cols cols-2">
+    <div class="card c-coral"><h4>Copied</h4><p class="small mb0">Each service drifts; a fix to the gates reaches nobody who started before it.</p></div>
+    <div class="card c-teal"><h4>Generated and updated</h4><p class="small mb0">The service records its answers; <code>copier update</code> brings later template changes, and conflicts show as a diff.</p></div>
+  </div>
+  <aside class="notes"><p>The lab's template writes Copier's answers file into every service for this reason. Updating needs the template under version control with tagged releases; the lab does not run an update, to keep within 25 minutes.</p><p>Sources: Copier documentation.</p></aside>
+</section>
+
+<section class="slide" id="check-golden" data-lo="LO5">
+  <div class="kicker">Checkpoint</div>
+  <h2>Why did the reports team's service miss the new gate?</h2>
+  <div class="quiz" data-type="single" data-lo="LO5">
+    <p class="lead">In March the platform adds an Arabic evaluation gate to the template. Services generated after March have it; the reports team's service, generated in January, does not. What went wrong?</p>
+    <div class="opts">
+      <div class="opt" data-why="Blames the team for a platform design gap: nothing told them or carried the change">The reports team should have read the release notes</div>
+      <div class="opt" data-why="Makes the template harder to use without fixing older services">The template should have had more questions</div>
+      <div class="opt" data-ok>The service was treated as a one-time copy, with no update path from the template</div>
+      <div class="opt" data-why="Moves a template problem to the gateway, which cannot see a service's evaluation">The gateway should run the evaluation</div>
+    </div>
+    <div class="callout tip why"><b>Why.</b> A golden path needs a way to bring template changes to services already generated from it.</div>
+  </div>
+  <aside class="notes"><p>Answer: C.</p></aside>
 </section>
 
 <section class="slide lab" id="lab-4-1" data-auto="lab" data-lab="4.1">
-  <aside class="notes">REPLACE: what to watch for while participants work, the typical problems, and the fallback for anyone who did not finish an earlier lab</aside>
+  <aside class="notes"><p>Copier is the only package today that is not in the standard Python data stack; it installs with the lab environment, and in Colab from requirements-colab.txt. The validator's Jinja is the usual trip: a validator returns a non-empty string to refuse. Nobody needs a model or a key.</p></aside>
 </section>
 
 <!-- Session 2 -->
 
 <section class="slide section" id="s2" data-auto="section" data-session="2"></section>
 
-<section class="slide" id="s2-idea" data-lo="LO5">
-  <div class="kicker">REPLACE: the question this slide answers</div>
-  <h2>REPLACE: one idea, stated as a sentence</h2>
-  <div class="cols cols-2">
-    <ul class="bullets">
-      <li>REPLACE: at most six bullets, each a complete thought</li>
-      <li>REPLACE: bold the key phrase; numbers come from the lab run, not from memory</li>
-    </ul>
-    <div class="card c-teal"><h4>In the case study</h4><p class="small mb0">REPLACE: tie the idea to the case study and its data</p></div>
+<section class="slide" id="fitness-function" data-lo="LO5" data-label="Fitness functions">
+  <div class="kicker">Fitness functions</div>
+  <h2>A fitness function turns a sentence in a standard into a failing build</h2>
+  <div class="flow">
+    <div class="step c-navy"><b>Standard</b>"Restricted data never leaves the Kingdom"</div>
+    <div class="arrow">→</div>
+    <div class="step c-teal"><b>Design as data</b>components, hosting, flows, levels</div>
+    <div class="arrow">→</div>
+    <div class="step c-cyan"><b>Check</b>a function over the file</div>
+    <div class="arrow">→</div>
+    <div class="step c-coral"><b>Pipeline</b>exit code 1 stops the merge</div>
   </div>
-  <div class="callout warn mt"><b>What goes wrong.</b> REPLACE: the failure participants will hit, and how to recognise it</div>
-  <aside class="notes">REPLACE: what to say, the demo to run, the question to ask the room, the common failure and its fix</aside>
+  <aside class="notes"><p>Thoughtworks' radar describes an architectural fitness function as an objective assessment of an architectural characteristic, run continuously. The design file is the container and data-flow views of Day 1 in a form a program can read; Structurizr models can be exported the same way.</p><p>Sources: Thoughtworks Technology Radar, architectural fitness function.</p></aside>
 </section>
 
-<section class="slide" id="s2-steps" data-lo="LO5">
-  <div class="kicker">Step by step</div>
-  <h2>REPLACE: a process, shown one step per key press</h2>
-  <div class="flow">
-    <div class="step c-teal"><b>1 · REPLACE: name</b>REPLACE: what happens first</div>
-    <div class="arrow frag" data-frag="b">→</div><div class="step c-cyan frag" data-frag="b"><b>2 · REPLACE: name</b>REPLACE: the next piece</div>
-    <div class="arrow frag" data-frag="c">→</div><div class="step c-coral frag" data-frag="c"><b>3 · REPLACE: name</b>REPLACE: the result</div>
+<section class="slide" id="design-data" data-lo="LO5" data-label="Design as data">
+  <div class="kicker">A design file</div>
+  <h2>The design names hosting, levels and pipeline stages</h2>
+  <pre class="code s" data-file="designs/inspections.json"><code class="language-json">{"service": "kashif", "team": "T03", "classification": "Restricted",
+ "components": [
+  {"id": "vision", "kind": "model", "model": "ksa-vision-x",
+   "hosting": "ksa_cloud", "fallback": "vision_ext"},
+  {"id": "vision_ext", "kind": "model", "model": "ext-vision-q", "hosting": "external"}],
+ "flows": [{"id": "F2", "from": "kashif", "to": "vision", "level": "Restricted"}],
+ "pipeline": [{"stage": "test"},
+  {"stage": "evaluate", "blocking": true, "min_score": 0.8, "sets": ["en"]},
+  {"stage": "deploy"}]}</code></pre>
+  <aside class="notes"><p>Shortened. The full file also records oversight, the latency budget, keys and photo handling, which the review in Session 3 reads.</p></aside>
+</section>
+
+<section class="slide" id="fitness-results" data-lo="LO5" data-label="Five designs">
+  <div class="kicker">Measured in Lab 4.2</div>
+  <h2>Two checks fail three of five designs, each for a different reason</h2>
+  <table class="t small">
+    <tr><th>Design</th><th>Evaluation gate</th><th>Placement</th><th>Why</th></tr>
+    <tr><td>permits_reference</td><td>pass</td><td>pass</td><td>the reference</td></tr>
+    <tr><td>zoning_public</td><td>pass</td><td>pass</td><td>Public data may go to an external model</td></tr>
+    <tr class="hl"><td>reports_triage</td><td>fail</td><td>pass</td><td>evaluate runs after deploy and does not block</td></tr>
+    <tr class="hl"><td>staff_assistant</td><td>pass</td><td>fail</td><td>an employee's leave record to an external model</td></tr>
+    <tr class="hl"><td>inspections</td><td>pass</td><td>fail</td><td>Restricted photos reach an external model through the fallback</td></tr>
+  </table>
+  <aside class="notes"><p>Each failure message names the service, the flow or stage, and what to change: a team reads the message, not the check's code.</p></aside>
+</section>
+
+<section class="slide" id="follow-fallback" data-lo="LO5" data-label="Fallbacks">
+  <div class="kicker">The placement check</div>
+  <h2>Follow every fallback: it is where the data goes when things fail</h2>
+  <div class="trace s">
+    <div class="ev user"><b>F2</b>kashif → vision · Restricted</div>
+    <div class="ev result"><b>vision</b>ksa-vision-x · ksa_cloud · allowed</div>
+    <div class="ev guard"><b>fallback</b>vision_ext · ext-vision-q · external · not allowed</div>
+    <div class="ev final"><b>FAIL</b>kashif: flow F2 sends Restricted data to vision_ext (fallback of vision), hosted external</div>
   </div>
-  <div class="callout tip mt frag"><b>Takeaway.</b> REPLACE: the one sentence to remember</div>
-  <aside class="notes">Press once per step and say what each step adds before the next one appears. REPLACE: the example to walk through</aside>
+  <aside class="notes"><p>The container view looks compliant: the primary model is in the Kingdom. The same lesson as Lab 3.2's stretch, now at design time: a fallback must pass the same rule as the first choice.</p></aside>
+</section>
+
+<section class="slide" id="policy-as-code" data-lo="LO5" data-label="Policy as code">
+  <div class="kicker">Same idea, other tools</div>
+  <h2>The language of the check matters less than where it runs</h2>
+  <table class="t">
+    <tr><th>Tool</th><th>Checks</th><th>Runs</th></tr>
+    <tr><td>A Python function (the lab)</td><td>design files</td><td>a test in the pipeline</td></tr>
+    <tr><td>Open Policy Agent with conftest</td><td>JSON, YAML, infrastructure files, in Rego</td><td>the pipeline, as a command</td></tr>
+    <tr><td>Tests over infrastructure definitions</td><td>the deployed resources' code</td><td>the pipeline</td></tr>
+  </table>
+  <aside class="notes"><p>conftest runs Rego policies against structured files; it was not run in this course's build because it is a binary download, and the Python checks do the same job here. Choose the language the platform team will maintain.</p><p>Sources: Conftest; Open Policy Agent documentation.</p></aside>
+</section>
+
+<section class="slide" id="check-limits" data-lo="LO5" data-label="Limits">
+  <div class="kicker">What a check cannot see</div>
+  <h2>A check is only as true as the design file</h2>
+  <div class="cols cols-2">
+    <ul class="bullets small">
+      <li>A file that says "ksa_cloud" for a service deployed abroad passes.</li>
+      <li>An evaluation set in the wrong language passes check 1.</li>
+      <li>A design that meets every rule may still miss its scenarios.</li>
+    </ul>
+    <div class="card c-purple"><h4>So</h4><p class="small mb0">Checks catch what can be read from the file on every commit; a review asks whether the file and the design are right, once per design.</p></div>
+  </div>
+  <aside class="notes"><p>The stretch adds a third check, for an Arabic evaluation set; Kashif fails it. Bridge to Session 3: the review finds what no check could.</p></aside>
+</section>
+
+<section class="slide" id="check-fitness" data-lo="LO5">
+  <div class="kicker">Checkpoint</div>
+  <h2>Should the placement check fail this design?</h2>
+  <div class="quiz" data-type="single" data-lo="LO5">
+    <p class="lead">The planning team's zoning assistant sends questions about published zoning plans, classified Public, to the external model. A colleague proposes failing every design with an external model, to be safe.</p>
+    <div class="opts">
+      <div class="opt" data-why="Treats any external host as a breach: the rule allows Public data anywhere">Yes: external models are a risk whatever the data</div>
+      <div class="opt" data-why="Ignores that the rule is per level: a warning on every external call trains teams to ignore warnings">Pass it with a warning that cannot be silenced</div>
+      <div class="opt" data-why="Moves the decision to a person on every commit, which is what the check was meant to save">Send every external design to the board for review</div>
+      <div class="opt" data-ok>No: the check enforces the rule by level, and Public data may go to an external host</div>
+    </div>
+    <div class="callout tip why"><b>Why.</b> A check stricter than the standard blocks allowed work, and teams learn to switch it off.</div>
+  </div>
+  <aside class="notes"><p>Answer: D.</p></aside>
 </section>
 
 <section class="slide lab" id="lab-4-2" data-auto="lab" data-lab="4.2">
-  <aside class="notes">REPLACE: what to watch for while participants work, the typical problems, and the fallback for anyone who did not finish an earlier lab</aside>
+  <aside class="notes"><p>The fallback is the step most participants miss on the first run; the check then passes inspections and the self-check says so. A while-loop over fallbacks, with a set of seen ids, also guards against a fallback cycle.</p></aside>
 </section>
 
 <!-- Session 3 -->
 
 <section class="slide section" id="s3" data-auto="section" data-session="3"></section>
 
-<section class="slide" id="s3-idea" data-lo="LO6">
-  <div class="kicker">REPLACE: the question this slide answers</div>
-  <h2>REPLACE: one idea, stated as a sentence</h2>
-  <div class="cols cols-2">
-    <ul class="bullets">
-      <li>REPLACE: at most six bullets, each a complete thought</li>
-      <li>REPLACE: bold the key phrase; numbers come from the lab run, not from memory</li>
-    </ul>
-    <div class="card c-teal"><h4>In the case study</h4><p class="small mb0">REPLACE: tie the idea to the case study and its data</p></div>
+<section class="slide" id="atam" data-lo="LO6" data-label="ATAM">
+  <div class="kicker">A structured review</div>
+  <h2>Review against prioritised scenarios, not against a checklist</h2>
+  <div class="flow">
+    <div class="step c-navy"><b>Drivers</b>the business goals and constraints</div>
+    <div class="arrow">→</div>
+    <div class="step c-teal"><b>Utility tree</b>scenarios by importance and difficulty</div>
+    <div class="arrow">→</div>
+    <div class="step c-cyan"><b>Analysis</b>the approaches against the leading scenarios</div>
+    <div class="arrow">→</div>
+    <div class="step c-purple"><b>Findings</b>risks, non-risks, sensitivity and trade-off points</div>
+    <div class="arrow">→</div>
+    <div class="step c-coral"><b>Risk themes</b>tied to the drivers</div>
   </div>
-  <div class="callout warn mt"><b>What goes wrong.</b> REPLACE: the failure participants will hit, and how to recognise it</div>
-  <aside class="notes">REPLACE: what to say, the demo to run, the question to ask the room, the common failure and its fix</aside>
+  <aside class="notes"><p>The Architecture Tradeoff Analysis Method from the SEI runs over days with stakeholders; the lab runs its core in 25 minutes on one design. The Ministry adds one tag of its own, non-compliance, for a finding that breaks a written standard.</p><p>Sources: The Architecture Tradeoff Analysis Method (SEI).</p></aside>
 </section>
 
-<section class="slide" id="s3-steps" data-lo="LO6">
-  <div class="kicker">Step by step</div>
-  <h2>REPLACE: a process, shown one step per key press</h2>
-  <div class="flow">
-    <div class="step c-teal"><b>1 · REPLACE: name</b>REPLACE: what happens first</div>
-    <div class="arrow frag" data-frag="b">→</div><div class="step c-cyan frag" data-frag="b"><b>2 · REPLACE: name</b>REPLACE: the next piece</div>
-    <div class="arrow frag" data-frag="c">→</div><div class="step c-coral frag" data-frag="c"><b>3 · REPLACE: name</b>REPLACE: the result</div>
+<section class="slide" id="utility-tree" data-lo="LO6" data-label="Utility tree">
+  <div class="kicker">Kashif's utility tree</div>
+  <h2>Three scenarios lead: Arabic quality, privacy and security</h2>
+  <table class="t small">
+    <tr><th>Scenario</th><th>Attribute</th><th>Importance</th><th>Difficulty</th></tr>
+    <tr class="hl"><td>Q1 · Arabic shop signs read correctly in 90% of the Ministry's set</td><td>answer quality</td><td>H</td><td>H</td></tr>
+    <tr class="hl"><td>P1 · no photo with faces or plates processed outside the Kingdom</td><td>privacy</td><td>H</td><td>M</td></tr>
+    <tr class="hl"><td>S1 · a leaked key contained to one client within 30 minutes</td><td>security</td><td>H</td><td>M</td></tr>
+    <tr><td>O1 · every filed report approved by its inspector</td><td>oversight</td><td>H</td><td>L</td></tr>
+    <tr><td>L1 · a draft on the tablet within 5 s at p95 on 4G</td><td>latency</td><td>M</td><td>H</td></tr>
+  </table>
+  <p class="caption">Five of eight scenarios; cost, availability and operability follow.</p>
+  <aside class="notes"><p>Importance is the business's; difficulty is the architect's estimate. Oversight is important and easy here, so it does not lead the review, which is not the same as not mattering.</p></aside>
+</section>
+
+<section class="slide" id="five-tags" data-lo="LO6" data-label="Five tags">
+  <div class="kicker">What a finding is</div>
+  <h2>Five tags, each telling the team something different to do</h2>
+  <table class="t small">
+    <tr><th>Tag</th><th>Means</th><th>Kashif example</th></tr>
+    <tr><td>Non-compliance</td><td>breaks a written standard</td><td>R02 · photos fall back to an external model</td></tr>
+    <tr><td>Risk</td><td>may keep a scenario from being met</td><td>R03 · evaluation in English only</td></tr>
+    <tr><td>Sensitivity point</td><td>one parameter a scenario depends on</td><td>R04 · the vision call takes 3,800 of 5,000 ms</td></tr>
+    <tr><td>Trade-off point</td><td>one decision, two attributes in opposite directions</td><td>R05 · compressing photos: faster, cheaper, worse at small Arabic text</td></tr>
+    <tr><td>Non-risk</td><td>a decision that meets a scenario</td><td>R06 · the inspector approves every report</td></tr>
+  </table>
+  <aside class="notes"><p>Non-risks belong in the report: they tell the team what not to change. The lab's self-check compares the participant's tags with the board chair's and prints the chair's reason for each disagreement.</p></aside>
+</section>
+
+<section class="slide" id="r01-r03" data-lo="LO6" data-label="R01 and R03">
+  <div class="kicker">Two findings about Arabic</div>
+  <h2>A checklist finds the broken rule; a reviewer finds the empty gate</h2>
+  <div class="cols cols-2">
+    <div class="card c-coral"><h4>R01 · non-compliance</h4><p class="small mb0">The vision model was not admitted: no Arabic evaluation evidence. Any checklist catches it.</p></div>
+    <div class="card c-amber"><h4>R03 · risk</h4><p class="small mb0">An evaluation gate exists and blocks. It runs on English, and the signs are Arabic. Only someone who read Q1 sees it.</p></div>
   </div>
-  <div class="callout tip mt frag"><b>Takeaway.</b> REPLACE: the one sentence to remember</div>
-  <aside class="notes">Press once per step and say what each step adds before the next one appears. REPLACE: the example to walk through</aside>
+  <aside class="notes"><p>Both fall under the first risk theme: Arabic answer quality is unproven. The stretch of Lab 4.3 asks which findings could become fitness checks next time: R03 can, now that a reviewer has named it.</p></aside>
+</section>
+
+<section class="slide" id="verdict" data-lo="LO6" data-label="Verdict">
+  <div class="kicker">Measured in Lab 4.3</div>
+  <h2>Not approved, with the four themes that would change the verdict</h2>
+  <div class="cols cols-2">
+    <div class="stat"><div class="big">2 · 3 · 2 · 2 · 3</div><div class="lbl">non-compliance, risks, sensitivity points, trade-off points, non-risks</div></div>
+    <ul class="bullets small">
+      <li><b>Q1</b> Arabic quality unproven: R01, R03</li>
+      <li><b>P1</b> photos can leave the Kingdom: R02</li>
+      <li><b>S1</b> one key for two clients: R10</li>
+      <li><b>M1</b> no owner for prompt templates: R08</li>
+    </ul>
+  </div>
+  <aside class="notes"><p>The report puts the verdict first. "Not approved" without the themes leaves the team guessing; with them, the team knows that fixing R01 and R02, or a granted deviation, changes the verdict. R02 is exactly what Rabah's deviation request asks the board to accept.</p></aside>
+</section>
+
+<section class="slide" id="check-review" data-lo="LO6">
+  <div class="kicker">Checkpoint</div>
+  <h2>How should the board tag this observation?</h2>
+  <div class="quiz" data-type="single" data-lo="LO6">
+    <p class="lead">"A 10% sample review of approved reports is the only check that inspectors' approvals are real." The oversight scenario requires every filed report to carry an approval.</p>
+    <div class="opts">
+      <div class="opt" data-why="Reads a weak spot as a broken rule: no standard sets the sample rate">Non-compliance</div>
+      <div class="opt" data-ok>A sensitivity point: whether approvals mean anything rests on that one rate</div>
+      <div class="opt" data-why="Ignores the dependency: approval is designed in, and its value hangs on one parameter">A non-risk, since every report is approved</div>
+      <div class="opt" data-why="Needs two attributes moving in opposite directions; this is one parameter under one scenario">A trade-off point</div>
+    </div>
+    <div class="callout tip why"><b>Why.</b> A sensitivity point is one parameter a scenario depends on; lower the sample rate and rubber-stamping goes unseen.</div>
+  </div>
+  <aside class="notes"><p>Answer: B. Observation R09.</p></aside>
 </section>
 
 <section class="slide lab" id="lab-4-3" data-auto="lab" data-lab="4.3">
-  <aside class="notes">REPLACE: what to watch for while participants work, the typical problems, and the fallback for anyone who did not finish an earlier lab</aside>
+  <aside class="notes"><p>Step 2 is judgment, not code: give it the full eight minutes and let pairs argue about R04 and R09. Ten of twelve tags matching the chair's passes; the disagreements print with the chair's reason, which is the teaching moment.</p></aside>
 </section>
 
 <!-- Session 4 -->
 
 <section class="slide section" id="s4" data-auto="section" data-session="4"></section>
 
-<section class="slide" id="s4-idea" data-lo="LO6">
-  <div class="kicker">REPLACE: the question this slide answers</div>
-  <h2>REPLACE: one idea, stated as a sentence</h2>
-  <div class="cols cols-2">
-    <ul class="bullets">
-      <li>REPLACE: at most six bullets, each a complete thought</li>
-      <li>REPLACE: bold the key phrase; numbers come from the lab run, not from memory</li>
-    </ul>
-    <div class="card c-teal"><h4>In the case study</h4><p class="small mb0">REPLACE: tie the idea to the case study and its data</p></div>
+<section class="slide" id="deviation" data-lo="LO6" data-label="Deviation">
+  <div class="kicker">Deviations</div>
+  <h2>A deviation is a decision record with an expiry</h2>
+  <div class="cols cols-3">
+    <div class="card c-teal"><h4>Conditions</h4><p class="small mb0">Each with a number a reviewer can check.</p></div>
+    <div class="card c-amber"><h4>Residual risk</h4><p class="small mb0">In numbers, and who accepts it.</p></div>
+    <div class="card c-coral"><h4>Expiry</h4><p class="small mb0">A date, and the events that reopen it sooner.</p></div>
   </div>
-  <div class="callout warn mt"><b>What goes wrong.</b> REPLACE: the failure participants will hit, and how to recognise it</div>
-  <aside class="notes">REPLACE: what to say, the demo to run, the question to ask the room, the common failure and its fix</aside>
+  <div class="callout warn mt"><b>What goes wrong.</b> A deviation without an expiry becomes the new standard by default, with nobody having decided that.</div>
+  <aside class="notes"><p>Same template as Lab 2.4's decision records, plus three fields. The board's job is not to say no; it is to make the exception bounded and visible.</p></aside>
 </section>
 
-<section class="slide" id="s4-steps" data-lo="LO6">
-  <div class="kicker">Step by step</div>
-  <h2>REPLACE: a process, shown one step per key press</h2>
-  <div class="flow">
-    <div class="step c-teal"><b>1 · REPLACE: name</b>REPLACE: what happens first</div>
-    <div class="arrow frag" data-frag="b">→</div><div class="step c-cyan frag" data-frag="b"><b>2 · REPLACE: name</b>REPLACE: the next piece</div>
-    <div class="arrow frag" data-frag="c">→</div><div class="step c-coral frag" data-frag="c"><b>3 · REPLACE: name</b>REPLACE: the result</div>
+<section class="slide" id="request-numbers" data-lo="LO6" data-label="The numbers">
+  <div class="kicker">Measured in Lab 4.4</div>
+  <h2>The request has a cost either way, and the request names neither</h2>
+  <div class="cols cols-3">
+    <div class="stat"><div class="big">SAR 96,000</div><div class="lbl">a month of inspector time if refused: 800 hours</div></div>
+    <div class="stat"><div class="big">5,445</div><div class="lbl">Restricted photos a month abroad if approved as asked</div></div>
+    <div class="stat"><div class="big">about 90</div><div class="lbl">a month still abroad if only photos the detector passes are sent</div></div>
   </div>
-  <div class="callout tip mt frag"><b>Takeaway.</b> REPLACE: the one sentence to remember</div>
-  <aside class="notes">Press once per step and say what each step adds before the next one appears. REPLACE: the example to walk through</aside>
+  <aside class="notes"><p>From 400 labelled synthetic photos: 30% show faces, plates or documents; the on-device detector let 2 of the 121 Restricted ones through. Two misses is a thin estimate, so the conditions ask for a measurement on 1,000 photos within 30 days.</p></aside>
+</section>
+
+<section class="slide" id="three-options" data-lo="LO6" data-label="Options">
+  <div class="kicker">Three answers</div>
+  <h2>Approve with conditions, until the evidence in the Kingdom arrives</h2>
+  <table class="t small">
+    <tr><th>Answer</th><th>Gives</th><th>Costs</th></tr>
+    <tr><td>Refuse</td><td>the rule kept whole</td><td>SAR 96,000 a month of inspector time, until February 2027 at least</td></tr>
+    <tr><td>Approve as asked</td><td>drafts for every photo</td><td>5,445 Restricted photos a month abroad, for twelve months</td></tr>
+    <tr class="hl"><td>Approve with conditions, until 31 March 2027</td><td>drafts for about 65% of photos</td><td>about 90 a month through detector misses, accepted by the data owner</td></tr>
+  </table>
+  <aside class="notes"><p>The expiry is a month after ksa-vision-x's evidence is expected. Reopen triggers: that evidence at or above the catalogue threshold, a measured miss rate above 3%, or any flagged photo in the external model's log. Whether 90 a month is acceptable is the data protection officer's call, not the architect's.</p></aside>
+</section>
+
+<section class="slide" id="sponsor-page" data-lo="LO6" data-label="Sponsor page">
+  <div class="kicker">One page for a sponsor</div>
+  <h2>The decision first, the trade-off in numbers, and a date it ends</h2>
+  <div class="cols cols-2">
+    <ul class="bullets small">
+      <li>The recommendation in the first sentence.</li>
+      <li>What it gives and what it risks, in hours, riyals and photos.</li>
+      <li>What she is asked to accept, by name.</li>
+      <li>When and how it ends.</li>
+    </ul>
+    <div class="card c-navy"><h4>Left out on purpose</h4><p class="small mb0">Gateway, fallback, p95, fitness check. The lab's self-check fails the page if any of them appear, or if it runs past 250 words.</p></div>
+  </div>
+  <aside class="notes"><p>The solution's page is 205 words. Dr. Afrah decides on outcomes; the mechanism is in the decision record for whoever needs it. Ask the room to read the solution page aloud in under a minute.</p></aside>
+</section>
+
+<section class="slide" id="deviation-policy" data-lo="LO6" data-label="Enforced">
+  <div class="kicker">The stretch of Lab 4.4</div>
+  <h2>A deviation the gateway enforces ends on its date</h2>
+  <div class="trace s">
+    <div class="ev result"><b>200</b>inspections key, photo the detector passed, December 2026</div>
+    <div class="ev guard"><b>403</b>inspections key, flagged photo</div>
+    <div class="ev guard"><b>403</b>another team's key, photo the detector passed</div>
+    <div class="ev guard"><b>403</b>inspections key, photo the detector passed, 1 April 2027: expired</div>
+  </div>
+  <aside class="notes"><p>A deviation written only in a document is forgotten; written as a policy with an expiry, it ends without anyone having to remember. The same gateway as Lab 3.2, one more policy.</p></aside>
+</section>
+
+<section class="slide" id="capstone-choice" data-lo="LO6" data-label="Capstone">
+  <div class="kicker">Your capstone</div>
+  <h2>Choose one of three services; all run on Asas</h2>
+  <div class="cols cols-3">
+    <div class="card c-teal"><h4>Citizen reports</h4><p class="small mb0">90,000 a year, routing and replies. Restricted: phones, locations, photos.</p></div>
+    <div class="card c-cyan"><h4>Call summaries</h4><p class="small mb0">40,000 calls a month. Restricted: voices, names, identity numbers read aloud.</p></div>
+    <div class="card c-purple"><h4>Staff policies</h4><p class="small mb0">6,000 questions a month. Public policies, Restricted employee records.</p></div>
+  </div>
+  <aside class="notes"><p>Briefs in labs/capstone/briefs/, with what the repository must hold in labs/capstone/README.md. The staff assistant's first design failed Lab 4.2's placement check, which is a good start for a decision record.</p></aside>
+</section>
+
+<section class="slide" id="check-deviation" data-lo="LO6">
+  <div class="kicker">Checkpoint</div>
+  <h2>What is missing from this approval?</h2>
+  <div class="quiz" data-type="single" data-lo="LO6">
+    <p class="lead">"DR-2026-07: approved. The inspections team may send clean photos to ext-vision-q. Owner: Rabah Al-Mujil. Conditions: the detector runs on every photo; flagged photos stay on the manual path."</p>
+    <div class="opts">
+      <div class="opt" data-ok>An expiry, and the events that would bring it back to the board</div>
+      <div class="opt" data-why="An owner is named: Rabah Al-Mujil">An owner for the conditions</div>
+      <div class="opt" data-why="Conditions are stated, though they need numbers; the larger gap is that nothing ends it">Any conditions at all</div>
+      <div class="opt" data-why="Scope is clear: one team, clean photos, one model">The scope of what is allowed</div>
+    </div>
+    <div class="callout tip why"><b>Why.</b> Without an expiry and reopen triggers, the exception outlives its reason and becomes the standard.</div>
+  </div>
+  <aside class="notes"><p>Answer: A. Also missing: the residual risk and who accepts it. Ask the room to add both.</p></aside>
 </section>
 
 <section class="slide lab" id="lab-4-4" data-auto="lab" data-lab="4.4">
-  <aside class="notes">REPLACE: what to watch for while participants work, the typical problems, and the fallback for anyone who did not finish an earlier lab</aside>
+  <aside class="notes"><p>Step 2 accepts any of the three decisions; the self-checks test the record's shape, not the verdict. Participants who refuse must still put the refusal's cost on the sponsor page. Step 4 is the capstone choice: nobody leaves without one.</p></aside>
 </section>
 
-<section class="slide" id="wrap-up">
-  <div class="kicker">Day 4 · wrap-up</div>
+<section class="slide" id="wrap-up" data-label="Wrap-up">
+  <div class="kicker">Day 4</div>
   <h2>Three things to keep</h2>
   <div class="cols cols-3">
-    <div class="card c-teal"><h4>Remember</h4><p class="small mb0">REPLACE: one idea participants keep</p></div>
-    <div class="card c-coral"><h4>Remember</h4><p class="small mb0">REPLACE: one idea participants keep</p></div>
-    <div class="card c-purple"><h4>Remember</h4><p class="small mb0">REPLACE: one idea participants keep</p></div>
+    <div class="card c-teal"><h4>Paths, not documents</h4><p class="small mb0">A template with its gates on is a standard teams actually follow.</p></div>
+    <div class="card c-cyan"><h4>Checks and reviews</h4><p class="small mb0">Checks catch what the file shows, every commit; a review asks whether the design is right.</p></div>
+    <div class="card c-coral"><h4>Bounded exceptions</h4><p class="small mb0">A deviation has conditions, a residual someone accepts and a date it ends.</p></div>
   </div>
+  <aside class="notes"><p>The capstone repository now has a source for every row of its rubric: Days 1 and 2 for scenarios, views, options and decisions; Day 3 and today for the platform slice, the fitness checks and the review.</p></aside>
 </section>
 
 <section class="slide dark" id="next" data-label="Next">
-  <div class="kicker">Next</div>
-  <h2>Capstone: Capstone project presentations</h2>
-  <p class="lead">REPLACE: what participants prepare before then; unfinished labs can be finished at home</p>
-  <aside class="notes">REPLACE: accounts, installs or reading participants need before the next unit</aside>
+  <div class="kicker">Capstone day</div>
+  <h2>Next: build your service's architecture and defend it before the panel</h2>
+  <ul class="bullets">
+    <li>Start a public repository from <code>labs/capstone/README.md</code>; commit early, the history counts.</li>
+    <li>Bring a peer's design to review: the review is 15% of the rubric.</li>
+    <li>Prepare for the panel to change one classification level or the volume forecast.</li>
+  </ul>
+  <aside class="notes"><p>The talk is 10 minutes, the questions 8. The panel includes a data architect.</p></aside>
 </section>
