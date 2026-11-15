@@ -102,7 +102,7 @@
             "title": "List drivers, constraints and stakeholders for the permits assistant from the case brief",
             "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
             "minutes": 25,
-            "href": "D1_1_list_drivers_constraints.ipynb"
+            "href": "D1_1_drivers.ipynb"
           }
         },
         {
@@ -118,7 +118,7 @@
             "title": "Write five measurable scenarios, including answer quality and human oversight",
             "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
             "minutes": 25,
-            "href": "D1_2_write_five_measurable.ipynb"
+            "href": "D1_2_scenarios.ipynb"
           }
         },
         {
@@ -134,7 +134,7 @@
             "title": "Classify the case's data flows and derive the placement constraints",
             "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
             "minutes": 25,
-            "href": "D1_3_classify_case_s.ipynb"
+            "href": "D1_3_data_flows.ipynb"
           }
         },
         {
@@ -150,7 +150,7 @@
             "title": "Draw context and container views and budget one request's latency and cost",
             "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
             "minutes": 25,
-            "href": "D1_4_draw_context_container.ipynb"
+            "href": "D1_4_views_budget.ipynb"
           }
         }
       ]
@@ -174,7 +174,7 @@
             "title": "Match six case needs to patterns and find the one a non-generative design serves better",
             "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
             "minutes": 25,
-            "href": "D2_1_match_six_case.ipynb"
+            "href": "D2_1_patterns.ipynb"
           }
         },
         {
@@ -190,7 +190,7 @@
             "title": "Cost three options and test their sensitivity to volume and token price",
             "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
             "minutes": 25,
-            "href": "D2_2_cost_three_options.ipynb"
+            "href": "D2_2_three_year_cost.ipynb"
           }
         },
         {
@@ -206,7 +206,7 @@
             "title": "Score exit cost and write two procurement requirements that keep the exit open",
             "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
             "minutes": 25,
-            "href": "D2_3_score_exit_cost.ipynb"
+            "href": "D2_3_exit_cost.ipynb"
           }
         },
         {
@@ -222,7 +222,7 @@
             "title": "Write two records, swap with a peer and challenge consequences and review triggers",
             "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
             "minutes": 25,
-            "href": "D2_4_write_two_records.ipynb"
+            "href": "D2_4_decision_records.ipynb"
           }
         }
       ]
@@ -246,7 +246,7 @@
             "title": "Build a demand matrix from the synthetic usage logs of nine teams",
             "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
             "minutes": 25,
-            "href": "D3_1_build_demand_matrix.ipynb"
+            "href": "D3_1_demand_matrix.ipynb"
           }
         },
         {
@@ -262,7 +262,7 @@
             "title": "Admit four models and make the supplied gateway refuse restricted data to an external model",
             "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
             "minutes": 25,
-            "href": "D3_2_admit_four_models.ipynb"
+            "href": "D3_2_admission_gateway.ipynb"
           }
         },
         {
@@ -278,7 +278,7 @@
             "title": "Walk a tenancy model through a leaked key, a noisy neighbour and a runaway agent",
             "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
             "minutes": 25,
-            "href": "D3_3_walk_tenancy_model.ipynb"
+            "href": "D3_3_tenancy.ipynb"
           }
         },
         {
@@ -294,7 +294,7 @@
             "title": "Build a showback from synthetic invoices and tags and name untagged spend",
             "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
             "minutes": 25,
-            "href": "D3_4_build_showback_from.ipynb"
+            "href": "D3_4_showback.ipynb"
           }
         }
       ]
@@ -318,7 +318,7 @@
             "title": "Turn a supplied retrieval service into a template with evaluation, tracing and classification checks on",
             "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
             "minutes": 25,
-            "href": "D4_1_turn_supplied_retrieval.ipynb"
+            "href": "D4_1_golden_path.ipynb"
           }
         },
         {
@@ -334,7 +334,7 @@
             "title": "Write two checks that fail a design lacking an evaluation gate or sending restricted data out",
             "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
             "minutes": 25,
-            "href": "D4_2_write_two_checks.ipynb"
+            "href": "D4_2_fitness_checks.ipynb"
           }
         },
         {
@@ -350,7 +350,7 @@
             "title": "Review a supplied design for risks, sensitivity points and non-compliance",
             "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
             "minutes": 25,
-            "href": "D4_3_review_supplied_design.ipynb"
+            "href": "D4_3_review.ipynb"
           }
         },
         {
@@ -366,7 +366,7 @@
             "title": "Decide a deviation request and explain the trade-off on one page for a sponsor",
             "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
             "minutes": 25,
-            "href": "D4_4_decide_deviation_request.ipynb"
+            "href": "D4_4_deviation.ipynb"
           }
         }
       ]
