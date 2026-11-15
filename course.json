@@ -414,69 +414,158 @@
       "sessions": [
         {
           "title": "The platform is a product",
+          "summary": "The shared platform treated as a product with nine teams as users, phased by their measured demand",
           "outcomes": [
-            "REPLACE: what a participant can do after this session"
+            "Build a demand matrix from usage logs and a team survey",
+            "Phase platform capabilities by shared demand",
+            "Spot in the logs what the platform should already prevent"
           ],
           "lo": [
             "LO4"
           ],
           "lab": {
             "id": "3.1",
-            "title": "Build a demand matrix from the synthetic usage logs of nine teams",
-            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "title": "A demand matrix from six months of usage",
+            "summary": "Build a teams-by-capabilities matrix from six months of synthetic gateway logs and a survey, phase the platform's capabilities and find the placement breach in the logs.",
             "minutes": 25,
-            "href": "D3_1_demand_matrix.ipynb"
+            "href": "D3_1_demand_matrix.ipynb",
+            "steps": [
+              {
+                "text": "Read six months of usage",
+                "minutes": 4
+              },
+              {
+                "text": "The demand matrix: used and asked for",
+                "minutes": 8
+              },
+              {
+                "text": "Phase the platform's capabilities",
+                "minutes": 6
+              },
+              {
+                "text": "What the logs show that the platform should have stopped",
+                "minutes": 7
+              }
+            ],
+            "stretch": "Growth by capability"
           }
         },
         {
           "title": "Catalogue, admission and the gateway",
+          "summary": "Admission to the model catalogue on evidence, and a gateway that enforces placement by classification",
           "outcomes": [
-            "REPLACE: what a participant can do after this session"
+            "Admit models on licence, evaluation and data-term evidence",
+            "Write catalogue entries with the highest level each model may receive",
+            "Make a gateway refuse Restricted data to an external model"
           ],
           "lo": [
             "LO4"
           ],
           "lab": {
             "id": "3.2",
-            "title": "Admit four models and make the supplied gateway refuse restricted data to an external model",
-            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "title": "Model admission and a gateway that refuses",
+            "summary": "Admit four of six candidate models on evidence, write their catalogue entries and add the classification policy that makes the supplied gateway refuse Restricted data to an external model.",
             "minutes": 25,
-            "href": "D3_2_admission_gateway.ipynb"
+            "href": "D3_2_admission_gateway.ipynb",
+            "steps": [
+              {
+                "text": "Admission criteria as code",
+                "minutes": 5
+              },
+              {
+                "text": "Admit four of the six candidates",
+                "minutes": 6
+              },
+              {
+                "text": "Catalogue entries with the level each may receive",
+                "minutes": 4
+              },
+              {
+                "text": "The classification policy, and nine test requests",
+                "minutes": 10
+              }
+            ],
+            "stretch": "A fallback that respects placement"
           }
         },
         {
           "title": "Tenancy and shared capacity",
+          "summary": "Tenancy as a set of controls that keep one team's incident inside that team",
           "outcomes": [
-            "REPLACE: what a participant can do after this session"
+            "Compare a shared and a per-team tenancy model under incidents",
+            "Cap a team's share of shared capacity",
+            "Contain leaked keys and runaway spend with keys and budgets per team"
           ],
           "lo": [
             "LO4"
           ],
           "lab": {
             "id": "3.3",
-            "title": "Walk a tenancy model through a leaked key, a noisy neighbour and a runaway agent",
-            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "title": "Three incidents, two tenancy models",
+            "summary": "Replay an hour with a leaked key, a noisy neighbour and a runaway agent under the pilot's shared model and under a per-team model you design, and measure the harm to bystanders.",
             "minutes": 25,
-            "href": "D3_3_tenancy.ipynb"
+            "href": "D3_3_tenancy.ipynb",
+            "steps": [
+              {
+                "text": "Replay the three incidents on the shared model",
+                "minutes": 5
+              },
+              {
+                "text": "A capped share of the Ministry-hosted model",
+                "minutes": 7
+              },
+              {
+                "text": "Your tenancy model: keys, budgets, revocation",
+                "minutes": 6
+              },
+              {
+                "text": "The incident table: who was harmed",
+                "minutes": 7
+              }
+            ],
+            "stretch": "The cap that costs the culprit least"
           }
         },
         {
           "title": "Who pays for which tokens",
+          "summary": "Cost attribution that reconciles with the invoices, shown to teams before anyone is charged",
           "outcomes": [
-            "REPLACE: what a participant can do after this session"
+            "Allocate invoices to teams by usage, credits and fixed costs included",
+            "Reconcile a showback with each invoice within 2%",
+            "Name spend that no tag or owner explains"
           ],
           "lo": [
             "LO4"
           ],
           "lab": {
             "id": "3.4",
-            "title": "Build a showback from synthetic invoices and tags and name untagged spend",
-            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "title": "A showback that reconciles",
+            "summary": "Build a showback from synthetic invoices, usage and tags, see a price-card version fail to reconcile, allocate the invoices instead within 2% and name the untagged spend.",
             "minutes": 25,
-            "href": "D3_4_showback.ipynb"
+            "href": "D3_4_showback.ipynb",
+            "steps": [
+              {
+                "text": "A showback priced with the price card",
+                "minutes": 6
+              },
+              {
+                "text": "Reconcile it with each invoice",
+                "minutes": 5
+              },
+              {
+                "text": "Allocate the invoices instead",
+                "minutes": 8
+              },
+              {
+                "text": "Name the untagged spend",
+                "minutes": 6
+              }
+            ],
+            "stretch": "Is token count the right key for the data centre?"
           }
         }
-      ]
+      ],
+      "subtitle": "Asas as a product: demand, admission, a gateway that refuses, tenancy and showback"
     },
     {
       "id": "day4",

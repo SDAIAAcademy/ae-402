@@ -1,158 +1,421 @@
 <section class="slide title" id="title" data-auto="title">
-  <aside class="notes">REPLACE: welcome; introduce yourself; one question to the room that calibrates the pace; the rhythm of the day</aside>
+  <aside class="notes"><p>Open with the question from yesterday's last slide: a shared service in your organisation that teams avoid, and why. Write two reasons on the board. Most will be about the service being built for its builders, not for its users; that is today's first session.</p></aside>
 </section>
 
 <section class="slide" id="agenda" data-auto="agenda"></section>
+
+<section class="slide" id="review-day2" data-lo="LO3" data-label="Review of Day 2">
+  <div class="kicker">Review of Day 2</div>
+  <h2>What does record one's review trigger watch?</h2>
+  <div class="quiz" data-type="single" data-lo="LO3">
+    <p class="lead">Decision record 1 hosts Muyassir's model in a cloud region of the Kingdom. Lab 2.2 found that volume moves the three-year cost by half and token price by 3%. What should its trigger watch first?</p>
+    <div class="opts">
+      <div class="opt" data-why="Watches the input that barely moves the ranking at this volume">The provider's token price</div>
+      <div class="opt" data-ok>Monthly requests, against a threshold below the crossover</div>
+      <div class="opt" data-why="Watches a cost already spent: build cannot reopen a hosting decision">The build cost of O1</div>
+      <div class="opt" data-why="Confuses an incident with a decision trigger: one bad answer is a defect to fix">A single wrong answer reported in the press</div>
+    </div>
+    <div class="callout tip why"><b>Why.</b> The ranking depends on volume; the trigger fires before the volume at which the Ministry-hosted option catches up.</div>
+  </div>
+  <aside class="notes"><p>Answer: B. Who measures monthly requests? The platform team, from the gateway logs: today's material.</p></aside>
+</section>
 
 <!-- Session 1 -->
 
 <section class="slide section" id="s1" data-auto="section" data-session="1"></section>
 
-<section class="slide" id="s1-idea" data-lo="LO4">
-  <div class="kicker">REPLACE: the question this slide answers</div>
-  <h2>REPLACE: one idea, stated as a sentence</h2>
-  <div class="cols cols-2">
-    <ul class="bullets">
-      <li>REPLACE: at most six bullets, each a complete thought</li>
-      <li>REPLACE: bold the key phrase; numbers come from the lab run, not from memory</li>
-    </ul>
-    <div class="card c-teal"><h4>In the case study</h4><p class="small mb0">REPLACE: tie the idea to the case study and its data</p></div>
+<section class="slide" id="platform-product" data-lo="LO4" data-label="A product">
+  <div class="kicker">The platform as a product</div>
+  <h2>A platform's users are teams, and they can choose not to use it</h2>
+  <div class="cols cols-3">
+    <div class="card c-teal"><h4>Users</h4><p class="small mb0">Nine product teams with different data levels and needs.</p></div>
+    <div class="card c-cyan"><h4>A roadmap from demand</h4><p class="small mb0">What most teams use and ask for, phased.</p></div>
+    <div class="card c-purple"><h4>Measured by use</h4><p class="small mb0">Adoption and the teams' satisfaction, not features shipped.</p></div>
   </div>
-  <div class="callout warn mt"><b>What goes wrong.</b> REPLACE: the failure participants will hit, and how to recognise it</div>
-  <aside class="notes">REPLACE: what to say, the demo to run, the question to ask the room, the common failure and its fix</aside>
+  <div class="callout warn mt"><b>What goes wrong.</b> A platform built as a project: a list of features, delivered, and avoided by the teams it was for.</div>
+  <aside class="notes"><p>The CNCF platforms white paper argues for treating platforms as products and measuring them by their users' satisfaction and productivity. Faris Al-Hothali runs Asas this way; his first question is what the teams actually use.</p><p>Sources: CNCF Platforms White Paper.</p></aside>
 </section>
 
-<section class="slide" id="s1-steps" data-lo="LO4">
-  <div class="kicker">Step by step</div>
-  <h2>REPLACE: a process, shown one step per key press</h2>
-  <div class="flow">
-    <div class="step c-teal"><b>1 · REPLACE: name</b>REPLACE: what happens first</div>
-    <div class="arrow frag" data-frag="b">→</div><div class="step c-cyan frag" data-frag="b"><b>2 · REPLACE: name</b>REPLACE: the next piece</div>
-    <div class="arrow frag" data-frag="c">→</div><div class="step c-coral frag" data-frag="c"><b>3 · REPLACE: name</b>REPLACE: the result</div>
+<section class="slide" id="asas-today" data-lo="LO4" data-label="Asas today">
+  <div class="kicker">Six months of logs</div>
+  <h2>Asas served nine teams on six models in six months</h2>
+  <div class="cols cols-3">
+    <div class="stat"><div class="big">3,312</div><div class="lbl">daily usage rows, May to October 2026</div></div>
+    <div class="stat"><div class="big">8 of 9</div><div class="lbl">teams use or ask for chat</div></div>
+    <div class="stat"><div class="big">1</div><div class="lbl">key with no owner, still calling a model</div></div>
   </div>
-  <div class="callout tip mt frag"><b>Takeaway.</b> REPLACE: the one sentence to remember</div>
-  <aside class="notes">Press once per step and say what each step adds before the next one appears. REPLACE: the example to walk through</aside>
+  <aside class="notes"><p>From Lab 3.1 on the synthetic logs. The pilot's gateway knew keys and budgets, nothing else: no classification, no per-team capacity. Today rebuilds it as a product.</p></aside>
+</section>
+
+<section class="slide" id="demand-matrix" data-lo="LO4" data-label="Demand matrix">
+  <div class="kicker">Measured in Lab 3.1</div>
+  <h2>Two capabilities serve most teams; four serve one team each</h2>
+  <div class="bars">
+    <div class="row"><span>Chat</span><div class="bar c-teal" style="--w:89%"></div><span class="val">8 teams</span></div>
+    <div class="row"><span>Embeddings</span><div class="bar c-cyan" style="--w:56%"></div><span class="val">5</span></div>
+    <div class="row"><span>Batch</span><div class="bar c-purple" style="--w:33%"></div><span class="val">3</span></div>
+    <div class="row"><span>Classification, vision, speech, agent tools</span><div class="bar c-amber" style="--w:11%"></div><span class="val">1 each</span></div>
+  </div>
+  <p class="caption">Teams that use a capability or ask for it in the survey, out of nine.</p>
+  <aside class="notes"><p>The matrix combines what teams do (logs) with what they ask for (survey). Disagreements are worth a conversation: the waste team asks for chat and uses only batch. Ask why before building chat for them.</p></aside>
+</section>
+
+<section class="slide" id="phasing" data-lo="LO4" data-label="Phasing">
+  <div class="kicker">Phasing</div>
+  <h2>Build shared what most teams need; pave a road for the rest</h2>
+  <table class="t">
+    <tr><th>Phase</th><th>Capabilities</th><th>Rule</th></tr>
+    <tr><td>Phase 1</td><td>chat, embeddings</td><td>five or more teams</td></tr>
+    <tr><td>Phase 2</td><td>batch</td><td>two to four teams</td></tr>
+    <tr><td>Team-owned</td><td>classification, vision, speech, agent tools</td><td>one team: a template, not a service</td></tr>
+  </table>
+  <aside class="notes"><p>The thresholds are the lab's; a real platform team tunes them with its sponsor. "Team-owned" does not mean unsupported: the team gets a golden path (Day 4) and the gateway, and owns the service. Classification is the example from Lab 2.1: a classifier the reports team owns.</p></aside>
+</section>
+
+<section class="slide" id="logs-breach" data-lo="LO4" data-label="A breach">
+  <div class="kicker">What the logs show</div>
+  <h2>For two months, a Restricted team called the external model</h2>
+  <div class="cols cols-2">
+    <div class="stat"><div class="big">47,556</div><div class="lbl">requests from the reports team (Restricted) to the external model, May and June</div></div>
+    <ul class="bullets small">
+      <li>Citizen reports carry phone numbers and locations.</li>
+      <li>The gateway kept no prompt text, by design: what was sent cannot be read back.</li>
+      <li>The prompt template of those months can be, and the team can say what it held.</li>
+    </ul>
+  </div>
+  <aside class="notes"><p>A breach in the logs is a lead, not a verdict: a Restricted team may send Public prompts. The data protection officer decides what follows. The architectural point: the gateway should have refused, and from Session 2 on, it does.</p></aside>
+</section>
+
+<section class="slide" id="check-phase" data-lo="LO4">
+  <div class="kicker">Checkpoint</div>
+  <h2>Should Asas build a shared vision service now?</h2>
+  <div class="quiz" data-type="single" data-lo="LO4">
+    <p class="lead">Only the inspections team uses vision, and its candidate model has no Arabic evaluation. The team asks the platform to offer vision to everyone. What does the platform do first?</p>
+    <div class="opts">
+      <div class="opt" data-why="Builds from one team's request: shared services carry shared cost and an owner for nine teams">Build a shared vision service for all nine teams</div>
+      <div class="opt" data-why="Treats team-owned as unsupported: the team still needs the gateway and a template">Refuse, since vision is not in phase 1</div>
+      <div class="opt" data-why="Admits a model without the evidence the catalogue requires">Add the vision model to the catalogue now</div>
+      <div class="opt" data-ok>Give the team a paved road to its own vision service, and ask for Arabic evidence</div>
+    </div>
+    <div class="callout tip why"><b>Why.</b> One team's need is served by a golden path the team owns; the catalogue waits for the evidence.</div>
+  </div>
+  <aside class="notes"><p>Answer: D. This sets up Day 4's deviation request: the inspections team will ask to use an external vision model instead.</p></aside>
 </section>
 
 <section class="slide lab" id="lab-3-1" data-auto="lab" data-lab="3.1">
-  <aside class="notes">REPLACE: what to watch for while participants work, the typical problems, and the fallback for anyone who did not finish an earlier lab</aside>
+  <aside class="notes"><p>The key-to-team join matters: rows with a blank tag still belong to the key's owner. Participants who group by the tag lose 116 rows. The breach step uses each team's highest level; say aloud that this flags leads, not proven violations.</p></aside>
 </section>
 
 <!-- Session 2 -->
 
 <section class="slide section" id="s2" data-auto="section" data-session="2"></section>
 
-<section class="slide" id="s2-idea" data-lo="LO4">
-  <div class="kicker">REPLACE: the question this slide answers</div>
-  <h2>REPLACE: one idea, stated as a sentence</h2>
-  <div class="cols cols-2">
-    <ul class="bullets">
-      <li>REPLACE: at most six bullets, each a complete thought</li>
-      <li>REPLACE: bold the key phrase; numbers come from the lab run, not from memory</li>
-    </ul>
-    <div class="card c-teal"><h4>In the case study</h4><p class="small mb0">REPLACE: tie the idea to the case study and its data</p></div>
+<section class="slide" id="admission" data-lo="LO4" data-label="Admission">
+  <div class="kicker">Model admission</div>
+  <h2>A model enters the catalogue on evidence, not on a leaderboard</h2>
+  <div class="flow">
+    <div class="step c-navy"><b>Licence</b>government production use allowed</div>
+    <div class="arrow">→</div>
+    <div class="step c-teal"><b>Evaluation</b>the Ministry's Arabic and English sets</div>
+    <div class="arrow">→</div>
+    <div class="step c-cyan"><b>Data terms</b>retention, no training on prompts</div>
+    <div class="arrow">→</div>
+    <div class="step c-purple"><b>Owner</b>and a review date</div>
   </div>
-  <div class="callout warn mt"><b>What goes wrong.</b> REPLACE: the failure participants will hit, and how to recognise it</div>
-  <aside class="notes">REPLACE: what to say, the demo to run, the question to ask the room, the common failure and its fix</aside>
+  <aside class="notes"><p>The four criteria are the case's. Signing, provenance and bills of materials of model files are AE-403's admission topics; here admission is the architect's question: may this model be offered to these teams, for which data?</p></aside>
 </section>
 
-<section class="slide" id="s2-steps" data-lo="LO4">
-  <div class="kicker">Step by step</div>
-  <h2>REPLACE: a process, shown one step per key press</h2>
-  <div class="flow">
-    <div class="step c-teal"><b>1 · REPLACE: name</b>REPLACE: what happens first</div>
-    <div class="arrow frag" data-frag="b">→</div><div class="step c-cyan frag" data-frag="b"><b>2 · REPLACE: name</b>REPLACE: the next piece</div>
-    <div class="arrow frag" data-frag="c">→</div><div class="step c-coral frag" data-frag="c"><b>3 · REPLACE: name</b>REPLACE: the result</div>
+<section class="slide" id="admitted" data-lo="LO4" data-label="Four admitted">
+  <div class="kicker">Measured in Lab 3.2</div>
+  <h2>Four of six candidates are admitted; the best scorer is not</h2>
+  <table class="t small">
+    <tr><th>Candidate</th><th>Arabic / English</th><th>Hosting</th><th>Verdict</th></tr>
+    <tr><td>ext-frontier-l</td><td>0.91 / 0.93</td><td>external</td><td>admitted, Public data only</td></tr>
+    <tr><td>ksa-general-m</td><td>0.86 / 0.88</td><td>cloud in the Kingdom</td><td>admitted, up to Restricted</td></tr>
+    <tr><td>own-open-s, own-embed-m</td><td>0.79 / 0.82, 0.88 / 0.90</td><td>Ministry</td><td>admitted, up to Secret</td></tr>
+    <tr class="hl"><td>ext-mini-r</td><td>0.84 / 0.89</td><td>external</td><td>rejected: research-only licence</td></tr>
+    <tr class="hl"><td>ksa-vision-x</td><td>none / 0.81</td><td>cloud in the Kingdom</td><td>rejected: no Arabic evidence</td></tr>
+  </table>
+  <aside class="notes"><p>Model ids, scores and licences are fictional. The catalogue entry carries the highest level each model may receive, derived from hosting by the placement rule of Day 1: the catalogue and the gateway use the same table.</p></aside>
+</section>
+
+<section class="slide" id="gateway-duties" data-lo="LO4" data-label="Gateway duties">
+  <div class="kicker">The gateway</div>
+  <h2>One door for every model call, with five duties</h2>
+  <div class="cols cols-3">
+    <div class="card c-teal"><h4>Credentials</h4><p class="small mb0">A key per team; provider keys never leave the gateway.</p></div>
+    <div class="card c-cyan"><h4>Quotas and budgets</h4><p class="small mb0">Per key: requests a minute, spend.</p></div>
+    <div class="card c-purple"><h4>Fallback</h4><p class="small mb0">Another admitted model when one fails, under the same policies.</p></div>
+    <div class="card c-amber"><h4>Tool mediation</h4><p class="small mb0">Only the tools a team is allowed reach the model.</p></div>
+    <div class="card c-coral"><h4>Audit</h4><p class="small mb0">Who, which model, which level, which decision.</p></div>
+    <div class="card c-navy"><h4>And now: policy</h4><p class="small mb0">Classification decides where a request may go.</p></div>
   </div>
-  <div class="callout tip mt frag"><b>Takeaway.</b> REPLACE: the one sentence to remember</div>
-  <aside class="notes">Press once per step and say what each step adds before the next one appears. REPLACE: the example to walk through</aside>
+  <aside class="notes"><p>Products in this slot: LiteLLM's proxy offers virtual keys with budgets and rate limits per key, fallbacks, and guardrails that run before or after a call; agentgateway proxies model, agent and MCP traffic. The lab's gateway is 150 lines of Python with the same ideas, so participants can read all of it. Budgets and kill switches for agents were AE-305 Day 4; one slide here, no more.</p><p>Sources: LiteLLM documentation (virtual keys, guardrails, fallbacks); agentgateway documentation.</p></aside>
+</section>
+
+<section class="slide" id="policy-code" data-lo="LO4" data-label="The policy">
+  <div class="kicker">Lab 3.2, step 4</div>
+  <h2>The level of a request is the highest it shows, declares or defaults to</h2>
+  <pre class="code s" data-file="Lab 3.2"><code class="language-python">def classification_policy(ctx):
+    levels = [G.detect_level(ctx["text"])]
+    levels.append(ctx["request"].get("classification")
+                  or ctx["key_info"]["max_level"])   # fail closed
+    level = A.highest(levels)
+    ctx["level"] = level
+    hosting = ctx["entry"]["hosting"]
+    if not A.allowed(level, hosting):
+        return 403, f"{level} data may not go to a model hosted at '{hosting}'"</code></pre>
+  <aside class="notes"><p>Three sources of the level: what the request declares, what the content shows, and, when it declares nothing, the team's highest level. Undeclared from a Restricted team means Restricted. That default is a decision; it makes teams declare Public explicitly when they mean it.</p></aside>
+</section>
+
+<section class="slide" id="nine-tests" data-lo="LO4" data-label="Nine tests">
+  <div class="kicker">Measured in Lab 3.2</div>
+  <h2>The supplied gateway passed four forbidden requests; the policy stops all four</h2>
+  <table class="t small">
+    <tr><th>Test</th><th>Request</th><th class="num">Supplied</th><th class="num">With the policy</th></tr>
+    <tr><td>G2</td><td>Restricted, declared, to the external model</td><td class="num">200</td><td class="num">403</td></tr>
+    <tr><td>G3</td><td>Restricted team, nothing declared, external model</td><td class="num">200</td><td class="num">403</td></tr>
+    <tr class="hl"><td>G4</td><td>declared Public, holds an identity number</td><td class="num">200</td><td class="num">403</td></tr>
+    <tr><td>G6</td><td>Secret tender text to the cloud model</td><td class="num">200</td><td class="num">403</td></tr>
+    <tr><td>G1, G5, G7, G8</td><td>allowed placements</td><td class="num">200</td><td class="num">200</td></tr>
+  </table>
+  <aside class="notes"><p>G9, an unknown key, gets 401 on both. G4 is the one to dwell on: a Public team, a Public label, Restricted content. The content check is a regular expression for the identity-number format; it is a floor. Production gateways add classifiers and data-loss-prevention services in the same place.</p></aside>
+</section>
+
+<section class="slide" id="audit-hash" data-lo="LO4" data-label="Audit">
+  <div class="kicker">The audit log</div>
+  <h2>Log the decision and a hash of the prompt, never the prompt</h2>
+  <div class="trace s">
+    <div class="ev guard"><b>seq 4</b>team T05 · alias ext-frontier-l · level Restricted · 403</div>
+    <div class="ev result"><b>reason</b>Restricted data may not go to a model hosted at 'external'</div>
+    <div class="ev result"><b>prompt</b>sha256 cf48bdcd010a953f</div>
+  </div>
+  <p class="small mt">A log full of prompts is a second copy of Restricted data, with its own retention rule. A hash proves whether a given text was sent.</p>
+  <aside class="notes"><p>From the solution's audit of the refusals. The assessment's authenticity rule asks for gateway logs in the capstone repository; this is why they can be public: no prompt text.</p></aside>
+</section>
+
+<section class="slide" id="fallback-placement" data-lo="LO4" data-label="Fallback">
+  <div class="kicker">Fallback</div>
+  <h2>A fallback must pass the same policy as the first choice</h2>
+  <div class="trace s">
+    <div class="ev user"><b>request</b>contracts team, Secret, alias own-open-s</div>
+    <div class="ev error"><b>own-open-s</b>busy (stand-in failure)</div>
+    <div class="ev guard"><b>fallback</b>ksa-general-m refused: Secret may not go to ksa_cloud</div>
+    <div class="ev final"><b>answer</b>503, no model available</div>
+  </div>
+  <aside class="notes"><p>From the stretch of Lab 3.2: two calls, statuses 200 then 503. A 503 is the right answer: an outage is better than a Secret document in the wrong place. Availability of Secret workloads therefore needs a second Ministry-hosted model, which is a decision with a cost.</p></aside>
+</section>
+
+<section class="slide" id="check-gateway" data-lo="LO4">
+  <div class="kicker">Checkpoint</div>
+  <h2>What should the gateway do with this request?</h2>
+  <div class="quiz" data-type="single" data-lo="LO4">
+    <p class="lead">The planning team (Public) labels a request Public and sends it to the external model. The text reads: "Owner 1048837265 asks whether plot 17 can be rezoned."</p>
+    <div class="opts">
+      <div class="opt" data-why="Trusts the label over the content: labels are what the caller remembered to send">Pass it: the team and the label are both Public</div>
+      <div class="opt" data-why="Fixes the data after the fact: masking in the log does not stop the text reaching the model">Pass it, and mask the number in the audit log</div>
+      <div class="opt" data-ok>Refuse it: the content shows an identity number, so the request is Restricted</div>
+      <div class="opt" data-why="Moves the risk to the team without stopping it: a warning lets the data out">Pass it with a warning to the team</div>
+    </div>
+    <div class="callout tip why"><b>Why.</b> The level is the highest the gateway can see; the identity number makes it Restricted, which may not go to an external model.</div>
+  </div>
+  <aside class="notes"><p>Answer: C. This is test G4.</p></aside>
 </section>
 
 <section class="slide lab" id="lab-3-2" data-auto="lab" data-lab="3.2">
-  <aside class="notes">REPLACE: what to watch for while participants work, the typical problems, and the fallback for anyone who did not finish an earlier lab</aside>
+  <aside class="notes"><p>No key or model is needed: the refusal happens before any call, and the models are labelled stand-ins. The gateway can forward to a free hosted model through ASAS_UPSTREAM variables; that path was not run in this course's build (no key), and nothing in the lab needs it. Common slip: treating a missing label as Public.</p></aside>
 </section>
 
 <!-- Session 3 -->
 
 <section class="slide section" id="s3" data-auto="section" data-session="3"></section>
 
-<section class="slide" id="s3-idea" data-lo="LO4">
-  <div class="kicker">REPLACE: the question this slide answers</div>
-  <h2>REPLACE: one idea, stated as a sentence</h2>
-  <div class="cols cols-2">
-    <ul class="bullets">
-      <li>REPLACE: at most six bullets, each a complete thought</li>
-      <li>REPLACE: bold the key phrase; numbers come from the lab run, not from memory</li>
-    </ul>
-    <div class="card c-teal"><h4>In the case study</h4><p class="small mb0">REPLACE: tie the idea to the case study and its data</p></div>
-  </div>
-  <div class="callout warn mt"><b>What goes wrong.</b> REPLACE: the failure participants will hit, and how to recognise it</div>
-  <aside class="notes">REPLACE: what to say, the demo to run, the question to ask the room, the common failure and its fix</aside>
+<section class="slide" id="isolation-levels" data-lo="LO4" data-label="Isolation">
+  <div class="kicker">Tenancy</div>
+  <h2>Tenancy is a choice of what teams share and what each gets alone</h2>
+  <table class="t small">
+    <tr><th>Model</th><th>Teams share</th><th>Each team gets</th><th>Fits</th></tr>
+    <tr><td>Pooled</td><td>key, budget, capacity</td><td>nothing</td><td>a pilot</td></tr>
+    <tr class="hl"><td>Per-team controls</td><td>capacity, under caps</td><td>a key, a budget, a capped share</td><td>Public and Restricted teams</td></tr>
+    <tr><td>Dedicated</td><td>the gateway only</td><td>its own model deployment</td><td>Secret teams with steady load</td></tr>
+  </table>
+  <aside class="notes"><p>Most platforms mix them: per-team controls for most teams, dedicated deployments where data or load demands it. The lab compares the first two; the third is a cost question the options paper of a Secret team answers.</p></aside>
 </section>
 
-<section class="slide" id="s3-steps" data-lo="LO4">
-  <div class="kicker">Step by step</div>
-  <h2>REPLACE: a process, shown one step per key press</h2>
-  <div class="flow">
-    <div class="step c-teal"><b>1 · REPLACE: name</b>REPLACE: what happens first</div>
-    <div class="arrow frag" data-frag="b">→</div><div class="step c-cyan frag" data-frag="b"><b>2 · REPLACE: name</b>REPLACE: the next piece</div>
-    <div class="arrow frag" data-frag="c">→</div><div class="step c-coral frag" data-frag="c"><b>3 · REPLACE: name</b>REPLACE: the result</div>
+<section class="slide" id="three-incidents" data-lo="LO4" data-label="Three incidents">
+  <div class="kicker">One hour, three incidents</div>
+  <h2>Three incidents test three different controls</h2>
+  <div class="cols cols-3">
+    <div class="card c-coral"><h4>Leaked key</h4><p class="small mb0">The planning team's key calls the external model 400 times a minute for 15 minutes.</p></div>
+    <div class="card c-amber"><h4>Noisy neighbour</h4><p class="small mb0">The contact team's batch floods the Ministry-hosted model with 300 extra requests a minute.</p></div>
+    <div class="card c-purple"><h4>Runaway agent</h4><p class="small mb0">An inspections agent loops for 40 minutes at six times the tokens per call.</p></div>
   </div>
-  <div class="callout tip mt frag"><b>Takeaway.</b> REPLACE: the one sentence to remember</div>
-  <aside class="notes">Press once per step and say what each step adds before the next one appears. REPLACE: the example to walk through</aside>
+  <aside class="notes"><p>The replay is deterministic (asas_tenancy.py). The Ministry-hosted model serves 120 requests a minute; a quiet hour of paid models costs SAR 99.</p></aside>
+</section>
+
+<section class="slide" id="incident-results" data-lo="LO4" data-label="Results">
+  <div class="kicker">Measured in Lab 3.3</div>
+  <h2>Under per-team controls, no bystander loses a request</h2>
+  <table class="t small">
+    <tr><th>Incident</th><th>Tenancy</th><th class="num">Worst bystander, own model</th><th class="num">Worst bystander, paid models</th></tr>
+    <tr><td>Noisy neighbour</td><td>pooled</td><td class="num">83.1%</td><td class="num">100%</td></tr>
+    <tr><td>Leaked key</td><td>pooled</td><td class="num">100%</td><td class="num">61.7%</td></tr>
+    <tr><td>Runaway agent</td><td>pooled</td><td class="num">100%</td><td class="num">43.3%</td></tr>
+    <tr class="hl"><td>All three</td><td>per team</td><td class="num">100%</td><td class="num">100%</td></tr>
+  </table>
+  <p class="caption">Share of requests served, for the worst-off team that caused nothing.</p>
+  <aside class="notes"><p>Under the pooled model, the leak and the runaway agent exhaust the one shared budget and cut every team off. Per team: the leaked key is revoked at minute 30 when its rate exceeds five times normal; the runaway agent hits its own budget and spike rule.</p></aside>
+</section>
+
+<section class="slide" id="control-map" data-lo="LO4" data-label="Controls">
+  <div class="kicker">Which control for which incident</div>
+  <h2>Each incident needs its own control; the tenancy model is the set</h2>
+  <table class="t">
+    <tr><th>Control</th><th>Contains</th><th>Does nothing for</th></tr>
+    <tr><td>A cap on each team's share of capacity</td><td>noisy neighbour</td><td>spend</td></tr>
+    <tr><td>A budget per key</td><td>runaway agent</td><td>capacity</td></tr>
+    <tr><td>A key per team, revoked on a spike</td><td>leaked key</td><td>a slow, legitimate overload</td></tr>
+  </table>
+  <aside class="notes"><p>The stretch finds the largest safe cap: 0.5 of capacity holds for this hour's noisy neighbour. A smaller cap is safer and slows the culprit's legitimate batch more; that trade-off belongs in a decision record.</p></aside>
+</section>
+
+<section class="slide" id="blast-radius" data-lo="LO4" data-label="Blast radius">
+  <div class="kicker">The principle</div>
+  <h2>One team's incident should stay that team's incident</h2>
+  <div class="cols cols-2">
+    <div class="stat"><div class="big">5 minutes</div><div class="lbl">without paid models for the planning team, until its new key</div></div>
+    <ul class="bullets small">
+      <li>Revocation costs the team whose key leaked; nobody else.</li>
+      <li>Keys are scoped to the models of the team's level: a leaked Public key reaches no Restricted model.</li>
+      <li>Rotation is routine, so revoking is not a crisis.</li>
+    </ul>
+  </div>
+  <aside class="notes"><p>Under the pooled model the only way to stop the leak is to revoke the key all nine teams use: an outage for everyone. Most teams then do not revoke, and the budget burns instead.</p></aside>
+</section>
+
+<section class="slide" id="check-tenancy" data-lo="LO4">
+  <div class="kicker">Checkpoint</div>
+  <h2>Which control stops this from harming other teams?</h2>
+  <div class="quiz" data-type="single" data-lo="LO4">
+    <p class="lead">The contact team's nightly batch moves to working hours and asks the Ministry-hosted model for more than twice its capacity. Budgets are untouched; the other teams' answers slow down. Which control fixes it?</p>
+    <div class="opts">
+      <div class="opt" data-why="Fixes spend, not capacity: the batch runs on a fixed-cost model and spends nothing per call">A lower budget on the contact team's key</div>
+      <div class="opt" data-why="Treats a legitimate overload as a leak: the key is the team's own and correctly used">Revoke the contact team's key</div>
+      <div class="opt" data-ok>A cap on any team's share of the Ministry-hosted model</div>
+      <div class="opt" data-why="Moves the problem: a cloud fallback may not receive Restricted call transcripts">Fall back to a cloud model when the queue is long</div>
+    </div>
+    <div class="callout tip why"><b>Why.</b> The harm is shared capacity; only a cap on each team's share keeps the others served.</div>
+  </div>
+  <aside class="notes"><p>Answer: C. D is worth a minute: call transcripts are Restricted, so a cloud region in the Kingdom would be allowed by the rule; the external model would not. Placement still limits the fallback.</p></aside>
 </section>
 
 <section class="slide lab" id="lab-3-3" data-auto="lab" data-lab="3.3">
-  <aside class="notes">REPLACE: what to watch for while participants work, the typical problems, and the fallback for anyone who did not finish an earlier lab</aside>
+  <aside class="notes"><p>The allocation function is the only hard part: unused share must go to the others, still under the cap. A one-pass version that caps and stops leaves capacity idle; the check on the noisy neighbour still passes but the own-model numbers of bystanders show the waste.</p></aside>
 </section>
 
 <!-- Session 4 -->
 
 <section class="slide section" id="s4" data-auto="section" data-session="4"></section>
 
-<section class="slide" id="s4-idea" data-lo="LO4">
-  <div class="kicker">REPLACE: the question this slide answers</div>
-  <h2>REPLACE: one idea, stated as a sentence</h2>
+<section class="slide" id="showback-first" data-lo="LO4" data-label="Showback">
+  <div class="kicker">Cost attribution</div>
+  <h2>Show teams their costs before anyone is charged</h2>
   <div class="cols cols-2">
-    <ul class="bullets">
-      <li>REPLACE: at most six bullets, each a complete thought</li>
-      <li>REPLACE: bold the key phrase; numbers come from the lab run, not from memory</li>
-    </ul>
-    <div class="card c-teal"><h4>In the case study</h4><p class="small mb0">REPLACE: tie the idea to the case study and its data</p></div>
+    <div class="card c-teal"><h4>Showback</h4><p class="small mb0">Each team sees what its use cost, at any granularity. Nothing moves between budgets.</p></div>
+    <div class="card c-coral"><h4>Chargeback</h4><p class="small mb0">The costs are sent to the teams' budgets. Allocation keys now move money.</p></div>
   </div>
-  <div class="callout warn mt"><b>What goes wrong.</b> REPLACE: the failure participants will hit, and how to recognise it</div>
-  <aside class="notes">REPLACE: what to say, the demo to run, the question to ask the room, the common failure and its fix</aside>
+  <div class="callout tip mt"><b>Order.</b> Run showback until the teams stop disputing the allocation keys; then decide about chargeback.</div>
+  <aside class="notes"><p>The FinOps Framework distinguishes the two: chargeback is the formal sending of costs to accounting budgets, showback is reporting without it. Nisreen Al-Mehaimeed asked for showback first; the lab shows why the keys need arguing before money moves.</p><p>Sources: FinOps Framework, invoicing and chargeback.</p></aside>
 </section>
 
-<section class="slide" id="s4-steps" data-lo="LO4">
-  <div class="kicker">Step by step</div>
-  <h2>REPLACE: a process, shown one step per key press</h2>
+<section class="slide" id="card-drift" data-lo="LO4" data-label="Price card">
+  <div class="kicker">Measured in Lab 3.4</div>
+  <h2>A showback priced with a price card drifts from the bill</h2>
+  <table class="t small">
+    <tr><th>Invoice</th><th class="num">Showback by card</th><th class="num">Invoice</th><th class="num">Off by</th><th>Why</th></tr>
+    <tr><td>In-Kingdom Cloud, August</td><td class="num">5,136</td><td class="num">4,636</td><td class="num">10.8%</td><td>an onboarding credit</td></tr>
+    <tr><td>External Provider, September</td><td class="num">3,772</td><td class="num">3,401</td><td class="num">10.9%</td><td>output price cut</td></tr>
+    <tr><td>External Provider, October</td><td class="num">3,935</td><td class="num">3,550</td><td class="num">10.9%</td><td>output price cut</td></tr>
+  </table>
+  <aside class="notes"><p>SAR, from the solution run on the synthetic invoices. The card was last updated in May. Finance stops trusting a showback the first month it disagrees with the bill.</p></aside>
+</section>
+
+<section class="slide" id="allocate-invoice" data-lo="LO4" data-label="Allocate">
+  <div class="kicker">Allocate, do not reprice</div>
+  <h2>Share each invoice line by the usage it covers</h2>
   <div class="flow">
-    <div class="step c-teal"><b>1 · REPLACE: name</b>REPLACE: what happens first</div>
-    <div class="arrow frag" data-frag="b">→</div><div class="step c-cyan frag" data-frag="b"><b>2 · REPLACE: name</b>REPLACE: the next piece</div>
-    <div class="arrow frag" data-frag="c">→</div><div class="step c-coral frag" data-frag="c"><b>3 · REPLACE: name</b>REPLACE: the result</div>
+    <div class="step c-teal"><b>Token lines</b>by the rows' tokens of that model</div>
+    <div class="arrow">→</div>
+    <div class="step c-amber"><b>Credits</b>by the rows' value on that provider</div>
+    <div class="arrow">→</div>
+    <div class="step c-navy"><b>Fixed cost</b>by an allocation key you defend</div>
+    <div class="arrow">→</div>
+    <div class="step c-purple"><b>Team</b>by the key's owner</div>
   </div>
-  <div class="callout tip mt frag"><b>Takeaway.</b> REPLACE: the one sentence to remember</div>
-  <aside class="notes">Press once per step and say what each step adds before the next one appears. REPLACE: the example to walk through</aside>
+  <div class="stat center mt"><div class="big">0.00%</div><div class="lbl">difference from each of the 18 invoices after allocation; the outcome asks for 2% or less</div></div>
+  <aside class="notes"><p>From Lab 3.4 step 3. The allocation sums to the invoice by construction, so reconciliation is a test that the code covers every line, not a coincidence.</p></aside>
+</section>
+
+<section class="slide" id="untagged" data-lo="LO4" data-label="Untagged">
+  <div class="kicker">Untagged spend</div>
+  <h2>Untagged spend comes in two kinds, and only one has an owner</h2>
+  <div class="cols cols-2">
+    <div class="card c-cyan"><h4>Blank tag, known key</h4><p class="small mb0">116 rows, SAR 13,950: the key's owner is known, so the gateway attributes them.</p></div>
+    <div class="card c-coral"><h4>Orphan key</h4><p class="small mb0"><code>k-legacy-01</code>: SAR 558 over six months, chat on a cloud model, owned by nobody.</p></div>
+  </div>
+  <div class="callout warn mt"><b>The fix is a rule, not a report.</b> No key without an owner, and a key without one is revoked.</div>
+  <aside class="notes"><p>The orphan's spend is 0.14% of the six months, small enough to be ignored, which is why it matters: nobody would notice it grow, and it can reach a model that receives Restricted data.</p></aside>
+</section>
+
+<section class="slide" id="allocation-key" data-lo="LO4" data-label="Allocation key">
+  <div class="kicker">The data centre's fixed cost</div>
+  <h2>The allocation key is a decision: tokens and requests disagree</h2>
+  <div class="cols cols-2">
+    <div class="stat"><div class="big">70.7%</div><div class="lbl">of the data centre's cost to the contact team, by tokens</div></div>
+    <div class="stat"><div class="big">24.1%</div><div class="lbl">of it to the same team, by requests</div></div>
+  </div>
+  <p class="small mt">Speech counts many tokens per call. Which key reflects what the servers actually spend their time on? Measure it, then record the choice.</p>
+  <aside class="notes"><p>From the stretch of Lab 3.4. A third key, accelerator time per team, would be the most defensible and needs metering the platform does not have yet. Tools such as OpenCost allocate cluster costs from measured resource use; the decision of which key to use stays the architect's.</p><p>Sources: OpenCost documentation.</p></aside>
+</section>
+
+<section class="slide" id="check-showback" data-lo="LO4">
+  <div class="kicker">Checkpoint</div>
+  <h2>Why does the August showback miss the invoice?</h2>
+  <div class="quiz" data-type="single" data-lo="LO4">
+    <p class="lead">Priced with the platform's card, August's In-Kingdom Cloud showback is SAR 500 above the invoice. Every token is accounted for. What is the right fix?</p>
+    <div class="opts">
+      <div class="opt" data-why="Hides a gap instead of explaining it: a fudge line makes the next month's gap invisible too">Add a correction line of SAR -500 to the unallocated bucket</div>
+      <div class="opt" data-why="Updates a card that was right: the provider's prices did not change in August">Update the price card for August</div>
+      <div class="opt" data-why="Blames tags for a pricing gap: tags decide who pays, not how much">Ask teams to tag their calls better</div>
+      <div class="opt" data-ok>Allocate the invoice lines, the credit included, to the usage they cover</div>
+    </div>
+    <div class="callout tip why"><b>Why.</b> The invoice holds a credit the card cannot know; allocating the invoice passes it to the teams in proportion to their use.</div>
+  </div>
+  <aside class="notes"><p>Answer: D.</p></aside>
 </section>
 
 <section class="slide lab" id="lab-3-4" data-auto="lab" data-lab="3.4">
-  <aside class="notes">REPLACE: what to watch for while participants work, the typical problems, and the fallback for anyone who did not finish an earlier lab</aside>
+  <aside class="notes"><p>The credit line has no model; a blank cell reads as missing in pandas, which is the usual trip. Attribute by key owner, not by tag: grouping by tag loses SAR 13,950 to "untagged".</p></aside>
 </section>
 
-<section class="slide" id="wrap-up">
-  <div class="kicker">Day 3 · wrap-up</div>
+<section class="slide" id="wrap-up" data-label="Wrap-up">
+  <div class="kicker">Day 3</div>
   <h2>Three things to keep</h2>
   <div class="cols cols-3">
-    <div class="card c-teal"><h4>Remember</h4><p class="small mb0">REPLACE: one idea participants keep</p></div>
-    <div class="card c-coral"><h4>Remember</h4><p class="small mb0">REPLACE: one idea participants keep</p></div>
-    <div class="card c-purple"><h4>Remember</h4><p class="small mb0">REPLACE: one idea participants keep</p></div>
+    <div class="card c-teal"><h4>Build from demand</h4><p class="small mb0">Shared services for most teams, paved roads for the rest.</p></div>
+    <div class="card c-coral"><h4>Policy at the door</h4><p class="small mb0">The gateway refuses by classification, content included, and logs no text.</p></div>
+    <div class="card c-purple"><h4>Contain and attribute</h4><p class="small mb0">Per-team controls keep incidents local; showback allocates the real bill.</p></div>
   </div>
+  <aside class="notes"><p>The platform slice of the capstone is today's four labs: a catalogue entry, the gateway with its refusal test, and a showback that reconciles. Tomorrow adds the golden path.</p></aside>
 </section>
 
 <section class="slide dark" id="next" data-label="Next">
-  <div class="kicker">Next</div>
-  <h2>Day 4: Reference designs and reviews</h2>
-  <p class="lead">REPLACE: what participants prepare before then; unfinished labs can be finished at home</p>
-  <aside class="notes">REPLACE: accounts, installs or reading participants need before the next unit</aside>
+  <div class="kicker">Day 4</div>
+  <h2>Tomorrow: a golden path, fitness checks, a review and a deviation</h2>
+  <ul class="bullets">
+    <li>Keep <code>artifacts/D3_2/</code> and <code>artifacts/D3_4/</code>: the capstone's platform slice starts there.</li>
+    <li>Read the inspections team's design in <code>labs/data/designs/</code>: you review it in Session 3.</li>
+    <li>Choose which of the three capstone services you would take.</li>
+  </ul>
+  <aside class="notes"><p>The three capstone services are in labs/capstone/README.md. Participants choose in Lab 4.4.</p></aside>
 </section>

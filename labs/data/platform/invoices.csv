@@ -1,0 +1,44 @@
+provider,month,line,model,amount_sar
+External Provider,2026-05,ext-frontier-l input tokens,ext-frontier-l,1810.55
+External Provider,2026-05,ext-frontier-l output tokens,ext-frontier-l,1754.86
+In-Kingdom Cloud,2026-05,ksa-general-m input tokens,ksa-general-m,2766.6
+In-Kingdom Cloud,2026-05,ksa-general-m output tokens,ksa-general-m,1048.6
+In-Kingdom Cloud,2026-05,ksa-vision-x input tokens,ksa-vision-x,216.69
+In-Kingdom Cloud,2026-05,ksa-vision-x output tokens,ksa-vision-x,108.86
+Ministry Data Centre,2026-05,accelerator servers and operations,own-*,60000.0
+External Provider,2026-06,ext-frontier-l input tokens,ext-frontier-l,1920.67
+External Provider,2026-06,ext-frontier-l output tokens,ext-frontier-l,1903.64
+In-Kingdom Cloud,2026-06,ksa-general-m input tokens,ksa-general-m,2915.62
+In-Kingdom Cloud,2026-06,ksa-general-m output tokens,ksa-general-m,1097.83
+In-Kingdom Cloud,2026-06,ksa-vision-x input tokens,ksa-vision-x,240.86
+In-Kingdom Cloud,2026-06,ksa-vision-x output tokens,ksa-vision-x,120.68
+Ministry Data Centre,2026-06,accelerator servers and operations,own-*,60000.0
+External Provider,2026-07,ext-frontier-l input tokens,ext-frontier-l,1819.31
+External Provider,2026-07,ext-frontier-l output tokens,ext-frontier-l,1751.93
+In-Kingdom Cloud,2026-07,ksa-general-m input tokens,ksa-general-m,3232.67
+In-Kingdom Cloud,2026-07,ksa-general-m output tokens,ksa-general-m,1290.66
+In-Kingdom Cloud,2026-07,ksa-vision-x input tokens,ksa-vision-x,255.98
+In-Kingdom Cloud,2026-07,ksa-vision-x output tokens,ksa-vision-x,128.02
+Ministry Data Centre,2026-07,accelerator servers and operations,own-*,60000.0
+External Provider,2026-08,ext-frontier-l input tokens,ext-frontier-l,1866.58
+External Provider,2026-08,ext-frontier-l output tokens,ext-frontier-l,1773.86
+In-Kingdom Cloud,2026-08,ksa-general-m input tokens,ksa-general-m,3393.93
+In-Kingdom Cloud,2026-08,ksa-general-m output tokens,ksa-general-m,1358.07
+In-Kingdom Cloud,2026-08,ksa-vision-x input tokens,ksa-vision-x,255.56
+In-Kingdom Cloud,2026-08,ksa-vision-x output tokens,ksa-vision-x,128.08
+In-Kingdom Cloud,2026-08,onboarding credit,,-500.0
+Ministry Data Centre,2026-08,accelerator servers and operations,own-*,60000.0
+External Provider,2026-09,ext-frontier-l input tokens,ext-frontier-l,1920.18
+External Provider,2026-09,ext-frontier-l output tokens,ext-frontier-l,1481.17
+In-Kingdom Cloud,2026-09,ksa-general-m input tokens,ksa-general-m,3550.56
+In-Kingdom Cloud,2026-09,ksa-general-m output tokens,ksa-general-m,1481.16
+In-Kingdom Cloud,2026-09,ksa-vision-x input tokens,ksa-vision-x,261.31
+In-Kingdom Cloud,2026-09,ksa-vision-x output tokens,ksa-vision-x,130.59
+Ministry Data Centre,2026-09,accelerator servers and operations,own-*,60000.0
+External Provider,2026-10,ext-frontier-l input tokens,ext-frontier-l,2007.46
+External Provider,2026-10,ext-frontier-l output tokens,ext-frontier-l,1542.15
+In-Kingdom Cloud,2026-10,ksa-general-m input tokens,ksa-general-m,3618.33
+In-Kingdom Cloud,2026-10,ksa-general-m output tokens,ksa-general-m,1446.44
+In-Kingdom Cloud,2026-10,ksa-vision-x input tokens,ksa-vision-x,270.1
+In-Kingdom Cloud,2026-10,ksa-vision-x output tokens,ksa-vision-x,136.11
+Ministry Data Centre,2026-10,accelerator servers and operations,own-*,60000.0

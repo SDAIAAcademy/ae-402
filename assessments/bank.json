@@ -378,6 +378,209 @@
       "level": "apply",
       "pool": "practice",
       "weight": 1
+    },
+    {
+      "id": "d3-phase",
+      "type": "single",
+      "prompt": "On a shared AI platform, eight of nine teams use or ask for chat and one team asks for speech. How should the platform serve speech?",
+      "options": [
+        "Give the speech team a paved road to a service it owns, behind the gateway",
+        "Build a shared speech service for all nine teams first",
+        "Refuse speech until more teams ask for it",
+        "Let the speech team call any external provider directly"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "One team's need is served by a golden path the team owns; shared services are for what most teams need.",
+      "misconceptions": [
+        "",
+        "Builds a shared service, with shared cost and an owner, for one team",
+        "Treats a team-owned capability as unsupported",
+        "Bypasses the gateway and its placement policy"
+      ],
+      "lo": [
+        "LO4"
+      ],
+      "day": "day3",
+      "session": 1,
+      "level": "apply",
+      "pool": "practice",
+      "weight": 1
+    },
+    {
+      "id": "d3-admit",
+      "type": "single",
+      "prompt": "A candidate model tops a public leaderboard, has no evaluation on the Ministry's Arabic set, and its licence forbids production use. What does admission decide?",
+      "options": [
+        "Admit it for Public data only",
+        "Reject it on the licence, and ask for Arabic evidence if it is proposed again",
+        "Admit it on the leaderboard score and evaluate later",
+        "Admit it for a three-month trial in production"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Admission rests on the licence and the Ministry's own evaluations; a leaderboard is neither.",
+      "misconceptions": [
+        "Data level does not cure a licence that forbids production use",
+        "",
+        "Admits without the evidence the catalogue requires",
+        "A trial in production is still production use"
+      ],
+      "lo": [
+        "LO4"
+      ],
+      "day": "day3",
+      "session": 2,
+      "level": "analyze",
+      "pool": "practice",
+      "weight": 1
+    },
+    {
+      "id": "d3-label",
+      "type": "single",
+      "prompt": "A request from a Restricted team declares no classification and names an external model. What should the gateway's policy do?",
+      "options": [
+        "Pass it, since nothing says the data is Restricted",
+        "Pass it and log the full prompt for review",
+        "Ask the model whether the prompt holds personal data",
+        "Treat it as Restricted and refuse it"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "An undeclared request takes the team's highest level: the policy fails closed.",
+      "misconceptions": [
+        "Fails open: a missing label is not a Public label",
+        "Creates a second copy of possibly Restricted data in the log",
+        "Sends the data to the model to decide whether it may be sent",
+        ""
+      ],
+      "lo": [
+        "LO4"
+      ],
+      "day": "day3",
+      "session": 2,
+      "level": "apply",
+      "pool": "practice",
+      "weight": 1
+    },
+    {
+      "id": "d3-audit",
+      "type": "single",
+      "prompt": "Why does the gateway's audit log store a hash of each prompt instead of the prompt?",
+      "options": [
+        "Hashes are shorter, so the log is cheaper",
+        "The log can prove what was sent without becoming a copy of the data",
+        "A hash lets the platform team read the prompt later",
+        "Regulators require hashing of all logs"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "The log must not hold Restricted text; a hash still proves whether a given text was sent.",
+      "misconceptions": [
+        "Size is a side effect, not the reason",
+        "",
+        "A hash cannot be read back into the text",
+        "Invents a requirement; the reason is the data the log would hold"
+      ],
+      "lo": [
+        "LO4"
+      ],
+      "day": "day3",
+      "session": 2,
+      "level": "understand",
+      "pool": "practice",
+      "weight": 1
+    },
+    {
+      "id": "d3-tenancy",
+      "type": "single",
+      "prompt": "Under one shared key and budget, a leaked key at one team cuts every team off paid models. Which change contains the leak to that team?",
+      "options": [
+        "A larger shared budget",
+        "A cap on each team's share of the Ministry-hosted model",
+        "A key and budget per team, with revocation of a key that spikes",
+        "A fallback to the Ministry-hosted model"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "Per-team keys let one key be revoked without stopping the others; per-key budgets bound the spend.",
+      "misconceptions": [
+        "Only delays the outage",
+        "Contains capacity incidents, not spend",
+        "",
+        "Moves the load to a capacity every team shares, and the leaked key keeps working"
+      ],
+      "lo": [
+        "LO4"
+      ],
+      "day": "day3",
+      "session": 3,
+      "level": "analyze",
+      "pool": "practice",
+      "weight": 1
+    },
+    {
+      "id": "d3-reconcile",
+      "type": "single",
+      "prompt": "A showback priced with the platform's price card is 10.9% above the provider's September invoice after a price cut. What makes the showback reconcile every month?",
+      "options": [
+        "Allocate each invoice line to the usage it covers",
+        "Update the price card each quarter",
+        "Add the difference to an 'other' line",
+        "Ask the teams to tag every call"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Allocating the invoice reproduces what the Ministry pays, including credits and price changes.",
+      "misconceptions": [
+        "",
+        "Still drifts between updates and misses credits",
+        "Hides the gap instead of explaining it",
+        "Tags decide who pays, not how much"
+      ],
+      "lo": [
+        "LO4"
+      ],
+      "day": "day3",
+      "session": 4,
+      "level": "evaluate",
+      "pool": "practice",
+      "weight": 1
+    },
+    {
+      "id": "d3-alloc-key",
+      "type": "single",
+      "prompt": "The data centre's fixed cost is shared by tokens and the contact team, whose speech model counts many tokens per call, gets 71% of it; by requests it would get 24%. What should the architect do?",
+      "options": [
+        "Use tokens, since it is the default",
+        "Use whichever share the contact team accepts",
+        "Split the difference at 47%",
+        "Choose the key that best tracks server time, measure it, and record the choice"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "The allocation key is a decision with consequences; it is measured and recorded, not defaulted.",
+      "misconceptions": [
+        "A default is not a reason",
+        "Negotiation is not measurement",
+        "Averages two keys without a reason for either",
+        ""
+      ],
+      "lo": [
+        "LO4"
+      ],
+      "day": "day3",
+      "session": 4,
+      "level": "evaluate",
+      "pool": "practice",
+      "weight": 1
     }
   ]
 }

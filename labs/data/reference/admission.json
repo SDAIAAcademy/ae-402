@@ -1,0 +1,12 @@
+{
+ "admitted": [
+  "ext-frontier-l",
+  "ksa-general-m",
+  "own-open-s",
+  "own-embed-m"
+ ],
+ "rejected": {
+  "ext-mini-r": "licence",
+  "ksa-vision-x": "no Arabic evaluation evidence"
+ }
+}

@@ -58,10 +58,10 @@ Every lab is a notebook in `labs/`. Open it in Google Colab from the course page
 | 2.2 | Day 2 · Session 2 | Three options over three years | [`D2_2_three_year_cost.ipynb`](labs/D2_2_three_year_cost.ipynb) |
 | 2.3 | Day 2 · Session 3 | Exit cost, weights and two requirements | [`D2_3_exit_cost.ipynb`](labs/D2_3_exit_cost.ipynb) |
 | 2.4 | Day 2 · Session 4 | Two decision records and a challenge | [`D2_4_decision_records.ipynb`](labs/D2_4_decision_records.ipynb) |
-| 3.1 | Day 3 · Session 1 | Build a demand matrix from the synthetic usage logs of nine teams | [`D3_1_demand_matrix.ipynb`](labs/D3_1_demand_matrix.ipynb) |
-| 3.2 | Day 3 · Session 2 | Admit four models and make the supplied gateway refuse restricted data to an external model | [`D3_2_admission_gateway.ipynb`](labs/D3_2_admission_gateway.ipynb) |
-| 3.3 | Day 3 · Session 3 | Walk a tenancy model through a leaked key, a noisy neighbour and a runaway agent | [`D3_3_tenancy.ipynb`](labs/D3_3_tenancy.ipynb) |
-| 3.4 | Day 3 · Session 4 | Build a showback from synthetic invoices and tags and name untagged spend | [`D3_4_showback.ipynb`](labs/D3_4_showback.ipynb) |
+| 3.1 | Day 3 · Session 1 | A demand matrix from six months of usage | [`D3_1_demand_matrix.ipynb`](labs/D3_1_demand_matrix.ipynb) |
+| 3.2 | Day 3 · Session 2 | Model admission and a gateway that refuses | [`D3_2_admission_gateway.ipynb`](labs/D3_2_admission_gateway.ipynb) |
+| 3.3 | Day 3 · Session 3 | Three incidents, two tenancy models | [`D3_3_tenancy.ipynb`](labs/D3_3_tenancy.ipynb) |
+| 3.4 | Day 3 · Session 4 | A showback that reconciles | [`D3_4_showback.ipynb`](labs/D3_4_showback.ipynb) |
 | 4.1 | Day 4 · Session 1 | Turn a supplied retrieval service into a template with evaluation, tracing and classification checks on | [`D4_1_golden_path.ipynb`](labs/D4_1_golden_path.ipynb) |
 | 4.2 | Day 4 · Session 2 | Write two checks that fail a design lacking an evaluation gate or sending restricted data out | [`D4_2_fitness_checks.ipynb`](labs/D4_2_fitness_checks.ipynb) |
 | 4.3 | Day 4 · Session 3 | Review a supplied design for risks, sensitivity points and non-compliance | [`D4_3_review.ipynb`](labs/D4_3_review.ipynb) |

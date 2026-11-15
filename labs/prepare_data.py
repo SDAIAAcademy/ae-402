@@ -602,11 +602,205 @@ If things change.
 
 
 # ======================================================================================
+# Day 3 · the shared platform
+# ======================================================================================
+
+TEAMS = [
+    ("T01", "permits", "Muyassir, the building-permits assistant", "Restricted", "chat;embeddings;agent_tools"),
+    ("T02", "reports", "Citizen reports: routing and replies", "Restricted", "classification;chat"),
+    ("T03", "inspections", "Kashif, the inspection-report assistant", "Restricted", "chat;vision"),
+    ("T04", "waste", "Collection route summaries", "Public", "batch;chat"),
+    ("T05", "planning", "Zoning questions assistant", "Public", "chat;embeddings"),
+    ("T06", "contracts", "Contract clause review", "Secret", "chat;embeddings"),
+    ("T07", "land", "Land and survey records search", "Secret", "embeddings;chat"),
+    ("T08", "contact", "Call-centre call summaries", "Restricted", "speech;batch"),
+    ("T09", "staff", "Staff policies assistant", "Restricted", "chat;embeddings;batch"),
+]
+MODELS = {"ext-frontier-l": "external", "ksa-general-m": "ksa_cloud", "ksa-vision-x": "ksa_cloud",
+          "own-open-s": "ministry", "own-embed-m": "ministry", "own-speech-s": "ministry"}
+PROVIDER = {"external": "External Provider", "ksa_cloud": "In-Kingdom Cloud", "ministry": "Ministry Data Centre"}
+CARD = {"ext-frontier-l": (10.0, 40.0), "ksa-general-m": (8.0, 24.0), "ksa-vision-x": (12.0, 36.0)}
+OWN_FIXED_PER_MONTH = 60000.0
+USAGE = [  # team, key, capability, model, daily requests, in tokens, out tokens
+    ("T01", "k-t01-a", "chat", "ksa-general-m", 3000, 3200, 330),
+    ("T01", "k-t01-a", "embeddings", "own-embed-m", 3500, 60, 0),
+    ("T02", "k-t02-a", "chat", "ext-frontier-l", 900, 900, 250),
+    ("T02", "k-t02-a", "classification", "ksa-general-m", 3000, 200, 5),
+    ("T03", "k-t03-a", "chat", "ksa-general-m", 600, 2500, 700),
+    ("T03", "k-t03-b", "vision", "ksa-vision-x", 400, 1800, 300),
+    ("T04", "k-t04-a", "batch", "own-open-s", 30, 9000, 1200),
+    ("T05", "k-t05-a", "chat", "ext-frontier-l", 2500, 2500, 600),
+    ("T05", "k-t05-a", "embeddings", "own-embed-m", 2600, 50, 0),
+    ("T06", "k-t06-a", "chat", "own-open-s", 300, 6000, 900),
+    ("T06", "k-t06-a", "embeddings", "own-embed-m", 800, 400, 0),
+    ("T07", "k-t07-a", "embeddings", "own-embed-m", 1200, 120, 0),
+    ("T07", "k-t07-a", "chat", "own-open-s", 150, 3000, 500),
+    ("T08", "k-t08-a", "speech", "own-speech-s", 1500, 3000, 600),
+    ("T08", "k-t08-b", "batch", "own-open-s", 1500, 2200, 250),
+    ("T09", "k-t09-a", "chat", "ksa-general-m", 700, 2000, 300),
+    ("T09", "k-t09-a", "embeddings", "own-embed-m", 750, 50, 0),
+    ("", "k-legacy-01", "chat", "ksa-general-m", 120, 2500, 300),
+]
+
+
+def day3(rng: random.Random) -> None:
+    write_csv("platform/teams.csv", [{"team": t, "name": n, "product": p, "max_level": l, "survey_wants": w}
+                                     for t, n, p, l, w in TEAMS])
+    keys = sorted({(t, k) for t, k, *_ in USAGE})
+    write_csv("platform/keys.csv", [{"key_id": k, "team": t} for t, k in keys if t] +
+              [{"key_id": "k-legacy-01", "team": ""}])
+
+    start, days = date(2026, 5, 1), 184
+    rows = []
+    for d in range(days):
+        day = start + timedelta(days=d)
+        weekend = day.weekday() in (4, 5)
+        growth = 1 + 0.05 * (d / 30.5)
+        for t, k, cap, model, req, tin, tout in USAGE:
+            m = model
+            if t == "T02" and cap == "chat" and day >= date(2026, 7, 1):
+                m = "ksa-general-m"  # moved after the gateway rule; May and June went external
+            n = req * growth * (0.4 if weekend else 1.0) * rng.uniform(0.85, 1.15)
+            if t == "T03" and cap == "chat" and day == date(2026, 9, 14):
+                n *= 8  # the runaway agent
+            n = max(1, int(n))
+            tag = t
+            if t and rng.random() < 0.04:
+                tag = ""  # tag forgotten on this batch of calls
+            rows.append({"date": day.isoformat(), "key_id": k, "team_tag": tag, "model": m, "capability": cap,
+                         "requests": n, "in_tokens": int(n * tin * rng.uniform(0.95, 1.05)),
+                         "out_tokens": int(n * tout * rng.uniform(0.95, 1.05))})
+    write_csv("platform/usage.csv", rows)
+
+    # --- invoices: the provider's prices, not the platform's price card -----------------------------------
+    inv = []
+    months = sorted({r["date"][:7] for r in rows})
+    for mo in months:
+        mrows = [r for r in rows if r["date"].startswith(mo)]
+        for model, (pin, pout) in CARD.items():
+            if model == "ext-frontier-l" and mo >= "2026-09":
+                pout = 32.0  # the provider cut its output price; the price card was not updated
+            tin = sum(r["in_tokens"] for r in mrows if r["model"] == model)
+            tout = sum(r["out_tokens"] for r in mrows if r["model"] == model)
+            inv.append({"provider": PROVIDER[MODELS[model]], "month": mo, "line": f"{model} input tokens",
+                        "model": model, "amount_sar": round(tin * pin / 1e6, 2)})
+            inv.append({"provider": PROVIDER[MODELS[model]], "month": mo, "line": f"{model} output tokens",
+                        "model": model, "amount_sar": round(tout * pout / 1e6, 2)})
+        if mo == "2026-08":
+            inv.append({"provider": "In-Kingdom Cloud", "month": mo, "line": "onboarding credit", "model": "",
+                        "amount_sar": -500.0})
+        inv.append({"provider": "Ministry Data Centre", "month": mo, "line": "accelerator servers and operations",
+                    "model": "own-*", "amount_sar": OWN_FIXED_PER_MONTH})
+    write_csv("platform/invoices.csv", inv)
+    write_json("platform/price_card.json", {
+        "note": "The Asas price card, SAR per million tokens, last updated 2026-05-01. Ministry-hosted models "
+                "carry no token price: their fixed monthly cost is shared by token volume.",
+        "per_million": {m: {"in": p[0], "out": p[1]} for m, p in CARD.items()},
+        "ministry_fixed_per_month": OWN_FIXED_PER_MONTH})
+
+    # reference: correct allocation of each invoice by usage share, team by key
+    key_team = {k: t for t, k in keys}
+    alloc = {}
+    unalloc = 0.0
+    for line in inv:
+        mo, amt = line["month"], line["amount_sar"]
+        mrows = [r for r in rows if r["date"].startswith(mo)]
+        if line["model"] == "own-*":
+            sel = [r for r in mrows if MODELS[r["model"]] == "ministry"]
+            w = [r["in_tokens"] + r["out_tokens"] for r in sel]
+        elif line["model"] == "":
+            sel = [r for r in mrows if MODELS[r["model"]] == "ksa_cloud"]
+            w = [r["in_tokens"] * CARD[r["model"]][0] + r["out_tokens"] * CARD[r["model"]][1] for r in sel]
+        else:
+            sel = [r for r in mrows if r["model"] == line["model"]]
+            w = [r["in_tokens"] if line["line"].endswith("input tokens") else r["out_tokens"] for r in sel]
+        tot = sum(w)
+        for r, x in zip(sel, w):
+            share = amt * x / tot if tot else 0.0
+            team = key_team.get(r["key_id"], "")
+            if team:
+                alloc[team] = alloc.get(team, 0.0) + share
+            else:
+                unalloc += share
+    invoice_total = sum(l["amount_sar"] for l in inv)
+    untagged_known = sum(1 for r in rows if r["team_tag"] == "" and r["key_id"] != "k-legacy-01")
+    ref("showback", {"by_team": {k: round(v, 2) for k, v in sorted(alloc.items())},
+                     "unallocated_legacy_key": round(unalloc, 2), "invoice_total": round(invoice_total, 2),
+                     "untagged_rows_with_known_key": untagged_known})
+
+    # demand matrix reference
+    used = {}
+    for r in rows:
+        t = key_team.get(r["key_id"], "")
+        if t:
+            used.setdefault(r["capability"], set()).add(t)
+    wants = {}
+    for t, _, _, _, w in TEAMS:
+        for c in w.split(";"):
+            wants.setdefault(c, set()).add(t)
+    demand = {c: sorted(used.get(c, set()) | wants.get(c, set())) for c in sorted(set(used) | set(wants))}
+    ref("demand", {c: len(v) for c, v in demand.items()})
+    t02_ext = sum(r["requests"] for r in rows if r["key_id"] == "k-t02-a" and r["model"] == "ext-frontier-l")
+    ref("placement_breach", {"team": "T02", "model": "ext-frontier-l", "requests": t02_ext})
+
+    # --- model candidates for admission -------------------------------------------------------------------
+    cands = [
+        {"id": "ext-frontier-l", "capability": "chat", "hosting": "external", "licence": "commercial API terms",
+         "licence_allows_government_production": True, "eval": {"ar": 0.91, "en": 0.93}, "retention_days": 30,
+         "trains_on_prompts": False, "owner": "Faris Al-Hothali"},
+        {"id": "ksa-general-m", "capability": "chat", "hosting": "ksa_cloud", "licence": "commercial API terms",
+         "licence_allows_government_production": True, "eval": {"ar": 0.86, "en": 0.88}, "retention_days": 0,
+         "trains_on_prompts": False, "owner": "Faris Al-Hothali"},
+        {"id": "own-open-s", "capability": "chat", "hosting": "ministry", "licence": "permissive open-weight licence",
+         "licence_allows_government_production": True, "eval": {"ar": 0.79, "en": 0.82}, "retention_days": 0,
+         "trains_on_prompts": False, "owner": "Faris Al-Hothali"},
+        {"id": "own-embed-m", "capability": "embeddings", "hosting": "ministry",
+         "licence": "permissive open-weight licence", "licence_allows_government_production": True,
+         "eval": {"ar": 0.88, "en": 0.90}, "retention_days": 0, "trains_on_prompts": False,
+         "owner": "Faris Al-Hothali"},
+        {"id": "ext-mini-r", "capability": "chat", "hosting": "external", "licence": "research use only",
+         "licence_allows_government_production": False, "eval": {"ar": 0.84, "en": 0.89}, "retention_days": 30,
+         "trains_on_prompts": False, "owner": "Faris Al-Hothali"},
+        {"id": "ksa-vision-x", "capability": "vision", "hosting": "ksa_cloud", "licence": "commercial API terms",
+         "licence_allows_government_production": True, "eval": {"ar": None, "en": 0.81}, "retention_days": 0,
+         "trains_on_prompts": False, "owner": "Rabah Al-Mujil"},
+    ]
+    write_json("platform/model_candidates.json", {
+        "note": "Fictional model ids. 'eval' is the score on the Ministry's own Arabic and English evaluation sets "
+                "(answer correctness for chat, recall at 5 for embeddings, defect detection for vision); null "
+                "means no evidence was submitted.",
+        "thresholds": {"chat": 0.75, "embeddings": 0.80, "vision": 0.80}, "candidates": cands})
+    ref("admission", {"admitted": ["ext-frontier-l", "ksa-general-m", "own-open-s", "own-embed-m"],
+                      "rejected": {"ext-mini-r": "licence", "ksa-vision-x": "no Arabic evaluation evidence"}})
+    write_json("platform/gateway_tests.json", [
+        {"id": "G1", "key": "k-t05-a", "model": "ext-frontier-l", "declared": "Public",
+         "text": "Which zoning class allows a two-storey shop on a main road?", "expect": 200},
+        {"id": "G2", "key": "k-t01-a", "model": "ext-frontier-l", "declared": "Restricted",
+         "text": "Summarise application 2026-4471 with the attached deed.", "expect": 403},
+        {"id": "G3", "key": "k-t01-a", "model": "ext-frontier-l", "declared": None,
+         "text": "List the missing documents for this applicant.", "expect": 403},
+        {"id": "G4", "key": "k-t05-a", "model": "ext-frontier-l", "declared": "Public",
+         "text": "Owner 1048837265 asks whether plot 17 can be rezoned.", "expect": 403},
+        {"id": "G5", "key": "k-t01-a", "model": "ksa-general-m", "declared": "Restricted",
+         "text": "Summarise application 2026-4471 with the attached deed.", "expect": 200},
+        {"id": "G6", "key": "k-t06-a", "model": "ksa-general-m", "declared": None,
+         "text": "Compare clause 9 of the two bids for tender 31.", "expect": 403},
+        {"id": "G7", "key": "k-t06-a", "model": "own-open-s", "declared": None,
+         "text": "Compare clause 9 of the two bids for tender 31.", "expect": 200},
+        {"id": "G8", "key": "k-t09-a", "model": "ext-frontier-l", "declared": "Public",
+         "text": "Rewrite the published leave policy in plain Arabic.", "expect": 200},
+        {"id": "G9", "key": "k-unknown", "model": "ksa-general-m", "declared": "Public",
+         "text": "Hello", "expect": 401},
+    ])
+
+
+# ======================================================================================
 
 def main() -> None:
     rng = random.Random(SEED)
     day1(rng)
     day2(random.Random(SEED + 2))
+    day3(random.Random(SEED + 3))
     print("wrote", sum(1 for p in DATA.rglob("*") if p.is_file()), "files under labs/data")
 
 
