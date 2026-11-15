@@ -1,158 +1,536 @@
 <section class="slide title" id="title" data-auto="title">
-  <aside class="notes">REPLACE: welcome; introduce yourself; one question to the room that calibrates the pace; the rhythm of the day</aside>
+  <aside class="notes"><p>Welcome the room and ask one calibrating question: who has had a design of theirs rejected by a data protection officer after it was built? Keep two answers; Session 3 returns to them.</p><p>The rhythm of every day: four sessions, each with about 20 minutes of ideas and a 25-minute lab. Breaks are yours to call with the B key.</p></aside>
 </section>
 
 <section class="slide" id="agenda" data-auto="agenda"></section>
+
+<section class="slide" id="setup-check" data-label="Setup">
+  <div class="kicker">Before Session 1</div>
+  <h2>Every lab runs on a laptop processor or in Colab, with no key</h2>
+  <div class="cols cols-2">
+    <div class="stack">
+      <pre class="code s" data-file="labs/"><code class="language-bash">uv sync
+uv run prepare_data.py
+uv run jupyter lab</code></pre>
+      <p class="small">In Colab, the first cell of each notebook clones the course and installs what is missing.</p>
+    </div>
+    <ul class="bullets small">
+      <li>The data is synthetic and already in <code>labs/data/</code>; the generator rebuilds the same files.</li>
+      <li>No model is downloaded. Where a lab needs a model, a scripted stand-in answers, labelled as such.</li>
+      <li>Each lab starts from supplied reference files: missing a lab never blocks the next one.</li>
+    </ul>
+  </div>
+  <aside class="notes"><p>Ask everyone to open Lab 1.1 and run its first two cells now. On Windows, if an import fails with a long-path error, set UV_PROJECT_ENVIRONMENT to a short folder before uv sync (labs/README.md says how).</p><p>The gateway lab can forward to a free hosted model through three environment variables; nobody needs that to pass the course.</p></aside>
+</section>
 
 <!-- Session 1 -->
 
 <section class="slide section" id="s1" data-auto="section" data-session="1"></section>
 
-<section class="slide" id="s1-idea" data-lo="LO1">
-  <div class="kicker">REPLACE: the question this slide answers</div>
-  <h2>REPLACE: one idea, stated as a sentence</h2>
-  <div class="cols cols-2">
-    <ul class="bullets">
-      <li>REPLACE: at most six bullets, each a complete thought</li>
-      <li>REPLACE: bold the key phrase; numbers come from the lab run, not from memory</li>
-    </ul>
-    <div class="card c-teal"><h4>In the case study</h4><p class="small mb0">REPLACE: tie the idea to the case study and its data</p></div>
+<section class="slide" id="architects-loop" data-lo="LO1" data-label="The loop">
+  <div class="kicker">The architect's loop</div>
+  <h2>Architecture is a loop from drivers to decisions, then back</h2>
+  <div class="flow">
+    <div class="step c-teal"><b>1 · Drivers</b>goals, constraints, concerns</div>
+    <div class="arrow">→</div>
+    <div class="step c-cyan"><b>2 · Scenarios</b>targets with numbers</div>
+    <div class="arrow">→</div>
+    <div class="step c-purple"><b>3 · Options</b>three, costed</div>
+    <div class="arrow">→</div>
+    <div class="step c-coral"><b>4 · Decisions</b>recorded, with triggers</div>
+    <div class="arrow">→</div>
+    <div class="step c-navy"><b>5 · Review</b>tested against scenarios</div>
   </div>
-  <div class="callout warn mt"><b>What goes wrong.</b> REPLACE: the failure participants will hit, and how to recognise it</div>
-  <aside class="notes">REPLACE: what to say, the demo to run, the question to ask the room, the common failure and its fix</aside>
+  <p class="lead mt">Views are drawn all along the loop. A review that finds a failed scenario sends you back to step 3, not to a slide tool.</p>
+  <aside class="notes"><p>This is the spine of the four days. Day 1 is steps 1 and 2 plus the views; Day 2 is options and decisions; Day 3 applies the loop to the shared platform; Day 4 is review and enforcement.</p><p>Ask: in your last project, which of these five steps happened only in someone's head?</p></aside>
 </section>
 
-<section class="slide" id="s1-steps" data-lo="LO1">
-  <div class="kicker">Step by step</div>
-  <h2>REPLACE: a process, shown one step per key press</h2>
-  <div class="flow">
-    <div class="step c-teal"><b>1 · REPLACE: name</b>REPLACE: what happens first</div>
-    <div class="arrow frag" data-frag="b">→</div><div class="step c-cyan frag" data-frag="b"><b>2 · REPLACE: name</b>REPLACE: the next piece</div>
-    <div class="arrow frag" data-frag="c">→</div><div class="step c-coral frag" data-frag="c"><b>3 · REPLACE: name</b>REPLACE: the result</div>
+<section class="slide" id="what-ai-adds" data-lo="LO1" data-label="What AI adds">
+  <div class="kicker">What changes for AI systems</div>
+  <h2>An AI system adds four attributes a classic design rarely names</h2>
+  <div class="cols cols-4">
+    <div class="card c-teal"><h4>Answer quality</h4><p class="small mb0">Correctness varies by question type, language and model version.</p></div>
+    <div class="card c-coral"><h4>Cost per request</h4><p class="small mb0">Tokens make cost a function of each prompt, not of a server count.</p></div>
+    <div class="card c-purple"><h4>Data in prompts</h4><p class="small mb0">Every prompt is a data flow to wherever the model runs.</p></div>
+    <div class="card c-cyan"><h4>Human oversight</h4><p class="small mb0">Some answers must go to a person, by design.</p></div>
   </div>
-  <div class="callout tip mt frag"><b>Takeaway.</b> REPLACE: the one sentence to remember</div>
-  <aside class="notes">Press once per step and say what each step adds before the next one appears. REPLACE: the example to walk through</aside>
+  <div class="callout warn mt"><b>What goes wrong.</b> These four are discovered after launch, by a complaint, a bill or a data protection officer.</div>
+  <aside class="notes"><p>Latency, availability and security still matter; they are covered by AE-403 and AE-308 in depth. This course makes these four first-class from the first hour, because each one changes where the system can run and what it costs.</p></aside>
+</section>
+
+<section class="slide" id="the-ministry" data-lo="LO1" data-label="The case">
+  <div class="kicker">The case study</div>
+  <h2>One ministry, nine product teams, one shared platform</h2>
+  <div class="cols cols-3">
+    <div class="stat"><div class="big">9</div><div class="lbl">product teams on Asas, the shared AI platform</div></div>
+    <div class="stat"><div class="big">3</div><div class="lbl">classification levels in use: Public, Restricted, Secret</div></div>
+    <div class="stat"><div class="big">38,000</div><div class="lbl">building-permit applications a year</div></div>
+  </div>
+  <p class="small mt">The Ministry of Municipal Services is fictional and its data synthetic. Days 1 and 2 architect <b>Muyassir</b>, the building-permits assistant; Days 3 and 4 design <b>Asas</b> itself.</p>
+  <aside class="notes"><p>Personas you will meet: Dr. Afrah Al-Dughaither, deputy minister and sponsor; Eyad Al-Shuraihi, permits product owner; Hadeel Al-Sharhan, data protection officer; Faris Al-Hothali, head of the platform team; Wasan Al-Dhuwaihi, chief data architect; Nisreen Al-Mehaimeed, finance and cost lead. Participants play Raneem Al-Shubaili, solution architect.</p></aside>
+</section>
+
+<section class="slide" id="four-kinds" data-lo="LO1" data-label="Four kinds">
+  <div class="kicker">Sorting what people say</div>
+  <h2>Drivers, constraints, concerns and assumptions need different handling</h2>
+  <table class="t small">
+    <tr><th>Kind</th><th>What it is</th><th>From the Muyassir interviews</th><th>What you do with it</th></tr>
+    <tr><td><b>Driver</b></td><td>A goal the system exists for</td><td>Median permit cycle from 21 to 10 days</td><td>Turn it into a measure</td></tr>
+    <tr><td><b>Constraint</b></td><td>A decision already taken</td><td>The permits system offers reads only</td><td>Obey it; record its owner</td></tr>
+    <tr><td><b>Concern</b></td><td>A stakeholder's worry</td><td>"Only an inspector can approve"</td><td>Answer it with a scenario</td></tr>
+    <tr><td><b>Assumption</b></td><td>Believed, not checked</td><td>Most questions cover 40 topics</td><td>Test it before relying on it</td></tr>
+  </table>
+  <aside class="notes"><p>The fifth bucket in the lab is noise: true statements no decision depends on, such as the console colour. Sorting is judgement; two architects may differ on one or two items. The lab passes at 17 of 20 agreeing with the reference.</p></aside>
+</section>
+
+<section class="slide" id="stakeholders" data-lo="LO1" data-label="Stakeholders">
+  <div class="kicker">Stakeholders</div>
+  <h2>A concern without an owner is never closed</h2>
+  <div class="cols cols-2">
+    <table class="t small">
+      <tr><th>Owner</th><th>Concern</th></tr>
+      <tr><td>Sponsor</td><td>No wrong requirement told to a citizen</td></tr>
+      <tr><td>Inspectors</td><td>The assistant must never sound as if it approves</td></tr>
+      <tr><td>Applicants</td><td>Know it is an assistant; reach a person</td></tr>
+      <tr><td>Permit staff</td><td>Logs must not rank their performance</td></tr>
+      <tr><td>Permits team</td><td>Traffic doubles after a fee change</td></tr>
+    </table>
+    <div class="card c-navy flat"><h4>The owner signs the scenario</h4><p class="small mb0">When the inspectors' concern becomes a scenario with a target, the inspectors agree the target. That is how a concern gets closed.</p></div>
+  </div>
+  <aside class="notes"><p>Point at the staff concern: it is about the use of logs, not about the assistant's answers. It becomes a decision on log access, and it is the kind of concern a design forgets because nobody in the steering group holds it.</p></aside>
+</section>
+
+<section class="slide" id="said-once" data-lo="LO1" data-label="Said once">
+  <div class="kicker">The hidden constraint</div>
+  <h2>The constraint that matters most was said once, in passing</h2>
+  <div class="chat">
+    <div class="msg user"><span class="who">Data protection officer</span>Applicant files hold national identity numbers, deeds and site plans. They are Restricted, and they do not leave the Kingdom: not for storage, not for processing, not for a quick look by a model.</div>
+  </div>
+  <div class="cols cols-2 mt-s">
+    <div class="card c-coral flat"><h4>Ruled out</h4><p class="small mb0">An external OCR service for deeds; an external model with applicant context; logs to an external dashboard.</p></div>
+    <div class="card c-teal flat"><h4>Still open</h4><p class="small mb0">A model hosted in the Kingdom; an external embedding of the published code.</p></div>
+  </div>
+  <aside class="notes"><p>From Lab 1.1, step 4: three of the six designs the room proposed are ruled out by S12 and S13. The point is not the answer, it is the habit: read interview notes for constraints before reading them for features.</p></aside>
+</section>
+
+<section class="slide" id="deliverables" data-lo="LO1" data-label="What you produce">
+  <div class="kicker">The course in one ladder</div>
+  <h2>Every lab produces a piece of an architecture a panel can test</h2>
+  <div class="ladder" style="--n:5">
+    <div class="rung c-teal on"><b>Scenarios</b>with numbers<small>Day 1</small></div>
+    <div class="rung c-cyan off"><b>Views</b>as code<small>Day 1</small></div>
+    <div class="rung c-purple off"><b>Options</b>and decisions<small>Day 2</small></div>
+    <div class="rung c-coral off"><b>Platform</b>slice<small>Day 3</small></div>
+    <div class="rung c-navy off"><b>Checks</b>and review<small>Day 4</small></div>
+  </div>
+  <aside class="notes"><p>These are the five parts of the capstone rubric: scenarios and views 20, options and decisions 25, platform slice 25, fitness checks 15, review 15. Say it now so participants keep their lab outputs.</p></aside>
+</section>
+
+<section class="slide" id="check-constraint" data-lo="LO1">
+  <div class="kicker">Checkpoint</div>
+  <h2>Which statement is a constraint?</h2>
+  <div class="quiz" data-type="single" data-lo="LO1">
+    <p class="lead">Four sentences from the Muyassir notes. Which one is a constraint the design must obey?</p>
+    <div class="opts">
+      <div class="opt" data-why="A goal with a number is a driver: the system exists to reach it, nothing forbids other designs">Cut the median permit cycle from 21 to 10 days</div>
+      <div class="opt" data-ok>The permits system offers a read interface only this year</div>
+      <div class="opt" data-why="A worry about behaviour is a concern: it becomes a scenario, not a fixed decision">Inspectors fear the assistant will sound as if it approves</div>
+      <div class="opt" data-why="An unverified belief is an assumption: it must be tested before a design relies on it">Most questions are about the same 40 topics</div>
+    </div>
+    <div class="callout tip why"><b>Why.</b> A constraint is a decision already taken elsewhere. The vendor's read-only interface fixes how Muyassir integrates, whatever the architect prefers.</div>
+  </div>
+  <aside class="notes"><p>Answer: B. If many choose A, ask what would forbid a design that misses the 10 days: nothing does, it just fails the goal.</p></aside>
 </section>
 
 <section class="slide lab" id="lab-1-1" data-auto="lab" data-lab="1.1">
-  <aside class="notes">REPLACE: what to watch for while participants work, the typical problems, and the fallback for anyone who did not finish an earlier lab</aside>
+  <aside class="notes"><p>AI-off for this lab: the sort is the judgement the supervised check tests. Walk the room at minute 10 and look at S15: participants who mark it a fact will send unpublished drafts to an external model in Lab 1.3. Common slip: marking S04 (the budget cap) a driver.</p></aside>
 </section>
 
 <!-- Session 2 -->
 
 <section class="slide section" id="s2" data-auto="section" data-session="2"></section>
 
-<section class="slide" id="s2-idea" data-lo="LO1">
-  <div class="kicker">REPLACE: the question this slide answers</div>
-  <h2>REPLACE: one idea, stated as a sentence</h2>
-  <div class="cols cols-2">
-    <ul class="bullets">
-      <li>REPLACE: at most six bullets, each a complete thought</li>
-      <li>REPLACE: bold the key phrase; numbers come from the lab run, not from memory</li>
-    </ul>
-    <div class="card c-teal"><h4>In the case study</h4><p class="small mb0">REPLACE: tie the idea to the case study and its data</p></div>
+<section class="slide" id="ai-attributes" data-lo="LO1" data-label="Attributes">
+  <div class="kicker">Quality attributes for AI</div>
+  <h2>Five attributes carry most of Muyassir's risk</h2>
+  <div class="cols cols-3">
+    <div class="card c-teal"><h4>Answer quality</h4><p class="small mb0">Share of correct answers, per question type and language</p></div>
+    <div class="card c-cyan"><h4>Latency</h4><p class="small mb0">A percentile of the end-to-end time</p></div>
+    <div class="card c-amber"><h4>Cost</h4><p class="small mb0">Per answer, from tokens and the price card</p></div>
+    <div class="card c-purple"><h4>Privacy</h4><p class="small mb0">Answers that expose another person's data</p></div>
+    <div class="card c-coral"><h4>Human oversight</h4><p class="small mb0">Cases that must reach a person, and do</p></div>
+    <div class="card c-navy"><h4>And the classics</h4><p class="small mb0">Availability, security, modifiability stay</p></div>
   </div>
-  <div class="callout warn mt"><b>What goes wrong.</b> REPLACE: the failure participants will hit, and how to recognise it</div>
-  <aside class="notes">REPLACE: what to say, the demo to run, the question to ask the room, the common failure and its fix</aside>
+  <aside class="notes"><p>Each card maps to a statement of Lab 1.1: quality to S05, cost to S04, privacy to S12 and S13, oversight to S07 and S14. Ask which attribute the sponsor would trade first when two conflict; the answer goes into a decision record on Day 2.</p></aside>
 </section>
 
-<section class="slide" id="s2-steps" data-lo="LO1">
-  <div class="kicker">Step by step</div>
-  <h2>REPLACE: a process, shown one step per key press</h2>
+<section class="slide" id="six-parts" data-lo="LO1" data-label="Six parts">
+  <div class="kicker">The scenario</div>
+  <h2>A scenario has six parts, and the last one carries a number</h2>
   <div class="flow">
-    <div class="step c-teal"><b>1 · REPLACE: name</b>REPLACE: what happens first</div>
-    <div class="arrow frag" data-frag="b">→</div><div class="step c-cyan frag" data-frag="b"><b>2 · REPLACE: name</b>REPLACE: the next piece</div>
-    <div class="arrow frag" data-frag="c">→</div><div class="step c-coral frag" data-frag="c"><b>3 · REPLACE: name</b>REPLACE: the result</div>
+    <div class="step c-teal"><b>Source</b>an engineering office</div>
+    <div class="arrow">→</div>
+    <div class="step c-cyan"><b>Stimulus</b>asks any question</div>
+    <div class="arrow">→</div>
+    <div class="step c-purple"><b>Environment</b>a normal working day</div>
+    <div class="arrow">→</div>
+    <div class="step c-amber"><b>Artefact</b>Muyassir via the gateway</div>
+    <div class="arrow">→</div>
+    <div class="step c-navy"><b>Response</b>a complete answer</div>
+    <div class="arrow">→</div>
+    <div class="step c-coral"><b>Measure</b>p95 ≤ 4,000 ms</div>
   </div>
-  <div class="callout tip mt frag"><b>Takeaway.</b> REPLACE: the one sentence to remember</div>
-  <aside class="notes">Press once per step and say what each step adds before the next one appears. REPLACE: the example to walk through</aside>
+  <div class="callout tip mt"><b>Testable.</b> The measure names a metric that is recorded, a statistic and a target.</div>
+  <aside class="notes"><p>The six-part form comes from the quality-attribute scenarios of the SEI's architecture methods, the same tradition as the review method of Day 4. Read the example aloud as one sentence.</p><p>Sources: SEI, The Architecture Tradeoff Analysis Method.</p></aside>
+</section>
+
+<section class="slide" id="vague-to-measure" data-lo="LO1" data-label="Vague words">
+  <div class="kicker">From the brief</div>
+  <h2>"Fast, accurate and available" becomes three measures</h2>
+  <table class="t small">
+    <tr><th>The brief says</th><th>The scenario measures</th><th>Who measures it</th></tr>
+    <tr><td>fast</td><td>p95 of end-to-end latency ≤ 4,000 ms on a normal day</td><td>gateway logs</td></tr>
+    <tr><td>accurate</td><td>share of correct answers to requirements questions ≥ 0.90</td><td>reviewers on a sample</td></tr>
+    <tr><td>available at all times</td><td>share of working-hours requests accepted ≥ 0.995 over a month</td><td>the platform team</td></tr>
+  </table>
+  <div class="callout warn mt-s"><b>What goes wrong.</b> A target nobody measures. The lab's lint flags availability: the pilot never recorded it, so the platform team owes a measurement.</div>
+  <aside class="notes"><p>The vague words are not wrong; they are unfinished. Ask the room who chose 4,000 ms: the number comes from S19 (engineering offices want answers within seconds) and is agreed with the sponsor, not invented by the architect.</p></aside>
+</section>
+
+<section class="slide" id="quality-by-type" data-lo="LO1" data-label="Answer quality">
+  <div class="kicker">Answer quality is a number</div>
+  <h2>Measure answer quality per question type, on a reviewed sample</h2>
+  <div class="cols cols-2">
+    <ul class="bullets small">
+      <li>A reviewer marks each pilot answer correct or not, against the building code.</li>
+      <li>The scenario names the slice: requirements questions, 197 of the 400.</li>
+      <li>Fee questions are 26 of 400: too few to claim anything about them yet.</li>
+    </ul>
+    <div class="stat"><div class="big">0.92</div><div class="lbl">correct on requirements questions in the pilot; target 0.90</div></div>
+  </div>
+  <aside class="notes"><p>Number from Lab 1.2, step 4, on the synthetic pilot file. The deeper method of grading and sampling is AE-303's; here the architect's job is to put the target and the slice into the scenario so a later design can be tested.</p></aside>
+</section>
+
+<section class="slide" id="oversight-number" data-lo="LO1" data-label="Oversight">
+  <div class="kicker">Oversight is a number too</div>
+  <h2>Human oversight becomes the share of cases that reach a person</h2>
+  <div class="cols cols-2">
+    <div class="trace s">
+      <div class="ev user"><b>applicant</b>Will my extension be approved if I move the stairs?</div>
+      <div class="ev guard"><b>rule</b>approval question: only an inspector decides</div>
+      <div class="ev final"><b>answer</b>I cannot approve designs. An inspector can review it; shall I book a hand-over?</div>
+    </div>
+    <div class="stack">
+      <div class="stat"><div class="big">46 of 53</div><div class="lbl">approval questions offered a person in the pilot</div></div>
+      <div class="callout warn small mb0"><b>Target 0.99.</b> The pilot reaches 0.87: it fails.</div>
+    </div>
+  </div>
+  <aside class="notes"><p>From Lab 1.2. The concern of the inspectors (S7) and the disclosure concern (S14) both become measures here. The ratio is from the synthetic pilot. Ask: is 0.99 too strict? The inspectors own that target, not the architect.</p></aside>
+</section>
+
+<section class="slide" id="privacy-sum" data-lo="LO1" data-label="Privacy">
+  <div class="kicker">Choose the statistic</div>
+  <h2>For privacy, count the leaks: a mean hides the one that matters</h2>
+  <div class="cols cols-2">
+    <div class="stat"><div class="big">1 of 400</div><div class="lbl">pilot answers showed another applicant's file (request P0288)</div></div>
+    <ul class="bullets small">
+      <li>Mean leak rate: 0.0025. It looks like success.</li>
+      <li>Sum of leaks with a target of zero: it fails, as it should.</li>
+      <li>One leak of a deed is a reportable incident, not a rate.</li>
+    </ul>
+  </div>
+  <aside class="notes"><p>The statistic is part of the requirement. Means suit quality, percentiles suit latency, sums or maxima suit harms. P0288 is planted in the synthetic pilot; ask what in the design could cause it (a status read keyed on the wrong identifier).</p></aside>
+</section>
+
+<section class="slide" id="pilot-results" data-lo="LO1" data-label="Pilot results">
+  <div class="kicker">Measured in Lab 1.2</div>
+  <h2>Tested against 400 pilot requests, three of five scenarios fail</h2>
+  <table class="t small">
+    <tr><th>Scenario</th><th>Measure</th><th class="num">Pilot</th><th>Result</th></tr>
+    <tr><td>Q1 answer quality</td><td>mean correct, requirements ≥ 0.90</td><td class="num">0.919</td><td>passes</td></tr>
+    <tr class="hl"><td>Q2 latency</td><td>p95 ≤ 4,000 ms</td><td class="num">4,866</td><td>fails</td></tr>
+    <tr><td>Q3 cost</td><td>mean ≤ SAR 0.05 per answer</td><td class="num">0.022</td><td>passes</td></tr>
+    <tr class="hl"><td>Q4 privacy</td><td>leaks = 0</td><td class="num">1</td><td>fails</td></tr>
+    <tr class="hl"><td>Q5 oversight</td><td>approval questions offered a person ≥ 0.99</td><td class="num">0.868</td><td>fails</td></tr>
+  </table>
+  <aside class="notes"><p>Copied from the solution run of Lab 1.2. The sheet now does what the outcome asks: a reviewer can test any design against it. The latency failure is the subject of Session 4's budget.</p></aside>
+</section>
+
+<section class="slide" id="check-scenario" data-lo="LO1">
+  <div class="kicker">Checkpoint</div>
+  <h2>Which scenario can a reviewer test?</h2>
+  <div class="quiz" data-type="single" data-lo="LO1">
+    <p class="lead">Four drafts for the inspectors' concern. Which one can be tested against pilot data?</p>
+    <div class="opts">
+      <div class="opt" data-why="Treats a promise as a target: 'never sounds as if it approves' names no metric or statistic to compute">Muyassir never sounds as if it approves a design</div>
+      <div class="opt" data-why="Measures the wrong population: the share over all questions dilutes the 53 approval questions among 400">At least 99% of all answers offer a person</div>
+      <div class="opt" data-ok>At least 99% of approval questions get an offer of a person</div>
+      <div class="opt" data-why="Confuses an input with the result: a rule in the prompt is a design choice, not a measured response">The prompt tells the model that only inspectors approve</div>
+    </div>
+    <div class="callout tip why"><b>Why.</b> It names the slice (approval questions), the metric (offered a person), the statistic (a share) and the target (0.99).</div>
+  </div>
+  <aside class="notes"><p>Answer: C. Option D is a good design idea; it belongs in the options, and the scenario is how you find out whether it works.</p></aside>
 </section>
 
 <section class="slide lab" id="lab-1-2" data-auto="lab" data-lab="1.2">
-  <aside class="notes">REPLACE: what to watch for while participants work, the typical problems, and the fallback for anyone who did not finish an earlier lab</aside>
+  <aside class="notes"><p>AI policy: participants write the first draft of each scenario themselves; an assistant may then question it. Typical slip: a `where` filter that is not valid pandas query syntax (use == and quotes). The lint is strict on vague words; "high" in a response is flagged on purpose.</p></aside>
 </section>
 
 <!-- Session 3 -->
 
 <section class="slide section" id="s3" data-auto="section" data-session="3"></section>
 
-<section class="slide" id="s3-idea" data-lo="LO1">
-  <div class="kicker">REPLACE: the question this slide answers</div>
-  <h2>REPLACE: one idea, stated as a sentence</h2>
-  <div class="cols cols-2">
-    <ul class="bullets">
-      <li>REPLACE: at most six bullets, each a complete thought</li>
-      <li>REPLACE: bold the key phrase; numbers come from the lab run, not from memory</li>
-    </ul>
-    <div class="card c-teal"><h4>In the case study</h4><p class="small mb0">REPLACE: tie the idea to the case study and its data</p></div>
-  </div>
-  <div class="callout warn mt"><b>What goes wrong.</b> REPLACE: the failure participants will hit, and how to recognise it</div>
-  <aside class="notes">REPLACE: what to say, the demo to run, the question to ask the room, the common failure and its fix</aside>
+<section class="slide" id="four-levels" data-lo="LO1 LO2" data-label="Four levels">
+  <div class="kicker">National data classification</div>
+  <h2>Four levels, set by the impact of unauthorised disclosure</h2>
+  <table class="t small">
+    <tr><th>Level</th><th>Impact of disclosure</th><th>In the Ministry</th></tr>
+    <tr><td>Top Secret</td><td>high</td><td>none in this case</td></tr>
+    <tr><td>Secret</td><td>medium</td><td>tender documents, land disputes, state land surveys</td></tr>
+    <tr><td>Restricted</td><td>low</td><td>applicant files, status records, conversation logs</td></tr>
+    <tr><td>Public</td><td>none</td><td>the published building code, fee schedule, zoning maps</td></tr>
+  </table>
+  <aside class="notes"><p>The four levels and the impact scale are in the Data Classification Policy issued by the National Data Management Office. The examples are the case's own inventory. Participants should know the levels already (it is a prerequisite); spend the time on what they decide.</p><p>Sources: NDMO Data Classification Policy.</p></aside>
 </section>
 
-<section class="slide" id="s3-steps" data-lo="LO1">
-  <div class="kicker">Step by step</div>
-  <h2>REPLACE: a process, shown one step per key press</h2>
-  <div class="flow">
-    <div class="step c-teal"><b>1 · REPLACE: name</b>REPLACE: what happens first</div>
-    <div class="arrow frag" data-frag="b">→</div><div class="step c-cyan frag" data-frag="b"><b>2 · REPLACE: name</b>REPLACE: the next piece</div>
-    <div class="arrow frag" data-frag="c">→</div><div class="step c-coral frag" data-frag="c"><b>3 · REPLACE: name</b>REPLACE: the result</div>
+<section class="slide" id="three-principles" data-lo="LO1 LO2" data-label="Principles">
+  <div class="kicker">Three principles that shape designs</div>
+  <h2>Open by default, highest level wins, classify at creation</h2>
+  <div class="cols cols-3">
+    <div class="card c-teal"><h4>Open by default</h4><p class="small mb0">Data is accessible unless its nature or sensitivity requires more protection.</p></div>
+    <div class="card c-coral"><h4>Highest level</h4><p class="small mb0">A dataset that combines levels takes the highest of them. A prompt is such a dataset.</p></div>
+    <div class="card c-purple"><h4>Timely</h4><p class="small mb0">Data is classified when created or received, so a new log needs a level on day one.</p></div>
   </div>
-  <div class="callout tip mt frag"><b>Takeaway.</b> REPLACE: the one sentence to remember</div>
-  <aside class="notes">Press once per step and say what each step adds before the next one appears. REPLACE: the example to walk through</aside>
+  <aside class="notes"><p>All three are principles of the NDMO policy, paraphrased. The second is the one architects trip on: a retrieval prompt that holds a public clause and an applicant's identity number is Restricted as a whole. The third explains Lab 1.3's blanks: the conversation log is new, so it has no level until someone gives it one.</p><p>Sources: NDMO Data Classification Policy.</p></aside>
+</section>
+
+<section class="slide" id="transfer-rules" data-lo="LO1 LO2" data-label="Transfer">
+  <div class="kicker">Personal data outside the Kingdom</div>
+  <h2>Transfer abroad is a regulated path, not a hosting preference</h2>
+  <div class="cols cols-3">
+    <div class="card c-navy flat"><h4>Adequacy</h4><p class="small mb0">The competent authority publishes the countries and organisations that give an appropriate level of protection.</p></div>
+    <div class="card c-cyan flat"><h4>Safeguards</h4><p class="small mb0">Otherwise, in set cases: standard contractual clauses, binding common rules or an accreditation certificate.</p></div>
+    <div class="card c-coral flat"><h4>Onward transfer</h4><p class="small mb0">The Law still applies when data moves on from the first recipient.</p></div>
+  </div>
+  <div class="callout tip mt"><b>For the architecture.</b> Each flow that could leave the Kingdom names its path, or does not leave.</div>
+  <aside class="notes"><p>Paraphrased from the Regulation on Personal Data Transfer outside the Kingdom, read for this course. Do not turn this slide into legal advice: the design states which flows carry personal data out and on what basis, and the data protection officer decides the basis. The Ministry in our case simply chose not to transfer Restricted data at all.</p><p>Sources: Regulation on Personal Data Transfer outside the Kingdom; Personal Data Protection Law.</p></aside>
+</section>
+
+<section class="slide" id="placement-rule" data-lo="LO2" data-label="Placement rule">
+  <div class="kicker">The Ministry's own rule</div>
+  <h2>Each level maps to where its data may be processed</h2>
+  <table class="t">
+    <tr><th>Level</th><th>Ministry data centre</th><th>Cloud region in the Kingdom</th><th>External service</th></tr>
+    <tr><td>Public</td><td>yes</td><td>yes</td><td>yes</td></tr>
+    <tr><td>Restricted</td><td>yes</td><td>yes</td><td>no</td></tr>
+    <tr><td>Secret</td><td>yes</td><td>no</td><td>no</td></tr>
+  </table>
+  <p class="small mt">Asas policy P-01. It is the case's rule, stricter by choice than the minimum the national texts set.</p>
+  <aside class="notes"><p>Make the distinction explicit: the national texts set obligations, the Ministry turns them into a placement rule its platform can enforce. On Day 3 the gateway enforces this table; on Day 4 a fitness check does. The NCA's Cloud Cybersecurity Controls apply to whichever cloud region is used; they are for the security team to map, AE-308 covers them.</p></aside>
+</section>
+
+<section class="slide" id="prompt-is-a-flow" data-lo="LO1 LO2" data-label="A prompt is a flow">
+  <div class="kicker">Prompts carry data</div>
+  <h2>A prompt is a data flow, and it takes the level of what it holds</h2>
+  <div class="trace s">
+    <div class="ev user"><b>question</b>Which documents are still missing from my application?</div>
+    <div class="ev result"><b>retrieved</b>clause 4.2 of the published code (Public)</div>
+    <div class="ev result"><b>status read</b>application record with identity number (Restricted)</div>
+    <div class="ev guard"><b>prompt level</b>Restricted: the highest of its parts</div>
+    <div class="ev final"><b>placement</b>Ministry or a cloud region in the Kingdom only</div>
+  </div>
+  <aside class="notes"><p>This is flow F11 of Lab 1.3. Ask: what if the status read were skipped for questions about requirements only? Then the prompt is Public and could go further. That is a design option, and it shows why classification is an input to the architecture.</p></aside>
+</section>
+
+<section class="slide" id="three-violations" data-lo="LO2" data-label="Violations">
+  <div class="kicker">Measured in Lab 1.3</div>
+  <h2>Three of Muyassir's fourteen flows break the rule</h2>
+  <table class="t small">
+    <tr><th>Flow</th><th>Carries</th><th>Goes to</th><th>Breaks</th></tr>
+    <tr><td>F07</td><td>scanned deeds and site plans</td><td>external OCR</td><td>S12, applicant files stay in the Kingdom</td></tr>
+    <tr><td>F09</td><td>conversation logs</td><td>external analytics</td><td>S13, logs are personal data</td></tr>
+    <tr><td>F14</td><td>unpublished draft circulars</td><td>external summary model</td><td>S15, an unchecked assumption</td></tr>
+  </table>
+  <div class="callout tip mt-s"><b>Allowed, and worth saying so.</b> F04 sends the published code to an external embedding model.</div>
+  <aside class="notes"><p>From the solution run of Lab 1.3. F14 is the teaching moment: the data protection officer assumed regulation documents may go anywhere, and drafts are regulation documents that are not yet published. The fixes: OCR in the Kingdom, aggregate the dashboard inside, summarise drafts with a model in the Kingdom.</p></aside>
+</section>
+
+<section class="slide" id="ethics-inputs" data-lo="LO1" data-label="Ethics as inputs">
+  <div class="kicker">Responsible AI from the start</div>
+  <h2>Ethics principles enter the design as scenarios, not as a final check</h2>
+  <div class="cols cols-3">
+    <div class="card c-purple"><h4>Privacy and security</h4><p class="small mb0">Q4: no answer shows another applicant's file.</p></div>
+    <div class="card c-cyan"><h4>Transparency and explainability</h4><p class="small mb0">S14: citizens know it is an assistant; answers cite the clause.</p></div>
+    <div class="card c-coral"><h4>Accountability and responsibility</h4><p class="small mb0">Q5: approvals stay with an inspector, by measure.</p></div>
+  </div>
+  <aside class="notes"><p>Three of the seven SDAIA AI Ethics Principles, each already a line in the scenario sheet. The Day 4 review checks that responsible-AI controls are designed in from the start; this is where they start. The National AI Risk Management Framework returns on Day 4 with the deviation request.</p><p>Sources: SDAIA AI Ethics Principles.</p></aside>
+</section>
+
+<section class="slide" id="check-flow-level" data-lo="LO2">
+  <div class="kicker">Checkpoint</div>
+  <h2>Where may this flow go?</h2>
+  <div class="quiz" data-type="single" data-lo="LO2">
+    <p class="lead">A missing-documents check sends the published building code, an applicant's form with identity number and a site plan to a model. Under the Ministry's rule, where may the model run?</p>
+    <div class="opts">
+      <div class="opt" data-ok>In the Ministry or in a cloud region in the Kingdom</div>
+      <div class="opt" data-why="Takes the level of most of the text: the code is the longest part, but the highest level in the set decides">Anywhere, since most of the prompt is the published code</div>
+      <div class="opt" data-why="Over-classifies: personal data in a permit form is Restricted here, not Secret">Only in the Ministry's own data centre</div>
+      <div class="opt" data-why="Thinks masking in the prompt changes the level: the site plan and form are still in the set">Anywhere, once the identity number is masked</div>
+    </div>
+    <div class="callout tip why"><b>Why.</b> The set combines Public and Restricted items, so it is Restricted, which the rule allows in the Ministry and in a cloud region in the Kingdom.</div>
+  </div>
+  <aside class="notes"><p>Answer: A. Option D deserves a minute: masking can lower the level of a flow, but only when every Restricted item is removed or transformed and the data owner agrees. Here the site plan remains.</p></aside>
 </section>
 
 <section class="slide lab" id="lab-1-3" data-auto="lab" data-lab="1.3">
-  <aside class="notes">REPLACE: what to watch for while participants work, the typical problems, and the fallback for anyone who did not finish an earlier lab</aside>
+  <aside class="notes"><p>Watch step 1: some participants mark the draft circulars Public "because circulars are published". Ask them to read the item name again. In step 2, `A.highest` takes a list of levels; an empty level means the blank was not filled.</p></aside>
 </section>
 
 <!-- Session 4 -->
 
 <section class="slide section" id="s4" data-auto="section" data-session="4"></section>
 
-<section class="slide" id="s4-idea" data-lo="LO2">
-  <div class="kicker">REPLACE: the question this slide answers</div>
-  <h2>REPLACE: one idea, stated as a sentence</h2>
-  <div class="cols cols-2">
-    <ul class="bullets">
-      <li>REPLACE: at most six bullets, each a complete thought</li>
-      <li>REPLACE: bold the key phrase; numbers come from the lab run, not from memory</li>
-    </ul>
-    <div class="card c-teal"><h4>In the case study</h4><p class="small mb0">REPLACE: tie the idea to the case study and its data</p></div>
+<section class="slide" id="c4-levels" data-lo="LO2" data-label="Views">
+  <div class="kicker">Views</div>
+  <h2>Each view answers one question for one audience</h2>
+  <div class="cols cols-4">
+    <div class="card c-teal"><h4>Context</h4><p class="small mb0">Who and what does the system talk to? Sponsors read this.</p></div>
+    <div class="card c-cyan"><h4>Container</h4><p class="small mb0">What runs where, and how do the parts talk? Architects and security.</p></div>
+    <div class="card c-purple"><h4>Data flow</h4><p class="small mb0">Which data, at which level, goes where? The data protection officer.</p></div>
+    <div class="card c-coral"><h4>Request trace</h4><p class="small mb0">One request through every hop, with time and cost.</p></div>
   </div>
-  <div class="callout warn mt"><b>What goes wrong.</b> REPLACE: the failure participants will hit, and how to recognise it</div>
-  <aside class="notes">REPLACE: what to say, the demo to run, the question to ask the room, the common failure and its fix</aside>
+  <aside class="notes"><p>Context and container are the first two levels of the C4 model; the component and code levels rarely help at architecture reviews of AI systems. The data-flow view is Lab 1.3's table; the request trace is today's budget.</p><p>Sources: the C4 model.</p></aside>
 </section>
 
-<section class="slide" id="s4-steps" data-lo="LO2">
-  <div class="kicker">Step by step</div>
-  <h2>REPLACE: a process, shown one step per key press</h2>
+<section class="slide" id="muyassir-context" data-lo="LO2" data-label="Context view">
+  <div class="kicker">Muyassir's context</div>
+  <h2>In the context view, Muyassir is one box</h2>
   <div class="flow">
-    <div class="step c-teal"><b>1 · REPLACE: name</b>REPLACE: what happens first</div>
-    <div class="arrow frag" data-frag="b">→</div><div class="step c-cyan frag" data-frag="b"><b>2 · REPLACE: name</b>REPLACE: the next piece</div>
-    <div class="arrow frag" data-frag="c">→</div><div class="step c-coral frag" data-frag="c"><b>3 · REPLACE: name</b>REPLACE: the result</div>
+    <div class="step c-teal"><b>Applicant</b>citizen or office</div>
+    <div class="arrow">→</div>
+    <div class="step c-navy"><b>Muyassir</b>permits assistant on Asas</div>
+    <div class="arrow">→</div>
+    <div class="step c-cyan"><b>Permits system</b>status, read only</div>
   </div>
-  <div class="callout tip mt frag"><b>Takeaway.</b> REPLACE: the one sentence to remember</div>
-  <aside class="notes">Press once per step and say what each step adds before the next one appears. REPLACE: the example to walk through</aside>
+  <div class="cols cols-3 mt">
+    <div class="card flat c-purple"><h4>National single sign-on</h4><p class="small mb0">signs the applicant in</p></div>
+    <div class="card flat c-amber"><h4>Contact centre</h4><p class="small mb0">takes hand-overs</p></div>
+    <div class="card flat c-coral"><h4>Inspector</h4><p class="small mb0">reviews and approves</p></div>
+  </div>
+  <aside class="notes"><p>This is what the generated Mermaid of Lab 1.4 step 2 shows. Note what is absent: the model, the index, the gateway. A sponsor does not need them, and a context view that shows them invites the wrong discussion.</p></aside>
+</section>
+
+<section class="slide" id="views-as-code" data-lo="LO2" data-label="As code">
+  <div class="kicker">Views as code</div>
+  <h2>Generate views from one model, so a pull request changes them</h2>
+  <div class="cols cols-2">
+    <pre class="code s" data-file="views/containers.mmd"><code class="language-text">flowchart LR
+  subgraph muyassir["Muyassir"]
+    gateway["Asas gateway&lt;br/&gt;hosting: ministry"]
+    answer_model["Answer model&lt;br/&gt;hosting: ksa_cloud"]
+  end
+  gateway --&gt;|routes by classification| answer_model</code></pre>
+    <ul class="bullets small">
+      <li>One model file holds elements and relations; every view is generated.</li>
+      <li>A change of hosting is a diff a reviewer sees.</li>
+      <li>A check can read the same model: Day 4 does.</li>
+    </ul>
+  </div>
+  <aside class="notes"><p>Show the full generated file from the solution run if the room asks. Tool slot: Structurizr DSL keeps one model and many views by design; Mermaid and PlantUML render text diagrams in most code hosts. The lab uses a JSON model and generates Mermaid because it needs no install. Paste the file into any Mermaid viewer to see it drawn.</p><p>Sources: Structurizr DSL documentation.</p></aside>
+</section>
+
+<section class="slide" id="hosting-on-boxes" data-lo="LO2" data-label="Hosting">
+  <div class="kicker">The container view</div>
+  <h2>Write hosting on every box, so placement can be read off the view</h2>
+  <table class="t small">
+    <tr><th>Container</th><th>Technology</th><th>Hosting</th></tr>
+    <tr><td>Muyassir service</td><td>Python</td><td>ministry</td></tr>
+    <tr><td>Asas gateway</td><td>AI gateway</td><td>ministry</td></tr>
+    <tr><td>Regulations index</td><td>vector and keyword index</td><td>ministry</td></tr>
+    <tr><td>Reranker</td><td>cross-encoder</td><td>ministry</td></tr>
+    <tr class="hl"><td>Answer model</td><td>ksa-general-m</td><td>ksa_cloud</td></tr>
+    <tr><td>Log store</td><td>object store, 90-day expiry</td><td>ministry</td></tr>
+  </table>
+  <aside class="notes"><p>Seven containers in the model; the portal widget is omitted here for space. The highlighted row is the one placement decision Day 2 will revisit: a model in a cloud region of the Kingdom, or one in the Ministry.</p></aside>
+</section>
+
+<section class="slide" id="request-hops" data-lo="LO2" data-label="One request">
+  <div class="kicker">One request traced</div>
+  <h2>Two hops hold most of the time of a request</h2>
+  <div class="bars">
+    <div class="row"><span>Answer model</span><div class="bar c-coral" style="--w:100%"></div><span class="val">2,900 ms</span></div>
+    <div class="row"><span>Reranker</span><div class="bar c-amber" style="--w:22%"></div><span class="val">650 ms</span></div>
+    <div class="row"><span>Status read</span><div class="bar c-cyan" style="--w:14%"></div><span class="val">400 ms</span></div>
+    <div class="row"><span>Retrieval</span><div class="bar c-teal" style="--w:6%"></div><span class="val">180 ms</span></div>
+    <div class="row"><span>Portal, sign-on, gateway</span><div class="bar c-navy" style="--w:6%"></div><span class="val">160 ms</span></div>
+  </div>
+  <p class="caption">p95 per hop, from the supplied hop measurements (synthetic). The log write is off the user's path.</p>
+  <aside class="notes"><p>From request_hops.csv, used in Lab 1.4 step 4. Ask which hop the architect controls: the reranker and the context size are design choices; the model's speed is a choice of model.</p></aside>
+</section>
+
+<section class="slide" id="budget-result" data-lo="LO2" data-label="Budget">
+  <div class="kicker">The budget</div>
+  <h2>The request costs half its budget and runs 290 ms over its time</h2>
+  <div class="cols cols-3">
+    <div class="stat"><div class="big">4,290 ms</div><div class="lbl">sum of p95s on the user's path; target 4,000</div></div>
+    <div class="stat"><div class="big">SAR 0.025</div><div class="lbl">per request, from tokens and the price card; target 0.05</div></div>
+    <div class="stat"><div class="big">3,640 ms</div><div class="lbl">without the reranker for status questions</div></div>
+  </div>
+  <aside class="notes"><p>All three numbers from the solution run of Lab 1.4 (the third is the stretch). Removing the reranker for status questions fits the time budget, and it reopens Q1: answer quality must be re-tested on those questions. That trade-off is a decision record on Day 2.</p></aside>
+</section>
+
+<section class="slide" id="sum-is-bound" data-lo="LO2" data-label="Upper bound">
+  <div class="kicker">Reading a budget</div>
+  <h2>A sum of p95s is an upper bound; check it against one measurement</h2>
+  <div class="cols cols-2">
+    <ul class="bullets small">
+      <li>Slow tails of different hops rarely meet in one request, so the sum overstates.</li>
+      <li>Retries and queues add time no single hop shows, so the sum can also understate.</li>
+      <li>The pilot measured 4,866 ms end to end: here the bound was not pessimistic.</li>
+    </ul>
+    <div class="callout warn small"><b>What goes wrong.</b> A budget built from p50s. It fits on paper, and half the users wait longer.</div>
+  </div>
+  <aside class="notes"><p>The gap between 4,290 and 4,866 comes from long-context retries planted in the pilot (every 23rd request). The lesson: budget per hop to find where to cut, measure end to end to know whether you are done.</p></aside>
+</section>
+
+<section class="slide" id="check-budget" data-lo="LO2">
+  <div class="kicker">Checkpoint</div>
+  <h2>Which change can bring Muyassir under 4,000 ms?</h2>
+  <div class="quiz" data-type="single" data-lo="LO2">
+    <p class="lead">The sum of p95s is 4,290 ms: model 2,900, reranker 650, status read 400, the rest 340. Which single change most likely brings the p95 under 4,000 ms without a new model?</p>
+    <div class="opts">
+      <div class="opt" data-why="Optimises a hop that is off the user's path: the log write is asynchronous and adds nothing users wait for">Write the conversation log faster</div>
+      <div class="opt" data-why="Optimises the p50 instead of the tail: a faster median retrieval moves the p95 sum by tens of milliseconds">Tune the index for a faster median query</div>
+      <div class="opt" data-why="Adds a hop for safety without measuring its cost: a second check adds time, it does not remove it">Add a second gateway check before the model</div>
+      <div class="opt" data-ok>Skip reranking for status questions and send fewer clauses</div>
+    </div>
+    <div class="callout tip why"><b>Why.</b> The reranker's 650 ms and the context size are the levers in the architect's hands, and the sum drops to 3,640 ms; answer quality must then be re-tested.</div>
+  </div>
+  <aside class="notes"><p>Answer: D. Keep the follow-up for Day 2: dropping a hop is a decision with a bad consequence (answer quality on some questions), so it gets a record with a review trigger.</p></aside>
 </section>
 
 <section class="slide lab" id="lab-1-4" data-auto="lab" data-lab="1.4">
-  <aside class="notes">REPLACE: what to watch for while participants work, the typical problems, and the fallback for anyone who did not finish an earlier lab</aside>
+  <aside class="notes"><p>The context view is the harder step: participants forget to collapse containers into the system and get edges like portal to sso. The check prints which edge is wrong. If Mermaid rendering is wanted, paste the .mmd text into any Mermaid viewer; nothing in the lab needs the network.</p></aside>
 </section>
 
-<section class="slide" id="wrap-up">
-  <div class="kicker">Day 1 · wrap-up</div>
+<section class="slide" id="wrap-up" data-label="Wrap-up">
+  <div class="kicker">Day 1</div>
   <h2>Three things to keep</h2>
   <div class="cols cols-3">
-    <div class="card c-teal"><h4>Remember</h4><p class="small mb0">REPLACE: one idea participants keep</p></div>
-    <div class="card c-coral"><h4>Remember</h4><p class="small mb0">REPLACE: one idea participants keep</p></div>
-    <div class="card c-purple"><h4>Remember</h4><p class="small mb0">REPLACE: one idea participants keep</p></div>
+    <div class="card c-teal"><h4>Sort before you design</h4><p class="small mb0">Constraints said once rule out designs; find them first.</p></div>
+    <div class="card c-coral"><h4>Numbers make scenarios testable</h4><p class="small mb0">A metric, a statistic and a target, owned by the stakeholder.</p></div>
+    <div class="card c-purple"><h4>Classification decides placement</h4><p class="small mb0">Every flow has a level, and every box shows where it runs.</p></div>
   </div>
+  <aside class="notes"><p>Ask each table for the one Muyassir scenario they would defend first in front of the sponsor. Keep the answers for Day 2's options.</p></aside>
 </section>
 
 <section class="slide dark" id="next" data-label="Next">
-  <div class="kicker">Next</div>
-  <h2>Day 2: Options and decisions</h2>
-  <p class="lead">REPLACE: what participants prepare before then; unfinished labs can be finished at home</p>
-  <aside class="notes">REPLACE: accounts, installs or reading participants need before the next unit</aside>
+  <div class="kicker">Day 2</div>
+  <h2>Tomorrow: three options, their cost over three years, and the decisions</h2>
+  <ul class="bullets">
+    <li>Keep <code>artifacts/D1_2/scenarios.json</code> and <code>artifacts/D1_4/architecture.md</code>: the capstone reuses their shape.</li>
+    <li>Read the three-year forecast in <code>labs/data/options/</code> once before the first session.</li>
+    <li>Bring one decision from your own work that nobody wrote down.</li>
+  </ul>
+  <aside class="notes"><p>The decision from their own work seeds the follow-up task: three decision records for a system of their own, after the course.</p></aside>
 </section>

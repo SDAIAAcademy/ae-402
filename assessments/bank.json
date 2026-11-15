@@ -3,24 +3,24 @@
   "version": 1,
   "questions": [
     {
-      "id": "q-example-1",
+      "id": "d1-sort-budget-cap",
       "type": "single",
-      "prompt": "REPLACE: a practice question on LO1, as a short scenario",
+      "prompt": "The sponsor says: run costs for the first year are capped at SAR 1.2 million, the approved budget line. How do you record it?",
       "options": [
-        "REPLACE: a wrong option that a common misconception makes tempting",
-        "REPLACE: the right answer",
-        "REPLACE: a wrong option that a common misconception makes tempting",
-        "REPLACE: a wrong option that a common misconception makes tempting"
+        "As a driver, with a scenario that measures spend",
+        "As a constraint, with the sponsor as its owner",
+        "As a concern of the finance and cost lead",
+        "As an assumption to test with the pilot"
       ],
       "correct": [
         1
       ],
-      "explanation": "REPLACE: why the right answer is right, in one sentence",
+      "explanation": "The cap is a decision already taken that bounds every option; nobody builds the system to spend it.",
       "misconceptions": [
-        "REPLACE: the misconception behind this option",
+        "Treats a limit as a goal: the system does not exist to spend SAR 1.2 million",
         "",
-        "REPLACE: the misconception behind this option",
-        "REPLACE: the misconception behind this option"
+        "Mistakes a fixed decision for a worry: the cap is approved, not feared",
+        "Confuses an approved budget with a belief: nothing about it needs testing"
       ],
       "lo": [
         "LO1"
@@ -32,134 +32,175 @@
       "weight": 1
     },
     {
-      "id": "q-example-2",
-      "type": "tf",
-      "prompt": "REPLACE: a statement on LO2 that is true",
+      "id": "d1-hidden-constraint",
+      "type": "single",
+      "prompt": "Three interviews are done. Which note most deserves a second reading before any design is drawn?",
       "options": [
-        "True",
-        "False"
+        "The sponsor's target for the permit cycle",
+        "The product owner's wish for a dark staff console",
+        "The data protection officer's remark that applicant files do not leave the Kingdom",
+        "The brief's sentence that the assistant must be fast and accurate"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "A placement constraint said in passing rules out whole designs, so it is found before options are drawn.",
+      "misconceptions": [
+        "Thinks drivers rule designs out: a target shapes the options but forbids none",
+        "Gives weight to noise: no architecture decision depends on the console colour",
+        "",
+        "Confuses vague targets with constraints: they need numbers, not a second reading"
+      ],
+      "lo": [
+        "LO1"
+      ],
+      "day": "day1",
+      "session": 1,
+      "level": "analyze",
+      "pool": "practice",
+      "weight": 1
+    },
+    {
+      "id": "d1-measure-oversight",
+      "type": "single",
+      "prompt": "Which response measure turns the inspectors' concern (only an inspector approves) into a testable scenario?",
+      "options": [
+        "The prompt says that only inspectors approve",
+        "Answers never sound like an approval",
+        "At least 99% of all answers include a contact number",
+        "At least 99% of approval questions receive an offer of a person"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "It names the slice, the metric, the statistic and the target, so a reviewer can compute it from logs.",
+      "misconceptions": [
+        "Mistakes a design choice for a measured response",
+        "States an intent with no metric or statistic",
+        "Measures the wrong population: approval questions are diluted among all answers",
+        ""
+      ],
+      "lo": [
+        "LO1"
+      ],
+      "day": "day1",
+      "session": 2,
+      "level": "apply",
+      "pool": "practice",
+      "weight": 1
+    },
+    {
+      "id": "d1-privacy-stat",
+      "type": "single",
+      "prompt": "In 400 pilot requests, one answer showed another applicant's deed. Which privacy measure should the scenario use?",
+      "options": [
+        "The number of such answers, with a target of zero",
+        "The mean leak rate, with a target below 1%",
+        "The p95 of leaks per day",
+        "The share of answers that cite a clause"
       ],
       "correct": [
         0
       ],
-      "explanation": "REPLACE: why the right answer is right, in one sentence",
+      "explanation": "A single leak is an incident; a sum with a target of zero fails on it, a mean of 0.25% hides it.",
       "misconceptions": [
         "",
-        "REPLACE: the misconception behind this option"
+        "Lets a rate hide a harm that counts one by one",
+        "Uses a latency statistic for an event count",
+        "Measures transparency, not privacy"
+      ],
+      "lo": [
+        "LO1"
+      ],
+      "day": "day1",
+      "session": 2,
+      "level": "evaluate",
+      "pool": "practice",
+      "weight": 1
+    },
+    {
+      "id": "d1-flow-level",
+      "type": "single",
+      "prompt": "A summary job combines published zoning maps with the names and mobile numbers of engineering office contacts. Under the highest-level principle, what is the job's output?",
+      "options": [
+        "Public, because most of it is published",
+        "Restricted, because it holds personal data",
+        "Secret, because it combines two sources",
+        "Unclassified until the job runs"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "A set that combines levels takes the highest; contact persons are personal data and Restricted in the case.",
+      "misconceptions": [
+        "Takes the level of the largest part instead of the highest",
+        "",
+        "Thinks combining raises the level by itself",
+        "Ignores that data is classified when it is created"
       ],
       "lo": [
         "LO2"
       ],
       "day": "day1",
-      "session": 1,
-      "level": "understand",
-      "pool": "practice",
-      "weight": 1
-    },
-    {
-      "id": "q-example-3",
-      "type": "single",
-      "prompt": "REPLACE: a practice question on LO3, as a short scenario",
-      "options": [
-        "REPLACE: a wrong option that a common misconception makes tempting",
-        "REPLACE: the right answer",
-        "REPLACE: a wrong option that a common misconception makes tempting",
-        "REPLACE: a wrong option that a common misconception makes tempting"
-      ],
-      "correct": [
-        1
-      ],
-      "explanation": "REPLACE: why the right answer is right, in one sentence",
-      "misconceptions": [
-        "REPLACE: the misconception behind this option",
-        "",
-        "REPLACE: the misconception behind this option",
-        "REPLACE: the misconception behind this option"
-      ],
-      "lo": [
-        "LO3"
-      ],
-      "day": "day1",
-      "session": 1,
+      "session": 3,
       "level": "apply",
       "pool": "practice",
       "weight": 1
     },
     {
-      "id": "q-example-4",
-      "type": "tf",
-      "prompt": "REPLACE: a statement on LO4 that is true",
-      "options": [
-        "True",
-        "False"
-      ],
-      "correct": [
-        0
-      ],
-      "explanation": "REPLACE: why the right answer is right, in one sentence",
-      "misconceptions": [
-        "",
-        "REPLACE: the misconception behind this option"
-      ],
-      "lo": [
-        "LO4"
-      ],
-      "day": "day1",
-      "session": 1,
-      "level": "understand",
-      "pool": "practice",
-      "weight": 1
-    },
-    {
-      "id": "q-example-5",
+      "id": "d1-budget-bound",
       "type": "single",
-      "prompt": "REPLACE: a practice question on LO5, as a short scenario",
+      "prompt": "The p95s of the hops of a request add up to 4,290 ms; the end-to-end p95 measured in the pilot is 4,866 ms. What explains the gap?",
       "options": [
-        "REPLACE: a wrong option that a common misconception makes tempting",
-        "REPLACE: the right answer",
-        "REPLACE: a wrong option that a common misconception makes tempting",
-        "REPLACE: a wrong option that a common misconception makes tempting"
+        "The sum of p95s always overstates, so the measurement is wrong",
+        "Retries and queues add time that no single hop's percentile shows",
+        "The asynchronous log write was left out of the sum",
+        "p50s should have been added instead"
       ],
       "correct": [
         1
       ],
-      "explanation": "REPLACE: why the right answer is right, in one sentence",
+      "explanation": "The sum of p95s bounds the hops; retries and queueing between hops add time the per-hop numbers miss.",
       "misconceptions": [
-        "REPLACE: the misconception behind this option",
+        "Trusts the bound over the measurement",
         "",
-        "REPLACE: the misconception behind this option",
-        "REPLACE: the misconception behind this option"
+        "Adds a hop users never wait for",
+        "A sum of medians understates the tail even more"
       ],
       "lo": [
-        "LO5"
+        "LO2"
       ],
       "day": "day1",
-      "session": 1,
-      "level": "apply",
+      "session": 4,
+      "level": "analyze",
       "pool": "practice",
       "weight": 1
     },
     {
-      "id": "q-example-6",
-      "type": "tf",
-      "prompt": "REPLACE: a statement on LO6 that is true",
+      "id": "d1-views-hosting",
+      "type": "single",
+      "prompt": "Why does the course write the hosting of every container on the container view?",
       "options": [
-        "True",
-        "False"
+        "So the sponsor sees which vendor was chosen",
+        "Because Mermaid requires a hosting label",
+        "So a reviewer can check placement against the classified flows by reading the view",
+        "Because the context view cannot show external systems"
       ],
       "correct": [
-        0
+        2
       ],
-      "explanation": "REPLACE: why the right answer is right, in one sentence",
+      "explanation": "Hosting on the boxes lets placement be read and diffed with the view.",
       "misconceptions": [
+        "Mistakes a vendor choice for the placement question",
+        "Confuses a course convention with a tool rule",
         "",
-        "REPLACE: the misconception behind this option"
+        "The context view does show external systems"
       ],
       "lo": [
-        "LO6"
+        "LO2"
       ],
       "day": "day1",
-      "session": 1,
+      "session": 4,
       "level": "understand",
       "pool": "practice",
       "weight": 1

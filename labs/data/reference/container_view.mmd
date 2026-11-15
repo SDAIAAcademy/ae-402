@@ -1,0 +1,26 @@
+flowchart LR
+  applicant(["Applicant"])
+  inspector(["Inspector"])
+  subgraph muyassir["Muyassir"]
+    portal["Permits portal widget<br/>Web<br/>hosting: ministry"]
+    orchestrator["Muyassir service<br/>Python<br/>hosting: ministry"]
+    gateway["Asas gateway<br/>AI gateway<br/>hosting: ministry"]
+    index["Regulations index<br/>Vector and keyword index<br/>hosting: ministry"]
+    reranker["Reranker<br/>Cross-encoder<br/>hosting: ministry"]
+    answer_model["Answer model<br/>ksa-general-m<br/>hosting: ksa_cloud"]
+    logs["Log store<br/>Object store, 90-day expiry<br/>hosting: ministry"]
+  end
+  sso[("National single sign-on<br/>hosting: ksa_cloud")]
+  permits[("Permits system<br/>hosting: ministry")]
+  contact[("Contact centre<br/>hosting: ministry")]
+  applicant -->|asks a question, HTTPS| portal
+  portal -->|signs the applicant in, OIDC| sso
+  portal -->|sends question and applicant id, HTTPS| orchestrator
+  orchestrator -->|reads application status, REST, read only| permits
+  orchestrator -->|retrieves clauses, HTTPS| index
+  orchestrator -->|reranks clauses, HTTPS| reranker
+  orchestrator -->|asks for an answer, OpenAI-compatible| gateway
+  gateway -->|routes by classification, HTTPS| answer_model
+  orchestrator -->|writes the conversation, HTTPS| logs
+  orchestrator -->|hands over to a person, Events| contact
+  inspector -->|takes hand-overs, Staff console| contact

@@ -1,0 +1,117 @@
+{
+ "F01": {
+  "level": "Restricted",
+  "allowed": [
+   "ministry",
+   "ksa_cloud"
+  ],
+  "violation": false
+ },
+ "F02": {
+  "level": "Restricted",
+  "allowed": [
+   "ministry",
+   "ksa_cloud"
+  ],
+  "violation": false
+ },
+ "F03": {
+  "level": "Public",
+  "allowed": [
+   "ministry",
+   "ksa_cloud",
+   "external"
+  ],
+  "violation": false
+ },
+ "F04": {
+  "level": "Public",
+  "allowed": [
+   "ministry",
+   "ksa_cloud",
+   "external"
+  ],
+  "violation": false
+ },
+ "F05": {
+  "level": "Restricted",
+  "allowed": [
+   "ministry",
+   "ksa_cloud"
+  ],
+  "violation": false
+ },
+ "F06": {
+  "level": "Restricted",
+  "allowed": [
+   "ministry",
+   "ksa_cloud"
+  ],
+  "violation": false
+ },
+ "F07": {
+  "level": "Restricted",
+  "allowed": [
+   "ministry",
+   "ksa_cloud"
+  ],
+  "violation": true
+ },
+ "F08": {
+  "level": "Restricted",
+  "allowed": [
+   "ministry",
+   "ksa_cloud"
+  ],
+  "violation": false
+ },
+ "F09": {
+  "level": "Restricted",
+  "allowed": [
+   "ministry",
+   "ksa_cloud"
+  ],
+  "violation": true
+ },
+ "F10": {
+  "level": "Restricted",
+  "allowed": [
+   "ministry",
+   "ksa_cloud"
+  ],
+  "violation": false
+ },
+ "F11": {
+  "level": "Restricted",
+  "allowed": [
+   "ministry",
+   "ksa_cloud"
+  ],
+  "violation": false
+ },
+ "F12": {
+  "level": "Restricted",
+  "allowed": [
+   "ministry",
+   "ksa_cloud"
+  ],
+  "violation": false
+ },
+ "F13": {
+  "level": "Public",
+  "allowed": [
+   "ministry",
+   "ksa_cloud",
+   "external"
+  ],
+  "violation": false
+ },
+ "F14": {
+  "level": "Restricted",
+  "allowed": [
+   "ministry",
+   "ksa_cloud"
+  ],
+  "violation": true
+ }
+}

@@ -1,0 +1,15 @@
+id,source,target,items,target_hosting,purpose
+F01,Applicant,Portal,D04;D06,ministry,question and identity
+F02,Portal,Asas gateway,D04;D06,ministry,question with applicant context
+F03,Asas gateway,Regulations index,D01;D02;D03,ministry,retrieval query
+F04,Regulations index,Embedding model,D01;D02;D03,external,embedding of published texts
+F05,Asas gateway,Permits system,D06,ministry,status read
+F06,Asas gateway,Answer model,D01;D02;D06,ksa_cloud,prompt with clauses and status
+F07,Portal,OCR service,D05,external,scanned deeds and site plans to text
+F08,Asas gateway,Log store,D07,ministry,conversation log
+F09,Log store,Analytics service,D07,external,weekly usage dashboard
+F10,Permits team,Regulations index,D09,ministry,draft circulars for preview
+F11,Asas gateway,Answer model,D01;D04;D05,ksa_cloud,missing-documents check
+F12,Asas gateway,Contact centre,D06;D12,ministry,hand-over to a person
+F13,Statistics job,Open data portal,D10,external,monthly statistics
+F14,Regulations index,Summary model,D09,external,draft circulars summarised

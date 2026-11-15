@@ -9,7 +9,7 @@
     "en": "AI Solution Architecture and Platform Design",
     "ar": "معمارية حلول الذكاء الاصطناعي وتصميم المنصات"
   },
-  "tagline": "REPLACE: one line under the title: what participants can do after the course",
+  "tagline": "Turn requirements into tested scenarios, costed options and recorded decisions, then design the shared AI platform many teams build on",
   "description": "Participants practise the architect's loop on AI systems and apply it to the shared platform many teams build on. For a fictional ministry of municipal services with nine product teams and data at three classification levels, they turn requirements into measurable scenarios, draw views as code, cost three options including a non-generative one, keep a decision log, design a model catalogue, gateway, tenancy model, golden paths and showback, enforce a reference design with fitness checks, and review a peer's architecture. Serving optimisation and reliability engineering are left to AE-401 and AE-403.",
   "track": "ai-engineering",
   "level": 400,
@@ -69,8 +69,8 @@
     }
   ],
   "case_study": {
-    "name": "REPLACE: the name of the fictional organisation every lab works on",
-    "summary": "REPLACE: two sentences on the case study and its synthetic data"
+    "name": "Ministry of Municipal Services",
+    "summary": "The Ministry of Municipal Services is a fictional ministry whose nine product teams build on Asas, its shared AI platform, with data at three classification levels. Participants architect Muyassir, its building-permits assistant (scenarios, classified flows, views as code, three costed options and a decision log), then design Asas itself: a demand matrix, model admission, a gateway that refuses Restricted data to an external model, tenancy, showback, a golden path, fitness checks and a structured review of the inspections team's design. All data is synthetic and generated with a fixed seed."
   },
   "format": "intensive",
   "format_note": "Intensive: 4 teaching days of four sessions and a capstone day, with guided pre-work and a tracked follow-up task",
@@ -91,69 +91,159 @@
       "sessions": [
         {
           "title": "The architect's loop for AI systems",
+          "summary": "The loop an architect runs on an AI system, starting from drivers, constraints and the people who hold them",
           "outcomes": [
-            "REPLACE: what a participant can do after this session"
+            "Describe the architect's loop and where an AI system adds steps to it",
+            "Separate drivers, constraints, concerns and assumptions in a brief",
+            "Name the stakeholder who owns each concern"
           ],
           "lo": [
             "LO1"
           ],
           "lab": {
             "id": "1.1",
-            "title": "List drivers, constraints and stakeholders for the permits assistant from the case brief",
-            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "title": "Drivers, constraints and stakeholders",
+            "summary": "Sort twenty statements from the Muyassir brief and three interview notes into drivers, constraints, concerns and assumptions, name each concern's owner, and find the constraint said once that rules out three designs.",
             "minutes": 25,
-            "href": "D1_1_drivers.ipynb"
+            "href": "D1_1_drivers.ipynb",
+            "steps": [
+              {
+                "text": "Read the brief and the three notes",
+                "minutes": 5
+              },
+              {
+                "text": "Sort twenty statements",
+                "minutes": 8
+              },
+              {
+                "text": "Name the owner of each concern",
+                "minutes": 5
+              },
+              {
+                "text": "The hidden constraint and what it rules out",
+                "minutes": 7
+              }
+            ],
+            "stretch": "Write two statements the notes are missing"
           }
         },
         {
           "title": "Quality attributes with numbers",
+          "summary": "Quality-attribute scenarios with a measure a reviewer can compute, answer quality and oversight included",
           "outcomes": [
-            "REPLACE: what a participant can do after this session"
+            "Write a scenario with its six parts and a measurable response",
+            "Express answer quality, privacy and human oversight as targets",
+            "Test a scenario against measurements"
           ],
           "lo": [
             "LO1"
           ],
           "lab": {
             "id": "1.2",
-            "title": "Write five measurable scenarios, including answer quality and human oversight",
-            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "title": "Five measurable scenarios",
+            "summary": "Rewrite the brief's vague targets, write five scenarios for answer quality, latency, cost, privacy and human oversight, and test each against 400 pilot requests.",
             "minutes": 25,
-            "href": "D1_2_scenarios.ipynb"
+            "href": "D1_2_scenarios.ipynb",
+            "steps": [
+              {
+                "text": "The six parts of a scenario",
+                "minutes": 4
+              },
+              {
+                "text": "Fix the brief's three vague targets",
+                "minutes": 6
+              },
+              {
+                "text": "Write five scenarios, answer quality and oversight included",
+                "minutes": 8
+              },
+              {
+                "text": "Test them on the pilot measurements",
+                "minutes": 7
+              }
+            ],
+            "stretch": "A scenario for the fee-change peak"
           }
         },
         {
           "title": "Regulation as a design constraint",
+          "summary": "Classification levels and transfer rules as inputs that decide where each data flow may be processed",
           "outcomes": [
-            "REPLACE: what a participant can do after this session"
+            "Classify a data flow by the highest level it carries",
+            "Derive placement constraints from classification and transfer rules",
+            "Find the flows a design must change"
           ],
           "lo": [
-            "LO1"
+            "LO1",
+            "LO2"
           ],
           "lab": {
             "id": "1.3",
-            "title": "Classify the case's data flows and derive the placement constraints",
-            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "title": "Classified flows and placement",
+            "summary": "Complete the data inventory, give each of Muyassir's fourteen flows its level, derive where it may be processed, and find the three flows that break the Ministry's placement rule.",
             "minutes": 25,
-            "href": "D1_3_data_flows.ipynb"
+            "href": "D1_3_data_flows.ipynb",
+            "steps": [
+              {
+                "text": "Fill the three blank levels",
+                "minutes": 5
+              },
+              {
+                "text": "The level of each flow",
+                "minutes": 6
+              },
+              {
+                "text": "Where each flow may go",
+                "minutes": 6
+              },
+              {
+                "text": "The violations and what each breaks",
+                "minutes": 8
+              }
+            ],
+            "stretch": "Redesign the violating flows"
           }
         },
         {
           "title": "Views as code",
+          "summary": "Context and container views generated from one model, and one request budgeted for latency and cost",
           "outcomes": [
-            "REPLACE: what a participant can do after this session"
+            "Generate context and container views from a model as code",
+            "Show hosting and classification on the views",
+            "Budget one request's latency and cost against the scenarios"
           ],
           "lo": [
             "LO2"
           ],
           "lab": {
             "id": "1.4",
-            "title": "Draw context and container views and budget one request's latency and cost",
-            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "title": "Views as code and a request budget",
+            "summary": "Generate Muyassir's context and container views as Mermaid from one model file, then trace a request through eight hops and add up its latency and cost against the scenarios.",
             "minutes": 25,
-            "href": "D1_4_views_budget.ipynb"
+            "href": "D1_4_views_budget.ipynb",
+            "steps": [
+              {
+                "text": "Read the model of Muyassir",
+                "minutes": 3
+              },
+              {
+                "text": "The context view as Mermaid",
+                "minutes": 7
+              },
+              {
+                "text": "The container view, with hosting on every box",
+                "minutes": 7
+              },
+              {
+                "text": "One request end to end: latency and cost",
+                "minutes": 8
+              }
+            ],
+            "stretch": "Cut the request to fit 4,000 ms"
           }
         }
-      ]
+      ],
+      "subtitle": "Drivers, scenarios with numbers, classified flows and views as code for Muyassir"
     },
     {
       "id": "day2",
@@ -381,7 +471,7 @@
   ],
   "capstone": {
     "summary": "An architecture for one ministry service and the platform slice it runs on (scenarios, views, options paper, at least six decision records, and a working gateway, catalogue entry, golden path and showback) in a public repository, defended before a panel that includes a data architect. The follow-up task writes three decision records for a system from the participant's own work",
-    "submission": "REPLACE: what participants submit and how: a public repository link, or a shared folder for a course without code",
+    "submission": "A public GitHub repository link, sent before the defence. The repository holds the scenario sheet, the architecture document with views as code and one request traced end to end, the options paper with total cost, lock-in and sensitivity, at least six dated decision records, and the platform slice (gateway with its refusal test and logs, catalogue entry, golden-path template, showback that reconciles within 2%), with the fitness checks running in its pipeline.",
     "rubric": [
       {
         "criterion": "Scenarios and views",
@@ -403,7 +493,9 @@
         "criterion": "Review",
         "weight": 15
       }
-    ]
+    ],
+    "talk_minutes": 10,
+    "qa_minutes": 8
   },
   "labs": {
     "kind": "notebooks",
@@ -451,6 +543,115 @@
       "examples": [
         "a Python notebook",
         "OpenCost"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "group": "National references",
+      "items": [
+        {
+          "title": "Personal Data Protection Law (SDAIA)",
+          "url": "https://sdaia.gov.sa/en/SDAIA/about/Documents/PersonalDataProtectionLaw.pdf"
+        },
+        {
+          "title": "Implementing Regulation of the Personal Data Protection Law (SDAIA)",
+          "url": "https://sdaia.gov.sa/en/SDAIA/about/Documents/ImplementingRegulationPersonalDataProtectionLaw.pdf"
+        },
+        {
+          "title": "Regulation on Personal Data Transfer outside the Kingdom (SDAIA)",
+          "url": "https://sdaia.gov.sa/Documents/RegulationonPersonalDataEN.pdf"
+        },
+        {
+          "title": "Data Classification Policy (National Data Management Office, SDAIA)",
+          "url": "https://sdaia.gov.sa/en/SDAIA/about/Documents/DataClassificationPolicy.pdf"
+        },
+        {
+          "title": "Cloud Cybersecurity Controls (National Cybersecurity Authority)",
+          "url": "https://nca.gov.sa/en/regulatory-documents/controls-list/ccc/"
+        },
+        {
+          "title": "AI Ethics Principles (SDAIA)",
+          "url": "https://sdaia.gov.sa/en/SDAIA/about/Documents/ai-principles.pdf"
+        },
+        {
+          "title": "National AI Risk Management Framework, executive summary (SDAIA, April 2026)",
+          "url": "https://sdaia.gov.sa/en/MediaCenter/KnowledgeCenter/ResearchLibrary/ExecutiveSummaryEn.pdf"
+        }
+      ]
+    },
+    {
+      "group": "Architecture methods",
+      "items": [
+        {
+          "title": "The Architecture Tradeoff Analysis Method (Software Engineering Institute)",
+          "url": "https://www.sei.cmu.edu/library/the-architecture-tradeoff-analysis-method/"
+        },
+        {
+          "title": "The C4 model for visualising software architecture",
+          "url": "https://c4model.com/"
+        },
+        {
+          "title": "Structurizr DSL documentation",
+          "url": "https://docs.structurizr.com/dsl"
+        },
+        {
+          "title": "MADR: Markdown Architectural Decision Records",
+          "url": "https://adr.github.io/madr/"
+        },
+        {
+          "title": "Architectural fitness function (Thoughtworks Technology Radar)",
+          "url": "https://www.thoughtworks.com/radar/techniques/architectural-fitness-function"
+        },
+        {
+          "title": "CNCF Platforms White Paper (TAG App Delivery)",
+          "url": "https://tag-app-delivery.cncf.io/whitepapers/platforms/"
+        }
+      ]
+    },
+    {
+      "group": "Platform tools (examples, interchangeable)",
+      "items": [
+        {
+          "title": "LiteLLM: virtual keys, budgets and rate limits",
+          "url": "https://docs.litellm.ai/docs/proxy/virtual_keys"
+        },
+        {
+          "title": "LiteLLM: guardrails quick start",
+          "url": "https://docs.litellm.ai/docs/proxy/guardrails/quick_start"
+        },
+        {
+          "title": "LiteLLM: fallbacks",
+          "url": "https://docs.litellm.ai/docs/proxy/reliability"
+        },
+        {
+          "title": "agentgateway documentation",
+          "url": "https://agentgateway.dev/docs/"
+        },
+        {
+          "title": "Conftest",
+          "url": "https://www.conftest.dev/"
+        },
+        {
+          "title": "Open Policy Agent documentation",
+          "url": "https://www.openpolicyagent.org/docs"
+        },
+        {
+          "title": "Copier documentation",
+          "url": "https://copier.readthedocs.io/en/stable/"
+        },
+        {
+          "title": "Backstage software templates",
+          "url": "https://backstage.io/docs/features/software-templates/"
+        },
+        {
+          "title": "OpenCost documentation",
+          "url": "https://opencost.io/docs/"
+        },
+        {
+          "title": "FinOps Framework: invoicing and chargeback",
+          "url": "https://www.finops.org/framework/capabilities/invoicing-chargeback/"
+        }
       ]
     }
   ]

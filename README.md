@@ -5,7 +5,7 @@
 
 AI Engineering Track · SDAIA Academy · AE-402 · Level 400
 
-REPLACE: one line under the title: what participants can do after the course
+Turn requirements into tested scenarios, costed options and recorded decisions, then design the shared AI platform many teams build on
 
 Participants practise the architect's loop on AI systems and apply it to the shared platform many teams build on. For a fictional ministry of municipal services with nine product teams and data at three classification levels, they turn requirements into measurable scenarios, draw views as code, cost three options including a non-generative one, keep a decision log, design a model catalogue, gateway, tenancy model, golden paths and showback, enforce a reference design with fitness checks, and review a peer's architecture. Serving optimisation and reliability engineering are left to AE-401 and AE-403.
 
@@ -39,7 +39,9 @@ Participants practise the architect's loop on AI systems and apply it to the sha
 
 ## Case study
 
-**REPLACE: the name of the fictional organisation every lab works on.** REPLACE: two sentences on the case study and its synthetic data
+**Ministry of Municipal Services (fictional).** Nine product teams build on Asas, the Ministry's shared AI platform, with data at three national classification levels (Public, Restricted, Secret). Days 1 and 2 architect Muyassir, the building-permits assistant: drivers and constraints from a brief and three interview notes, five measurable scenarios tested on 400 pilot requests, fourteen classified data flows, views generated as code, three options costed over three years (one of them non-generative) and a decision log. Days 3 and 4 design Asas itself: a demand matrix from six months of usage logs, model admission, a gateway that refuses Restricted data to an external model, a tenancy model walked through three incidents, a showback that reconciles with the invoices, a golden-path template, fitness checks and a structured review of the inspections team's design with its deviation request.
+
+All data is synthetic and written by `labs/prepare_data.py` with a fixed seed; model ids, prices and people are invented. The placement rule the labs enforce (Public anywhere, Restricted in the Ministry or a cloud region in the Kingdom, Secret in the Ministry only) is the case's own policy, stricter by choice than the minimum the national texts set.
 
 <!-- academy:labs -->
 ## Labs
@@ -48,29 +50,29 @@ Every lab is a notebook in `labs/`. Open it in Google Colab from the course page
 
 | | Session | Lab | File |
 |---|---|---|---|
-| 1.1 | Day 1 · Session 1 | List drivers, constraints and stakeholders for the permits assistant from the case brief | [`D1_1_list_drivers_constraints.ipynb`](labs/D1_1_list_drivers_constraints.ipynb) |
-| 1.2 | Day 1 · Session 2 | Write five measurable scenarios, including answer quality and human oversight | [`D1_2_write_five_measurable.ipynb`](labs/D1_2_write_five_measurable.ipynb) |
-| 1.3 | Day 1 · Session 3 | Classify the case's data flows and derive the placement constraints | [`D1_3_classify_case_s.ipynb`](labs/D1_3_classify_case_s.ipynb) |
-| 1.4 | Day 1 · Session 4 | Draw context and container views and budget one request's latency and cost | [`D1_4_draw_context_container.ipynb`](labs/D1_4_draw_context_container.ipynb) |
-| 2.1 | Day 2 · Session 1 | Match six case needs to patterns and find the one a non-generative design serves better | [`D2_1_match_six_case.ipynb`](labs/D2_1_match_six_case.ipynb) |
-| 2.2 | Day 2 · Session 2 | Cost three options and test their sensitivity to volume and token price | [`D2_2_cost_three_options.ipynb`](labs/D2_2_cost_three_options.ipynb) |
-| 2.3 | Day 2 · Session 3 | Score exit cost and write two procurement requirements that keep the exit open | [`D2_3_score_exit_cost.ipynb`](labs/D2_3_score_exit_cost.ipynb) |
-| 2.4 | Day 2 · Session 4 | Write two records, swap with a peer and challenge consequences and review triggers | [`D2_4_write_two_records.ipynb`](labs/D2_4_write_two_records.ipynb) |
-| 3.1 | Day 3 · Session 1 | Build a demand matrix from the synthetic usage logs of nine teams | [`D3_1_build_demand_matrix.ipynb`](labs/D3_1_build_demand_matrix.ipynb) |
-| 3.2 | Day 3 · Session 2 | Admit four models and make the supplied gateway refuse restricted data to an external model | [`D3_2_admit_four_models.ipynb`](labs/D3_2_admit_four_models.ipynb) |
-| 3.3 | Day 3 · Session 3 | Walk a tenancy model through a leaked key, a noisy neighbour and a runaway agent | [`D3_3_walk_tenancy_model.ipynb`](labs/D3_3_walk_tenancy_model.ipynb) |
-| 3.4 | Day 3 · Session 4 | Build a showback from synthetic invoices and tags and name untagged spend | [`D3_4_build_showback_from.ipynb`](labs/D3_4_build_showback_from.ipynb) |
-| 4.1 | Day 4 · Session 1 | Turn a supplied retrieval service into a template with evaluation, tracing and classification checks on | [`D4_1_turn_supplied_retrieval.ipynb`](labs/D4_1_turn_supplied_retrieval.ipynb) |
-| 4.2 | Day 4 · Session 2 | Write two checks that fail a design lacking an evaluation gate or sending restricted data out | [`D4_2_write_two_checks.ipynb`](labs/D4_2_write_two_checks.ipynb) |
-| 4.3 | Day 4 · Session 3 | Review a supplied design for risks, sensitivity points and non-compliance | [`D4_3_review_supplied_design.ipynb`](labs/D4_3_review_supplied_design.ipynb) |
-| 4.4 | Day 4 · Session 4 | Decide a deviation request and explain the trade-off on one page for a sponsor | [`D4_4_decide_deviation_request.ipynb`](labs/D4_4_decide_deviation_request.ipynb) |
+| 1.1 | Day 1 · Session 1 | Drivers, constraints and stakeholders | [`D1_1_drivers.ipynb`](labs/D1_1_drivers.ipynb) |
+| 1.2 | Day 1 · Session 2 | Five measurable scenarios | [`D1_2_scenarios.ipynb`](labs/D1_2_scenarios.ipynb) |
+| 1.3 | Day 1 · Session 3 | Classified flows and placement | [`D1_3_data_flows.ipynb`](labs/D1_3_data_flows.ipynb) |
+| 1.4 | Day 1 · Session 4 | Views as code and a request budget | [`D1_4_views_budget.ipynb`](labs/D1_4_views_budget.ipynb) |
+| 2.1 | Day 2 · Session 1 | Match six case needs to patterns and find the one a non-generative design serves better | [`D2_1_patterns.ipynb`](labs/D2_1_patterns.ipynb) |
+| 2.2 | Day 2 · Session 2 | Cost three options and test their sensitivity to volume and token price | [`D2_2_three_year_cost.ipynb`](labs/D2_2_three_year_cost.ipynb) |
+| 2.3 | Day 2 · Session 3 | Score exit cost and write two procurement requirements that keep the exit open | [`D2_3_exit_cost.ipynb`](labs/D2_3_exit_cost.ipynb) |
+| 2.4 | Day 2 · Session 4 | Write two records, swap with a peer and challenge consequences and review triggers | [`D2_4_decision_records.ipynb`](labs/D2_4_decision_records.ipynb) |
+| 3.1 | Day 3 · Session 1 | Build a demand matrix from the synthetic usage logs of nine teams | [`D3_1_demand_matrix.ipynb`](labs/D3_1_demand_matrix.ipynb) |
+| 3.2 | Day 3 · Session 2 | Admit four models and make the supplied gateway refuse restricted data to an external model | [`D3_2_admission_gateway.ipynb`](labs/D3_2_admission_gateway.ipynb) |
+| 3.3 | Day 3 · Session 3 | Walk a tenancy model through a leaked key, a noisy neighbour and a runaway agent | [`D3_3_tenancy.ipynb`](labs/D3_3_tenancy.ipynb) |
+| 3.4 | Day 3 · Session 4 | Build a showback from synthetic invoices and tags and name untagged spend | [`D3_4_showback.ipynb`](labs/D3_4_showback.ipynb) |
+| 4.1 | Day 4 · Session 1 | Turn a supplied retrieval service into a template with evaluation, tracing and classification checks on | [`D4_1_golden_path.ipynb`](labs/D4_1_golden_path.ipynb) |
+| 4.2 | Day 4 · Session 2 | Write two checks that fail a design lacking an evaluation gate or sending restricted data out | [`D4_2_fitness_checks.ipynb`](labs/D4_2_fitness_checks.ipynb) |
+| 4.3 | Day 4 · Session 3 | Review a supplied design for risks, sensitivity points and non-compliance | [`D4_3_review.ipynb`](labs/D4_3_review.ipynb) |
+| 4.4 | Day 4 · Session 4 | Decide a deviation request and explain the trade-off on one page for a sponsor | [`D4_4_deviation.ipynb`](labs/D4_4_deviation.ipynb) |
 <!-- /academy:labs -->
 
 ## Capstone
 
 An architecture for one ministry service and the platform slice it runs on (scenarios, views, options paper, at least six decision records, and a working gateway, catalogue entry, golden path and showback) in a public repository, defended before a panel that includes a data architect. The follow-up task writes three decision records for a system from the participant's own work
 
-**Submission:** REPLACE: what participants submit and how: a public repository link, or a shared folder for a course without code
+**Submission:** a public GitHub repository link, sent before the defence (see the capstone deck for what it holds). The defence is a 10-minute talk and 8 minutes of questions before a panel that includes a data architect.
 
 ## Prerequisites
 
@@ -97,14 +99,44 @@ Each line is a capability; the examples are interchangeable.
 <!-- academy:sources -->
 ## Sources
 
-- REPLACE: every source the course cites, with its address, in course.json under "sources"; this list is written from there
+### National references
+
+- [Personal Data Protection Law (SDAIA)](https://sdaia.gov.sa/en/SDAIA/about/Documents/PersonalDataProtectionLaw.pdf)
+- [Implementing Regulation of the Personal Data Protection Law (SDAIA)](https://sdaia.gov.sa/en/SDAIA/about/Documents/ImplementingRegulationPersonalDataProtectionLaw.pdf)
+- [Regulation on Personal Data Transfer outside the Kingdom (SDAIA)](https://sdaia.gov.sa/Documents/RegulationonPersonalDataEN.pdf)
+- [Data Classification Policy (National Data Management Office, SDAIA)](https://sdaia.gov.sa/en/SDAIA/about/Documents/DataClassificationPolicy.pdf)
+- [Cloud Cybersecurity Controls (National Cybersecurity Authority)](https://nca.gov.sa/en/regulatory-documents/controls-list/ccc/)
+- [AI Ethics Principles (SDAIA)](https://sdaia.gov.sa/en/SDAIA/about/Documents/ai-principles.pdf)
+- [National AI Risk Management Framework, executive summary (SDAIA, April 2026)](https://sdaia.gov.sa/en/MediaCenter/KnowledgeCenter/ResearchLibrary/ExecutiveSummaryEn.pdf)
+
+### Architecture methods
+
+- [The Architecture Tradeoff Analysis Method (Software Engineering Institute)](https://www.sei.cmu.edu/library/the-architecture-tradeoff-analysis-method/)
+- [The C4 model for visualising software architecture](https://c4model.com/)
+- [Structurizr DSL documentation](https://docs.structurizr.com/dsl)
+- [MADR: Markdown Architectural Decision Records](https://adr.github.io/madr/)
+- [Architectural fitness function (Thoughtworks Technology Radar)](https://www.thoughtworks.com/radar/techniques/architectural-fitness-function)
+- [CNCF Platforms White Paper (TAG App Delivery)](https://tag-app-delivery.cncf.io/whitepapers/platforms/)
+
+### Platform tools (examples, interchangeable)
+
+- [LiteLLM: virtual keys, budgets and rate limits](https://docs.litellm.ai/docs/proxy/virtual_keys)
+- [LiteLLM: guardrails quick start](https://docs.litellm.ai/docs/proxy/guardrails/quick_start)
+- [LiteLLM: fallbacks](https://docs.litellm.ai/docs/proxy/reliability)
+- [agentgateway documentation](https://agentgateway.dev/docs/)
+- [Conftest](https://www.conftest.dev/)
+- [Open Policy Agent documentation](https://www.openpolicyagent.org/docs)
+- [Copier documentation](https://copier.readthedocs.io/en/stable/)
+- [Backstage software templates](https://backstage.io/docs/features/software-templates/)
+- [OpenCost documentation](https://opencost.io/docs/)
+- [FinOps Framework: invoicing and chargeback](https://www.finops.org/framework/capabilities/invoicing-chargeback/)
 <!-- /academy:sources -->
 
 ### National references
 
-- Personal Data Protection Law and its implementing regulations: REPLACE: the address of the official text
-- Regulation on Personal Data Transfer outside the Kingdom: REPLACE: the address of the official text
-- NDMO Data Classification Policy: REPLACE: the address of the official text
-- National Cybersecurity Authority (NCA) Cloud Cybersecurity Controls: REPLACE: the address of the official text
-- SDAIA AI Ethics Principles: REPLACE: the address of the official text
-- National AI Risk Management Framework: REPLACE: the address of the official text
+- Personal Data Protection Law and its implementing regulations: https://sdaia.gov.sa/en/SDAIA/about/Documents/PersonalDataProtectionLaw.pdf and https://sdaia.gov.sa/en/SDAIA/about/Documents/ImplementingRegulationPersonalDataProtectionLaw.pdf
+- Regulation on Personal Data Transfer outside the Kingdom: https://sdaia.gov.sa/Documents/RegulationonPersonalDataEN.pdf
+- NDMO Data Classification Policy: https://sdaia.gov.sa/en/SDAIA/about/Documents/DataClassificationPolicy.pdf
+- National Cybersecurity Authority (NCA) Cloud Cybersecurity Controls: https://nca.gov.sa/en/regulatory-documents/controls-list/ccc/
+- SDAIA AI Ethics Principles: https://sdaia.gov.sa/en/SDAIA/about/Documents/ai-principles.pdf
+- National AI Risk Management Framework: https://sdaia.gov.sa/en/MediaCenter/KnowledgeCenter/ResearchLibrary/ExecutiveSummaryEn.pdf (the English executive summary; the full text is published in Arabic)

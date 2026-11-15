@@ -1,0 +1,2 @@
+# Colab already ships pandas, numpy and scikit-learn.
+copier>=9.4
