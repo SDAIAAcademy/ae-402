@@ -223,7 +223,7 @@
 </section>
 
 <section class="slide lab" id="lab-3-2" data-auto="lab" data-lab="3.2">
-  <aside class="notes"><p>No key or model is needed: the refusal happens before any call, and the models are labelled stand-ins. The gateway can forward to a free hosted model through ASAS_UPSTREAM variables; that path was not run in this course's build (no key), and nothing in the lab needs it. Common slip: treating a missing label as Public.</p></aside>
+  <aside class="notes"><p>No key or model is needed: the refusal happens before any call, and the models are labelled stand-ins. An optional cell puts a free hosted model behind the external alias when the three ASAS_UPSTREAM variables are set; G1 then gets a real answer and G4 is still refused before the call. Nothing in the lab needs it. Common slip: treating a missing label as Public.</p></aside>
 </section>
 
 <!-- Session 3 -->
@@ -302,7 +302,7 @@
       <div class="opt" data-why="Fixes spend, not capacity: the batch runs on a fixed-cost model and spends nothing per call">A lower budget on the contact team's key</div>
       <div class="opt" data-why="Treats a legitimate overload as a leak: the key is the team's own and correctly used">Revoke the contact team's key</div>
       <div class="opt" data-ok>A cap on any team's share of the Ministry-hosted model</div>
-      <div class="opt" data-why="Moves the problem: a cloud fallback may not receive Restricted call transcripts">Fall back to a cloud model when the queue is long</div>
+      <div class="opt" data-why="Moves the load instead of capping it: the batch spills onto a paid model the other teams share, and only a cloud region in the Kingdom may take its Restricted transcripts">Fall back to a cloud model when the queue is long</div>
     </div>
     <div class="callout tip why"><b>Why.</b> The harm is shared capacity; only a cap on each team's share keeps the others served.</div>
   </div>

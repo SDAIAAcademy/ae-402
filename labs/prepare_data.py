@@ -1229,7 +1229,7 @@ ask inspectors to avoid people in photos.
     briefs = {
         "reports": ("Citizen reports: routing and replies", "T02, the reports team",
                     "Citizens report potholes, broken lights and blocked pavements through the app and the call "
-                    "centre: 90,000 reports a year, growing 15% a year. Each report carries text, a location, a "
+                    "centre: about 95,000 reports a month, growing 15% a year. Each report carries text, a location, a "
                     "phone number and sometimes a photo. The team wants each report routed to the right department "
                     "and a reply drafted for the citizen.",
                     "Restricted (phone numbers, locations, photos)",

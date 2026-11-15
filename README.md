@@ -74,6 +74,25 @@ An architecture for one ministry service and the platform slice it runs on (scen
 
 **Submission:** a public GitHub repository link, sent before the defence; `labs/capstone/README.md` lists what it holds and `labs/capstone/briefs/` the three services to choose from. The defence is a 10-minute talk and 8 minutes of questions before a panel that includes a data architect.
 
+## Pre-work, assessment and follow-up
+
+- **Guided pre-work (about two hours):** open `labs/D1_1_drivers.ipynb` in Google Colab, or run `uv sync` in
+  `labs/`, and run its first two cells (no key is needed); read the case brief in `labs/data/case/brief.md` and
+  the three interview notes in `labs/data/case/interviews/`; refresh the four national data classification levels
+  and the gateway budgets and kill switches of AE-305 Day 4. Bring one decision from your own work that nobody
+  wrote down.
+- **Supervised entry and exit checks, without AI (20%):** write a scenario, find the missing consequence in a
+  decision record, place a classified data flow.
+- **Capstone rubric (60%) and panel defence (20%).** Passing needs 70% overall and at least 60% on both the
+  capstone rubric and the supervised checks. The panel reads the commit history, the dated decision records and
+  the gateway logs, and during the defence changes a classification level or the volume forecast: you name the
+  decisions it reopens.
+- **AI use:** off for the supervised checks and the first scenario draft; a tutor in the labs that questions
+  assumptions and points to missing views but does not write decisions; allowed in the capstone, which is
+  defended before the panel.
+- **Follow-up task:** within a month of the capstone, write three decision records for a system from your own
+  work, each with good and bad consequences and a review trigger.
+
 ## Prerequisites
 
 - AE-305 Operating Machine Learning and Language Model Systems
@@ -132,7 +151,7 @@ Each line is a capability; the examples are interchangeable.
 - [FinOps Framework: invoicing and chargeback](https://www.finops.org/framework/capabilities/invoicing-chargeback/)
 <!-- /academy:sources -->
 
-### National references
+## National references as the catalog names them
 
 - Personal Data Protection Law and its implementing regulations: https://sdaia.gov.sa/en/SDAIA/about/Documents/PersonalDataProtectionLaw.pdf and https://sdaia.gov.sa/en/SDAIA/about/Documents/ImplementingRegulationPersonalDataProtectionLaw.pdf
 - Regulation on Personal Data Transfer outside the Kingdom: https://sdaia.gov.sa/Documents/RegulationonPersonalDataEN.pdf

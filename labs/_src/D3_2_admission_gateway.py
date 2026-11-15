@@ -196,6 +196,28 @@ if result is not supplied:
 # check is deliberately simple and will miss things a person would see: it is a floor, not a proof.
 
 # %% [markdown]
+# **Optional · a real model behind the external alias.** If you set `ASAS_UPSTREAM_URL`, `ASAS_UPSTREAM_KEY` and
+# `ASAS_UPSTREAM_MODEL` (for example a free model on OpenRouter: `https://openrouter.ai/api/v1` and a model id
+# ending in `:free`), the next cell puts that hosted model behind the alias `ext-frontier-l` and sends G1 and G4
+# again. G1 gets a real answer; G4 is still refused, before any byte reaches the model. Without the variables the
+# cell says so and moves on.
+
+# %%
+hosted = A.upstream_from_env()
+if hosted is None:
+    print("(no ASAS_UPSTREAM_* variables: the stand-ins stay; nothing else in this lab needs a model)")
+else:
+    live = G.Gateway(catalogue=catalogue, keys=G.default_keys(teams),
+                     models={**G.default_models(), "ext-frontier-l": hosted}, policies=[classification_policy])
+    try:
+        for t in [t for t in tests if t["id"] in ("G1", "G4")]:
+            r = live.handle(t["key"], {"model": t["model"], "messages": [{"role": "user", "content": t["text"]}],
+                                       "classification": t["declared"]})
+            print(t["id"], r.status, r.reason, "|", (r.text or "")[:120])
+    except NotImplementedError:
+        print("(write classification_policy first)")
+
+# %% [markdown]
 # ## ✱ Stretch · A fallback that respects placement
 #
 # Give the alias `own-open-s` a fallback to `ksa-general-m`, make the Ministry-hosted stand-in fail every

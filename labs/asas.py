@@ -144,12 +144,17 @@ def upstream_from_env():
         name, hosting, latency_ms = model, "external", 0
 
         def complete(self, messages):
+            import urllib.error
             import urllib.request
             body = json.dumps({"model": model, "messages": messages}).encode("utf-8")
             req = urllib.request.Request(url.rstrip("/") + "/chat/completions", data=body, headers={
                 "Authorization": f"Bearer {key}", "Content-Type": "application/json"})
-            with urllib.request.urlopen(req, timeout=60) as r:
-                out = json.loads(r.read().decode("utf-8"))
+            try:
+                with urllib.request.urlopen(req, timeout=60) as r:
+                    out = json.loads(r.read().decode("utf-8"))
+            except (urllib.error.URLError, TimeoutError, ValueError) as e:
+                # The gateway treats ConnectionError as "this model failed": it tries the fallback, or answers 503.
+                raise ConnectionError(f"{model} did not answer: {e}") from e
             usage = out.get("usage", {})
             return {"model": model, "text": out["choices"][0]["message"]["content"],
                     "in_tokens": usage.get("prompt_tokens", 0), "out_tokens": usage.get("completion_tokens", 0),

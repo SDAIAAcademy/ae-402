@@ -93,7 +93,10 @@ implements it.
 
 **Optional: a hosted model behind the gateway.** `asas.upstream_from_env()` returns an OpenAI-compatible client
 when `ASAS_UPSTREAM_URL`, `ASAS_UPSTREAM_KEY` and `ASAS_UPSTREAM_MODEL` are set (for example a free model on
-OpenRouter). No lab needs it, and it was not exercised when the course was built.
+OpenRouter: `https://openrouter.ai/api/v1` and a model id ending in `:free`). An optional cell of Lab 3.2 puts it
+behind the external alias and sends one allowed and one forbidden request; the forbidden one is refused before
+the model is called. No lab needs it. It was checked against a local scripted endpoint, not yet against a real
+hosted model.
 
 **Windows and long folder paths.** If an import fails with "The filename or extension is too long", keep the
 virtual environment in a short folder: set `UV_PROJECT_ENVIRONMENT` to a short path before `uv sync`.
