@@ -1,0 +1,457 @@
+{
+  "$schema": "https://sdaiaacademy.github.io/engine/schemas/course.schema.json",
+  "engine": "1",
+  "id": "ae-402",
+  "code": "AE-402",
+  "version": "2027.1.0",
+  "lang": "en",
+  "title": {
+    "en": "AI Solution Architecture and Platform Design",
+    "ar": "معمارية حلول الذكاء الاصطناعي وتصميم المنصات"
+  },
+  "tagline": "REPLACE: one line under the title: what participants can do after the course",
+  "description": "Participants practise the architect's loop on AI systems and apply it to the shared platform many teams build on. For a fictional ministry of municipal services with nine product teams and data at three classification levels, they turn requirements into measurable scenarios, draw views as code, cost three options including a non-generative one, keep a decision log, design a model catalogue, gateway, tenancy model, golden paths and showback, enforce a reference design with fitness checks, and review a peer's architecture. Serving optimisation and reliability engineering are left to AE-401 and AE-403.",
+  "track": "ai-engineering",
+  "level": 400,
+  "badge": {
+    "name": "AI Engineering",
+    "level": "Expert"
+  },
+  "audience": "Specialists. Engineers who have completed the level 300 core or can show equivalent work: a production AI system they built, operated and can defend.",
+  "prerequisites": [
+    "AE-305 Operating Machine Learning and Language Model Systems",
+    "AE-308 Securing Language Model and Agent Applications",
+    "AE-311 Shaping the Build: Product Sense and Delivery Practice",
+    "Has built and deployed at least one AI service that other people used",
+    "Reads a cloud usage export or bill",
+    "Can name the four national data classification levels"
+  ],
+  "site": {
+    "url": "https://sdaiaacademy.github.io/ae-402/",
+    "repo": "SDAIAAcademy/ae-402"
+  },
+  "outcomes": [
+    {
+      "id": "LO1",
+      "text": "Prepare quality-attribute scenarios with measurable targets for answer quality, latency, cost, privacy and human oversight, given the case brief, three interview notes and the data inventory",
+      "level": "Applied",
+      "evidence": "a scenario sheet a reviewer can test a design against"
+    },
+    {
+      "id": "LO2",
+      "text": "Design an end-to-end architecture with context, container and data-flow views and a per-request latency and cost budget, given the scenario sheet and the classification of each data flow",
+      "level": "Performance",
+      "evidence": "an architecture document with views as code and one request traced end to end"
+    },
+    {
+      "id": "LO3",
+      "text": "Evaluate at least three solution options, including a non-generative baseline, and record the resulting decisions, given weighted criteria, a three-year volume forecast and price ranges",
+      "level": "Performance",
+      "evidence": "an options paper with total cost, lock-in and sensitivity analysis, and at least six decision records"
+    },
+    {
+      "id": "LO4",
+      "text": "Design a shared AI platform covering model admission, gateway, tenancy, golden paths and cost attribution, given nine teams, three classification levels, synthetic usage logs and invoices",
+      "level": "Performance",
+      "evidence": "a design and a working slice whose gateway refuses restricted data to an external model and whose showback reconciles within 2%"
+    },
+    {
+      "id": "LO5",
+      "text": "Design a reference architecture with fitness functions that check conformance automatically, given a recurring pattern: retrieval over classified documents",
+      "level": "Performance",
+      "evidence": "a template and two automated checks that fail on a non-conforming design"
+    },
+    {
+      "id": "LO6",
+      "text": "Review a peer's architecture with a structured trade-off method and decide on a requested deviation, given a peer design, the reference designs and a deviation request",
+      "level": "Performance",
+      "evidence": "a review report naming risks, sensitivity points and non-compliance, with a recorded decision"
+    }
+  ],
+  "case_study": {
+    "name": "REPLACE: the name of the fictional organisation every lab works on",
+    "summary": "REPLACE: two sentences on the case study and its synthetic data"
+  },
+  "format": "intensive",
+  "format_note": "Intensive: 4 teaching days of four sessions and a capstone day, with guided pre-work and a tracked follow-up task",
+  "hours": {
+    "instruction": 6,
+    "lab": 7,
+    "guided_self_study": 6,
+    "assessment": 1,
+    "capstone": 6
+  },
+  "unit": "day",
+  "days": [
+    {
+      "id": "day1",
+      "kind": "day",
+      "title": "From requirements to architecture",
+      "deck": "slides/day1.html",
+      "sessions": [
+        {
+          "title": "The architect's loop for AI systems",
+          "outcomes": [
+            "REPLACE: what a participant can do after this session"
+          ],
+          "lo": [
+            "LO1"
+          ],
+          "lab": {
+            "id": "1.1",
+            "title": "List drivers, constraints and stakeholders for the permits assistant from the case brief",
+            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "minutes": 25,
+            "href": "D1_1_list_drivers_constraints.ipynb"
+          }
+        },
+        {
+          "title": "Quality attributes with numbers",
+          "outcomes": [
+            "REPLACE: what a participant can do after this session"
+          ],
+          "lo": [
+            "LO1"
+          ],
+          "lab": {
+            "id": "1.2",
+            "title": "Write five measurable scenarios, including answer quality and human oversight",
+            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "minutes": 25,
+            "href": "D1_2_write_five_measurable.ipynb"
+          }
+        },
+        {
+          "title": "Regulation as a design constraint",
+          "outcomes": [
+            "REPLACE: what a participant can do after this session"
+          ],
+          "lo": [
+            "LO1"
+          ],
+          "lab": {
+            "id": "1.3",
+            "title": "Classify the case's data flows and derive the placement constraints",
+            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "minutes": 25,
+            "href": "D1_3_classify_case_s.ipynb"
+          }
+        },
+        {
+          "title": "Views as code",
+          "outcomes": [
+            "REPLACE: what a participant can do after this session"
+          ],
+          "lo": [
+            "LO2"
+          ],
+          "lab": {
+            "id": "1.4",
+            "title": "Draw context and container views and budget one request's latency and cost",
+            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "minutes": 25,
+            "href": "D1_4_draw_context_container.ipynb"
+          }
+        }
+      ]
+    },
+    {
+      "id": "day2",
+      "kind": "day",
+      "title": "Options and decisions",
+      "deck": "slides/day2.html",
+      "sessions": [
+        {
+          "title": "Patterns and when each fits",
+          "outcomes": [
+            "REPLACE: what a participant can do after this session"
+          ],
+          "lo": [
+            "LO3"
+          ],
+          "lab": {
+            "id": "2.1",
+            "title": "Match six case needs to patterns and find the one a non-generative design serves better",
+            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "minutes": 25,
+            "href": "D2_1_match_six_case.ipynb"
+          }
+        },
+        {
+          "title": "Total cost over three years",
+          "outcomes": [
+            "REPLACE: what a participant can do after this session"
+          ],
+          "lo": [
+            "LO3"
+          ],
+          "lab": {
+            "id": "2.2",
+            "title": "Cost three options and test their sensitivity to volume and token price",
+            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "minutes": 25,
+            "href": "D2_2_cost_three_options.ipynb"
+          }
+        },
+        {
+          "title": "Lock-in and exit",
+          "outcomes": [
+            "REPLACE: what a participant can do after this session"
+          ],
+          "lo": [
+            "LO3"
+          ],
+          "lab": {
+            "id": "2.3",
+            "title": "Score exit cost and write two procurement requirements that keep the exit open",
+            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "minutes": 25,
+            "href": "D2_3_score_exit_cost.ipynb"
+          }
+        },
+        {
+          "title": "Decision records",
+          "outcomes": [
+            "REPLACE: what a participant can do after this session"
+          ],
+          "lo": [
+            "LO3"
+          ],
+          "lab": {
+            "id": "2.4",
+            "title": "Write two records, swap with a peer and challenge consequences and review triggers",
+            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "minutes": 25,
+            "href": "D2_4_write_two_records.ipynb"
+          }
+        }
+      ]
+    },
+    {
+      "id": "day3",
+      "kind": "day",
+      "title": "The shared platform",
+      "deck": "slides/day3.html",
+      "sessions": [
+        {
+          "title": "The platform is a product",
+          "outcomes": [
+            "REPLACE: what a participant can do after this session"
+          ],
+          "lo": [
+            "LO4"
+          ],
+          "lab": {
+            "id": "3.1",
+            "title": "Build a demand matrix from the synthetic usage logs of nine teams",
+            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "minutes": 25,
+            "href": "D3_1_build_demand_matrix.ipynb"
+          }
+        },
+        {
+          "title": "Catalogue, admission and the gateway",
+          "outcomes": [
+            "REPLACE: what a participant can do after this session"
+          ],
+          "lo": [
+            "LO4"
+          ],
+          "lab": {
+            "id": "3.2",
+            "title": "Admit four models and make the supplied gateway refuse restricted data to an external model",
+            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "minutes": 25,
+            "href": "D3_2_admit_four_models.ipynb"
+          }
+        },
+        {
+          "title": "Tenancy and shared capacity",
+          "outcomes": [
+            "REPLACE: what a participant can do after this session"
+          ],
+          "lo": [
+            "LO4"
+          ],
+          "lab": {
+            "id": "3.3",
+            "title": "Walk a tenancy model through a leaked key, a noisy neighbour and a runaway agent",
+            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "minutes": 25,
+            "href": "D3_3_walk_tenancy_model.ipynb"
+          }
+        },
+        {
+          "title": "Who pays for which tokens",
+          "outcomes": [
+            "REPLACE: what a participant can do after this session"
+          ],
+          "lo": [
+            "LO4"
+          ],
+          "lab": {
+            "id": "3.4",
+            "title": "Build a showback from synthetic invoices and tags and name untagged spend",
+            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "minutes": 25,
+            "href": "D3_4_build_showback_from.ipynb"
+          }
+        }
+      ]
+    },
+    {
+      "id": "day4",
+      "kind": "day",
+      "title": "Reference designs and reviews",
+      "deck": "slides/day4.html",
+      "sessions": [
+        {
+          "title": "Golden paths",
+          "outcomes": [
+            "REPLACE: what a participant can do after this session"
+          ],
+          "lo": [
+            "LO5"
+          ],
+          "lab": {
+            "id": "4.1",
+            "title": "Turn a supplied retrieval service into a template with evaluation, tracing and classification checks on",
+            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "minutes": 25,
+            "href": "D4_1_turn_supplied_retrieval.ipynb"
+          }
+        },
+        {
+          "title": "Fitness functions",
+          "outcomes": [
+            "REPLACE: what a participant can do after this session"
+          ],
+          "lo": [
+            "LO5"
+          ],
+          "lab": {
+            "id": "4.2",
+            "title": "Write two checks that fail a design lacking an evaluation gate or sending restricted data out",
+            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "minutes": 25,
+            "href": "D4_2_write_two_checks.ipynb"
+          }
+        },
+        {
+          "title": "Structured architecture review",
+          "outcomes": [
+            "REPLACE: what a participant can do after this session"
+          ],
+          "lo": [
+            "LO6"
+          ],
+          "lab": {
+            "id": "4.3",
+            "title": "Review a supplied design for risks, sensitivity points and non-compliance",
+            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "minutes": 25,
+            "href": "D4_3_review_supplied_design.ipynb"
+          }
+        },
+        {
+          "title": "Deviations and sponsors",
+          "outcomes": [
+            "REPLACE: what a participant can do after this session"
+          ],
+          "lo": [
+            "LO6"
+          ],
+          "lab": {
+            "id": "4.4",
+            "title": "Decide a deviation request and explain the trade-off on one page for a sponsor",
+            "summary": "REPLACE: one line on what participants build and take away; then list the steps of the lab in course.json, their minutes adding up to 25",
+            "minutes": 25,
+            "href": "D4_4_decide_deviation_request.ipynb"
+          }
+        }
+      ]
+    },
+    {
+      "id": "capstone",
+      "kind": "capstone",
+      "title": "Capstone project presentations",
+      "deck": "slides/capstone.html",
+      "subtitle": "REPLACE: the catalog gives no length for the presentations; set capstone.talk_minutes and capstone.qa_minutes in course.json, write them on the format slide, add a timer for each to the now-presenting slide, and remove this line"
+    }
+  ],
+  "capstone": {
+    "summary": "An architecture for one ministry service and the platform slice it runs on (scenarios, views, options paper, at least six decision records, and a working gateway, catalogue entry, golden path and showback) in a public repository, defended before a panel that includes a data architect. The follow-up task writes three decision records for a system from the participant's own work",
+    "submission": "REPLACE: what participants submit and how: a public repository link, or a shared folder for a course without code",
+    "rubric": [
+      {
+        "criterion": "Scenarios and views",
+        "weight": 20
+      },
+      {
+        "criterion": "Options and decisions",
+        "weight": 25
+      },
+      {
+        "criterion": "Platform slice",
+        "weight": 25
+      },
+      {
+        "criterion": "Fitness checks",
+        "weight": 15
+      },
+      {
+        "criterion": "Review",
+        "weight": 15
+      }
+    ]
+  },
+  "labs": {
+    "kind": "notebooks",
+    "base": "labs/"
+  },
+  "tools": [
+    {
+      "slot": "Architecture views as code",
+      "examples": [
+        "Structurizr DSL",
+        "Mermaid",
+        "PlantUML"
+      ]
+    },
+    {
+      "slot": "Decision record templates",
+      "examples": [
+        "MADR",
+        "a plain Markdown template"
+      ]
+    },
+    {
+      "slot": "AI gateway",
+      "examples": [
+        "LiteLLM",
+        "agentgateway"
+      ]
+    },
+    {
+      "slot": "Fitness checks and policy",
+      "examples": [
+        "Open Policy Agent with conftest",
+        "tests over infrastructure definitions"
+      ]
+    },
+    {
+      "slot": "Project templates",
+      "examples": [
+        "Copier",
+        "Backstage software templates"
+      ]
+    },
+    {
+      "slot": "Cost modelling and allocation",
+      "examples": [
+        "a Python notebook",
+        "OpenCost"
+      ]
+    }
+  ]
+}
