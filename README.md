@@ -136,6 +136,7 @@ Each line is a capability; the examples are interchangeable.
 - [MADR: Markdown Architectural Decision Records](https://adr.github.io/madr/)
 - [Architectural fitness function (Thoughtworks Technology Radar)](https://www.thoughtworks.com/radar/techniques/architectural-fitness-function)
 - [CNCF Platforms White Paper (TAG App Delivery)](https://tag-app-delivery.cncf.io/whitepapers/platforms/)
+- [Strangler Fig (Martin Fowler)](https://martinfowler.com/bliki/StranglerFigApplication.html)
 
 ### Platform tools (examples, interchangeable)
 
@@ -149,6 +150,7 @@ Each line is a capability; the examples are interchangeable.
 - [Backstage software templates](https://backstage.io/docs/features/software-templates/)
 - [OpenCost documentation](https://opencost.io/docs/)
 - [FinOps Framework: invoicing and chargeback](https://www.finops.org/framework/capabilities/invoicing-chargeback/)
+- [OpenTofu: Command: plan](https://opentofu.org/docs/cli/commands/plan/)
 <!-- /academy:sources -->
 
 ## National references as the catalog names them

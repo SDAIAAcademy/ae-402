@@ -3,7 +3,7 @@
   "engine": "1",
   "id": "ae-402",
   "code": "AE-402",
-  "version": "2027.1.0",
+  "version": "2027.2.0",
   "lang": "en",
   "title": {
     "en": "AI Solution Architecture and Platform Design",
@@ -874,6 +874,10 @@
         {
           "title": "CNCF Platforms White Paper (TAG App Delivery)",
           "url": "https://tag-app-delivery.cncf.io/whitepapers/platforms/"
+        },
+        {
+          "title": "Strangler Fig (Martin Fowler)",
+          "url": "https://martinfowler.com/bliki/StranglerFigApplication.html"
         }
       ]
     },
@@ -919,6 +923,10 @@
         {
           "title": "FinOps Framework: invoicing and chargeback",
           "url": "https://www.finops.org/framework/capabilities/invoicing-chargeback/"
+        },
+        {
+          "title": "OpenTofu: Command: plan",
+          "url": "https://opentofu.org/docs/cli/commands/plan/"
         }
       ]
     }

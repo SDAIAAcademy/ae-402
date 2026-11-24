@@ -315,22 +315,44 @@
     <div class="msg ai bad"><span class="who">Weak</span>The provider will make data available where possible.</div>
     <div class="msg ai good"><span class="who">Verifiable</span>The provider shall export all indexed documents, their embeddings and metadata in JSON Lines or Parquet within 10 working days of a request, at no extra charge.</div>
   </div>
-  <aside class="notes"><p>The lab's lint checks three things: "shall", something verifiable (a number, a format, a standard interface) and no escape phrase. Content is the participant's: each requirement must remove one of O1's factors. The second solution requirement asks for an OpenAI-compatible interface and a 90-day notice after 12 months.</p></aside>
+  <p class="small mt">Test the export once a year: request it, load it into the Ministry's index, re-run the evaluation set and record the time taken. Untested, the requirement is only paper.</p>
+  <aside class="notes"><p>The lab's lint checks three things: "shall", something verifiable (a number, a format, a standard interface) and no escape phrase. Content is the participant's: each requirement must remove one of O1's factors. The second solution requirement asks for an OpenAI-compatible interface and a 90-day notice after 12 months.</p><p>The yearly exit test is an architect's control, not a lawyer's: it turns the exit cost into a measured number for the next decision.</p></aside>
 </section>
 
-<section class="slide" id="test-the-exit" data-lo="LO3" data-label="Test the exit">
-  <div class="kicker">An exit is a design artefact</div>
-  <h2>Test the export once a year, or the requirement is only paper</h2>
+<section class="slide" id="strangler-facade" data-lo="LO3" data-label="Leaving in steps">
+  <div class="kicker">Leaving in steps</div>
+  <h2>Replace a legacy system one capability at a time, behind a facade that routes</h2>
   <div class="flow">
-    <div class="step c-teal"><b>Request</b>a full export</div>
+    <div class="step c-navy"><b>Applicants</b>one enquiry address</div>
     <div class="arrow">→</div>
-    <div class="step c-cyan"><b>Load</b>it into the Ministry's index</div>
+    <div class="step c-teal"><b>Facade</b>routes each question by its capability</div>
     <div class="arrow">→</div>
-    <div class="step c-purple"><b>Re-run</b>the evaluation set</div>
+    <div class="step c-cyan"><b>Muyassir</b>status, fees, part of documents and setbacks</div>
     <div class="arrow">→</div>
-    <div class="step c-coral"><b>Record</b>time taken and gaps</div>
+    <div class="step c-amber"><b>Guided search</b>the rest, until retired</div>
   </div>
-  <aside class="notes"><p>The yearly exit test is an architect's control, not a lawyer's. It turns the exit cost into a measured number for the next decision.</p></aside>
+  <ul class="bullets small mt">
+    <li><b>Route by capability:</b> move status questions, then fees, then documents, each on its own evidence.</li>
+    <li><b>Keep the way back:</b> rolling back is one route flipped in the facade, with no deployment.</li>
+    <li><b>Retire in steps:</b> a legacy part goes only after four weeks without traffic and once its rollback window has closed.</li>
+  </ul>
+  <aside class="notes"><p>The alternative is a cut-over weekend: every capability moves at once and the only way back is the whole old system. The facade is transitional architecture, built to be removed. It is also where the old and new paths are compared: the legacy path keeps a graded shadow sample even when it carries no traffic.</p><p>The same move fits the reports team, which can hand routing from its rule list to the classifier of Lab 2.1 one report category at a time behind its intake endpoint.</p><p>Sources: Strangler Fig (Martin Fowler).</p></aside>
+</section>
+
+<section class="slide" id="facade-week5" data-lo="LO3" data-label="Facade log">
+  <div class="kicker">Week 5 of the move</div>
+  <h2>Read the week by capability: advance, hold, roll back or retire</h2>
+  <table class="t small">
+    <tr><th>Capability, share on Muyassir</th><th class="num">Correct, new / legacy</th><th class="num">Hand-over, new / legacy</th></tr>
+    <tr><td>status, 100%</td><td class="num">0.970 / 0.895</td><td class="num">0.025 / 0.050</td></tr>
+    <tr><td>documents, 50%</td><td class="num">0.925 / 0.905</td><td class="num">0.045 / 0.050</td></tr>
+    <tr><td>fees, 100%</td><td class="num">0.905 / 0.905</td><td class="num">0.040 / 0.060</td></tr>
+    <tr class="hl"><td>setbacks, 25%</td><td class="num">0.790 / 0.925</td><td class="num">0.115 / 0.060</td></tr>
+    <tr><td>appeals, 0%</td><td class="num">none / 0.865</td><td class="num">none / 0.105</td></tr>
+  </table>
+  <p class="small mt">200 graded answers per path. Advance when the new path is within 0.01 of the legacy one and hands over no more; roll back when it is more than 0.02 below.</p>
+  <div class="callout tip frag"><b>Decisions.</b> Setbacks roll back; documents advance; fees stay; status's legacy part, idle four weeks, retires; appeals wait.</div>
+  <aside class="notes"><p>Ask the room to decide each row before showing the callout. Setbacks is the point: at 25% only 225 questions a week went the new way, and the flip sends them back without a release. Status has had no legacy traffic for four weeks and its rollback window has closed, so its legacy lookup is switched off; Muyassir now carries 80% of the 9,900 weekly enquiries.</p><p>Figures from labs/_tools/enquiry_facade.py (seed 402), which writes labs/data/migration/.</p></aside>
 </section>
 
 <section class="slide" id="check-lockin" data-lo="LO3">

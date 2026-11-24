@@ -211,7 +211,31 @@
     </ul>
     <div class="card c-purple"><h4>So</h4><p class="small mb0">Checks catch what can be read from the file on every commit; a review asks whether the file and the design are right, once per design.</p></div>
   </div>
-  <aside class="notes"><p>The stretch adds a third check, for an Arabic evaluation set; Kashif fails it. Bridge to Session 3: the review finds what no check could.</p></aside>
+  <aside class="notes"><p>The stretch adds a third check, for an Arabic evaluation set; Kashif fails it. The first bullet is the bridge to the next two slides: declare the platform as code and compare it with what runs. The review in Session 3 finds what no check could.</p></aside>
+</section>
+
+<section class="slide" id="declared-deployed" data-lo="LO5" data-label="Declared and deployed">
+  <div class="kicker">Infrastructure as code</div>
+  <h2>Declare the platform in reviewed code, and drift becomes a diff you can read</h2>
+  <table class="t small">
+    <tr><th>Asas setting</th><th>Declared, reviewed</th><th>Deployed</th><th>How it changed</th></tr>
+    <tr class="hl"><td>fallback of ksa-general-m</td><td>own-open-s</td><td>ext-frontier-l</td><td>by hand in an outage, no ticket</td></tr>
+    <tr><td>reports team budget, SAR a month</td><td>18,000</td><td>24,000</td><td>by hand, emergency ticket approved</td></tr>
+    <tr><td>audit log retention, days</td><td>365</td><td>90</td><td>by hand to free storage, no ticket</td></tr>
+  </table>
+  <p class="small mt">3 of 19 settings differ. The placement check passes on the declared file and fails on what runs: Restricted data of the permits and reports teams can reach ext-frontier-l through the fallback.</p>
+  <aside class="notes"><p>Ask the room, row by row: put it back, or write it into the code? Then show the next slide. This is "a check is only as true as the file" made concrete: the fitness checks read the declared file, so a change made in a console is invisible to them until something compares the file with what runs.</p><p>Declarative tools such as OpenTofu or Terraform do this comparison in their plan step; OpenTofu also has a refresh-only mode for recording a change deliberately made outside the usual workflow, for example during an incident. The figures here come from labs/_tools/gateway_drift.py, which writes labs/data/infra/ and runs the lab's placement rule on both files.</p><p>Sources: OpenTofu, Command: plan.</p></aside>
+</section>
+
+<section class="slide" id="revert-or-codify" data-lo="LO5" data-label="Revert or codify">
+  <div class="kicker">Infrastructure as code</div>
+  <h2>Revert a hand change nobody approved; codify one that was</h2>
+  <div class="cols cols-2">
+    <div class="card c-coral"><h4>Changed by hand in a console</h4><p class="small mb0">One person decides and applies; no record of why; the fitness checks never see it; rebuilding in another region depends on memory.</p></div>
+    <div class="card c-teal"><h4>Declared under version control</h4><p class="small mb0">A second person reviews each change; checks run before it applies; a revert is one commit; the same files rebuild the platform.</p></div>
+  </div>
+  <div class="callout tip mt"><b>For the three drifts.</b> Apply the declared file again for the fallback and the retention, now. Write the reports budget into the code through a reviewed change, then apply.</div>
+  <aside class="notes"><p>Emergencies happen: the rule is not "never touch the console" but "an emergency hand change carries a ticket and is codified or reverted within one working day". A change without a ticket is reverted, even when it looks harmless.</p><p>A parallel case for practice: the waste team's nightly batch is declared with 8 parallel calls and runs with 20, changed by hand with no ticket. Its data is Public, so no placement rule breaks; it is still reverted, and the team asks for 20 through a reviewed change if it needs them.</p></aside>
 </section>
 
 <section class="slide" id="check-fitness" data-lo="LO5">

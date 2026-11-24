@@ -1,0 +1,51 @@
+{
+ "models": {
+  "ext-frontier-l": {
+   "hosting": "external",
+   "fallback": null
+  },
+  "ksa-general-m": {
+   "hosting": "ksa_cloud",
+   "fallback": "ext-frontier-l"
+  },
+  "own-open-s": {
+   "hosting": "ministry",
+   "fallback": null
+  }
+ },
+ "routes": [
+  {
+   "team": "T01",
+   "level": "Restricted",
+   "model": "ksa-general-m"
+  },
+  {
+   "team": "T02",
+   "level": "Restricted",
+   "model": "ksa-general-m"
+  },
+  {
+   "team": "T05",
+   "level": "Public",
+   "model": "ext-frontier-l"
+  },
+  {
+   "team": "T06",
+   "level": "Secret",
+   "model": "own-open-s"
+  }
+ ],
+ "budgets_sar_month": {
+  "T01": 60000,
+  "T02": 24000,
+  "T05": 9000,
+  "T06": 12000
+ },
+ "rate_limits_per_min": {
+  "T01": 600,
+  "T02": 240,
+  "T05": 120,
+  "T06": 60
+ },
+ "audit_retention_days": 90
+}
