@@ -1,7 +1,7 @@
 ---
 course: "AI Solution Architecture and Platform Design"
 code: "AE-402"
-version: "2027.1.0"
+version: "2027.2.0"
 deck: "day4"
 day: 4
 language: "en"
@@ -224,6 +224,27 @@ Turn the permits team's retrieval service into a Copier template whose questions
 - A design that meets every rule may still miss its scenarios.
 
 - **So.** Checks catch what can be read from the file on every commit; a review asks whether the file and the design are right, once per design.
+
+#### [day4#declared-deployed] Declare the platform in reviewed code, and drift becomes a diff you can read
+
+*Infrastructure as code*
+
+| Asas setting | Declared, reviewed | Deployed | How it changed |
+| --- | --- | --- | --- |
+| fallback of ksa-general-m | own-open-s | ext-frontier-l | by hand in an outage, no ticket |
+| reports team budget, SAR a month | 18,000 | 24,000 | by hand, emergency ticket approved |
+| audit log retention, days | 365 | 90 | by hand to free storage, no ticket |
+
+3 of 19 settings differ. The placement check passes on the declared file and fails on what runs: Restricted data of the permits and reports teams can reach ext-frontier-l through the fallback.
+
+#### [day4#revert-or-codify] Revert a hand change nobody approved; codify one that was
+
+*Infrastructure as code*
+
+- **Changed by hand in a console.** One person decides and applies; no record of why; the fitness checks never see it; rebuilding in another region depends on memory.
+- **Declared under version control.** A second person reviews each change; checks run before it applies; a revert is one commit; the same files rebuild the platform.
+
+> **For the three drifts.** Apply the declared file again for the fallback and the retention, now. Write the reports budget into the code through a reviewed change, then apply.
 
 #### [day4#check-fitness] Should the placement check fail this design?
 

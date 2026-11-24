@@ -6,7 +6,7 @@
     "code": "AE-402",
     "title": "AI Solution Architecture and Platform Design",
     "lang": "en",
-    "version": "2027.1.0"
+    "version": "2027.2.0"
   },
   "questions": [
     {
@@ -938,6 +938,36 @@
       "timer": 30
     },
     {
+      "id": "d2-facade-hold",
+      "type": "single",
+      "prompt": "The reports team moves routing from its rule list to the classifier one report category at a time, behind its intake endpoint. In week 3, roads reports (30% on the classifier) are correct in 0.895 of 200 graded answers against 0.900 for the rule list, and hand over 0.050 to a person against 0.045. The team advances a category when it is within 0.01 and hands over no more, and rolls back when it is more than 0.02 below. What happens to roads?",
+      "options": [
+        "Move roads to the classifier in full, since the gap is within 0.01",
+        "Flip roads back to the rule list",
+        "Switch off the rule list for roads",
+        "Keep roads at 30% and grade another week"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "The quality gap passes but the hand-over share is higher, so neither rule to advance nor rule to roll back is met: hold and keep the way back open.",
+      "misconceptions": [
+        "Reads one of the two conditions: the classifier hands more reports to a person than the rule list",
+        "Treats a 0.005 gap as a failure: rolling back is for a gap above 0.02",
+        "Retires the legacy path while 70% of roads reports still use it and the rollback is still needed",
+        ""
+      ],
+      "lo": [
+        "LO3"
+      ],
+      "day": 2,
+      "session": 3,
+      "level": "evaluate",
+      "pool": "practice",
+      "weight": 1,
+      "timer": 30
+    },
+    {
       "id": "d2-adr-trigger",
       "type": "single",
       "prompt": "Which review trigger can fire?",
@@ -1293,6 +1323,36 @@
       "day": 4,
       "session": 2,
       "level": "evaluate",
+      "pool": "practice",
+      "weight": 1,
+      "timer": 30
+    },
+    {
+      "id": "d4-drift-codify",
+      "type": "single",
+      "prompt": "A weekly comparison of Asas's declared settings with the running gateway finds the contracts team's rate limit at 90 calls a minute; the reviewed file says 60. The change was made by hand in a deadline week, under an emergency ticket the platform owner approved. What should the platform team do now?",
+      "options": [
+        "Write 90 into the declared file through a reviewed change, then apply it",
+        "Apply the declared file again, so the limit returns to 60",
+        "Leave it: the approved ticket is the record of the change",
+        "Raise every team's limit by hand so the platform stays consistent"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "An approved hand change is brought into the code through review; then the declared file and the running gateway agree again and the checks read the truth.",
+      "misconceptions": [
+        "",
+        "Reverts an approved change and cuts the team back mid-deadline: revert is for changes nobody approved",
+        "Leaves the drift in place: the next apply of the declared file silently undoes the change",
+        "Answers drift with more hand changes, none reviewed and none in the file"
+      ],
+      "lo": [
+        "LO5"
+      ],
+      "day": 4,
+      "session": 2,
+      "level": "apply",
       "pool": "practice",
       "weight": 1,
       "timer": 30

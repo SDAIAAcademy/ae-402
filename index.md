@@ -1,7 +1,7 @@
 ---
 course: "AI Solution Architecture and Platform Design"
 code: "AE-402"
-version: "2027.1.0"
+version: "2027.2.0"
 language: "en"
 view: "trainee"
 source: "https://sdaiaacademy.github.io/ae-402/index.html"
@@ -192,6 +192,7 @@ An architecture for one ministry service and the platform slice it runs on (scen
 - [MADR: Markdown Architectural Decision Records](https://adr.github.io/madr/)
 - [Architectural fitness function (Thoughtworks Technology Radar)](https://www.thoughtworks.com/radar/techniques/architectural-fitness-function)
 - [CNCF Platforms White Paper (TAG App Delivery)](https://tag-app-delivery.cncf.io/whitepapers/platforms/)
+- [Strangler Fig (Martin Fowler)](https://martinfowler.com/bliki/StranglerFigApplication.html)
 
 ### Platform tools (examples, interchangeable)
 
@@ -205,9 +206,10 @@ An architecture for one ministry service and the platform slice it runs on (scen
 - [Backstage software templates](https://backstage.io/docs/features/software-templates/)
 - [OpenCost documentation](https://opencost.io/docs/)
 - [FinOps Framework: invoicing and chargeback](https://www.finops.org/framework/capabilities/invoicing-chargeback/)
+- [OpenTofu: Command: plan](https://opentofu.org/docs/cli/commands/plan/)
 
 ---
 
 SDAIA Academy · AI Engineering Track · AI Solution Architecture and Platform Design
 
-Course version 2027.1.0 · engine 1.0.0 · built 2026-11-15 · commit b2bfbf8
+Course version 2027.2.0 · engine 1.0.0 · built 2026-11-24 · commit a68c57e

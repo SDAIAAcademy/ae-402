@@ -1,7 +1,7 @@
 ---
 course: "AI Solution Architecture and Platform Design"
 code: "AE-402"
-version: "2027.1.0"
+version: "2027.2.0"
 scope: "course"
 language: "en"
 view: "trainee"
@@ -846,14 +846,36 @@ Person-months at SAR 35,000 plus fees, from the case's exit factors.
 
 **Verifiable (good example):** The provider shall export all indexed documents, their embeddings and metadata in JSON Lines or Parquet within 10 working days of a request, at no extra charge.
 
-#### [day2#test-the-exit] Test the export once a year, or the requirement is only paper
+Test the export once a year: request it, load it into the Ministry's index, re-run the evaluation set and record the time taken. Untested, the requirement is only paper.
 
-*An exit is a design artefact*
+#### [day2#strangler-facade] Replace a legacy system one capability at a time, behind a facade that routes
 
-1. **Request** a full export
-2. **Load** it into the Ministry's index
-3. **Re-run** the evaluation set
-4. **Record** time taken and gaps
+*Leaving in steps*
+
+1. **Applicants** one enquiry address
+2. **Facade** routes each question by its capability
+3. **Muyassir** status, fees, part of documents and setbacks
+4. **Guided search** the rest, until retired
+
+- **Route by capability:** move status questions, then fees, then documents, each on its own evidence.
+- **Keep the way back:** rolling back is one route flipped in the facade, with no deployment.
+- **Retire in steps:** a legacy part goes only after four weeks without traffic and once its rollback window has closed.
+
+#### [day2#facade-week5] Read the week by capability: advance, hold, roll back or retire
+
+*Week 5 of the move*
+
+| Capability, share on Muyassir | Correct, new / legacy | Hand-over, new / legacy |
+| --- | --- | --- |
+| status, 100% | 0.970 / 0.895 | 0.025 / 0.050 |
+| documents, 50% | 0.925 / 0.905 | 0.045 / 0.050 |
+| fees, 100% | 0.905 / 0.905 | 0.040 / 0.060 |
+| setbacks, 25% | 0.790 / 0.925 | 0.115 / 0.060 |
+| appeals, 0% | none / 0.865 | none / 0.105 |
+
+200 graded answers per path. Advance when the new path is within 0.01 of the legacy one and hands over no more; roll back when it is more than 0.02 below.
+
+> **Decisions.** Setbacks roll back; documents advance; fees stay; status's legacy part, idle four weeks, retires; appeals wait.
 
 #### [day2#check-lockin] Which requirement removes O1's largest exit cost?
 
@@ -1629,6 +1651,27 @@ Turn the permits team's retrieval service into a Copier template whose questions
 - A design that meets every rule may still miss its scenarios.
 
 - **So.** Checks catch what can be read from the file on every commit; a review asks whether the file and the design are right, once per design.
+
+#### [day4#declared-deployed] Declare the platform in reviewed code, and drift becomes a diff you can read
+
+*Infrastructure as code*
+
+| Asas setting | Declared, reviewed | Deployed | How it changed |
+| --- | --- | --- | --- |
+| fallback of ksa-general-m | own-open-s | ext-frontier-l | by hand in an outage, no ticket |
+| reports team budget, SAR a month | 18,000 | 24,000 | by hand, emergency ticket approved |
+| audit log retention, days | 365 | 90 | by hand to free storage, no ticket |
+
+3 of 19 settings differ. The placement check passes on the declared file and fails on what runs: Restricted data of the permits and reports teams can reach ext-frontier-l through the fallback.
+
+#### [day4#revert-or-codify] Revert a hand change nobody approved; codify one that was
+
+*Infrastructure as code*
+
+- **Changed by hand in a console.** One person decides and applies; no record of why; the fitness checks never see it; rebuilding in another region depends on memory.
+- **Declared under version control.** A second person reviews each change; checks run before it applies; a revert is one commit; the same files rebuild the platform.
+
+> **For the three drifts.** Apply the declared file again for the fallback and the retention, now. Write the reports budget into the code through a reviewed change, then apply.
 
 #### [day4#check-fitness] Should the placement check fail this design?
 

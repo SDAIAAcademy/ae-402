@@ -2,9 +2,9 @@
   "v": 1,
   "engine": "1.0.0",
   "build": {
-    "at": "2026-11-15T16:14:16Z",
-    "version": "2027.1.0",
-    "commit": "b2bfbf8"
+    "at": "2026-11-24T14:42:07Z",
+    "version": "2027.2.0",
+    "commit": "a68c57e"
   },
   "lang": "en",
   "dir": "ltr",
@@ -15,7 +15,7 @@
   "course": {
     "id": "ae-402",
     "code": "AE-402",
-    "version": "2027.1.0",
+    "version": "2027.2.0",
     "title": "AI Solution Architecture and Platform Design",
     "tagline": "Turn requirements into tested scenarios, costed options and recorded decisions, then design the shared AI platform many teams build on",
     "description": "Participants practise the architect's loop on AI systems and apply it to the shared platform many teams build on. For a fictional ministry of municipal services with nine product teams and data at three classification levels, they turn requirements into measurable scenarios, draw views as code, cost three options including a non-generative one, keep a decision log, design a model catalogue, gateway, tenancy model, golden paths and showback, enforce a reference design with fitness checks, and review a peer's architecture. Serving optimisation and reliability engineering are left to AE-401 and AE-403.",
@@ -963,6 +963,10 @@
           {
             "title": "CNCF Platforms White Paper (TAG App Delivery)",
             "url": "https://tag-app-delivery.cncf.io/whitepapers/platforms/"
+          },
+          {
+            "title": "Strangler Fig (Martin Fowler)",
+            "url": "https://martinfowler.com/bliki/StranglerFigApplication.html"
           }
         ]
       },
@@ -1008,6 +1012,10 @@
           {
             "title": "FinOps Framework: invoicing and chargeback",
             "url": "https://www.finops.org/framework/capabilities/invoicing-chargeback/"
+          },
+          {
+            "title": "OpenTofu: Command: plan",
+            "url": "https://opentofu.org/docs/cli/commands/plan/"
           }
         ]
       }

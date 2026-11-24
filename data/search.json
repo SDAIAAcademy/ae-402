@@ -2,9 +2,9 @@
   "v": 1,
   "engine": "1.0.0",
   "build": {
-    "at": "2026-11-15T16:14:16Z",
-    "version": "2027.1.0",
-    "commit": "b2bfbf8"
+    "at": "2026-11-24T14:42:07Z",
+    "version": "2027.2.0",
+    "commit": "a68c57e"
   },
   "lang": "en",
   "dir": "ltr",
@@ -672,22 +672,31 @@
       "n": 29,
       "session": 3,
       "title": "A procurement requirement keeps the exit open only if it can be verified",
-      "text": "Buying the exit down A procurement requirement keeps the exit open only if it can be verified WeakThe provider will make data available where possible. VerifiableThe provider shall export all indexed documents, their embeddings and metadata in JSON Lines or Parquet within 10 working days of a request, at no extra charge.",
+      "text": "Buying the exit down A procurement requirement keeps the exit open only if it can be verified WeakThe provider will make data available where possible. VerifiableThe provider shall export all indexed documents, their embeddings and metadata in JSON Lines or Parquet within 10 working days of a request, at no extra charge. Test the export once a year: request it, load it into the Ministry's index, re-run the evaluation set and record the time taken. Untested, the requirement is only paper.",
       "href": "../slides/day2.html#requirements"
     },
     {
       "deck": "day2",
-      "id": "test-the-exit",
+      "id": "strangler-facade",
       "n": 30,
       "session": 3,
-      "title": "Test the export once a year, or the requirement is only paper",
-      "text": "An exit is a design artefact Test the export once a year, or the requirement is only paper Request a full export → Load it into the Ministry's index → Re-run the evaluation set → Record time taken and gaps",
-      "href": "../slides/day2.html#test-the-exit"
+      "title": "Replace a legacy system one capability at a time, behind a facade that routes",
+      "text": "Leaving in steps Replace a legacy system one capability at a time, behind a facade that routes Applicants one enquiry address → Facade routes each question by its capability → Muyassir status, fees, part of documents and setbacks → Guided search the rest, until retired Route by capability: move status questions, then fees, then documents, each on its own evidence. Keep the way back: rolling back is one route flipped in the facade, with no deployment. Retire in steps: a legacy part goes only after four weeks without traffic and once its rollback window has closed.",
+      "href": "../slides/day2.html#strangler-facade"
+    },
+    {
+      "deck": "day2",
+      "id": "facade-week5",
+      "n": 31,
+      "session": 3,
+      "title": "Read the week by capability: advance, hold, roll back or retire",
+      "text": "Week 5 of the move Read the week by capability: advance, hold, roll back or retire Capability, share on Muyassir Correct, new / legacy Hand-over, new / legacy status, 100% 0.970 / 0.895 0.025 / 0.050 documents, 50% 0.925 / 0.905 0.045 / 0.050 fees, 100% 0.905 / 0.905 0.040 / 0.060 setbacks, 25% 0.790 / 0.925 0.115 / 0.060 appeals, 0% none / 0.865 none / 0.105 200 graded answers per path. Advance when the new path is within 0.01 of the legacy one and hands over no more; roll back when it is more than 0.02 below. Decisions. Setbacks roll back; documents advance; fees stay; status's legacy part, idle four weeks, retires; appeals wait.",
+      "href": "../slides/day2.html#facade-week5"
     },
     {
       "deck": "day2",
       "id": "check-lockin",
-      "n": 31,
+      "n": 32,
       "session": 3,
       "title": "Which requirement removes O1's largest exit cost?",
       "text": "Checkpoint Which requirement removes O1's largest exit cost? O1's largest exit factor is its managed vector store with no bulk export (SAR 250,000). Which requirement removes it? The service shall expose an OpenAI-compatible interface The provider shall export the index, embeddings and metadata in JSON Lines within 10 working days The contract shall allow exit with 90 days' notice The provider shall give reasonable help on exit",
@@ -696,7 +705,7 @@
     {
       "deck": "day2",
       "id": "lab-2-3",
-      "n": 32,
+      "n": 33,
       "session": 3,
       "title": "Exit cost, weights and two requirements",
       "text": "Lab 2.3 · 25 min Exit cost, weights and two requirements Price each option's exit, fold it into the weighted score, find the weight that flips the ranking and write two requirements that keep the exit open. D2_3_exit_cost.ipynb Exit cost per option 6 min The weighted score, exit cost included 6 min The weight that flips the ranking 6 min Two procurement requirements that keep the exit open 7 min ✱ Stretch: A third requirement for the evaluation data",
@@ -705,7 +714,7 @@
     {
       "deck": "day2",
       "id": "s4",
-      "n": 33,
+      "n": 34,
       "session": 4,
       "title": "Decision records",
       "text": "Session 4 Decision records Write a decision record with drivers, options and consequences both ways Set a review trigger someone can test Challenge a peer's record for what a lint cannot see 04",
@@ -714,7 +723,7 @@
     {
       "deck": "day2",
       "id": "why-records",
-      "n": 34,
+      "n": 35,
       "session": 4,
       "title": "A decision record is written for the architect who reopens it",
       "text": "Decision records A decision record is written for the architect who reopens it The next architect Why O1, what it cost, what would change it. The auditor Who decided, on which drivers, on which date. The panel The capstone asks for six, dated, in the repository.",
@@ -723,7 +732,7 @@
     {
       "deck": "day2",
       "id": "record-shape",
-      "n": 35,
+      "n": 36,
       "session": 4,
       "title": "MADR's sections, plus a trigger that says when to reopen",
       "text": "The template MADR's sections, plus a trigger that says when to reopen Context the question → Drivers with ids → Options two or more → Outcome and why → Consequences good and bad → Trigger a number or a date",
@@ -732,7 +741,7 @@
     {
       "deck": "day2",
       "id": "record-one",
-      "n": 36,
+      "n": 37,
       "session": 4,
       "title": "Record one names the fragile ranking as a bad consequence",
       "text": "From Lab 2.4 Record one names the fragile ranking as a bad consequence ## Decision outcome Chosen option: \"O1\", because it is the cheapest over three years (SAR 6.25 million against 7.59 and 11.92), meets S12 and goes live first. ### Consequences - Good, because no accelerator servers to buy or operate - Bad, because it is the dearest option to leave (SAR 540,000) - Bad, because an exit-cost weight of 0.13 puts O2 first ## Review trigger Reopen if monthly requests exceed 600,000 or the input price rises above SAR 12 per million.",
@@ -741,7 +750,7 @@
     {
       "deck": "day2",
       "id": "triggers",
-      "n": 37,
+      "n": 38,
       "session": 4,
       "title": "A trigger fires on a measurement or a date",
       "text": "Review triggers A trigger fires on a measurement or a date Cannot fire Can fire If things change If monthly requests exceed 600,000 When quality drops If Q1 falls below 0.90 on the monthly sample of 200 Revisit periodically On 2027-12-31 If the vendor raises prices If input tokens cost more than SAR 12 per million",
@@ -750,7 +759,7 @@
     {
       "deck": "day2",
       "id": "the-log",
-      "n": 38,
+      "n": 39,
       "session": 4,
       "title": "Six records make a log when they share an index and a status",
       "text": "The decision log Six records make a log when they share an index and a status One file per decision, numbered, never renumbered. Status: proposed, accepted, or superseded by a later number. An index with each record's trigger, so triggers are watched in one place. Records are reviewed in pull requests like code.",
@@ -759,7 +768,7 @@
     {
       "deck": "day2",
       "id": "peer-challenge",
-      "n": 39,
+      "n": 40,
       "session": 4,
       "title": "The lint finds missing parts; the reviewer finds missing consequences",
       "text": "The peer challenge The lint finds missing parts; the reviewer finds missing consequences lint no bad consequence; the review trigger has no number or date reviewer A cached answer can outlive a new circular for 30 days. Who carries that? reviewer Q1 answer quality is not a driver, and a stale answer is a wrong answer.",
@@ -768,7 +777,7 @@
     {
       "deck": "day2",
       "id": "check-record",
-      "n": 40,
+      "n": 41,
       "session": 4,
       "title": "Which line makes this record reviewable?",
       "text": "Checkpoint Which line makes this record reviewable? A record chooses to skip the reranker for status questions. Its trigger reads \"revisit if quality drops\". Which replacement makes it a trigger someone can act on? Revisit when the product owner feels quality has dropped Revisit every three years Reopen if Q1 on mixed questions falls below 0.90 on the monthly sample of 200 Reopen if p95 latency rises above 4,000 ms",
@@ -777,7 +786,7 @@
     {
       "deck": "day2",
       "id": "lab-2-4",
-      "n": 41,
+      "n": 42,
       "session": 4,
       "title": "Two decision records and a challenge",
       "text": "Lab 2.4 · 25 min Two decision records and a challenge Record where Muyassir's model runs and why status questions skip the reranker, lint both, then challenge a peer's record on its consequences and trigger. D2_4_decision_records.ipynb Read the template and run the lint 4 min Record one: where Muyassir's model runs 8 min Record two: no reranking for status questions 6 min Challenge a peer's record 7 min ✱ Stretch: The decision log index",
@@ -786,7 +795,7 @@
     {
       "deck": "day2",
       "id": "wrap-up",
-      "n": 42,
+      "n": 43,
       "session": 4,
       "title": "Three things to keep",
       "text": "Day 2 Three things to keep Cost a baseline A non-generative option shows what the model must beat, and sometimes wins. Find what the ranking depends on Volume and coverage, not token price, at Muyassir's scale. Record the cost of a choice Bad consequences and a trigger that can fire.",
@@ -795,7 +804,7 @@
     {
       "deck": "day2",
       "id": "next",
-      "n": 43,
+      "n": 44,
       "session": 4,
       "title": "Tomorrow: nine teams, one platform, and who pays for which tokens",
       "text": "Day 3 Tomorrow: nine teams, one platform, and who pays for which tokens Keep artifacts/D2_4/: the two records start your decision log. Look at labs/data/platform/usage.csv: six months of nine teams. Think of one shared service in your own organisation that teams avoid. Why?",
@@ -1325,8 +1334,26 @@
     },
     {
       "deck": "day4",
-      "id": "check-fitness",
+      "id": "declared-deployed",
       "n": 20,
+      "session": 2,
+      "title": "Declare the platform in reviewed code, and drift becomes a diff you can read",
+      "text": "Infrastructure as code Declare the platform in reviewed code, and drift becomes a diff you can read Asas setting Declared, reviewed Deployed How it changed fallback of ksa-general-m own-open-s ext-frontier-l by hand in an outage, no ticket reports team budget, SAR a month 18,000 24,000 by hand, emergency ticket approved audit log retention, days 365 90 by hand to free storage, no ticket 3 of 19 settings differ. The placement check passes on the declared file and fails on what runs: Restricted data of the permits and reports teams can reach ext-frontier-l through the fallback.",
+      "href": "../slides/day4.html#declared-deployed"
+    },
+    {
+      "deck": "day4",
+      "id": "revert-or-codify",
+      "n": 21,
+      "session": 2,
+      "title": "Revert a hand change nobody approved; codify one that was",
+      "text": "Infrastructure as code Revert a hand change nobody approved; codify one that was Changed by hand in a console One person decides and applies; no record of why; the fitness checks never see it; rebuilding in another region depends on memory. Declared under version control A second person reviews each change; checks run before it applies; a revert is one commit; the same files rebuild the platform. For the three drifts. Apply the declared file again for the fallback and the retention, now. Write the reports budget into the code through a reviewed change, then apply.",
+      "href": "../slides/day4.html#revert-or-codify"
+    },
+    {
+      "deck": "day4",
+      "id": "check-fitness",
+      "n": 22,
       "session": 2,
       "title": "Should the placement check fail this design?",
       "text": "Checkpoint Should the placement check fail this design? The planning team's zoning assistant sends questions about published zoning plans, classified Public, to the external model. A colleague proposes failing every design with an external model, to be safe. Yes: external models are a risk whatever the data Pass it with a warning that cannot be silenced Send every external design to the board for review No: the check enforces the rule by level, and Public data may go to an external host",
@@ -1335,7 +1362,7 @@
     {
       "deck": "day4",
       "id": "lab-4-2",
-      "n": 21,
+      "n": 23,
       "session": 2,
       "title": "Two fitness checks over designs as data",
       "text": "Lab 4.2 · 25 min Two fitness checks over designs as data Write two checks over five teams' design files, one for a blocking evaluation gate and one for the placement of every classified flow, and run them as a pipeline step that fails three designs. D4_2_fitness_checks.ipynb Read a design as data 4 min Check 1: a blocking evaluation gate before deployment 7 min Check 2: every flow is placed where its level may go 8 min Run both as a pipeline step 6 min ✱ Stretch: A third check: the evaluation includes Arabic",
@@ -1344,7 +1371,7 @@
     {
       "deck": "day4",
       "id": "s3",
-      "n": 22,
+      "n": 24,
       "session": 3,
       "title": "Structured architecture review",
       "text": "Session 3 Structured architecture review Prioritise scenarios in a utility tree Tell risks, sensitivity points, trade-off points and non-compliance apart Write a review report with a verdict a team can act on 03",
@@ -1353,7 +1380,7 @@
     {
       "deck": "day4",
       "id": "atam",
-      "n": 23,
+      "n": 25,
       "session": 3,
       "title": "Review against prioritised scenarios, not against a checklist",
       "text": "A structured review Review against prioritised scenarios, not against a checklist Drivers the business goals and constraints → Utility tree scenarios by importance and difficulty → Analysis the approaches against the leading scenarios → Findings risks, non-risks, sensitivity and trade-off points → Risk themes tied to the drivers",
@@ -1362,7 +1389,7 @@
     {
       "deck": "day4",
       "id": "utility-tree",
-      "n": 24,
+      "n": 26,
       "session": 3,
       "title": "Three scenarios lead: Arabic quality, privacy and security",
       "text": "Kashif's utility tree Three scenarios lead: Arabic quality, privacy and security Scenario Attribute Importance Difficulty Q1 · Arabic shop signs read correctly in 90% of the Ministry's set answer quality H H P1 · no photo with faces or plates processed outside the Kingdom privacy H M S1 · a leaked key contained to one client within 30 minutes security H M O1 · every filed report approved by its inspector oversight H L L1 · a draft on the tablet within 5 s at p95 on 4G latency M H Five of eight scenarios; cost, availability and operability follow.",
@@ -1371,7 +1398,7 @@
     {
       "deck": "day4",
       "id": "five-tags",
-      "n": 25,
+      "n": 27,
       "session": 3,
       "title": "Five tags, each telling the team something different to do",
       "text": "What a finding is Five tags, each telling the team something different to do Tag Means Kashif example Non-compliance breaks a written standard R02 · photos fall back to an external model Risk may keep a scenario from being met R03 · evaluation in English only Sensitivity point one parameter a scenario depends on R04 · the vision call takes 3,800 of 5,000 ms Trade-off point one decision, two attributes in opposite directions R05 · compressing photos: faster, cheaper, worse at small Arabic text Non-risk a decision that meets a scenario R06 · the inspector approves every report",
@@ -1380,7 +1407,7 @@
     {
       "deck": "day4",
       "id": "r01-r03",
-      "n": 26,
+      "n": 28,
       "session": 3,
       "title": "A checklist finds the broken rule; a reviewer finds the empty gate",
       "text": "Two findings about Arabic A checklist finds the broken rule; a reviewer finds the empty gate R01 · non-compliance The vision model was not admitted: no Arabic evaluation evidence. Any checklist catches it. R03 · risk An evaluation gate exists and blocks. It runs on English, and the signs are Arabic. Only someone who read Q1 sees it.",
@@ -1389,7 +1416,7 @@
     {
       "deck": "day4",
       "id": "verdict",
-      "n": 27,
+      "n": 29,
       "session": 3,
       "title": "Not approved, with the four themes that would change the verdict",
       "text": "Measured in Lab 4.3 Not approved, with the four themes that would change the verdict 2 · 3 · 2 · 2 · 3 non-compliance, risks, sensitivity points, trade-off points, non-risks Q1 Arabic quality unproven: R01, R03 P1 photos can leave the Kingdom: R02 S1 one key for two clients: R10 M1 no owner for prompt templates: R08",
@@ -1398,7 +1425,7 @@
     {
       "deck": "day4",
       "id": "check-review",
-      "n": 28,
+      "n": 30,
       "session": 3,
       "title": "How should the board tag this observation?",
       "text": "Checkpoint How should the board tag this observation? \"A 10% sample review of approved reports is the only check that inspectors' approvals are real.\" The oversight scenario requires every filed report to carry an approval. Non-compliance A sensitivity point: whether approvals mean anything rests on that one rate A non-risk, since every report is approved A trade-off point",
@@ -1407,7 +1434,7 @@
     {
       "deck": "day4",
       "id": "lab-4-3",
-      "n": 29,
+      "n": 31,
       "session": 3,
       "title": "A structured review of Kashif's design",
       "text": "Lab 4.3 · 25 min A structured review of Kashif's design Review the inspections team's design: order its scenarios in a utility tree, tag twelve observations, group the risks into themes and write the report with its verdict. D4_3_review.ipynb The utility tree: which scenarios lead 6 min Tag the twelve observations 8 min Risk themes, tied to scenarios 5 min The review report and its verdict 6 min ✱ Stretch: Which finding becomes a fitness check?",
@@ -1416,7 +1443,7 @@
     {
       "deck": "day4",
       "id": "s4",
-      "n": 30,
+      "n": 32,
       "session": 4,
       "title": "Deviations and sponsors",
       "text": "Session 4 Deviations and sponsors Put numbers on what a deviation breaks and what refusing it costs Decide a deviation with verifiable conditions, an expiry and reopen triggers Explain a trade-off on one page for a sponsor 04",
@@ -1425,7 +1452,7 @@
     {
       "deck": "day4",
       "id": "deviation",
-      "n": 31,
+      "n": 33,
       "session": 4,
       "title": "A deviation is a decision record with an expiry",
       "text": "Deviations A deviation is a decision record with an expiry Conditions Each with a number a reviewer can check. Residual risk In numbers, and who accepts it. Expiry A date, and the events that reopen it sooner. What goes wrong. A deviation without an expiry becomes the new standard by default, with nobody having decided that.",
@@ -1434,7 +1461,7 @@
     {
       "deck": "day4",
       "id": "request-numbers",
-      "n": 32,
+      "n": 34,
       "session": 4,
       "title": "The request has a cost either way, and the request names neither",
       "text": "Measured in Lab 4.4 The request has a cost either way, and the request names neither SAR 96,000 a month of inspector time if refused: 800 hours 5,445 Restricted photos a month abroad if approved as asked about 90 a month still abroad if only photos the detector passes are sent",
@@ -1443,7 +1470,7 @@
     {
       "deck": "day4",
       "id": "three-options",
-      "n": 33,
+      "n": 35,
       "session": 4,
       "title": "Approve with conditions, until the evidence in the Kingdom arrives",
       "text": "Three answers Approve with conditions, until the evidence in the Kingdom arrives Answer Gives Costs Refuse the rule kept whole SAR 96,000 a month of inspector time, until February 2027 at least Approve as asked drafts for every photo 5,445 Restricted photos a month abroad, for twelve months Approve with conditions, until 31 March 2027 drafts for about 65% of photos about 90 a month through detector misses, accepted by the data owner",
@@ -1452,7 +1479,7 @@
     {
       "deck": "day4",
       "id": "sponsor-page",
-      "n": 34,
+      "n": 36,
       "session": 4,
       "title": "The decision first, the trade-off in numbers, and a date it ends",
       "text": "One page for a sponsor The decision first, the trade-off in numbers, and a date it ends The recommendation in the first sentence. What it gives and what it risks, in hours, riyals and photos. What she is asked to accept, by name. When and how it ends. Left out on purpose Gateway, fallback, p95, fitness check. The lab's self-check fails the page if any of them appear, or if it runs past 250 words.",
@@ -1461,7 +1488,7 @@
     {
       "deck": "day4",
       "id": "deviation-policy",
-      "n": 35,
+      "n": 37,
       "session": 4,
       "title": "A deviation the gateway enforces ends on its date",
       "text": "The stretch of Lab 4.4 A deviation the gateway enforces ends on its date 200 inspections key, photo the detector passed, December 2026 403 inspections key, flagged photo 403 another team's key, photo the detector passed 403 inspections key, photo the detector passed, 1 April 2027: expired",
@@ -1470,7 +1497,7 @@
     {
       "deck": "day4",
       "id": "capstone-choice",
-      "n": 36,
+      "n": 38,
       "session": 4,
       "title": "Choose one of three services; all run on Asas",
       "text": "Your capstone Choose one of three services; all run on Asas Citizen reports 95,000 reports a month, routing and replies. Restricted: phones, locations, photos. Call summaries 40,000 calls a month. Restricted: voices, names, identity numbers read aloud. Staff policies 6,000 questions a month. Public policies, Restricted employee records.",
@@ -1479,7 +1506,7 @@
     {
       "deck": "day4",
       "id": "check-deviation",
-      "n": 37,
+      "n": 39,
       "session": 4,
       "title": "What is missing from this approval?",
       "text": "Checkpoint What is missing from this approval? \"DR-2026-07: approved. The inspections team may send clean photos to ext-vision-q. Owner: Rabah Al-Mujil. Conditions: the detector runs on every photo; flagged photos stay on the manual path.\" An expiry, and the events that would bring it back to the board An owner for the conditions Any conditions at all The scope of what is allowed",
@@ -1488,7 +1515,7 @@
     {
       "deck": "day4",
       "id": "lab-4-4",
-      "n": 38,
+      "n": 40,
       "session": 4,
       "title": "A deviation request, decided and explained on one page",
       "text": "Lab 4.4 · 25 min A deviation request, decided and explained on one page Measure the inspections team's request to send photos to an external vision model, decide it with conditions and an expiry, write the sponsor's one page and choose your capstone service. D4_4_deviation.ipynb What the request breaks, and what refusing costs 6 min Decide, with conditions, an expiry and what reopens it 7 min One page for the sponsor 7 min Choose your capstone service 5 min ✱ Stretch: The deviation as a gateway policy that expires",
@@ -1497,7 +1524,7 @@
     {
       "deck": "day4",
       "id": "wrap-up",
-      "n": 39,
+      "n": 41,
       "session": 4,
       "title": "Three things to keep",
       "text": "Day 4 Three things to keep Paths, not documents A template with its gates on is a standard teams actually follow. Checks and reviews Checks catch what the file shows, every commit; a review asks whether the design is right. Bounded exceptions A deviation has conditions, a residual someone accepts and a date it ends.",
@@ -1506,7 +1533,7 @@
     {
       "deck": "day4",
       "id": "next",
-      "n": 40,
+      "n": 42,
       "session": 4,
       "title": "Next: build your service's architecture and defend it before the panel",
       "text": "Capstone day Next: build your service's architecture and defend it before the panel Start a public repository from labs/capstone/README.md; commit early, the history counts. Bring a peer's design to review: the review is 15% of the rubric. Prepare for the panel to change one classification level or the volume forecast.",

@@ -1,0 +1,6 @@
+capability,route,share_to_muyassir,rollback
+status,muyassir,1.0,flip route to legacy
+documents,split,0.5,flip route to legacy
+fees,muyassir,1.0,flip route to legacy
+setbacks,split,0.25,flip route to legacy
+appeals,legacy,0.0,none needed
